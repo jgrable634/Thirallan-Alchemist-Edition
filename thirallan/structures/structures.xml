@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<structures>
+  <tilesheet id="undead_shrine.png" width="32" height="32" />
+  <tile id="undead_shrine" sheet="undead_shrine.png" x="0" y="0" />
+  <tile id="undead_shrine_destroyed" sheet="undead_shrine.png" x="1" y="4" />
+  <animation id="undead_shrine.awaken" x="0" count="21" />
+  <structure id="undead_shrine" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
+    <operate>
+      <choose>
+        <section if="area.getObject('undead') == null && player.questComplete('find_jacominus')">
+          <wait seconds="0.5" />
+          <play object="this" animation="awaken" modal="true" />
+          <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+          <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
+        </section>
+        <dialogue section="player" id="no_shrine1" speaker='player' if="area.getObject('undead_shrineDefender') != null && !player.questComplete('find_jacominus')" />
+        <dialogue section="player" id="no_shrine2" speaker='player' if="area.getObject('undead_shrineDefender') == null && !player.questComplete('find_jacominus')" />
+        <dialogue section="player" id="no_shrine3" speaker='player' if="area.getObject('undead_shrineDefender') != null && player.questComplete('find_jacominus')" />
+      </choose>
+    </operate>
+  </structure>
+  <structure id="undead_shrine_destroyed" tile="undead_shrine_destroyed">
+    <tooltip section="actions" id="artifact" if="player.hasQuest('lost_artifact')" />
+    <operate>
+      <section if="player.hasQuest('lost_artifact')">
+        <item id="lost_artifact" />
+        <remove structure="this" />
+        <structure id="undead_shrine_useless" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </operate>
+  </structure>
+  <structure id="undead_shrine_useless" tile="undead_shrine_destroyed" />
+  <structure id="thirallan_zargoroth.mines" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
+    <operate>
+      <choose>
+        <dialogue section="common" id="thirallan_mines_no" speaker='player' if="!player.hasQuest('find_jacominus')" />
+        <dialogue section="common" id="hut_stuff" speaker='player' if="!getFlag('TAE_second')" />
+        <teleport area="thirallan_zargoroth.mines" x="1" y="15" with="ellipse" />
+      </choose>
+    </operate>
+  </structure>
+  <structure id="thirallan_zargoroth.mines.ret" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
+    <operate>
+      <teleport area="thirallan_zargoroth" x="90" y="-1" with="ellipse" />
+    </operate>
+  </structure>
+  <structure id="hut" extends="hut">
+    <operate>
+      <section if="getFlag('blood_moon')">
+        <dialogue section="player" id="cant_sleep" speaker='player' />
+        <stop/>
+      </section>
+      <section if="!getFlag('TAE_first') && area.id == 'thirallan_zargoroth'">
+        <scene id="thirallan_alchemist" show="zargoroth_second" with="fade" />
+      </section>
+      <section if="player.hasQuest('undead_rumors') && !getFlag('TAE_second') && area.id == 'thirallan_zargoroth'">
+        <scene id="thirallan_alchemist" show="zargoroth_third" with="fade" />
+      </section>
+    </operate>
+  </structure>
+  <structure id="guild_door" width="32" height="32" image="guild_door.png" name="enter">
+    <operate>
+      <choose>
+        <section if="area.id == 'guild_HQ'">
+          <teleport area="thirallan_mountains" x="10" y="11" with="ellipse" />
+        </section>
+        <section if="!getFlag('welcome_home')">
+          <dialogue section="guild" id="door1" />
+          <window type="input" message="guild.door2">
+            <choose>
+              <section if="result.toLowerCase() == 'purgat omne mundatorem'">
+                <dialogue section="guild" id="door3" />
+                <action>setFlag('welcome_home',true);</action>
+                <teleport area="guild_HQ" x="3" y="6" with="ellipse" />
+              </section>
+              <dialogue section="guild" id="door4" />
+            </choose>
+          </window>
+        </section>
+        <teleport area="guild_HQ" x="3" y="6" with="ellipse" />
+      </choose>
+    </operate>
+  </structure>
+  <structure id="guild_door.exit" width="32" height="32" image="guild_door.png" name="enter" />
+  <structure id="guild_library" tile="spirit_door" animation="spirit_door" type="crafting">
+    <recipe type="guild_magic" />
+  </structure>
+
+  <structure id="monastery_cathedral" image="monastery_cathedral.png" width="256" height="512" name="enter">
+    <operate>
+      <teleport area="thirallan_cathedral" x="10" y="-1" with="ellipse" />
+    </operate>
+  </structure>
+  <structure id="monastery_entrance" image="monastery_wall.png" width="512" height="512" name="enter">
+    <operate>
+      <teleport area="thirallan_monastery" x="66" y="-1" with="ellipse" />
+    </operate>
+  </structure>
+  <structure id="monastery_exit" image="monastery_exit.png" width="128" height="90" name="enter">
+    <operate>
+      <teleport area="thirallan_rotting_forest" x="74" y="-1" with="ellipse" />
+    </operate>
+  </structure>
+
+  <tilesheet id="cathedral_wall_parallax.png" width="144" height="160" />
+  <tile id="wall_parallax" sheet="cathedral_wall_parallax.png" x="0" />
+
+  <object id="wall_parallax" tile="wall_parallax" layer="back" />
+
+  <tile id="blood_tree" sheet="blood_tree.png" x="0" y="0" />
+  <animation id="blood_tree.hit" x="0" count="8" />
+  <animation id="blood_tree.grow" x="8" count="4" />
+  <tree id="blood_tree" health="15" loot="wood" min="3" max="5" collect="2" grown="3" speed="0.002" tile="blood_tree" />
+
+	<structure id="monastery_weaps_market" tile="weaps_market" type="market" animation="market" restock="5000" show_offers="!isNight()" nightAnimation="market.night">
+		<item id="mega_backpack" min="1" max="1" />
+		<item id="ultra_backpack" min="1" max="1" />
+		<item id="net" min="5" max="10" />
+		<item id="torch" min="5" max="10" />
+		<item id="trap" min="5" max="10" />
+		<item id="arrow" min="20" max="40" />
+		<item id="fence" min="5" max="10" />
+		<select count="6">
+			<item id="bow" min="1" max="1" />
+			<item id="malumite_pickaxe" min="1" max="1" />
+			<item id="malumite_sword" min="1" max="1" />
+			<item id="steel_axe" min="1" max="1" />
+			<item id="steel_hammer" min="1" max="1"/>
+			<item id="malumite_armor" min="1" max="1" />
+			<item id="malumite_shield" min="1" max="1" />
+		</select>
+		<buy type="equipment" /><buy type="tool" /><buy type="object" />
+		<over><action>this.loopAnimation("talk")</action></over>
+		<out><action>this.loopAnimation("idle")</action></out>
+		<operate><run procedure="market" /></operate>
+	</structure>
+	<structure id="monastery_mineral_market" tile="mineral_market" type="market" animation="market" restock="5000" show_offers="!isNight()" nightAnimation="market.night">
+		<item id="wood" min="10" max="30" />
+		<item id="coal" min="10" max="20" />
+		<item id="malumite_ore" min="5" max="20" />
+		<item id="cloth" min="10" max="20" />
+		<select count="3">
+			<item id="quartz" min="5" max="5" />
+			<item id="gold" min="5" max="5" />
+			<item id="diamond" min="5" max="5" />
+			<item id="iron_bar" min="5" max="5" />
+			<item id="steel_bar" min="5" max="5" />
+		</select>
+		<buy type="resource" />
+		<over><action>this.loopAnimation("talk")</action></over>
+		<out><action>this.loopAnimation("idle")</action></out>
+		<operate><run procedure="market" /></operate>
+	</structure>
+	<compound id="monastery_market">
+		<structure id="monastery_mineral_market" x="0" />
+		<structure id="monastery_weaps_market" x="3" />
+	</compound>
+
+  <object id="monastery.mines_entrance_decoy" width="16" height="16" />
+  <object id="monastery.mines_exit_decoy" width="16" height="16" />
+
+  <structure id="monastery.mines_entrance" width="32" height="32" image="{core}/structures/cave.png" name="enter">
+    <addedToArea>
+      <object id="monastery.mines_entrance_decoy" x="this.tile_x+0.5" y="this.tile_y" />
+    </addedToArea>
+    <operate>
+      <section>
+        <lerp object="player" alpha="0" seconds="0.25" />
+        <wait seconds="1" />
+        <pan toObject="area.getObject('monastery.mines_exit_decoy')" seconds="1" />
+        <wait seconds="0.5" />
+        <move object="player" x="106.5" y="2" />
+        <lerp object="player" alpha="1" seconds="0.25" />
+      </section>
+    </operate>
+  </structure>
+  <structure id="monastery.mines_exit" width="32" height="32" image="{core}/structures/cave.png" name="enter">
+    <addedToArea>
+      <object id="monastery.mines_exit_decoy" x="this.tile_x+0.5" y="this.tile_y" />
+    </addedToArea>
+    <operate>
+      <section>
+        <lerp object="player" alpha="0" seconds="0.25" />
+        <wait seconds="1" />
+        <pan toObject="area.getObject('monastery.mines_entrance_decoy')" seconds="1" />
+        <wait seconds="0.5" />
+        <move object="player" x="106.5" y="-1" />
+        <lerp object="player" alpha="1" seconds="0.25" />
+      </section>
+    </operate>
+  </structure>
+
+  <tilesheet id="mess_of_souls_summon.png" width="32" height="128" />
+  <tile id="MOS_summon" sheet="mess_of_souls_summon.png" x="0" y="0" />
+  <animation id="MOS_summon.summon" length="2" x="0" count="43" />
+
+  <object id="MOS_summon" tile="MOS_summon"><light tile="light.large" color="ffff00" offsetY="-32" /></object>
+
+  <object id="MOS_hotspot" width="96">
+    <over>
+      <section>
+        <remove object="this" />
+        <object id="MOS_summon" x="68" y="-1" />
+        <pan toObject="area.getObject('MOS_summon')" seconds="1" />
+        <play object="area.getObject('MOS_summon')" animation="MOS_summon.summon" modal="true" />
+        <wait seconds="1">
+          <operate object="area.getObject('MOS_summon')" />
+        </wait>
+        <remove object="area.getObject('MOS_summon')" />
+        <object id="mess_of_souls" x="68" y="-1" />
+      </section>
+    </over>
+  </object>
+
+  <animation id="cathedral_sanctuary.idle" x="0" count="5" length="1.5" />
+  <animation id="cathedral_sanctuary.night.idle" x="5" count="5" length="1.5" />
+
+  <structure id="cathedral_sanctuary" width="88" height="64" image="cathedral_sanctuary.png" sleep="true" nightAnimation="cathedral_sanctuary.night" name="rest">
+    <operate>
+      <section if="isNight()">
+        <save sleep="true" />
+      </section>
+      <section if="!isNight()">
+        <dialogue section="azriel" id="no_service" speaker='player' />
+      </section>
+    </operate>
+  </structure>
+
+  <structure id="cathedral_exit" width="48" height="40" image="cathedral_exit.png" name="enter">
+    <operate><teleport area="thirallan_monastery" x="87" y="-1" with="ellipse" /></operate>
+  </structure>
+
+  <structure id="encampment_door" width="128" height="128" image="encampment.png" name="enter">
+    <operate>
+      <choose>
+        <section if="area.id == 'thirallan_fang_plains'">
+          <teleport area="encampment.fangs" x="15" y="-1" with="ellipse" allowReturn="true" />
+        </section>
+        <section if="area.id == 'thirallan_beast_forest'">
+          <teleport area="encampment.beasts" x="15" y="-1" with="ellipse" allowReturn="true" />
+        </section>
+        <section if="area.id == 'thirallan_phoenix_plateau'">
+          <teleport area="encampment.phoenixes" x="15" y="-1" with="ellipse" allowReturn="true" />
+        </section>
+        <return with="ellipse" />
+      </choose>
+    </operate>
+  </structure>
+
+</structures>

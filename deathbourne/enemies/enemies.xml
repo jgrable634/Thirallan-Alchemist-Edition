@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<enemies>
+	<tilesheet id="alien.deathbourne.png" width="50" height="50" />
+	<tile id="project_calamari" sheet="alien.deathbourne.png" x="0" y="0" />
+	<animation id="project_calamari.idle" x="0" count="2">
+		<frame x="3" />
+		<frame x="4" />
+	</animation>
+	<animation id="project_calamari.walk" equals="project_calamari.idle" />
+	<animation id="project_calamari.omni" x="2" count="1" length="4" />
+	<animation id="project_calamari.pre_beam" x="0" count="2" length="2" >
+		<frame x="3" />
+		<frame x="4" />
+		<append tile="beam_charge" x="8" y="8" offsetX="-1" offsetY="-0.5" animation="beam_charge" />
+	</animation>
+	<animation id="project_calamari.beam" x="0" count="2">
+		<frame x="3" />
+		<frame x="4" />
+		<append tile="magic_beam" x="8" y="8" offsetX="-1" offsetY="0.5" animation="magic_beam" />
+	</animation>
+	<procedure id="ball_bombardment">
+		<set id="orbs" value="[]" if="!exists('orbs')" />
+		<action>while(orbs.length > 0) Movement.seek(orbs.pop(), player, 4);</action>
+		<action>
+				function addOrb(dx, dy){
+				var o = getObject("magic_orb").create(this.xPos+dx, this.yTile+dy);
+				area.addObject(o); Movement.circle(o, this, 1.25, 4); orbs.push(o);
+				} 
+			addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100));
+			addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100));
+			addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100)); addOrb(randInt(-100, 100),randInt(-100,100));
+			Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4);
+			Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4);
+			Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); 
+			Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); Movement.seek(orbs.pop(), player, 4); 
+      </action>
+	</procedure>
+	<procedure id="ball_constant">
+		<section if="area.getObject('project_calamari') != null">
+			<invokeLater seconds="2">
+				<set id="orbs" value="[]" if="!exists('orbs')" />
+				<action>while(orbs.length > 0) Movement.seek(orbs.pop(), player, 4);</action>
+				<action>
+								function addOrb(dx, dy){
+					var o = getObject("magic_orb").create(this.xPos+dx, this.yTile+dy);
+					area.addObject(o); Movement.circle(o, this, 1.25, 4); orbs.push(o);
+					} 
+					addOrb(100, 100);
+					addOrb(100, -100);
+					addOrb(-100, 100);
+					addOrb(-100, -100);
+					Movement.seek(orbs.pop(), player, 4);
+					Movement.seek(orbs.pop(), player, 4);
+					Movement.seek(orbs.pop(), player, 4);
+					Movement.seek(orbs.pop(), player, 4);
+				</action>
+				<run procedure="ball_constant" />
+			</invokeLater>
+		</section>
+		<stop/>
+	</procedure>
+	<enemy id="project_calamari" tile="project_calamari" health="150" defense="8" speed="0.5" vertical="true" range="20" type="surface" bgm="boss" canCritical="false" ignoreHit="true" knockback="false">
+		<cooldown seconds="10">
+			<attack type="omni" damage="40" range="10" animation="omni">
+				<pre><play object='this' animation="idle" /></pre>
+				<post><run procedure="ball_bombardment" /></post>
+			</attack>
+		</cooldown>
+		<cooldown seconds="20">
+			<attack type="beam" damage="200" range="10" animation="beam" knockback="32" top="10" bottom="5" critical="false" sfx="magic">
+				<pre><play object='this' animation="pre_beam" /></pre>
+			</attack>
+		</cooldown>
+		<init><run procedure="ball_constant" /></init>
+		<onDeath><structure id="deathbourne_cave_exit" x="5" y="5" /></onDeath>
+	</enemy>
+</enemies>

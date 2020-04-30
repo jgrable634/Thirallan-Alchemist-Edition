@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+	<procedure id="mirrows.npc" extends="mirrows.npc">
+		<choose if="!player.questComplete('legendary_blade')">
+			<section if="player.questComplete('ship_parts') && !player.hasQuest('legendary_blade')">
+				<dialogue section="mirrows" id="Deathbourne1" speaker='this' />
+				<dialogue section="mirrows" id="Deathbourne2" speaker='this' />
+				<quest id="legendary_blade" />
+			</section>
+			<section if="player.hasQuest('legendary_blade') && player.canCompleteQuest('legendary_blade')">
+				<dialogue section="mirrows" id="Deathbourne4" speaker='this' />
+				<complete quest="legendary_blade" />
+				<item id="test_sword2" modal="true" />
+				<dialogue section="mirrows" id="Deathbourne5" speaker='this' />
+				<dialogue section="mirrows" id="Deathbourne6" speaker='this' />
+			</section>
+			<section if="player.hasQuest('legendary_blade') && !player.questComplete('legendary_blade')">
+				<dialogue section="mirrows" id="Deathbourne3" speaker='this' />
+			</section>
+		</choose>
+	</procedure>
+
+	<npc id="ancient_dragon_npc" extends="ancient_dragon_npc">
+				<operate>
+					<section if="player.questComplete('legendary_blade') && !player.hasQuest('legendary_blade2') && player.hasItem('test_sword2')">
+						<dialogue section="dragon" id="Deathbourne7" speaker="this" />
+						<dialogue section="dragon" id="Deathbourne8" speaker="player" />
+						<dialogue section="dragon" id="Deathbourne9" speaker="this" />
+						<dialogue section="dragon" id="Deathbourne10" speaker="player" />
+						<dialogue section="dragon" id="Deathbourne11" speaker="this" />
+						<dialogue section="dragon" id="Deathbourne12" speaker="player" />
+						<dialogue section="dragon" id="Deathbourne13" speaker="this" />
+						<quest id="legendary_blade2" />
+						<dialogue section="dragon" id="Deathbourne14" speaker='player' />
+						<dialogue section="dragon" id="Deathbourne15" speaker='this' />
+					</section>
+					<section if="player.hasQuest('legendary_blade2') && player.canCompleteQuest('legendary_blade2')">
+						<dialogue section="dragon" id="Deathbourne16" speaker='this' />
+						<complete quest="legendary_blade2" />
+						<dialogue section="dragon" id="Deathbourne17" speaker='this' />
+						<item id="test_sword" modal="true" />
+						<dialogue section="dragon" id="Deathbourne18" speaker='player' />
+						<dialogue section="dragon" id="Deathbourne19" speaker='this' />
+						<dialogue section="dragon" id="Deathbourne20" speaker='player' />
+					</section>
+					<section if="player.hasQuest('legendary_blade2') && !player.questComplete('legendary_blade2')">
+						<dialogue section="dragon" id="Deathbourne21" speaker='this' />
+					</section>
+				</operate>
+			</npc>
+			<npc id="mechanic" extends="mechanic">
+				<operate>
+					<section if="player.questComplete('legendary_blade') && !player.hasQuest('legendary_blade3') && player.hasItem('test_sword')">
+						<dialogue section="mechanic" id="Deathbourne22" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne23" speaker='player' />
+						<dialogue section="mechanic" id="Deathbourne24" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne25" speaker='this' />
+						<quest id="legendary_blade3" />
+						<dialogue section="mechanic" id="Deathbourne26" speaker='player' />
+						<dialogue section="mechanic" id="Deathbourne27" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne28" speaker='player' />
+					</section>
+					<section if="player.hasQuest('legendary_blade3') && player.canCompleteQuest('legendary_blade3')">
+						<dialogue section="mechanic" id="Deathbourne30" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne31" speaker='player' />
+						<dialogue section="mechanic" id="Deathbourne32" speaker='player' />
+						<dialogue section="mechanic" id="Deathbourne33" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne34" speaker='player' />
+						<dialogue section="mechanic" id="Deathbourne35" speaker='this' />
+						<dialogue section="mechanic" id="Deathbourne36" speaker='player' />
+						<complete quest="legendary_blade3" />
+					</section>
+					<section if="player.hasQuest('legendary_blade3') && !player.questComplete('legendary_blade3')">
+						<dialogue section="mechanic" id="Deathbourne29" speaker='this' />
+					</section>
+					<section if="player.questComplete('legendary_blade3') && !getFlag('mechanic.deathbourne_gift')">
+						<quest />
+						<dialogue section="mechanic" id="Deathbourne37" speaker='this' />
+						<action>setFlag('mechanic.deathbourne_gift', true)</action>
+						<item id="test_present" />
+					</section>
+				</operate>
+			</npc>
+			<npc id="alchemist" extends="alchemist">
+				<operate>
+					<section if="player.questComplete('legendary_blade2') && !player.hasQuest('newcomer')">
+						<dialogue section="alchemist" id="energy1" speaker='this' />
+						<dialogue section="alchemist" id="energy2" speaker='player' />
+						<dialogue section="alchemist" id="energy3" speaker='this' />
+						<quest id="newcomer" />
+						<dialogue section="alchemist" id="energy4" speaker='player' />
+						<dialogue section="alchemist" id="energy5" speaker='this' />
+						<dialogue section="alchemist" id="energy6" speaker='player' />
+						<dialogue section="alchemist" id="energy7" speaker='this' />
+						<dialogue section="alchemist" id="energy8" speaker='player' />
+						<dialogue section="alchemist" id="energy9" speaker='this' />
+						<dialogue section="alchemist" id="energy10" speaker='player' />
+						<dialogue section="alchemist" id="energy11" speaker='this' />
+						<dialogue section="alcehmist" id="energy12" speaker='player' />
+					</section>
+					<section if="player.hasQuest('newcomer') && !player.canCompleteQuest('newcomer') && !player.questComplete('newcomer')">
+						<dialogue section="alchemist" id="hint" speaker='this' />
+					</section>
+					<section if="player.hasQuest('newcomer') && player.canCompleteQuest('newcomer')">
+						<dialogue section="alchemist" id="must_die1" speaker='player' />
+						<dialogue section="alchemist" id="must_die2" speaker='this' />
+						<dialogue section="alchemist" id="must_die3" speaker='player' />
+						<dialogue section="alchemist" id="must_die4" speaker='this' />
+						<complete quest="newcomer" />
+						<quest id="must_die_now" />
+						<dialogue section="alchemist" id="must_die5" speaker='player' />
+					</section>
+					<section if="player.hasQuest('must_die_now') && player.canCompleteQuest('must_die_now')">
+						<dialogue section="alchemist" id="not_going" speaker='player' />
+						<dialogue section="alchemist" id="no" speaker='this' />
+						<dialogue section="alchemist" id="yes" speaker='player' />
+						<dialogue section="alchemist" id="wow" speaker='this' />
+						<dialogue section="alchemist" id="what" speaker='player' />
+						<dialogue section="alchemist" id="nothing" speaker='this' />
+						<complete quest="must_die_now" />
+					</section>
+				</operate>
+			</npc>
+			<include id="{mod:full_version}/magic/enemies/alien.xml" />
+			<tile id="hi_alien" sheet="{mod:full_version}/magic/enemies/alien.1" />
+			<animation id="hi_alien.talk" equals="hi_alien.idle" />
+			<npc id="alien2.npc" tile="hi_alien" action="talk" animation="hi_alien">
+				<operate>
+					<section if="!player.hasQuest('newcomer')">
+						<dialogue section="oldone" id="discovery1" speaker='this' />
+					</section>
+					<section if="player.hasQuest('newcomer') && !player.questComplete('newcomer')">
+						<dialogue section="oldone" id="discovery2" speaker='player' />
+						<dialogue section="oldone" id="discovery3" speaker='this' />
+						<action>setFlag('discovery', true)</action>
+					</section>
+					<section if="player.hasQuest('must_die_now')">
+						<dialogue section="oldone" id="fight1" speaker='this' />
+					  <shake count="10" dx="2" seconds="1" />
+						<dialogue section="oldone" id="woah" speaker='player' />
+						<section with="fade">
+							<object id="project_calamari" x="15" y="5" />
+							<remove object="area.getObject('alien2.npc')" />
+							<remove structure="area.getStructureById('deathbourne_cave_exit')" />
+						</section>
+					</section>
+				</operate>
+			</npc>
+			<npc id="alien3" tile="alien" action="talk">
+				<operate>
+					<section>
+						<dialogue section="oldone" id="what?" speaker='this' />
+						<dialogue section="oldone" id="what?2" speaker='player' />
+						<dialogue section="oldone" id="what?3" speaker='this' />
+						<run procedure=";)" />
+					</section>
+				</operate>
+			</npc>
+		<procedure id=";)">
+			<damage object="player" damage="500" ignoreArmor="true" element="fire" hitEffect="fire_lg_dot"  />
+		</procedure>
+		<quest id="must_die_now" giver="alien2.npc" exp="5000">
+			<kill id="project_calamari" name="common.complete" count="1" hidden="true" />
+		</quest>
+		<quest id="newcomer" giver="alchemist" exp="1250">
+			<flag id="discovery" hidden="true" />
+		</quest>
+		<quest id="legendary_blade2" giver="ancient_dragon_npc" exp="2000">
+			<item id="evo_gem" count="1" />
+			<item id="earth_gem" count="3" />
+			<item id="steel_bar" count="20" />
+			<item id="spirit_gem" count="5" />
+			<item id="test_sword2" count="1" />
+		</quest>
+        <quest id="legendary_blade" giver="mirrows" exp="2000" recipe="craft_test_sword" />
+		<quest id="legendary_blade3" giver="mechanic" exp="500">
+			<item id="test_sword" count="1" />
+			<item id="steel_bar" count="5" />
+		</quest>
+</npcs>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <procedure id="blood_moon_purifier">
+      <dialogue section="player" id="vision" speaker='player' />
+      <section with="fade">
+        <teleport area="purifier_get_fucked" x="20" y="-1" />
+      </section>
+      <invokeLater seconds="0.5">
+        <pan toObject="area.getObject('purifier_get_fucked')" seconds="1" />
+        <play object="area.getObject('purifier_get_fucked')" animation="purifier_get_fucked.open_eyes" modal="true" />
+        <dialogue section="purifier" id="blood_moon" />
+      </invokeLater>
+      <section with="fade">
+        <teleport area="thirallan_zargoroth" x="60" y="-1" />
+      </section>
+    </procedure>
+</data>

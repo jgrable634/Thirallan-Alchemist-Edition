@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <include id="art/art.xml" />
+
+  <include id="zargoroth_haven.xml" />
+
+  <include id="mage_guild.xml" />
+
+  <include id="church_survivors.xml" />
+
+  <include id="bandits.xml" />
+
+  <include id="UC.xml" />
+
+  <procedure id="iterol.invite">
+    <menu section="common">
+      <dialogue section="iterol" id="invite_iterol" />
+      <choice id="yes">
+        <dialogue section="iterol" id="invite_iterol1" speaker='player' />
+        <dialogue section="iterol" id="invite_iterol2" speaker='this' />
+        <dialogue section="iterol" id="invite_iterol3" speaker='player' />
+        <dialogue section="iterol" id="invite_iterol4" speaker='this' />
+        <remove object="this" />
+        <action>setFlag('iterol_recruited',true);</action>
+      </choice>
+      <choice id="no" />
+    </menu>
+  </procedure>
+  <npc id="iterol" tile="iterol" action="talk" talk_sfx="talking1">
+    <idle class="wander" fromX="25" toX="40" />
+    <operate>
+      <choose>
+        <section if="!getFlag('iterol_introduced')">
+          <dialogue section="iterol" id="introduce" speaker='this' />
+          <dialogue section="iterol" id="introduce2" speaker='player' />
+          <dialogue section="iterol" id="introduce3" speaker='this' />
+          <action>setFlag('iterol_introduced',true);</action>
+        </section>
+        <run procedure="iterol.invite" if="player.hasQuest('rebuild_monastery') && !getFlag('iterol_recruited')" />
+        <dialogue section="iterol" id="introduce4" speaker='this' if="area.id == 'thirallan_gold_diggers_haven'" />
+        <dialogue section="iterol" id="monastery" speaker='this' if="area.id == 'thirallan_cathedral'" />
+      </choose>
+    </operate>
+  </npc>
+  <npc id="iterol_cathedral" extends="iterol" night="true" />
+
+  <include id="non_thirallan.xml" />
+
+</npcs>

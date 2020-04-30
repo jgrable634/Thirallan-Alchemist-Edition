@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lang id="en_US">
+  <section id="system">
+    <text id="alchemist_system">Unoiks 187</text>
+  </section>
+  <section id="system.desc">
+    <text id="alchemist_system">M-type star 33 light years from Earth. 4 confirmed exoplanets.</text>
+  </section>
+  <section id="system.planet">
+    <text id="thirallan_alchemist">Unoiks 187e</text>
+    <text id="deathbourne.planet">Unoiks 187b</text>
+    <text id="ROD_planet">???</text>
+    <text id="robot_rebellion">Unoiks 187c</text>
+    <text id="corruption">Unoiks 187d</text>
+  </section>
+  <section id="system.planet.desc">
+    <text id="thirallan_alchemist">Found during the Unoiks Colony Project, atmosphere was considered unsatisfactory. \nConfirmed location of the Mars Colony.</text>
+    <text id="deathbourne.planet">A dwarf planet that has somehow shared it's orbit with Unoiks 187c. Rejected for the same reasons as Unoiks 428b.</text>
+    <text id="ROD_planet">A strange hunk of rock that is mysteriously held in place.</text>
+    <text id="robot_rebellion">A dwarf planet that has somehow shared it's orbit with Unoiks 187b. Rejected for the same reasons as Unoiks 428b.</text>
+    <text id="corruption">An incredibly abnormal planet, strange surges of energy eminate from it's atmosphere. \nSuspected of being an [color=ff2222]Enemy Experiment[/color].</text>
+  </section>
+  <section id="system.entry">
+    <text id="alchemist_system_entry_alch1">I noticed in the Unoiks project a peculiar system, where strange readings had been noted, I've been intrigued about it, but no way to get there and investigate.</text>
+    <text id="alchemist_system_entry_alch2">Now that you have a ship, I ask that you investigate. The system is [color=770000]Unoiks 187[/color].</text>
+    <text id="alchemist_system_entry_pres1">We now know that you are capable of this task, knowing you made it all the way to the Alien HQ!</text>
+    <text id="alchemist_system_entry_pres2">There is a system known as [color=770000]Unoiks 187[/color], that has been the source of very strange energy readings! We sent a team to investigate, but they haven't returned. Can you investigate for us?</text>
+  </section>
+  <section id="quests">
+    <text id="alchemist_system_alch">A Strange System</text>
+    <text id="alchemist_system_pres">A Strange System</text>
+  </section>
+  <section id="quest.description">
+    <text id="alchemist_system_alch">wants you to investigate [color=770000]Unoiks 187[/color].</text>
+    <text id="alchemist_system_pres">wants you to investigate [color=770000]Unoiks 187[/color].</text>
+  </section>
+  <section id="item.names">
+    <text id="corrupted_item">Corrupted Item</text>
+  </section>
+  <section id="item.descriptions">
+    <text id="corrupted_item">The Corruption has rendered this item unusable.</text>
+  </section>
+  <section id="warning">
+    <text id="item_corrupted">{item} has been corrupted!</text>
+  </section>
+</lang>

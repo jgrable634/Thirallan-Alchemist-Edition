@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <!--include id="spears/spears.xml" /-->
+  <tilesheet id="icos.png" width="16" height="10" />
+  <tile id="thirallan_map.ico" sheet="icos.png" x="1" y="0" />
+  <item id="thirallan_map" icon="thirallan_map.ico" type="tool" corruptible="false">
+    <action id="use">
+      <choose>
+        <scene id="thirallan_alchemist" show="thirallan_move" with="fade" if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist'"/>
+        <dialogue section="player" id="peredur_no_travel" speaker='player' if="!player.hasSeenItem('peredur') && !player.isEquipped('peredur')" />
+        <dialogue section="player" id="blood_moon_no_travel" speaker='player' if="getFlag('blood_moon')"/>
+        <dialogue section="player" id="no_travel" speaker='player' />
+      </choose>
+    </action>
+  </item>
+  <item id="science_spear" type="equipment" slot="weapon" cost="200" weight="5" melee_range="1" icon="science_spear.ico" attack="5" stamina="5" breakable="false">
+    <action id="equip" />
+  </item>
+  <familiar id="peredur" type="ground">
+    <light tile="light.small" />
+    <attack type="projectile" damage="5" range="10" animation="attack">
+      <projectile tile="magic_orb" range="10" speed="3" delay="5" />
+    </attack>
+  </familiar>
+
+  <tile id="peredur.ico" sheet="icos.png" x="0" y="0" />
+  <item id="peredur" type="animal" slot="familiar" icon="peredur.ico" corruptible="false">
+    <action id="equip" /><action id="rename" />
+    <familiar id="peredur" tile="mage" animation="mage" />
+  </item>
+
+  <animation id="malumite.item" x="0" count="1" color="490068" />
+
+  <item id="malumite_ore" type="resource" cost="20" weight="5" icon="iron.ico" color="490068" />
+  <item id="malumite_bar" type="resource" cost="75" weight="5" icon="steel_bar.ico" color="490068" />
+
+  <tilesheet id="warhammer.png" width="20" height="20" />
+  <tile id="steel_warhammer.ico" sheet="warhammer.png" x="1" y="1" offsetY="-12" />
+  <tile id="exotic_warhammer.ico" sheet="warhammer.png" x="0" y="4" offsetY="-12" />
+
+  <tile id="malumite_pickaxe" sheet="{core}/items/weps.png" x="163" />
+	<tile id="malumite_sword" sheet="{core}/items/weps.png" x="111" />
+  <tile id="steel_warhammer" sheet="warhammer.png" x="0" y="0" />
+  <tile id="malumite_warhammer" sheet="warhammer.png" x="0" y="0" />
+  <tile id="exotic_warhammer" sheet="warhammer.png" x="3" y="1" />
+  <animation id="equipment.steel_warhammer.idle" x="0" count="1" />
+  <animation id="equipment.steel_warhammer">
+    <frame x="1" offsetX="-6" offsetY="-2" />
+    <frame x="2" offsetX="-6" offsetY="-2" />
+    <frame x="3" offsetX="-6" offsetY="-2" />
+    <frame x="4" offsetX="-6" offsetY="-2" />
+    <frame x="5" offsetX="-6" offsetY="-2" />
+    <frame x="6" offsetX="2" />
+    <frame x="6" offsetX="3" length="3" />
+    <frame x="6" offsetX="2" />
+  </animation>
+  <animation id="equipment.malumite_warhammer.idle" x="0" count="1" color="490068" offsetX="2" />
+  <animation id="equipment.malumite_warhammer" color="490068">
+    <frame x="1" offsetX="-6" offsetY="-2" />
+    <frame x="2" offsetX="-6" offsetY="-2" />
+    <frame x="3" offsetX="-6" offsetY="-2" />
+    <frame x="4" offsetX="-6" offsetY="-2" />
+    <frame x="5" offsetX="-6" offsetY="-2" />
+    <frame x="6" offsetX="2" />
+    <frame x="6" offsetX="3" length="3" />
+    <frame x="6" offsetX="2" />
+  </animation>
+  <animation id="equipment.exotic_warhammer.idle" x="0" count="5" offsetX="2" />
+  <animation id="equipment.exotic_warhammer">
+    <frame x="5" offsetX="-6" offsetY="-2" />
+    <frame x="6" offsetX="-6" offsetY="-2" />
+    <frame x="7" offsetX="-6" offsetY="-2" />
+    <frame x="8" offsetX="-6" offsetY="-2" />
+    <frame x="9" offsetX="-6" offsetY="-2" />
+    <frame x="10" offsetX="2" />
+    <frame x="10" offsetX="3" length="3" />
+    <frame x="10" offsetX="2" />
+  </animation>
+  <animation id="equipment.malumite_sword.idle" x="10" count="1" color="490068" />
+  <animation id="equipment.malumite_sword" count="10" shift="2" color="490068" />
+  <animation id="malumite_shield" count="6" color="490068">
+    <frame x="5" length="20" />
+  </animation>
+  <animation id="equipment.malumite_shield.idle" count="6" offsetX="0" offsetY="4" color="490068">
+    <frame x="5" length="20" offsetX="0" offsetY="4" />
+  </animation>
+  <animation id="equipment.malumite_pickaxe.idle" x="10" count="1" color="490068" />
+	<animation id="equipment.malumite_pickaxe" count="10" shift="2" color="490068" />
+  <tile id="malumite_armor" sheet="{core}/items/armors.png" x="116" />
+	<animation id="equipment.malumite_armor.idle" x="47" count="1" color="490068" />
+	<animation id="equipment.malumite_armor.walk" x="48" count="10" color="490068" />
+	<animation id="equipment.malumite_armor.hit" x="41" count="6" color="490068" />
+	<animation id="equipment.malumite_armor.death" x="0" count="41" color="490068" />
+
+  <item id="steel_warhammer" slot="weapon" type="equipment" cost="250" durability="500" melee_range="2" weight="12" attack="5" stamina="10" icon="steel_warhammer.ico" action="equip" knockback="5" repair="steel_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
+
+  <item id="malumite_warhammer" slot="weapon" type="equipment" cost="250" durability="500" melee_range="2" weight="12" attack="5" stamina="10" corruptible="false" icon="steel_warhammer.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
+
+  <item id="exotic_warhammer" slot="weapon" type="equipment" cost="8000" weight="20" melee_range="2" attack="18" critical="true" knockback="5" stamina="2" icon="exotic_warhammer.ico" durability="250" durabilityName="common.fuel" breakable="false" durabilityWarning="warning.fuel" movement_walk="walk_rswing" underwater="true" sfx="dragonsword">
+    <action id="equip" /><action id="feed" alt="feed_all" alt_name="fuel_all" name="common.fuel" full="warning.max_fuel" auto="common.auto_fuel" select="common.add_fuel" sfx="fuel" />
+    <food id="exotic_matter" value="50" />
+  </item>
+
+  <item id="malumite_pickaxe" extends="iron_pickaxe" cost="250" durability="2000" weight="5" mine="2" stamina="1" corruptible="false" icon="steel_pickaxe.ico" color="490068" repair="malumite_bar" />
+  <item id="malumite_sword" type="equipment" slot="weapon" cost="165" weight="6" attack="3" stamina="2" durability="500" corruptible="false" icon="steel_sword.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
+  <item id="malumite_armor" type="equipment" slot="armor" cost="330" durability="500" weight="12" defense="2" corruptible="false" icon="steel_armor.ico" color="490068" action="equip" repair="malumite_bar" />
+  <item id="malumite_shield" type="equipment" slot="shield" use="block" cost="165" weight="6" defense="1" durability="700" corruptible="false" icon="kite_shield.ico" animation="malumite_shield" action="equip" movement_walk="walk_lswing" repair="malumite_bar" />
+
+  <recipe id="craft_malumite_pickaxe" creates="malumite_pickaxe" type="workshop" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="3" />
+	</recipe>
+	<recipe id="craft_malumite_sword" creates="malumite_sword" type="workshop" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="2" />
+	</recipe>
+  <recipe id="craft_malumite_warhammer" creates="malumite_warhammer" type="workshop" available="player.questComplete('rebuild_monastery')">
+		<item id="malumite_bar" count="4" />
+	</recipe>
+  <recipe id="craft_steel_warhammer" creates="steel_warhammer" type="workshop" available="player.questComplete('rebuild_monastery')">
+    <item id="steel_bar" count="4" />
+  </recipe>
+  <recipe id="craft_exotic_warhammer" creates="exotic_warhammer" type="exo_factory" available="player.questComplete('exotic_warhammer')" value="0">
+    <item id="ship_parts" count="2" /><item id="chromium" count="8" /><item id="titanium" count="10" /><item id="exotic_matter" count="1" />
+  </recipe>
+	<recipe id="craft_malumite_armor" creates="malumite_armor" type="workshop" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="4" />
+	</recipe>
+	<recipe id="craft_malumite_shield" creates="malumite_shield" type="workshop" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="2" />
+	</recipe>
+  <recipe id="smelt_malumite" creates="malumite_bar" type="smelter" available="player.hasQuest('proving_worth')">
+    <item id="malumite_ore" count="2" />
+  </recipe>
+
+  <tile id="init_rite.ico" sheet="icos.png" x="0" y="1" />
+  <item id="init_rite" icon="init_rite.ico" type="tool" weight="1" />
+
+  <tile id="lost_artifact.ico" sheet="icos.png" x="1" y="1" />
+  <item id="lost_artifact" icon="lost_artifact.ico" type="resource" weight="3" />
+
+  <tile id="corruption_book" equals="spellbook" />
+	<animation id="equipment.corruption_book.idle" x="0" count="1" color="00000" colorScale="1.4" />
+
+  <tile id="corruption_book.cast" sheet="{mod:full_version}/magic/items/equip.3" x="6" offsetX="-8" />
+
+  <animation id="corruption_book.ico">
+		<frame visible="false" length="32" />
+		<append tile="spellbook.ico" animation="spellbook.ico" color="000000" colorScale="1.4" />
+		<append tile="spellbook.ico" animation="spellbook.letters" color="26142a" colorScale="2.4" />
+	</animation>
+
+  <animation id="equipment.corruption_book">
+    <frame visible="false" length="22" /><append tile="spellbook" animation="spellbook" color="26124a" colorScale="1.4" />
+    <append tile="corruption_book.cast" animation="spellbook.cast" />
+  </animation>
+
+  <item id="corruption_book" type="spellbook" equip_fps="30" cost="0" slot="shield" use="attack" weight="2" attack="8" stamina="20" range="12" icon="spellbook.ico" movement_walk="walk_lswing" animation="corruption_book.ico" element="corruption" action="equip" delay="5" staminaStat="spellcast" bindStaff="true" canModify="false">
+    <projectile tile="fire" animation="item8" glow="true" offsetY="2" speed="3" scaleTo="3" fire_sfx="orb_impact" hitEffect="fire_lg_dot" color="26142a" colorScale="2">
+      <light tile="light.small" color="cc5500" />
+    </projectile>
+  </item>
+
+
+
+</items>

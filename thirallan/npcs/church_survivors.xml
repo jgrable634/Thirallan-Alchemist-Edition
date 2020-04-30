@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <quest id="rebuild_monastery" exp="1000" giver="gilbert_template">
+    <flag id="andreas_recruited" name="quests.misc.find_miner" tile="andreas_hidden" />
+    <flag id="merchants_recruited" name="quests.misc.find_merchants" tile="pyrrhos_hidden" />
+    <flag id="iterol_recruited" name="quests.misc.find_scientist" tile="iterol_hidden" />
+  </quest>
+
+  <procedure id="gilbert.npc">
+    <choose>
+      <choose if="!player.hasQuest('rebuild_monastery')">
+        <section if="getFlag('gilbert.rejected')">
+          <menu section="common">
+            <dialogue section="gilbert" id="rebuild8" speaker='this' />
+            <choice id="yes">
+              <dialogue section="gilbert" id="rebuild3" speaker='this' />
+              <dialogue section="gilbert" id="rebuild4" speaker='this' />
+              <dialogue section="gilbert" id="rebuild5" speaker='this' />
+              <dialogue section="gilbert" id="rebuild6" speaker='this' />
+            </choice>
+            <choice id="no">
+              <dialogue section="gilbert" id="rebuild7" speaker='this' />
+            </choice>
+          </menu>
+          <stop/>
+        </section>
+        <section>
+          <dialogue section="gilbert" id="rebuild1" speaker='this' />
+          <menu section="common">
+            <dialogue section="gilbert" id="rebuild2" speaker='this' />
+            <choice id="yes">
+              <dialogue section="gilbert" id="rebuild3" speaker='this' />
+              <dialogue section="gilbert" id="rebuild4" speaker='this' />
+              <dialogue section="gilbert" id="rebuild5" speaker='this' />
+              <dialogue section="gilbert" id="rebuild6" speaker='this' />
+              <quest id="rebuild_monastery" ask="false" />
+            </choice>
+            <choice id="no">
+              <dialogue section="gilbert" id="rebuild7" speaker='this' />
+            </choice>
+          </menu>
+          <stop/>
+        </section>
+      </choose>
+      <choose if="player.hasQuest('rebuild_monastery') && !player.questComplete('rebuild_monastery')">
+        <section if="!player.canCompleteQuest('rebuild_monastery')">
+          <menu section="common">
+            <dialogue section="gilbert" id="rebuild9" speaker='this' />
+            <choice id="yes">
+              <dialogue section="gilbert" id="rebuild3" speaker='this' />
+              <dialogue section="gilbert" id="rebuild4" speaker='this' />
+              <dialogue section="gilbert" id="rebuild5" speaker='this' />
+              <dialogue section="gilbert" id="rebuild6" speaker='this' />
+            </choice>
+            <choice id="no">
+              <dialogue section="gilbert" id="rebuild10" speaker='this' />
+            </choice>
+          </menu>
+        </section>
+        <section if="player.canCompleteQuest('rebuild_monastery')">
+          <dialogue section="gilbert" id="rebuild11" speaker='this' />
+          <dialogue section="gilbert" id="rebuild12" speaker='this' />
+          <complete quest="rebuild_monastery" />
+        </section>
+      </choose>
+    </choose>
+  </procedure>
+
+  <procedure id="hadvarr.npc">
+    <dialogue section="hadvarr" id="notOne" speaker='this' />
+  </procedure>
+
+  <npc id="gilbert_template" tile="gilbert" action="talk" talk_sfx="talking1">
+    <operate>
+      <section>
+        <set id="this" value="this" />
+        <run procedure="gilbert.npc" />
+      </section>
+    </operate>
+  </npc>
+  <npc id="hadvarr_template" tile="hadvarr" action="talk" talk_sfx="talking4">
+    <operate>
+      <section>
+        <set id="this" value="this" />
+        <run procedure="hadvarr.npc" />
+      </section>
+    </operate>
+  </npc>
+  <npc id="gilbert_cathedral" extends="gilbert_template" sleepDay="true" night="true"><idle class="wander" fromX="0" toX="20" /></npc>
+  <npc id="hadvarr_cathedral" extends="hadvarr_template" sleepDay="true" night="true"><idle class="wander" fromX="0" toX="20" /></npc>
+  <npc id="gilbert_monastery" extends="gilbert_template"><idle class="wander" fromX="50" toX="126" /></npc>
+  <npc id="hadvarr_monastery" extends="hadvarr_template"><idle class="wander" fromX="50" toX="126" /></npc>
+
+  <npc id="azriel" tile="azriel" action="talk" talk_sfx="talking5">
+    <idle class="wander" fromX="50" toX="126" />
+    <operate>
+      <dialogue section="azriel" id="notOne" speaker='this' />
+    </operate>
+  </npc>
+  <npc id="ligart" tile="ligart" action="talk" night="true" sleepDay="true">
+    <idle class="wander" fromX="50" toX="126" />
+    <operate>
+      <dialogue section="ligart" id="placeholder" speaker='this' />
+    </operate>
+  </npc>
+
+  <npc id="andreas_monastery" mine="4" tile="andreas" action="talk" talk_sfx="talking5">
+		<idle class="mineOre"><loot id="coal" /></idle>
+    <operate><dialogue section="andreas" id="monastery" speaker='this' /></operate>
+	</npc>
+
+  <!--enemy id="lightning_wyvern" tile="adult_dragon" health="30" defense="3" fps="10" type="dragon" color="00008b" colorScale="1.5">
+		<lootSet><loot id="fire_gem" /></lootSet><sound id="death" value="dragon_death" /><sound id="hit" value="dragon_hit" />
+		<lootSet><loot id="dragonblood" count="3" /></lootSet>
+		<tile id="hadvarr" name="hadvarr" offsetX="-1" offsetY="-1" />
+		<attack type="breath" damage="5" range="13" repeat="2" animation="fire" state="standing" sfx="dragon_atk">
+			<projectile tile="fire" glow="true" speed="2" frames="8" breakTile="2" breakPower="4" scaleTo="3" offsetX="-40" offsetY="8" hitEffect="fire_med" color="f9be0b" colorScale="2">
+				<light tile="light.small" color="cc5500" />
+			</projectile>
+		</attack>
+		<attack type="breath" damage="5" range="13" repeat="2" animation="hover_fire" state="flying" sfx="dragon_atk">
+			<projectile tile="fire" glow="true" speed="2" frames="8" breakTile="2" breakPower="4" scaleTo="3" offsetX="-33" offsetY="-5" hitEffect="fire_med" color="f9be0b" colorScale="2">
+				<light tile="light.small" color="cc5500" />
+			</projectile>
+		</attack>
+	</enemy-->
+</npcs>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lang id="en_US">
+  <section id="map">
+    <text id="selection_location">Select a location.</text>
+    <text id="travel_beast_forest">The Forest of Beasts is occupied by The Beasts, one of the 3 bandit groups. Also home to experimentations made by The Beasts that were released. Would you like to go to The Forest of Beasts?</text>
+    <text id="travel_zargoroth">Zargoroth's Village is a haven for all, a nice place for outsiders to get used to the bad times that Thirallan has found itself in. Would you like to go to Zargoroth's Village?</text>
+    <text id="travel_undying_peninsula">This peninsula has a rumor tied to it, that a spirit that has become restless haunts the area. Hence Undying Peninsula. A strange shrine is in this area, would you like to go to The Undying Peninsula?</text>
+    <text id="travel_mountains">The mountain range northeast of Zargoroth's Village is home to strange undead that have somehow adapted to the steep terrain. Some strange energy pulse emenates from here, would you like to go to the mountain range?</text>
+    <text id="travel_rotting_forest">There it is, The Rotting Forest. It was home to The Church, but the monastery there was devastated by the battle that plunged Thirallan into chaos. A strange shrine is in this area, would you like to go to the Rotting Forest?</text>
+    <text id="travel_fang_plains">These plains have been claimed by "The Fangs", another of the 3 bandit groups of Thirallan, there is a strange shrine here. Would you like to go to The Fang Plains?</text>
+    <text id="travel_phoenix_plateau">This plateau has been claimed by "The Phoenixes", the 3rd bandit group of Thirallan. There is a strange shrine here. Would you like to go to the Phoenix Plateau?</text>
+    <text id="travel_gold_diggers_haven">Gold Digger's Haven was sprung up upon the discovery of gold nearby, it has been long abandoned since then. There is a dock here. A strange shrine is in the area, would you like to go to Gold Digger's Haven?</text>
+    <text id="travel_gold_excavation">This Gold Excavation is the reason [color=770000]Gold Digger's Haven[/color] was ever established. It was discovered long ago that there was enough shining gold to make you blind. Would you like to go to the Gold Excavation?</text>
+    <text id="travel_holy_hills">These hills were deemed holy by The Church long ago. the priests would come for repent, forgiveness, and requests to the god they worshipped. Would you like to go to The Holy Hills?</text>
+    <text id="travel_desert">The desert has been ignored ever since the island was first colonized. It must be dangerous, as no one ever comes back from there. Would you like to go to The Desert?</text>
+  </section>
+
+  <section id="common">
+    <text id="beast_forest">Forest of Beasts</text>
+    <text id="zargoroth">Zargoroth's Safe Haven</text>
+    <text id="undying_peninsula">Undying Peninsula</text>
+    <text id="mountains">Thirallan Mountain Range</text>
+    <text id="rotting_forest">Rotting Forest</text>
+    <text id="fang_plains">Fang Plains</text>
+    <text id="phoenix_plateau">Phoenix Plateau</text>
+    <text id="gold_diggers_haven">Gold Digger's Haven</text>
+    <text id="gold_excavation">Gold Excavation</text>
+    <text id="holy_hills">Holy Hills</text>
+    <text id="desert">Thirallan Desert</text>
+    <text id="thirallan_monastery">The Monastery</text>
+    <text id="spearAndArmor">Spear and Armor</text>
+    <text id="diy">Do it myself</text>
+    <text id="thirallan_mines_no">Are these mines? I probably shouldn't enter just yet, could be unstable.</text>
+    <text id="hut_stuff">I should probably check up on [object=zargoroth] in the [color=770000]Hut[/color].</text>
+    <text id="early_escape">So you decided to yolo and leave? Very well, get your shit out of the chest, and board your ship. You can go to orbit from here. Thanks for testing this.</text>
+    <text id="blood_moon">The [color=770000]Blood Moon[/color] rises...</text>
+    <text id="beckoning">You feel a strange voice inside your head beckoning you to the hut...</text>
+    <text id="current_objective">Current Objective</text>
+    <text id="town">Ask about this village</text>
+    <text id="island">Ask About this island</text>
+    <text id="travelers">Ask About travelers</text>
+    <text id="himself">Ask About himself</text>
+    <text id="peredur">Ask about [color=770000]Peredur[/color]</text>
+    <text id="pyrrhos">Ask about [color=770000]Pyrrhos[/color]</text>
+    <text id="tomkin">Ask about [color=770000]Tomkin[/color]</text>
+    <text id="andreas">Ask about [color=770000]Andreas[/color]</text>
+    <text id="monastery">Ask about [color=770000]The Monastery[/color]</text>
+    <text id="bandits">Ask about Bandits</text>
+    <text id="beasts">About [color=770000]The Beasts[/color]</text>
+    <text id="fangs">About [color=770000]The Fangs[/color]</text>
+    <text id="phoenixes">About [color=770000]The Phoenixes[/color]</text>
+    <text id="gold_diggers_haven_about">About [color=770000]Gold Digger's Haven[/color]</text>
+    <text id="strangle_break_up">Press [key=up]!</text>
+    <text id="strangle_break_left">Press [key=left]!</text>
+    <text id="strangle_break_right">Press [key=right]!</text>
+    <text id="strangle_break_down">Press [key=down]!</text>
+  </section>
+
+  <section id="structure.tooltip">
+    <text id="monastery_weaps_market">Trade with Weapon Dealer</text>
+    <text id="monastery_mineral_market">Trade with Ore Merchant</text>
+  </section>
+
+  <section id="item.names">
+    <text id="thirallan_map">Map of Thirallan</text>
+    <text id="peredur">Peredur</text>
+    <text id="init_rite">Rite of Initiation</text>
+    <text id="lost_artifact">Lost Artifact</text>
+    <text id="corruption_book">Book of Corruption</text>
+    <text id="malumite_pickaxe">Malumite Pick</text>
+    <text id="malumite_sword">Malumite Sword</text>
+    <text id="malumite_armor">Malumite Armor</text>
+    <text id="malumite_shield">Malumite Shield</text>
+    <text id="malumite_ore">Malumite Ore</text>
+    <text id="malumite_bar">Malumite Bar</text>
+    <text id="malumite_warhammer">Malumite Warhammer</text>
+    <text id="steel_warhammer">Steel Warhammer</text>
+    <text id="exotic_warhammer">Exotic Warhammer</text>
+  </section>
+  <section id="item.descriptions">
+    <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
+    <text id="init_rite">Bring this to [object=asim].</text>
+    <text id="lost_artifact">Bring this to [object=umazz].</text>
+    <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
+  </section>
+  <section id="actions">
+    <text id="artifact">Scavenge</text>
+  </section>
+
+  <section id="zargoroth">
+    <text id="found1">Excuse me sir? Are you hurt?</text>
+    <text id="found2">Sir? I won't just leave you here for the undead, I need you to wake up.</text>
+    <text id="found3">Oh, you finally woke up, are you okay?</text>
+    <text id="found4">I'm Zargoroth, you're in Thirallan, in my village, do you remember anything?</text>
+    <text id="found5">You're fine, you're welcome to stay here as long as you like, once you've gotten better, feel free to ask me any more questions.</text>
+    <text id="first1">So must've come here for a reason... right?</text>
+		<text id="first2">Hmm, well, if there is a distress siganl, it wasn't us. We don't have access to that kind of technology, and we never will.</text>
+		<text id="first3">However, if you want help in finding it, I'm gonna ask that you help us. But we'll get to that later.</text>
+		<text id="first4">...I'm gonna go get some fresh air, sorry.</text>
+		<text id="second1">Hmph.</text>
+		<text id="second2">Peredur just... He won't grow up! He keeps doing things I tell him not to. </text>
+    <text id="proving_worth1">Hey! I don't recognize you! Let's chat in the [color=770000]Hut[/color]!</text>
+    <text id="proving_worth2">Ha! Like you are! You're new here, I get it. I was there. You see, [color=490068]The Corrupted[/color] aren't just mindless, they have an insane power at their disposal.</text>
+    <text id="proving_worth3">They have a power known as [color=490068]Corruption[/color]. It can infest your equipment, rendering them useless, I'm sure you've had it happen to at least one piece of your equipment. So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
+    <text id="proving_worth4">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. We haven't been able to get a workshop and smelter set up due to [color=490068]The Corrupted[/color]'s increased harassment of the town. Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Here's a [item=steel_pickaxe] in case yours got corrupted.</text>
+    <text id="proving_worth5">That's fine, I understand, but if you change your mind, come talk to me again.</text>
+    <text id="proving_worth6">Ah you're back, are you ready?</text>
+    <text id="proving_worth7">I need you to collect [item=malumite_ore] for corruption resistant gear. You need at least [color=770000]11[/color] [item=malumite_bar]s.</text>
+    <text id="proving_worth8">So, now you are prepared for my request. Speak with me again when you are ready.</text>
+    <text id="undead_rumors1">So... There have been rumors that the increase in [color=490068]The Corrupted[/color]'s numbers lately have been no coincidence, the latest lead was found by [object=andreas] in the mines.</text>
+    <text id="undead_rumors2">I'd appreciate it if you investigated it... Be wary, I'm unsure of exactly what he found.</text>
+    <text id="undead_rumors3">I need you to get [object=andreas] to show you what he found in the [color=770000]Mines[/color], so we can put this rumor to rest.</text>
+    <text id="undead_rumors4">Ah, do you have something of worth to tell? The look on your face says you do.</text>
+    <text id="undead_rumors5">You... what? Well that's troubling. A few scouts have reported similar looking structures, I think it's time I give you a [item=thirallan_map]. But before you go anywhere, [object=peredur] wanted to speak with you.</text>
+    <text id="andreas_accomplishment">It appears [object=andreas] has built up a few new work stations, A workshop and a smelter if I'm not mistaken, feel free to use them!</text>
+    <text id="peredur_blood_moon">I need you to do as [object=peredur] asks before you leave.</text>
+    <text id="explore_thirallan">Please, explore Thirallan, figure out the secrets behind these [color=770000]Shrines[/color].</text>
+    <text id="recruiting">Forgive me, but is there a reason you value the people at the [color=770000]Monastery[/color] enough to take my people? What have they done for you that I haven't? I don't get it.</text>
+  </section>
+  <section id="zargoroth_info">
+    <text id="selection">What is it? Do you need something?</text>
+    <text id="zargoroths_haven">Well, the village being called [color=770000]Zargoroth's Haven[/color], It's probably obvious that I'm the leader here, I was also the founder of this little village, attempting to make a stand against primarily the bandits. Outside this village, be ready for combat.</text>
+    <text id="thirallan1">This island is called [color=770000]Thirallan[/color]. Not exactly sure where the name came from to be honest. However, this island, has seen much better days, I've actually heard rumors that people came here for hospitality, healing, and worship! Though now it's chaos, death, and some people even lose their faith here.</text>
+    <text id="thirallan2">I hate to sound depressing, but it's kind of hard not to in the current state of this place. That's why I established this village in the first place, to try and shut out the evils of this land to have a peaceful village where people can live a peaceful life.</text>
+    <text id="thirallan3">Because outside the non-existent walls that we so desperately need, there are rampant undead, hardly breathable air, and groups of people who have decided to get their kicks from kidnapping an-... [pause=10]and...</text>
+    <text id="thirallan4">Sorry, I'll... [pause=5] Let you get back to what you're doing.</text>
+    <text id="travelers">Actually there are more than you'd expect, coming to see the supposed great island this place should be. That's why this village is "thriving", if you can call it that in the state of this entire island. We are welcoming to all kinds of travelers. Such is the ideal of this entire village.</text>
+    <text id="zargoroth1">Me? Well, I'm the leader and founder of this village, I train the people here to defend themselves. I came to this island about a year or two ago, and met [object=pyrrhos]. From there, we built a hut, and started to make the place look kinda like home. And suddenly travelers showed up, from there we built up the village you see now. I'm in I think my 30's now, I've honestly lost track of time since we got here.</text>
+    <text id="zargoroth2">I'd say I'm pretty skillful in the art of spears, javelins, lances, and pikes. Which is what I teach the people of this village to use. I also have a brother, his name is [object=tomkin].</text>
+    <text id="pyrrhos1">[object=pyrrhos]? Well, he's, I guess you could call him the co-founder of this village, me and him were the original creators of this village. He's easygoing, he's also taken up the job of a mobile shopkeep for the occasional merchant that'll pass through. Not exactly sure how old he is, I'd say about 50's or 60's. He's a very warmhearted guy, Easy to befriend.</text>
+    <text id="pyrrhos2">Not sure whether he's too old for it, or he just doesn't want to, but he refuses to be taught how to fight. I don't really mind it, we have a decent amount of people who do know how to fight here. Though he does have a good amount of skill in trading. In that aspect, he can actually be quite charismatic, so he's useful here. He's even taken up to teaching others here how to be good merchants, hoping they can be of use either here or elsewhere.</text>
+    <text id="peredur1">[object=peredur]? Well, not sure where he came from, I'm lead to believe he's been on this island longer than all of us, he came to the village one day, and just asked to rest there for the night. He definitely looked untrustworthy at the time. But we did accept everyone until they wronged us, so I welcomed him. He's expressed a large interest in the Undead recently, not exactly sure what to think of it.</text>
+    <text id="peredur2">He's shown a masterful skill in magic, and strange magic at that. Not your typical power to harness elements like you'd expect. He's never truly explained what it is. It seems he might even be shameful of it, or why he has it. Perhaps a curse? I can't know for sure.</text>
+    <text id="tomkin1">[object=tomkin]? Well, Tomkin is my younger brother who later arrived here in search of me when I didn't return to my homestead, simply because I was unable to, as my ship crashed upon reaching land. By that time, we had a decent amount of people, I quickly taught him how to defend himself, I couldn't watch my younger brother be killed. I can't stand the thought of it. He actually picked up the skill pretty quickly.</text>
+    <text id="tomkin2">He's on par with me now I'd say, however he can be quite timid. Which brings up a problem in not only socially, but in combat, he has trouble determining when to be aggressive. But no matter, he's only in his late 20's, he'll come through.</text>
+    <text id="andreas1">[object=andreas]? Well, He's in I think his 40's, he used to actually be a strong knight. I know that sounds crazy given how he is now. From my understanding he had a near death experience with undead, and now is terrified of them, he resigned his knighthood and began to assist mining around here.</text>
+    <text id="andreas2">On one hand, we lost a powerful warrior, but on the other hand, he is quite efficient when it comes to mining. I'm not really sure what to think of it, but I certainly don't want him to fight undead if he freaks out everytime he encounters one. Similar to [object=tomkin], he is quite timid because of what happened. Just bear with him, he's been through a lot.</text>
+    <text id="monastery1">The Monastery? It's in the [color=770000]Rotting Forest[/color=770000], here, hand me your map, I'll mark it.</text>
+    <text id="monastery2">The Monastery has a lot of history to it, most I still don't know, but from my understanding, back in the days where this island was peaceful, that was the capital. But disagreements arose between them and some cult that worshipped some dark god, and war broke out.</text>
+    <text id="bandits1">Bandits? Which ones, there are three groups, The Beasts, The Fangs, and The Phoenixes.</text>
+    <text id="beasts1">The Beasts are the closest bandits group, and therefore the most troublesome, their encampment is in the Beast Forest. Here, hand me your map, I'll mark it.</text>
+    <text id="beasts2">This group are mostly Savages. They wield big heavy weaponry, such as Battleaxes and Greatswords. I believe their leader's name is [color=770000]Marwood[/color]. He found an enchanted battleaxe from my understanding.</text>
+    <text id="fangs1">The Fangs are probably the least troublesome to us, we've only had a few interactions with them, their encampment is in the Fang Plains. Here, I'll mark it on your map.</text>
+    <text id="fangs2">This group has quite the dexterity, they primarily wield my kind of weapons: spears, javelins, and lances. Though this is mostly irrelevant to us, as they never come here. Their leader's name is [color=770000]Grady[/color] I think. He has an enchanted lance from my scout's reports.</text>
+    <text id="phoenixes1">The Phoenixes are the farthest from us, but occasionally come here for things such as ransom, they're actually the most reasonable of the three groups, their encampment is at the Phoenix Plateau. Here, I'll mark it on your map.</text>
+    <text id="phoenixes2">Like I said, this group is actually quite reasonable, and from my understanding the most intelligent of the three groups, they perfer bows and crossbows. Instead of just brute force attacking like The Beasts, they perfer to take victims by surprise from afar. Their leader's name is [color=770000]Erskine[/color], and has a enchanted bow.</text>
+    <text id="gold_diggers_haven1">Gold Digger's Haven, heh, been a while since I've seen that place, how's old [color=770000]Iterol[/color]? Still as irritable and paranoid as always I assume? Anyway Gold Digger's Haven was sprouted up upon the discovery of a massive gold vein. I'll mark the excavation on your map.</text>
+    <text id="gold_diggers_haven2">Though I've heard that The Fangs are inhabiting the excavation, be careful around there.</text>
+  </section>
+  <section id="pyrrhos">
+    <text id="first_interaction1">Oh hello, I don't recognize you friend, names Pyrrhos! I'm just what you'd call a mobile shopkeep! I've got some good wares today!</text>
+    <text id="first_interaction2">Thanks Friend! Enjoy yourself here in Thirallan, hope you stay for long! Have a wondorous day!</text>
+    <text id="normal1">Hello again friend! Take a look at my wares today!</text>
+    <text id="normal2">Thanks again friend! Have a wondorous day!</text>
+    <text id="purse">Oh... It appears you don't have a [item=coin_purse], I'll give you one.</text>
+    <text id="merchants_invite1">Huh!? The [color=770000]Monastery[/color]? As in, in the Rotting Forest? I thought that place was abandoned?</text>
+    <text id="merchants_invite2">Hmm... I guess you're right. I'll speak with [object=zargoroth_npc] about getting the merchants an escort, to ensure they get there safely.</text>
+    <text id="first1">Sorry, we've been a bit tense recently. Problems with the [color=490068]The Corrupted[/color] has been escalating.</text>
+    <text id="first2">There seem to be more and more every day, even to the point of us losing at least 2 people per week. It truly has been difficult.</text>
+    <text id="first3">So try not to ask Zargoroth about that helm, I know it looks weird, but it wasn't his choice to acquire it, he never told me what truly happened, just that he can't take it off, and said to drop it.</text>
+    <text id="first4">Anyway, if you can, some help would be greatly appreciated with [color=490068]The Corrupted[/color]. Perhaps you can find what you're looking for while helping us?</text>
+    <text id="second1">You seem troubled Zargoroth, what's wrong?</text>
+    <text id="second2">Come on Peredur, you know he hates that tech, stop going out of your way to annoy him, he's under a lot of pressure.</text>
+    <text id="second3">You need to practice empathy Peredur. It's something a lot of people here lack, and I'm sick of it.</text>
+  </section>
+  <section id="peredur">
+    <text id="stranger">Greetings stranger, I'd appreciate it if you worked with [object=zargoroth_npc] to get familiar with the area, as I can use your help for something...</text>
+    <text id="departure">Well, now that the events of last night have ended, shall we depart?</text>
+    <text id="departure2">Perfect, let's go!</text>
+    <text id="departure3">That's fine, don't leave without me though!</text>
+    <text id="second1">You called "Professor"?</text>
+    <text id="second2">Why should I respect him if he doesn't give respect me back Pyrrhos?</text>
+    <text id="second3">Irrelevant. You, have you finished helping Zargoroth yet? My research is at a standstill without a helper.</text>
+    <text id="second4">I'd appreciate if you would hurry up with him. I assure you I'll reward you in some way for your help.</text>
+    <text id="speak">You've done it? Excellent, let's talk in the hut.</text>
+    <text id="blood_moon1">So, we have a similar goal, so let's work together on this.</text>
+    <text id="blood_moon2">I'm referring to you going out and investigating these other shrines. I have no doubt that these shrines will lead to a breakthrough in my research. So, I shall accompany with you on this investigation.</text>
+    <text id="blood_moon3">Great! We leave in the morning!</text>
+  </section>
+  <section id="tomkin">
+    <text id="stranger">Oh... Hello. Don't recognize you, if you are new around here, I advise you work with [object=zargoroth_npc] before you do anything else.</text>
+  </section>
+  <section id="andreas">
+    <text id="stranger">Hi... [pause=5]Uh, do.. [pause=5] I know you? Pl-.. [pause=5] Please talk to um... [pause=5][object=zargoroth_npc].</text>
+    <text id="rumors1">Hel.. [pause=5] Sorry, can you help me with something? I.. [pause=5] I heard that you needed some help.. [pause=5] but I need your help first. There is a friend of mine by the name of.. [pause=5]Jacominus.</text>
+    <text id="rumors2">Ple.. [pause=5] Please look for him in the mines. Then I'll gui.. [pause=5] I'll guide you to what you seek. Here's a torch.</text>
+    <text id="rumors3">Please fi.. [pause=5] find Jacominus, I fear th.. [pause=5]the worst has happened.</text>
+    <text id="rumors4">He... WHAT!? He's been dead all this time!?!? AAHHHHHH</text>
+    <text id="rumors5">Sor.. [pause=5] Sorry about that. I.. [pause=5] I am scared of them... I can't.. [pause=5]I'll take you to the shrine... But do.. [pause=5]don't expect me to do anything else..[pause=5] Sorry...</text>
+    <text id="rumors6">Sorry, bu.. [pause=5]but please leave me alone...</text>
+    <text id="andreas_invite1">Yo.. [pause=5] You really mean it?</text>
+    <text id="andreas_invite2">I... Ok! I.. [pause=5] I'll prepare for de.. [pause=5] departure. I'll ask [object=zargoroth_npc] for a... [pause=5] an escort.</text>
+    <text id="monastery">Thanks for bringing me here! I can be more straight forward now without worrying abo.. [pause=5] Never mind, thank you!</text>
+  </section>
+
+  <section id="player">
+    <text id="zargoroth_found1">Ugh... [pause=10]My head... [pause=10]Who are you? Where am I?</text>
+    <text id="zargoroth_found2">Everytime I try to remember, my head pulsates with pain, sorry.</text>
+    <text id="first1">Well, you see, I was sent by someone who noticed that this planet specifically has had a distress signal of sorts?</text>
+    <text id="first2">You seem tense, what gives? I assume you aren't always like this...</text>
+    <text id="first3">I have a lot of questions, but I'll get a simple one out of the way first, if you have a problem with technology, why do you have the odd helm on?</text>
+    <text id="second1">No, I'm supposed to ask [object=andreas] for help in searching for something in the [color=770000]Mines[/color].</text>
+    <text id="blood_moon1">What exactly are you referring to?</text>
+    <text id="blood_moon2">Sure, the more the merrier I suppose.</text>
+    <text id="blood_moon3">That isn't Peredur tapping me is it...</text>
+    <text id="blood_moon4">AAAHHHH!!!</text>
+    <text id="vision">My... My head! What is this!?!?</text>
+    <text id="zargoroth_proving_worth1">I'm ready to help with whatever you need.</text>
+    <text id="andreas_second1">I'm sorry, but I found Jacominus as one of [color=490068]The Corrupted[/color], I had to kill him. I'm sorry for your loss.</text>
+    <text id="andreas_second2">I mean, I understand he was a friend... But why did he get scared and run away?</text>
+    <text id="no_shrine1">I should kill the undead before I touch this thing... Plus aren't I supposed to be looking for Jacominus?</text>
+    <text id="no_shrine2">Aren't I supposed to be looking for Jacominus?</text>
+    <text id="no_shrine3">I should kill the undead before I touch this thing...</text>
+    <text id="undead_rumors1">Yes... [object=andreas] lead me to a shrine of sorts, a statue of an angel. After defeating the undead there, the angel statue became alive, the thing had purple and black wings, I managed to take it down.</text>
+    <text id="no_travel">It would probaby be pretty difficult to get to the *planet* of Thirallan using this map...</text>
+    <text id="peredur_no_travel">I should probably do as [object=peredur] asks before I leave...</text>
+    <text id="blood_moon_no_travel">I can't just leave during a [color=770000]Blood Moon[/color]!</text>
+    <text id="cant_sleep">Some strange force keeps you from resting under the Blood Moon.</text>
+    <text id="mundatorem">(He obviously doesn't want to talk, his glowing glare forces you to turn your head away.)</text>
+    <text id="merchants_invite">Ask [object=pyrrhos] for merchants from his school to come to the [color=770000]Monastery[/color]?</text>
+    <text id="merchants_invite1">Pyrrhos, would you be interested in having some of your students come to the [color=770000]Monastery[/color] and learn some things actually out in the field?</text>
+    <text id="merchants_invite2">Nope, they asked me to recruit some people to help rebuild the town within the Monastery. They needed some fresh merchants, just being taught the trade. This is a perfect opportunity for them and us.</text>
+    <text id="andreas_invite">Ask [object=andreas] to join the [color=770000]Monastery[/color]?</text>
+    <text id="andreas_invite1">Hey Andreas? How would you like to go to a place where you never have to see... those things ever again?</text>
+    <text id="andreas_invite2">Yeah, it's in the [color=770000]Rotting Forest[/color]. Once you get there, you can never have to worry about them ever again!</text>
+  </section>
+  <section id="purifier">
+    <text id="blood_moon">Go mad under the [color=770000]Blood Moon[/color], as every other traveler has...</text>
+  </section>
+
+  <section id="gilbert">
+    <text id="rebuild1">I guess our guard is lazing around again! Who are you? What are you doing in my Monastery? If you want to stay here. You will help us!</text>
+    <text id="rebuild2">Your first task will be finding workers. The four of us already have tasks at hand. We need more hands on the job! Do that, and I may consider letting you amongst our ranks.</text>
+    <text id="rebuild3">Good. First, I need someone good at [color=770000]Mining[/color]. Perferably someone scared of the outside, so they'll stick to mining.</text>
+    <text id="rebuild4">Next, we need some people adept at the art of the trade. You know, [color=770000]Merchants[/color]. If we want to rebuild this town, we are gonna need some merchants. Perhaps some fresh ones, ones that are being taught it as we speak.</text>
+    <text id="rebuild5">Finally, I want someone who has some knowledge in [color=770000]Science[/color]. Someone who is always interested in research. I want them to be so into it, they only care about getting their research done.</text>
+    <text id="rebuild6">That's it for now, get those people, and I may consider you amongst our ranks. Now go! Before I change my mind!</text>
+    <text id="rebuild7">Then what are you doing here? If you do not wish to help us, then you have no business here... Begone.</text>
+    <text id="rebuild8">Well? If you're talking to me again, that means you've changed your mind? Will you help us find workers?</text>
+    <text id="rebuild9">What is it? Do you need me to tell you the specifics of who I want again?</text>
+    <text id="rebuild10">Then why are you talking to me and not finding those workers?</text>
+    <text id="rebuild11">Well, you pulled through! Impressive! With someone like you, we'll have many more successes in the future!</text>
+    <text id="rebuild12">As a token of my esteem, I can teach you how to create a [color=770000]Warhammer[/color]. It has more range than a simple sword! It's not much, but I hope it can be helpful.</text>
+  </section>
+  <section id="hadvarr">
+    <text id="notOne">Hmph, we really need a guard out there... Anyway, if you are interested in joining us, speak to [object=gilbert_template]... Otherwise, begone, we are not accepting tourists.</text>
+  </section>
+  <section id="ligart">
+    <text id="placeholder">...</text>
+  </section>
+  <section id="azriel">
+    <text id="notOne">Greetings! Blessing of our god upon you!</text>
+    <text id="no_service">[object=azriel] only preaches at night. Should wait until then before entering.</text>
+  </section>
+
+  <section id="guild">
+    <text id="door1">Speak[pause=20] the Lord's [pause=20] name.</text>
+    <text id="door2">Speak the Lord's name.</text>
+    <text id="door3">Welcome[pause=20] brother.</text>
+    <text id="door4">You[pause=20] are not[pause=20] worthy...</text>
+  </section>
+  <section id="asim">
+    <text id="greetings1">So... Another human comes to the Mage Guild, for whatever reason.</text>
+    <text id="greetings2">There would be no other reason to come here than to join our ranks. So if you want to find yourself in our ranks, first, I have a request of you.</text>
+    <text id="guild_init1">Well? Go get the [item=init_rite].</text>
+    <text id="guild_init2">Great, Human, you have officially joined our ranks. If you wish to rise to a higher rank, you must complete more tasks, talk to me, [object=umazz], or [object=zhak_vik] for more tasks.</text>
+    <text id="guild_init3">But for now, here is your very own robe. You've earned it.</text>
+  </section>
+  <section id="umazz">
+    <text id="new_one">What are you doing here? If you wish to join us, I'm not the one to talk to. Speak with [object=oviar], he's just past me, up the ladder.</text>
+    <text id="greetings1">Ah, the new one. I heard Asim sent you to me to get a [item=init_rite] right?</text>
+    <text id="greetings2">Well, you're gonna have to earn it, one does not just come in here, and join, I need of a artifact from an old statue, retrieve it, and I'll give you what you request.</text>
+    <text id="lost_artifact1">Well? Go get the [item=lost_artifact].</text>
+    <text id="lost_artifact2">Perfect, thank you. Your [item=init_rite], as promised. Soon you'll oficially be one of us, so I'll just say now, congrats.</text>
+  </section>
+  <section id="oviar">
+    <text id="greetings1">Greetings, you're new here, so I assume you wanna talk to [object=asim]? Alright, but no fooling around.</text>
+    <text id="greetings2">Go on, talk with him.</text>
+    <text id="guild_init">Well? Go get that [item=init_rite]. I want a new member to interact with.</text>
+    <text id="guild_accept">Great! You're one of us now! But I'm not the one to talk to, not yet at least.</text>
+  </section>
+  <section id="xhak_vik">
+    <text id="new_one">You aren't one of us yet, therefore you have no business with me. Begone.</text>
+  </section>
+
+  <section id="iterol">
+    <text id="introduce">Who are you? Stay away from me... I can't risk getting the virus!</text>
+    <text id="introduce2">What virus...</text>
+    <text id="introduce3">Don't you know?? [color=490068]Corruption[/color] is transmitted like the flu. I'm not becoming one of those things anytime soon, at least not until I finish researching ways to prevent it.</text>
+    <text id="introduce4">Stay away from me!</text>
+    <text id="invite_iterol">Invite [object=iterol] to the [color=770000]Monastery[/color]?</text>
+    <text id="invite_iterol1">Hey, how would you like a secluded area such as this one to conduct your research, but you'll have access to more equipment, and people to fetch you things?</text>
+    <text id="invite_iterol2">Sounds like more opportunities to contract [color=490068]Corruption[/color].</text>
+    <text id="invite_iterol3">Trust me, the long term reward will be better than the short term risk of travel.</text>
+    <text id="invite_iterol4">Hmph. You better be right about this.</text>
+    <text id="monastery">Hmph. Not the most conventional workplace, but this will do for now.</text>
+  </section>
+
+
+  <section id="professor">
+    <text id="exotic_warhammer1">You found a [item=steel_warhammer]? Strange type of weapon. But, if you wanna really use it, why stop with Steel?</text>
+    <text id="exotic_warhammer2">I bet if you get me these materials, I might actually be able to make an Exotic variant of that Warhammer!</text>
+    <text id="exotic_warhammer3">Get me those materials, and I'll get you your new warhammer!</text>
+    <text id="exotic_warhammer4">It was a success! This is probably the most powerful melee weapon yet! Try it out! I also added the recipe to the Exo Factory!</text>
+  </section>
+
+  <section id="spirit">
+    <text id="corruption_scene">About [color=490068]Corruption[/color]</text>
+    <text id="corruption1">I see you have learned of the forbidden element. [color=490068]Corruption[/color] is feared even in the spirit realm. It's dark powers knows little limit.</text>
+    <text id="corruption2">Whoever told you about this, stay away from them. Only true evil wields that magic properly.</text>
+    <text id="corruption3">There is a being that I know of the embodies this power. It's known as [color=490068]The Corrupted One[/color]. If you know of this being's whereabouts, avoid it at all costs.</text>
+  </section>
+
+  <section id="structure.tooltip">
+    <text id="undead_shrine">Touch</text>
+  </section>
+
+  <section id="npc">
+    <text id="zargoroth_npc">Zargoroth</text>
+    <text id="pyrrhos">Pyrrhos</text>
+    <text id="peredur">Peredur</text>
+    <text id="andreas">Andreas</text>
+    <text id="tomkin">Tomkin</text>
+
+    <text id="gilbert_template">Gilbert</text>
+    <text id="hadvarr_template">Hadvarr</text>
+    <text id="ligart">Ligart</text>
+    <text id="azriel">Azriel</text>
+
+    <text id="asim">Asim</text>
+    <text id="umazz">Umazz</text>
+    <text id="oviar">Oviar</text>
+    <text id="xhak_vik">Xhak'vik</text>
+    <text id="mundatorem">Mundatorem</text>
+
+    <text id="iterol">Iterol</text>
+
+  </section>
+  <section id="quests">
+    <text id="proving_worth">Proving Worth</text>
+    <text id="undead_rumors">Undead Rumors</text>
+    <text id="find_jacominus">Find Jacominus</text>
+    <text id="blood_moon">Help Peredur</text>
+    <text id="undead_shrines">The Six Shrines</text>
+
+    <text id="rebuild_monastery">Recruiter Mcstabby</text>
+
+    <text id="guild_init">The Mage Guild</text>
+    <text id="lost_artifact">Lost Artifact</text>
+
+    <text id="exotic_warhammer">Exotic Warhammer</text>
+  </section>
+  <section id="quests.misc">
+    <text id="thirallan_undead">Kill Undead</text>
+    <text id="thirallan_fallen_angel">Investigate Rumors</text>
+    <text id="thirallan_jacominus">Find Jacominus</text>
+    <text id="thirallan_undead_shrines">Investigate Shrines</text>
+    <text id="find_miner">Recruit Miner</text>
+    <text id="find_merchants">Recruit Merchants</text>
+    <text id="find_scientist">Recruit Scientist</text>
+  </section>
+  <section id="quest.description">
+    <text id="proving_worth">wants you to get some [color=490068]Malumite[/color] gear.</text>
+    <text id="undead_rumors">wants to investigate rumors about the undead.</text>
+    <text id="find_jacominus">wants you to find [color=770000]Jacominus[/color] in the [color=770000]Mines[/color].</text>
+    <text id="blood_moon">wants you to help [object=peredur] with whatever he needs before you leave.</text>
+    <text id="undead_shrines">wants you to investigate the reported shrines throughout the island.</text>
+
+    <text id="rebuild_monastery">wants you to recruit people for the Monastery.</text>
+
+    <text id="guild_init">wants you to retrieve a [item=init_rite] from [color=770000]Umazz[/color]</text>
+    <text id="lost_artifact">wants you to retrieve a [item=lost_artifact] from an "old statue".</text>
+
+    <text id="exotic_warhammer">wants to make an [item=exotic_warhammer].</text>
+  </section>
+  <section id="world">
+    <text id="thirallan_zargoroth">Zargoroth's Safe Haven</text>
+  </section>
+</lang>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scenes>
+  <scene id="robot_rebellion_climax" extends="colony">
+    <layer id="roboRebel_orbit" tile="stars.dwarf.orbit" animation="single" />
+    <show id="robot_rebellion_climax">
+      <layer id="space" />
+      <layer id="roboRebel_orbit" /><action>roboRebel_orbit.y = 100;</action>
+      <layer id="fighter" />
+      <action>fighter.scaleX = -0.5; fighter.scaleY = 0.5; fighter.x = 230; fighter.y = -10;</action><play object="fighter" animation="fighter.ftl" loop="true" />
+      <layer id="exo_fighter" /><layer id="exo_fighter2" /><layer id="exo_fighter3" />
+      <action>exo_fighter.scaleX = -0.5; exo_fighter.scaleY = 0.5; exo_fighter.x = 20; exo_fighter.y = -40;</action>
+      <action>exo_fighter2.scaleX = -0.5; exo_fighter2.scaleY = 0.5; exo_fighter2.x = 220; exo_fighter2.y = -60;</action>
+      <action>exo_fighter3.scaleX = -0.5; exo_fighter3.scaleY = 0.5; exo_fighter3.x = 100; exo_fighter3.y = -20;</action>
+      <play object="exo_fighter" animation="exo_fighter.ftl" loop="true" /><play object="exo_fighter2" animation="exo_fighter.ftl" loop="true" /><play object="exo_fighter3" animation="exo_fighter.ftl" loop="true" />
+      <lerp object="fighter" y="40/Tile.SIZE" modal="false" seconds="4" /><lerp object="science" y="5/Tile.SIZE" modal="false" seconds="4" />
+      <lerp object="exo_fighter" x="30/Tile.SIZE" y="60/Tile.SIZE" modal="false" seconds="4" />
+      <lerp object="exo_fighter2" x="240/Tile.SIZE" y="10/Tile.SIZE" modal="false" seconds="4" />
+      <lerp object="exo_fighter3" x="130/Tile.SIZE" y="80/Tile.SIZE" modal="false" seconds="4" />
+      <layer id="ftl" /><wait seconds="1" />
+      <play object="ftl" animation="ftl.disengage" /><action>ftl.alpha = 0;</action>
+      <play object="fighter" animation="fighter.hover" loop="true" /><play object="science" animation="science_ship.hover" loop="true" />
+      <play object="exo_fighter" animation="exo_fighter.hover" loop="true" /><play object="exo_fighter2" animation="exo_fighter.hover" loop="true" /><play object="exo_fighter3" animation="exo_fighter.hover" loop="true" />
+      <lerp object="roboRebel_orbit" y="22/Tile.SIZE" seconds="1" />
+      <wait seconds="2" />
+      <scene id="robot_rebellion_climax" show="good_fleet1" dissolve="true" seconds="0.5" />
+    </show>
+    <show id="good_fleet1">
+      <layer id="command_ship.bg" /><wait seconds="2" />
+      <layer id="president" /><action>president.alpha = 0;</action><lerp object="president" alpha="1" seconds="0.25" />
+      <dialogue section="colony" id="first1" speaker='president' />
+      <dialogue section="colony" id="first2" speaker='president' />
+      <dialogue section="player" id="first1" speaker='player' />
+      <dialogue section="colony" id="first3" speaker='president' />
+      <dialogue section="colony" id="first4" speaker='president' />
+      <wait seconds="2" />
+    </show>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+
+  <include id="parallax/parallax.xml" />
+
+  <area id="thirallan_mountain">
+    <shape type="trapezoid">
+      <top y="-15" fromX="10" toX="15" />
+      <bottom y="0" fromX="0" toX="25" />
+    </shape>
+    <tiles id="stone" start="0" end="1" />
+    <tiles id="snow" y="-15" />
+  </area>
+
+  <area id="thirallan_mountains" background="thirallan_mountains" width="80" height="150" looping="true" name="common.thirallan_mountains" planet="thirallan_alchemist">
+    <tiles id="stone" start="0" end="0.34" />
+    <tiles id="dirt" start="0.34" end="0.67" />
+    <tiles id="stone" start="0.67" end="1" />
+    <tiles id="blackstone" y="149" />
+    <appendArea id="thirallan_mountain" offsetX="25" />
+    <appendArea id="thirallan_mountain" offsetX="70" />
+    <ore id="gold" start="0.2" end="0.3" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.1" end="0.34" percent="0.0375" tile="stone" />
+    <ore id="quartz" start="0.5" end="0.6" percent="0.0025" tile="dirt" />
+    <ore id="iron" start="0.4" end="0.67" percent="0.0125" tile="dirt" />
+    <ore id="iron" start="0.1" end="0.2" percent="0.000625" tile="dirt" />
+    <ore id="coal" start="0.0" end="0.4" percent="0.0375" tile="dirt" />
+    <ore id="gold" start="0.4" end="0.5" percent="0.000625" tile="dirt" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+    <action>for(x in 10...12) for(y in 10...12) mine(x,y);</action>
+    <structure id="guild_door" x="10" y="11" />
+    <init><runAreaLoad/></init>
+    <onLoad><music id="heights" seconds="1" /></onLoad>
+  </area>
+
+
+  <procedure id="guild_pathAsim">
+    <action>setBack(33, 8, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>setBack(33, 7, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>setBack(33, 6, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>setBack(33, 5, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>var x = 33; var y = 4; setTile(x, y, null); area.addObject(ObjectInfo.make("spirit_lava", x*Tile.SIZE, y*Tile.SIZE)); setBack(x, y, "spirit_ladder"); setFlag('pathAsim',true);</action>
+  </procedure>
+
+  <procedure id="guild_pathLibrary">
+    <action>setBack(20, 1, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>setBack(20, 2, "spirit_ladder");</action><wait seconds="0.25" />
+    <action>var x = 20; var y = 0; setTile(x, y, null); area.addObject(ObjectInfo.make("spirit_lava", x*Tile.SIZE, y*Tile.SIZE)); setBack(x, y, "spirit_ladder");</action>
+  </procedure>
+
+  <area id="guild_HQ" tile_anim="item8" backDarkness="1" height="1" background="spirit" shouldLight="false" viewHidden="true" placeLadder="false">
+    <tiles from="guild_HQ.png" x="0" y="-1">
+      <tile id="spirit_block" color="000000" /><tile id="spirit_ladder" color="00ff00" layer="back" />
+      <tile id="spirit_ladder" color="ffff00" layer="back">area.addObject(ObjectInfo.make("spirit_lava", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="ff8000">area.addObject(ObjectInfo.make("mundatorem", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="00ffff">area.addObject(ObjectInfo.make("oviar", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="ff00ff">area.addObject(ObjectInfo.make("xhak_vik", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="808080">area.addObject(ObjectInfo.make("umazz", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="0000ff">var s = getStructure("guild_door.exit").build(null, area, x*Tile.SIZE, y*Tile.SIZE); s.area_id = "thirallan_mountains"; s.x = 10*Tile.SIZE; s.y = 11*Tile.SIZE;</tile>
+      <tile color="ff0000">area.addObject(ObjectInfo.make("asim", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      <tile color="A000FF">getStructure("guild_library").build(null,area,x*Tile.SIZE,y*Tile.SIZE);</tile>
+    </tiles>
+    <connection area="spirit" fromX="-10" toX="46" />
+    <connection area="spirit" fromX="46" toX="-10" />
+    <connection area="spirit" dir="down" fromY="30" toY="-2" />
+    <connection area="spirit" dir="up" fromY="-2" toY="30" />
+    <init><runAreaLoad /></init>
+    <onLoad><music id="purified_encounter" seconds="1" /></onLoad>
+    <onLeave><action>setGameTime(24);</action></onLeave>
+    <updateHidden><run procedure="spirit_world_hidden" /></updateHidden>
+  </area>
+
+</areas>

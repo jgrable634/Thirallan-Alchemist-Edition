@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lang id="en_US">
+	<section id="actions">
+		<text id="enter">Enter</text>
+	</section>
+	<section id="common">
+		<text id="robot_factory_access">Robot Factory</text>
+		<text id="ship_storage_access">Ship Storage</text>
+		<text id="training_room_access">Training Room</text>
+		<text id="view_logs">View Logs</text>
+		<text id="5/1">5/1 - Departure</text>
+		<text id="5/9">5/9 - Early Trials</text>
+		<text id="6/1">6/1 - One Month</text>
+		<text id="12/25">12/25 - Christmas</text>
+		<text id="1/1">1/1 - New Year</text>
+		<text id="3/26">3/26 - Terror</text>
+		<text id="5/1y">5/1 - One Year</text>
+	</section>
+	<section id="quests">
+		<text id="RB_old_ship">Strange Signal</text>
+		<text id="RB_old_ship">The Old Ship</text>
+	</section>
+	<section id="quest.description">
+		<text id="RB_old_ship">I should check out that weird signal my </text>
+	</section>
+
+	<section id="structure.tooltip">
+		<text id="robot_factory">Craft</text>
+	</section>
+
+	<section id="item.names">
+		<text id="robot_core">Robot Core</text>
+		<text id="robot_leg">Robot Leg</text>
+		<text id="robot_wheel">Robot Wheel</text>
+		<text id="robot_thruster">Robot Thruster</text>
+		<text id="robot_blaster">Robot Blaster</text>
+		<text id="whip_bot">Whip Bot</text>
+		<text id="small_tank">Small Tank</text>
+		<text id="small_drone">Small Drone</text>
+		<text id="large_drone">Large Drone</text>
+		<text id="robot_sword">Robot Blade</text>
+		<text id="abyssal_blade">Blade Of The Abyss</text>
+		<text id="robot_whip">Robot Whip</text>
+	</section>
+
+	<section id="player">
+		<text id="RB_old_ship_notice">What the... Why is there a Colony ship so deep underground?</text>
+		<text id="RB_old_ship_closed">The door just refuses to open!</text>
+	</section>
+
+	<section id="robots">
+		<text id="boss1">Error: Detected unknown entity. Scanning...</text>
+		<text id="boss2">Entity has weaponry; Opening fire.</text>
+		<text id="boss3">System Diagnosis: Critical Failure. Powering Down.</text>
+	</section>
+
+	<section id="ship">
+		<text id="no_access">Error: Unauthorized Personel Detected.</text>
+		<text id="access">Access Granted.</text>
+		<text id="advanced_terminal">Hello Commander! Select an option to begin!</text>
+		<text id="no_power">Error: No Power in Entrance Chamber</text>
+		<text id="robots">Highly explosive material detected in the facilities.</text>
+		<text id="robots1">Error: Only Autorized Personel allowed to remote open door.</text>
+		<text id="training">Error: Power off in Training Facilities.</text>
+		<text id="storage">Error: Power off in Storage Facilities.</text>
+		<text id="logs">Select Log to review:</text>
+		<text id="5/1_logs">Well. This is it, it's time to travel the unknown... There has been so much peace in this world it's just amazing. So amazing that the world is joining together to research ways to make colonization better! No conflict at all! Let's hope it stays that way!</text>
+		<text id="5/9_logs">We were already aware that this was going to be difficult. But I'm alraedy having second thoughts about this, but of course it's too late anyway. People are already beginning to get worried about the success of this trip. However we should have enough supplies to find somewhere habitable.</text>
+		<text id="6/1_logs">It's been a whole month since we left Earth. My wife and kids are back on Earth, as only people who were trained for this kind of thing were allowed on. This seems a little worrying, that I may never see my family again. But this is for the benefit of the entire human race! I must not be selfish!</text>
+		<text id="12/25_logs">It's been a long time since my last entry. I figured it would be nice to make a log on a what should be a great day. I think there is some virus going about, Some people are getting very sick. Our antibiotics aren't seeming to work, I may have to order a quarantine, which I don't want to do.</text>
+		<text id="1/1_logs">It's a new year... And you wanna know what this new year brings? A new planet! It took us this long... but we found a planet! It's got atmosphere as well! Finally!</text>
+		<text id="3/26_logs">I don't know how it happened, but suddenly the power in the Robot Facilities shut off. When we sent someone in there, he didn't come back out. We locked the door for now. I'm not sure what is in there right now. But it definitely isn't friendly. I thought the Robot Factory was safe! This can't just be a setup can it?</text>
+		<text id="5/1y_logs">This will be my last entry. I don't know what happened in the night, but whatever it was, it killed the entire crew, except me for now. All I hope is that whatever that thing is is destroyed one way or another, if anyone finds this terminal, know that the Robot Factory is not safe, and should be destroyed. Don't try to fix it, I'm sure it will break again. This is Commander Monroe, signing off for the last time.</text>
+	</section>
+	<section id="robot_commander">
+		<text id="disruptions1">Hello, I require assistance. I was sent here by the Colony to scout out the planet, but my ship was shot down, and hostile robots are everywhere.</text>
+		<text id="disruptions2">I'm getting a faint signal from a Colony ship nearby, but I can't track it down, I think the robots are disrupting the signal. Help?</text>
+		<text id="disruptions2_5">We should get rid of these robots to track down the origin of the signal.</text>
+		<text id="disruptions3">There, the signal has a better strength. Strange, the signal's origin appears to be deep underground.</text>
+		<text id="disruptions4">I set the signal to be located with your [item=com_device], perhaps you should investigate?</text>
+		<text id="ship0_5">You should investigate the signal in case there are any survivors making the signal.</text>
+		<text id="ship1">A tough robot was making that signal? There was an entire Colony Ship down there? That far?</text>
+		<text id="ship2">I need you to investigate that ship further. There has got to be something more to it.</text>
+	</section>
+	<section id="npc">
+		<text id="robot_commander">Robot Fighter</text>
+	</section>
+
+	<section id="colony">
+		<text id="only_dialogue">Could you search [color=770000]Unoiks 187b[/color] in the [color=770000]Unoiks 187[/color] for us? The Robot we sent there to report the status of the planet hasn't communicated back with us.</text>
+	</section>
+</lang>

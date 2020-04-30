@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<enemies>
+	<tile id="undead" sheet="art/undead/undead.png" x="0" y="0" />
+	<tile id="jacominus" sheet="art/undead/jacominus.png" x="0" y="0" />
+	<animation id="jacominus.idle" x="0" count="2" />
+	<animation id="jacominus.walk" x="2" count="3" />
+	<animation id="jacominus.pre_attack" x="6" count="2" />
+	<animation id="jacominus.attack" x="9" count="4" />
+	<animation id="undead.idle" x="0" count="4" />
+	<animation id="undead.walk" x="4" count="4" />
+	<animation id="undead.pre_attack" x="8" count="4" />
+	<animation id="undead.attack" x="12" count="2" />
+
+	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" capture="4" underground="true" type="surface" fps="10" vertical="true">
+		<loot id="undead_flesh" p="0" />
+		<attack type="melee" damage="5" animation="attack">
+			<pre><play object="this" animation="pre_attack" /></pre>
+		</attack>
+		<onDeath><run procedure="corrupted.death" /></onDeath>
+	</enemy>
+
+	<enemy id="undead_shrineDefender" extends="undead" />
+
+	<enemy id="jacominus" tile="jacominus" defense="1" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10">
+		<attack type="melee" damage="7">
+			<pre><play object="this" animation="pre_attack" /></pre>
+		</attack>
+		<onDeath><run procedure="corrupted.death" /></onDeath>
+	</enemy>
+
+	<tilesheet id="art/purifier/fallen_angel.png" width="32" height="32" />
+	<tile id="fallen_angel" sheet="art/purifier/fallen_angel.png" x="0" y="0" />
+	<animation id="fallen_angel.idle" x="0" count="7" />
+	<animation id="fallen_angel.walk" equals="fallen_angel.idle" />
+	<animation id="fallen_angel.charge_pre" x="7" count="7" />
+	<animation id="fallen_angel.charge" x="14" count="7" />
+	<animation id="fallen_angel.combo_pre" x="21" count="2" />
+	<animation id="fallen_angel.combo1" x="23" count="4" />
+	<animation id="fallen_angel.combo2" x="27" count="4" />
+	<animation id="fallen_angel.combo3" x="31" count="4" />
+	<animation id="fallen_angel.omni" x="32" count="3" />
+
+	<enemy id="fallen_angel" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true" bgm="purification1">
+		<light tile="light.large" color="5C0000" />
+		<inRange range="10">
+			<attack type="melee" cooldown="100">
+				<pre>
+					<section>
+						<play object='this' animation="charge_pre" modal="false" />
+						<play object='this' animation="charge" modal="false" loop="true" />
+						<set id="oldX" value="this.tile_x" />
+						<set id="oldY" value="this.tile_y" />
+						<set id="facing" value="this.getFacing()" />
+			 			<lerp object="this" deltaX="facing*(-160)/Tile.SIZE" seconds="0.25" modal="false" />
+						<damage object="player" attacker="this" damage="20" />
+						<move object="this" x="oldX+(facing*(-160)/Tile.SIZE)" y="oldY" />
+					</section>
+				</pre>
+			</attack>
+		</inRange>
+		<attack type="melee" damage="9" animation="combo1" hits="3">
+			<pre><play object='this' animation="combo_pre" /></pre>
+			<cont animation="combo2" damage="9" />
+			<cont animation="combo3" damage="15" />
+			<post><attack type="omni" damage="10" range="1" knockback="20" animation="omni" /><play object="this" animation="idle" /></post>
+		</attack>
+	</enemy>
+
+	<tilesheet id="art/purifier/soul_blast.png" width="8" height="8" />
+	<tile id="soul_blast" sheet="art/purifier/soul_blast.png" x="0" y="0" />
+	<animation id="soul_blast" x="0" count="4" />
+	<tilesheet id="art/purifier/mess_of_souls.png" width="40" height="32" />
+	<tile id="mess_of_souls" sheet="art/purifier/mess_of_souls.png" x="0" y="0" />
+	<animation id="mess_of_souls.idle" x="0" count="1" />
+	<animation id="mess_of_souls.walk" x="4" count="3" />
+	<animation id="mess_of_souls.charge_up" x="0" count="4" />
+	<animation id="mess_of_souls.calm_down" x="0" count="4" reverse="true" length="2" />
+	<animation id="mess_of_souls.blast" x="10" count="4" />
+	<animation id="mess_of_souls.shield" x="7" count="3" />
+	<animation id="mess_of_souls.pre_slash" x="14" count="2" />
+	<animation id="mess_of_souls.stab" x="16" count="2" />
+	<animation id="mess_of_souls.slash" x="18" count="4" />
+
+			<enemy id="mess_of_souls" tile="mess_of_souls" range="8" health="40" defense="1" type="surface" fps="10" speed="2" bgm="purification1" underground="true" vertical="true">
+				<tile id="mess_of_souls" name="shield" animation="hidden" fps="10" y="0" />
+
+        <attack type="projectile" damage="15" range="20" animation="blast" cooldown="300">
+          <pre><play object="this" animation="charge_up" /></pre>
+          <projectile tile="soul_blast" animation="soul_blast" range="20" speed="2" homing="true">
+						<onHit>
+							<sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
+							<section if="corruptedItem != null"><show tooltip="popup" text="warning.item_corrupted{item:[global=corruptedItem]}" x="0.5" y="0.4" /></section>
+						</onHit>
+					</projectile>
+					<post><play object="this" animation="calm_down" /></post>
+      	</attack>
+
+				<cooldown seconds="5">
+					<action>
+						var shield = this.getTileById('shield'); if(shield != null){
+						if(this.front_defense == -1) shield.playAnimation('hidden', false);
+							else shield.playAnimation(this.info.id+'.shield', true, null, -0.5, -0.5);
+							if(this.front_defense == -1){
+								this.setVulnerable(100,100);
+								shield.playAnimation(this.info.id+'.shield', true, null, -0.5, -0.5);
+							} else{
+								this.endVulnerable();
+								shield.playAnimation('hidden', false);
+							}
+						}
+					</action>
+				</cooldown>
+
+
+				<attack type="melee" damage="5" hits="2" range="0.5" knockback="0" animation="stab">
+					<pre><play object="this" animation="pre_slash" /></pre>
+					<cont animation="slash" damage="10" knockback="5" />
+					<post><play object="this" animation="calm_down" /></post>
+				</attack>
+
+				<onDeath>
+					<section>
+						<action>
+							setFlag('blood_moon',false);
+							getParallaxLayer("thirallan_sky").getChildAt(0).playAnimation("thirallan_sky.sky", true, function(p){p.playAnimation("single", true);});
+	            getParallaxLayer("thirallan_sky").getChildAt(1).playAnimation("thirallan_sky.sky", true, function(p){p.playAnimation("single", true);});
+	            setSpriteColor(getParallaxLayer("thirallan_sky").getChildAt(2),0x1F2A1F);
+	            getParallaxLayer("thirallan_moon").getChildAt(0).playAnimation("thirallan_moon.none", true, function(p){p.playAnimation("single", true);});
+						</action>
+						<runAreaLoad/>
+						<section if="!player.questComplete('blood_moon')">
+							<object id="zargoroth_npc" x="62" y="-1" />
+							<object id="peredur" x="61" y="-1" />
+							<action>setGameTime(6);</action>
+							<complete quest="blood_moon" />
+						</section>
+					</section>
+				</onDeath>
+
+    </enemy>
+
+		<tilesheet id="art/purifier/purifier_campaign.png" width="32" height="32" />
+	  <tile id="campaign_purifier_head" sheet="art/purifier/purifier_campaign.png" x="0" y="0" />
+	  <tile id="campaign_purifier_hand_l" sheet="art/purifier/purifier_campaign.png" x="1" y="0" />
+	  <tile id="campaign_purifier_hand_r" sheet="art/purifier/purifier_campaign.png" x="0" y="1" />
+	  <action>
+	    score = 0; setGlobal("mini-key",null); EvalXml = null;
+	    function getRandomKey(){
+	      return ["left","up","right","down"][Std.random(4)];
+	    }
+	    function popUps(arg){
+	        trace(arg);
+	        evalXml(arg);
+	    }
+	    function pressMinigame(evt,player_movement){
+	      trace(evt); trace(evt.key); trace(getGlobal("mini-key")); trace(score);
+		    if (getGlobal("mini-key") == null){
+		      setGlobal("mini-key",getRandomKey());
+		    }
+		    if(getGlobal("mini-key") == "up"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_up" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
+		    else if(getGlobal("mini-key") == "left"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_left" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
+		    else if(getGlobal("mini-key") == "right"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_right" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
+		    else if(getGlobal("mini-key") == "down"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_down" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
+		    if (evt.key == getGlobal("mini-key")){
+		      if (score >= 3) { trace("You Did It!"); player_movement.destroy(); removePress(pressMinigame); return; }
+		      score++;
+		      setGlobal("mini-key",getRandomKey());
+		    }
+		    else if(evt.key == "left" || evt.key == "up" || evt.key == "right" || evt.key == "down") {
+		      score = 0;
+		    }
+		  }
+	  //manually run " score = 0; key = null; addPress(pressMinigame); watch score; watch key; "
+	  </action>
+	  <procedure id="hand_l.attackSelection">
+	    <action>
+	      var attackSelection = 2;
+	      if(attackSelection == 1){
+	        for(x in 25...30) addOrb(x, x);
+	      }
+	      else{
+	       Movement.seek(area.getObject('campaign_purifier_hand_l'),player,1,false,0,0,10);
+	       for(x in 0...10){
+	        count += frames;
+	        if(campaign_purifier_hand_l.tile_x == player.tile_x && campaign_purifier_hand_l.tile_y == player.tile_y){
+	          runProcedure('purifier_strangle');
+	        }
+	        if(count >= 10){
+	          count -= 10; campaign_purifier_hand_l.tile_x = 10; campaign_purifier_hand_l.tile_y = -3;
+	        }
+	       }
+	      }
+	    </action>
+	  </procedure>
+	  <procedure id="purifier_strangle">
+	    <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
+	    <teleport area="purifier_void" x="10" y="-3" />
+	    <invokeLater seconds="1">
+	      <action>
+	        Movement.seek(player, area.getObject('campaign_purifier_hand_l'),50,false,0,0);
+	        addPress(function(evt){pressMinigame(evt,player.movement);});
+	      </action>
+	    </invokeLater>
+	  </procedure>
+	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10">
+			<onHit><move object="this" x="12" y="-5" /></onHit>
+	  </enemy>
+	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l">
+	    <onFrame>count += frames; if(count >= 10 && player.tile_x == 10 && player.tile_y == -3){count = 0; runProcedure("hand_l.attackSelection");}</onFrame>
+	  </object>
+	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r">
+	    <!--onFrame>count += frames; if(count >= 15){count = 0; runProcedure("hand_r.attack");}</onFrame-->
+	  </object>
+
+	<tilesheet id="art/unknown/unknown.png" width="32" height="32" />
+	<tilesheet id="art/unknown/unknown_2nd.png" width="32" height="40" />
+	<tilesheet id="art/unknown/unknown_beam.png" width="64" height="16" />
+	<tilesheet id="art/unknown/unknown_orb.png" width="9" height="9" />
+
+	<tile id="unknown" sheet="art/unknown/unknown.png" x="0" y="0" />
+	<tile id="zargoroth_dummy" sheet="art/unknown/unknown.png" x="2" y="3" />
+	<tile id="unknown_transition" sheet="art/unknown/unknown.png" x="3" y="6" />
+	<tile id="unknown_shockwave" sheet="art/unknown/unknown_shockwave.png" x="0" y="0" />
+	<tile id="unknown_2nd" sheet="art/unknown/unknown_2nd.png" x="0" y="0" />
+	<tile id="unknown_death" sheet="art/unknown/unknown_2nd.png" x="5" y="4" />
+	<tile id="unknown_beam" sheet="art/unknown/unknown_beam.png" x="0" y="0" />
+	<tile id="unknown_orb" sheet="art/unknown/unknown_orb.png" x="0" y="0" />
+
+	<animation id="unknown.idle" x="0" count="4" />
+	<animation id="unknown.walk" x="4" count="5" />
+	<animation id="unknown.pre_combo" x="9" count="2" />
+	<animation id="unknown.attack1" x="11" count="3" />
+	<animation id="unknown.attack2" x="14" count="4" />
+	<animation id="unknown.attack3" x="18" count="5" />
+	<animation id="zargoroth_dummy.pre_transformation" x="0" count="1" offsetY="8" />
+	<animation id="zargoroth_dummy.transformation" x="0" count="19" offsetY="8" />
+	<animation id="zargoroth_dummy.spawn" x="19" count="3" />
+	<animation id="unknown_transition.begin" x="0" count="12" />
+	<animation id="unknown_transition.end" x="12" count="19" />
+	<animation id="unknown_shockwave" x="0" count="4" />
+	<animation id="unknown_2nd.idle" x="0" count="3" />
+	<animation id="unknown_2nd.walk" x="3" count="5" />
+	<animation id="unknown_2nd.pre_combo" x="8" count="3" />
+	<animation id="unknown_2nd.combo1" x="11" count="2" />
+	<animation id="unknown_2nd.combo2" x="13" count="2" />
+	<animation id="unknown_2nd.oof" x="15" count="4" length="2" />
+	<animation id="unknown_2nd.pre_golf" x="19" count="4" />
+	<animation id="unknown_2nd.golf" x="23" count="2" />
+	<animation id="unknown_2nd.pre_beam" x="25" count="3" />
+	<animation id="unknown_2nd.beam" x="28" count="1">
+		<append tile="unknown_beam" x="0" offsetX="-0.75" offsetY="1.5" animation="unknown_beam" />
+	</animation>
+	<animation id="unknown_death.1" x="0" count="9" />
+	<animation id="unknown_death.2" x="8" count="11" />
+	<animation id="unknown_beam" count="3" />
+	<animation id="unknown_orbs" count="3" />
+
+	<object id="zargoroth_dummy" tile="zargoroth_dummy" fps="8" />
+	<object id="unknown_transition" tile="unknown_transition" fps="8" />
+	<object id="unknown_death" tile="unknown_death" fps="8" />
+	<object id="unknown_orb" tile="unknown_orb" animation="unknown_orbs" layer="player" save="false" width="16" height="16" overlapVehicle="true">
+		<over>
+			<sound id="fireball" />
+			<damage object="player" attacker="this" damage="15" directional="false" />
+			<remove object="this" />
+		</over>
+	</object>
+
+	<procedure id="unknown_start">
+			<teleport area="purifier_arena" x="25" y="-1" />
+			<object id="zargoroth_dummy" x="35" y="-1" />
+			<music id="magic2" seconds="1" />
+			<pan toObject="zargoroth_dummy" seconds="1" />
+			<play object="zargoroth_dummy" animation="zargoroth_dummy.pre_transformation" loop="true" />
+			<set id="zargoroth" value="area.getObject('zargoroth_dummy')" />
+			<wait seconds="1">
+				<operate object="area.getObject('zargoroth_dummy')" />
+			</wait>
+			<dialogue section="guard_chief" id="battle1" />
+			<dialogue section="guard_chief" id="battle2" />
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="battle3" />
+			<play object="zargoroth_dummy" animation="zargoroth_dummy.transformation" modal="true" />
+			<play object="zargoroth_dummy" animation="zargoroth_dummy.spawn" modal="true" />
+			<sound id="magic" />
+			<music id="" />
+			<object id="unknown" x="35" y="-1" facing="left" />
+			<wait seconds="3">
+				<operate object="area.getObject('zargoroth_dummy')" />
+			</wait>
+			<remove object="area.getObject('zargoroth_dummy')" />
+	</procedure>
+
+	<procedure id="unknown_transition">
+		<section with="fade">
+			<teleport area="purifier_arena" x="25" y="-1" />
+			<object id="unknown_transition" x="35" y="-1" />
+			<music id="Cutscene9" seconds="1" />
+		</section>
+		<pan toObject="unknown_transition" seconds="1" />
+		<play object="unknown_transition" animation="unknown_transition.begin" modal="true" />
+		<set id="unknown_transition" value="area.getObject('unknown_transition')" />
+		<wait seconds="1">
+			<operate object="area.getObject('unknown_transition')" />
+		</wait>
+		<dialogue section="guard_chief" id="battle4" />
+		<dialogue section="guard_chief" id="battle5" />
+		<play object="unknown_transition" animation="unknown_transition.end" modal="true" />
+		<remove object="area.getObject('unknown_transition')" />
+		<object id="unknown_2nd" x="35" y="-1" facing="left" />
+		<music id="" />
+		<wait seconds="1">
+			<operate object="area.getObject('unknown_transition')" />
+		</wait>
+	</procedure>
+
+	<procedure id="unknown_orbs">
+		<set id="unknown_orb" value="[]" if="!exists('unknown_orb')" />
+		<action>
+			function addUnknownOrb(dx, dy){
+			var o = getObject("unknown_orb").create(this.xPos+dx, this.yTile+dy);
+			area.addObject(o); Movement.circle(o, this, 1.25, 4); unknown_orb.push(o);
+			}
+			i = 0;
+			while(10 > i){
+				addUnknownOrb(randInt(-100, 100), randInt(-100, 100));
+				i++;
+			}
+			i = 0;
+		</action>
+	</procedure>
+
+	<procedure id="unknown_orbs_attack">
+			<action>
+			for(o in area.getObjectsById('unknown_orb')){
+				Movement.seek(o, player, 4);
+			}
+		</action>
+	</procedure>
+
+	<procedure id="unknown_death">
+		<section with="fade">
+			<teleport area="purifier_arena" x="25" y="-1" />
+			<object id="unknown_death" x="35" y="-1" />
+			<music id="Cutscene9" seconds="1" />
+		</section>
+		<pan toObject="unknown_death" seconds="1" />
+		<play object="area.getObject('unknown_death')" animation="unknown_death.1" modal="true" />
+		<wait seconds="1">
+			<operate object="area.getObject('unknown_death')" />
+		</wait>
+		<dialogue section="guard_chief" id="battle6" />
+		<dialogue section="guard_chief" id="battle7" />
+		<play object="area.getObject('unknown_death')" animation="unknown_death.2" modal="true" />
+		<remove object="area.getObject('unknown_death')" />
+		<wait seconds="2">
+			<operate object="area.getObject('unknown_death')" />
+		</wait>
+		<action>setFlag('martians_dead', true);</action>
+		<section with="fade">
+			<teleport area="thirallan" x="50" y="-1" />
+		</section>
+	</procedure>
+
+	<enemy id="unknown" tile="unknown" health="100" defense="9" speed="1" range="10" type="surface" ignoreHit="true" fps="8" bgm="boss">
+			<attack type="melee" damage="15" range="1" hits="3" animation="attack1">
+				<pre><play object="this" animation="pre_combo" /></pre>
+				<cont damage="15" animation="attack2" />
+				<cont damage="30" animation="attack3" knockback="15" />
+			</attack>
+			<attack type="projectile" damage="20" range="20" animation="attack3" cooldown="200">
+				<projectile tile="unknown_shockwave" animation="unknown_shockwave" offsetY="8" speed="3" knockback="20" />
+			</attack>
+			<onDeath><remove object='this' /><wait seconds="0.25"><operate object='this' /></wait><run procedure="unknown_transition" /></onDeath>
+	</enemy>
+
+	<enemy id="unknown_2nd" tile="unknown_2nd" health="150" defense="7" speed="1" range="15" type="surface" ignoreHit="true" fps="8" bgm="boss">
+			<attack type="melee" damage="20" range="1" hits="2" animation="combo1">
+				<pre><play object='this' animation="pre_combo" /></pre>
+				<cont damage="25" animation="combo2" knockback="20" />
+			</attack>
+			<attack type="melee" damage="30" range="1" animation="golf" cooldown="100">
+				<pre><play object='this' animation="pre_golf" /></pre>
+			</attack>
+			<attack type="melee" range="5" animation="oof" cooldown="600">
+				<pre><run procedure="unknown_orbs" /></pre>
+				<post><run procedure="unknown_orbs_attack" /></post>
+			</attack>
+			<attack type="beam" range="2" damage="30" animation="beam" hits="4" cooldown="300">
+				<pre><play object='this' animation="pre_beam" /></pre>
+				<cont animation="beam" />
+				<cont animation="beam" />
+				<cont animation="beam" />
+			</attack>
+			<onDeath><remove object='this' /><wait seconds="0.25"><operate object='this' /></wait><action>setFlag('martians_dead');</action><run procedure="unknown_death" /></onDeath>
+	</enemy>
+
+	<tilesheet id="art/prototype/prototype_boss_1st.png" width="40" height="32" />
+	<tilesheet id="art/prototype/prototype_boss_2nd.png" width="40" height="32" />
+	<tilesheet id="art/prototype/archaic_soldier.png" width="32" height="32" />
+	<tilesheet id="art/prototype/archaic_missile.png" width="16" height="9" />
+
+	<tile id="prototype_boss_1st" sheet="art/prototype/prototype_boss_1st.png" x="0" y="0" />
+	<tile id="prototype_boss_1st_shield" sheet="art/prototype/prototype_boss_1st.png" x="0" y="4" />
+	<tile id="prototype_boss_2nd" sheet="art/prototype/prototype_boss_2nd.png" x="0" y="0" />
+	<tile id="archaic_soldier" sheet="art/prototype/archaic_soldier.png" x="0" y="0" />
+	<tile id="archaic_soldier_healer" sheet="art/prototype/archaic_soldier.png" x="0" y="6" />
+	<tile id="archaic_missile" sheet="art/prototype/archaic_missile.png" x="0" y="0" />
+
+	<animation id="prototype_boss_1st.idle" x="0" count="2" />
+	<animation id="prototype_boss_1st.walk" equals="prototype_boss_1st.idle" />
+	<animation id="prototype_boss_1st.rocket" x="2" count="3" />
+	<animation id="prototype_boss_1st.laser" x="5" count="3" />
+	<animation id="prototype_boss_1st.pre_attack" x="8" count="2" />
+	<animation id="prototype_boss_1st.attack" x="12" count="4" />
+	<animation id="prototype_boss_1st_shield.idle" x="0" count="6" />
+	<animation id="prototype_boss_2nd.idle" x="0" count="2" />
+	<animation id="prototype_boss_2nd.walk" equals="prototype_boss_2nd.idle" />
+	<animation id="prototype_boss_2nd.rocket" x="2" count="3" />
+	<animation id="prototype_boss_2nd.laser" x="5" count="3" />
+	<animation id="prototype_boss_2nd.pre_attack1" x="8" count="2" />
+	<animation id="prototype_boss_2nd.attack1" x="12" count="4" />
+	<animation id="prototype_boss_2nd.attack2" x="16" count="5" />
+	<animation id="archaic_soldier.idle">
+		<frame x="22" />
+		<frame x="23" />
+		<frame x="32" />
+	</animation>
+	<animation id="archaic_soldier.walk" equals="archaic_soldier.idle" />
+	<animation id="archaic_soldier.pre_combo" x="24" count="1" />
+	<animation id="archaic_soldier.attack1" x="25" count="4" />
+	<animation id="archaic_soldier.attack2" x="29" count="3" />
+	<animation id="archaic_soldier.fire" x="32" count="1" />
+	<animation id="archaic_soldier.pre_beam" x="0" count="12" />
+	<animation id="archaic_soldier.beam" x="12" count="10" />
+	<animation id="archaic_soldier.retaliation" x="33" count="3" length="0.5" />
+	<animation id="archaic_missile" x="0" count="3" />
+	<animation id="archaic_soldier_healer.idle" x="0" count="6" />
+
+	<object id="prototype_hotspot" width="800" height="800">
+		<over>
+			<remove object='this' />
+			<run procedure="prototype_begin" />
+		</over>
+	</object>
+
+	<procedure id="prototype_begin">
+		<section with="fade">
+			<teleport area="artic_kingdom" x="60" y="-1" />
+			<remove object="area.getObject('prototype')" />
+			<object id="prototype_boss_1st" x="50" y="-1" facing="right" />
+			<remove object="area.getObject('UC_scientist')" />
+			<remove object="area.getObject('UC.king')" />
+			<remove object="area.getObjectsById('UC.citizens')" />
+			<object id="UC_scientist" x="50" y="-1" facing="right" />
+			<action>setFlag('prototype_hotspot', true);</action>
+		</section>
+		<pan toObject="UC_scientist" seconds="1" />
+		<dialogue section="UC" id="prototype1" />
+		<dialogue section="UC" id="prototype2" />
+		<remove object="area.getObject('UC_scientist')" />
+		<wait seconds="0.25">
+			<operate object="area.getObject('UC_scientist')" />
+		</wait>
+		<action>for(y in -20...0){setTile('-1', y, 'empty'); setTile('127', y, 'empty');} for(x in -1...150) setTile(x, '-20', 'empty');</action>
+	</procedure>
+
+	<enemy id="prototype_boss_1st" tile="prototype_boss_1st" health="75" defense="6" speed="1" range="10" type="surface" ignoreHit="true" flying="true" vertical="true" fps="5" bgm="boss" passEnemies="true" friendlyFire="false">
+		<attack type="melee" damage="10" range="0.5" animation="attack">
+			<pre><play object="this" animation="pre_attack" /></pre>
+		</attack>
+		<attack type="projectile" damage="15" range="20" animation="missile" cooldown="200">
+			<projectile tile="archaic_missile" animation="archaic_missile" speed="3" offsetY="-10" hitEffect="explosion_dmg" knockback="10" breakTile="5" breakPower="100" homing="true" />
+		</attack>
+		<attack type="projectile" damage="10" range="20" animation="laser" cooldown="200">
+			<projectile tile="prototype_laser_blast" animation="prototype_laser" speed="3" offsetY="-15" hitEffect="explosion_dmg" breakTile="5" breakPower="100" homing="true" />
+		</attack>
+		<onDeath><dialogue section="UC" id="prototype3" /><object id="archaic_soldier" x="50" y="-3" /><object id="prototype_boss_1st_shield" x="50" y="-1" /></onDeath>
+	</enemy>
+
+	<object id="prototype_boss_1st_shield" tile="prototype_boss_1st_shield" fps="5" />
+
+	<enemy id="prototype_boss_2nd" tile="prototype_boss_2nd" health="100" defense="8" speed="1.5" range="20" type="surface" ignoreHit="true" flying="true" vertical="true" fps="5" bgm="boss" passEnemies="true" friendlyFire="false">
+		<attack type="melee" damage="20" range="0.5" hits="2" animation="attack1">
+			<pre><play object="this" animation="pre_attack1" /></pre>
+			<cont animation="attack2" damage="45" knockback="20" />
+		</attack>
+		<attack type="projectile" damage="30" range="20" animation="missile" cooldown="200">
+			<projectile tile="archaic_missile" animation="archaic_missile" speed="3.5" offsetY="-10" hitEffect="explosion_dmg" knockback="10" breakTile="5" breakPower="100" homing="true" />
+		</attack>
+		<attack type="projectile" damage="20" range="20" animation="laser" cooldown="200">
+			<projectile tile="prototype_laser_blast" animation="prototype_laser" speed="4" offsetY="-15" hitEffect="explosion_dmg" breakTile="5" breakPower="100" homing="true" />
+		</attack>
+		<onDeath><action>setFlag('UC_dead', true); for(y in -20...0){setTile('-1', y, null); setTile('127', y, null);} for(x in -1...150) setTile(x, '-20', null); mine(55, 20);</action><remove object="area.getObject('archaic_soldier')" /><remove object="area.getObject('archaic_soldier_healer')" /><remove object="area.getObject('archaic_soldier_healer_dummy')" /></onDeath>
+	</enemy>
+
+	<enemy id="archaic_soldier" tile="archaic_soldier" health="50" defense="7" speed="1.5" range="15" type="surface" ignoreHit="true" flying="true" vertical="true" fps="5" bgm="boss" passEnemies="true" friendlyFire="false">
+		<attack type="melee" damage="15" range="0.5" hits="2" animation="attack1">
+			<pre><play object="this" animation="pre_combo" /></pre>
+			<cont damage="15" animation="attack2" knockback="15" />
+		</attack>
+		<attack type="projectile" damage="20" range="20" hits="2" animation="fire" cooldown="200">
+			<projectile tile="archaic_missile" animation="archaic_missile" speed="3" offsetY="-10" hitEffect="explosion_dmg" knockback="10" breakTile="5" breakPower="100" homing="true" />
+			<cont animation="fire" />
+		</attack>
+		<attack type="melee" damage="40" range="1" animation="beam" cooldown="400">
+			<pre><play object="this" animation="pre_beam" /></pre>
+		</attack>
+		<onHit><attack type="omni" range="2" animation="retaliation" knockback="20" /></onHit>
+		<onDeath>
+			<object id="archaic_soldier_healer" x="50" y="-3" /><object id="archaic_soldier_healer_dummy" x="50" y="-3" />
+			<section if="area.getObject('prototype_boss_2nd') == null">
+				<remove object="area.getObject('prototype_boss_1st_shield')" />
+				<object id="prototype_boss_2nd" x="50" y="-1" />
+			</section>
+		</onDeath>
+	</enemy>
+
+	<enemy id="archaic_soldier_healer" tile="archaic_soldier_healer" health="20" defense="10" type="surface" ignoreHit="true" flying="true" fps="5">
+		<onDeath><remove object="area.getObject('archaic_soldier_healer_dummy')" /></onDeath>
+	</enemy>
+
+	<object id="archaic_soldier_healer_dummy" tile="archaic_soldier_healer" animation="archaic_soldier_healer.idle">
+		<addedToArea><action>count = 0.0;</action></addedToArea>
+		<onFrame>
+			count += frames;
+			if(count >= 1000){
+				count = 0;
+				area.addObject(getObject('archaic_soldier').create(area.getObject('archaic_soldier_healer').tile_x * 16, area.getObject('archaic_soldier_healer').tile_y * 16));
+				area.removeObject(area.getObject('archaic_soldier_healer'));
+				area.removeObject(area.getObject('archaic_soldier_healer_dummy'));
+			}
+		</onFrame>
+	</object>
+
+	<enemy id="pyronaut_enemy" tile="pyronaut" health="50" defense="5" speed="1" range="20" type="surface" ignoreHit="true" friendlyFire="false" passEnemies="true">
+		<attack type="melee" damage="20" range="1" hitEffect="fire_lg_dot" animation="attack" />
+	</enemy>
+
+	<enemy id="purifiers_commander_enemy" tile="purifiers_commander" health="100" defense="8" speed="1" range="20" type="surface" ignoreHit="true" friendlyFire="false" bgm="boss" passEnemies="true">
+		<attack type="melee" damage="30" range="1" hitEffect="fire_lg_dot" animation="attack" />
+		<onDeath><action>setFlag('purifiers_dead', true);</action><structure id="dark_portal.purifiers.exit" x="5" y="-1" /></onDeath>
+	</enemy>
+
+
+
+
+</enemies>

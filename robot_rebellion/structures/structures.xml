@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<structures>
+	<object id="RB_old_ship_notice" width="560" height="320">
+		<over>
+			<remove object="this" />
+			<dialogue section="player" id="RB_old_ship_notice" speaker='player' />
+		</over>
+	</object>
+	<object id="RB_old_ship.marker" width="16" height="16" icon="RB_boss" iconColor="000000" />
+	<structure id="RB_old_ship_door" tile="ship_door" name="enter">
+		<operate>
+			<section if="player.hasQuest('RB_old_ship')">
+				<save if="player.getKillCount('RB_boss') == 0" />
+				<locate id="RB_old_ship.marker" hide="true" />
+				<teleport area="RB_old_ship_boss" x="20.5" y="9" allowReturn="true" with="ellipse" />
+			</section>
+			<dialogue section="player" id="RB_old_ship_closed" speaker='player' if="!player.hasQuest('RB_old_ship')" />
+		</operate>
+		<tile id="ship_door_light" animation="ship_door_light" fps="12" x="-3" y="-2.875" glow="true" />
+	</structure>
+	<structure id="RB_old_ship_door.exit" tile="ship_door" behind="true" remove="false">
+		<tooltip id="enter" if="area.getObject('RB_boss') == null" />
+		<operate><section if="area.getObject('RB_boss') == null"><return with="ellipse" /><section if="area.getObject('RB_old_ship.crack2') == null"><run procedure="RB_old_ship_opening" /></section></section></operate>
+		<over><action if="area.getObject('RB_boss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.opening", false)</action></over>
+		<out><action if="area.getObject('RB_boss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.closing", false)</action></out>
+	</structure>
+	<structure id="RB_old_ship.bridge.entrance" tile="ship_door" behind="true" remove="false">
+		<tooltip id="enter" if="area.getObject('RB_boss') == null" />
+		<operate><teleport area="RB.bridge" x="8" y="5.5" with="ellipse" if="area.getObject('RB_boss') == null" /></operate>
+		<over><action if="area.getObject('RB_boss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.opening", false)</action></over>
+		<out><action if="area.getObject('RB_boss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.closing", false)</action></out>
+	</structure>
+	<object id="RB.bridge.exit" layer="npc" action="structure.tooltip.enter" width="16" height="32">
+		<operate><teleport area="RB_old_ship_boss" x="8.5" y="9" with="ellipse" /></operate>
+	</object>
+	<tilesheet id="advanced_terminal.png" width="32" height="32" />
+	<tile id="advanced_terminal" sheet="advanced_terminal.png" x="0" y="0" />
+	<object id="RB.bridge.nav" tile="advanced_terminal" animation="item7" layer="npc" action="structure.tooltip.operate">
+		<operate>
+			<menu section="common" closeable="true">
+				<dialogue section="ship" id="advanced_terminal" />
+				<choice id="robot_factory_access">
+					<section if="getFlag('RB_old_ship.powered')">
+						<dialogue section="ship" id="robots1" />
+						<choice id="RB_ask">
+							<dialogue section="ship" id="robots" />
+						</choice>
+						<choice id="RB_no_ask" />
+						<stop/>
+					</section>
+					<dialogue section="ship" id="no_power" />
+				</choice>
+				<choice id="ship_storage_access">
+					<section if="getFlag('RB_old_ship.powered')">
+						<dialogue section="ship" id="storage" />
+						<stop/>
+					</section>
+					<dialogue section="ship" id="no_power" />
+				</choice>
+				<choice id="training_room_access">
+					<section if="getFlag('RB_old_ship.powered')">
+						<dialogue section="ship" id="training" />
+						<stop/>
+					</section>
+					<dialogue section="ship" id="no_power" />
+				</choice>
+				<choice id="view_logs">
+					<menu section="common" closeable="true">
+						<dialogue section="ship" id="logs" />
+						<choice id="5/1">
+							<dialogue section="ship" id="5/1_logs" />
+						</choice>
+						<choice id="5/9">
+							<dialogue section="ship" id="5/9_logs" />
+						</choice>
+						<choice id="6/1">
+							<dialogue section="ship" id="6/1_logs" />
+						</choice>
+						<choice id="12/25">
+							<dialogue section="ship" id="12/25_logs" />
+						</choice>
+						<choice id="1/1">
+							<dialogue section="ship" id="1/1_logs" />
+						</choice>
+						<choice id="3/26">
+							<dialogue section="ship" id="3/26_logs" />
+						</choice>
+						<choice id="5/1y">
+							<dialogue section="ship" id="5/1y_logs" />
+						</choice>
+					</menu>
+				</choice>
+			</menu>
+		</operate>
+	</object>
+	<object id="RB.bridge.nav.broken" layer="npc" action="structure.tooltip.operate" width="16" height="16">
+		<operate><dialogue section="medicom" id="broken" /></operate>
+	</object>
+	<structure id="RB_old_ship.crack1.ret" tile="crashed_ship.crack1" name="enter">
+		<operate><teleport area="RB_old_ship.cave2" x="65" y="15" with="ellipse" /></operate>
+	</structure>
+	<structure id="RB_old_ship_crack1" tile="crashed_ship.crack1" name="enter">
+		<operate><teleport area="RB_old_ship.cave1" x="8.5" y="21" with="ellipse" /></operate>
+	</structure>
+	<structure id="RB_old_ship.crack2.ret" tile="crashed_ship.crack2" name="enter">
+		<operate><teleport area="robot_start" x="138.125" y="77.0625" with="ellipse" /></operate>
+	</structure>
+	<object id="RB_old_ship.crack2" tile="crashed_ship.crack2" action="enter">
+		<operate><teleport area="RB_old_ship.cave2" x="14" y="23" allowReturn="true" with="ellipse" /></operate>
+	</object>
+	<object id="RB_ship_storage_enter" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea>
+			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
+		</addedToArea>
+		<operate><teleport area="RB_ship_storage" x="35" y="15" with="ellipse" /></operate>
+	</object>
+	<object id="RB_ship_training_enter" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea>
+			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
+		</addedToArea>
+		<operate><teleport area="RB_ship_training" x="35" y="15" with="ellipse" /></operate>
+	</object>
+	<object id="RB_ship_quarters_enter" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea>
+			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
+		</addedToArea>
+		<operate><teleport area="RB_ship_quarters" x="15" y="15" with="ellipse" /></operate>
+	</object>
+	<object id="RB_robots_access_door" tile="ship.doorh" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<over><play object="this" animation="ship.door.open" /></over>
+		<out><play object="this" animation="ship.door.close" /></out>
+	</object>
+	<object id="RB_ship_robot_permission" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea>
+			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
+		</addedToArea>
+		<operate>
+			<section if="!player.hasItem('robots_keycard')">
+				<dialogue section="ship" id="no_access" />
+				<stop/>
+			</section>
+			<section if="player.hasItem('robots_keycard')">
+				<dialogue section="ship" id="access" />
+				<action>setTile(this.tile_x, this.tile_y, null);</action>
+				<remove object="this" />
+				<object id="RB_robots_access_door" x="this.tile_x" y="this.tile_y" />
+			</section>
+		</operate>
+	</object>
+	<object id="RB_ship.ret" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea>
+			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
+		</addedToArea>
+		<operate><return with="ellipse" /></operate>
+	</object>
+	<structure id="RB_robots_door" image="robots_door.png" width="32" height="32" name="enter">
+		<operate><teleport area="RB_ship_robots" x="7" y="21" /></operate>
+	</structure>
+	<object id="RB_old_ship.decoy" width="64" height="64" />
+	<include id="explosions.xml" />
+	<tile id="science.explosion.med" sheet="explosions.2" x="8" />
+	<animation id="science.explosion.med" equals="item6" />
+	<object id="RB.explosion" tile="science.explosion.med" animation="science.explosion.med" removeOnComplete="true" layer="top" save="false" fps="10" width="64" height="64">
+		<light tile="light.large" color="ffff00" />
+	</object>
+</structures>

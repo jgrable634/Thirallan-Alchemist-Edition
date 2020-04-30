@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<art>
+
+  <!--Zargoroth's Safe Haven-->
+  <tilesheet id="zargoroth_haven/peredur.prototype.png" width="17" height="16" />
+  <tile id="guard_chief" sheet="zargoroth_haven/zargoroth.prototype.png" x="0" y="0" />
+  <animation id="guard_chief.idle" x="0" count="1" />
+  <animation id="guard_chief.talk" x="0" count="9" length="2" />
+  <animation id="guard_chief.attack" x="17" count="4" length="2" />
+  <animation id="guard_chief.walk" x="9" count="9" />
+  <tile id="shopkeeper" sheet="zargoroth_haven/pyrrhos.prototype.png" x="0" y="0" />
+  <animation id="shopkeeper.idle" x="8" count="1" />
+  <animation id="shopkeeper.talk" x="0" count="8" />
+  <animation id="shopkeeper.walk" x="9" count="10" />
+  <tile id="mage" sheet="zargoroth_haven/peredur.prototype.png" x="0" y="0" />
+  <animation id="mage.idle" x="4" count="1" />
+  <animation id="mage.talk" x="5" count="5" />
+  <animation id="mage.walk" x="0" count="4" />
+  <animation id="mage.attack" x="5" count="8" />
+  <tile id="tomkin" sheet="zargoroth_haven/tomkin.png" x="0" y="0" />
+  <tile id="andreas" sheet="zargoroth_haven/andreas.png" x="0" y="0" />
+  <animation id="andreas.idle" x="0" count="1" />
+  <animation id="andreas.talk" x="0" count="9" />
+  <animation id="andreas.walk" x="9" count="9" />
+
+  <!--Church Survivors-->
+
+  <tilesheet id="church_survivors/gilbert.png" width="20" height="16" />
+  <tile id="gilbert" sheet="church_survivors/gilbert.png" x="0" y="0" />
+  <animation id="gilbert.idle" x="8" count="1" />
+  <animation id="gilbert.talk" x="0" count="8" />
+  <animation id="gilbert.walk" x="9" count="10" />
+  <animation id="gilbert.attack" x="19" count="9" />
+  <tile id="azriel" sheet="church_survivors/azriel.png" x="0" y="0" />
+  <animation id="azriel.idle" x="8" count="1" />
+  <animation id="azriel.talk" x="0" count="8" />
+  <animation id="azriel.walk" x="9" count="10" />
+  <tile id="hadvarr" sheet="church_survivors/hadvarr.png" x="0" y="0" />
+  <animation id="hadvarr.idle" x="8" count="1" />
+  <animation id="hadvarr.talk" x="0" count="8" />
+  <animation id="hadvarr.walk" x="9" count="10" />
+  <animation id="hadvarr.attack" x="19" count="9" />
+  <tile id="ligart" sheet="church_survivors/ligart.png" x="0" y="0" />
+  <animation id="ligart.idle" x="0" count="1" />
+  <animation id="ligart.talk" x="0" count="8" />
+  <animation id="ligart.walk" x="9" count="8" />
+  <animation id="ligart.attack" x="9" count="14" />
+  <tile id="andreas_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="0" />
+  <tile id="pyrrhos_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="1" />
+  <tile id="iterol_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="2" />
+
+  <!--Mage Guild-->
+  <tilesheet id="mage_guild/asim.png" width="17" height="16" />
+  <tilesheet id="mage_guild/umazz.png" width="17" height="16" />
+  <tilesheet id="mage_guild/oviar.png" width="17" height="16" />
+  <tilesheet id="mage_guild/mundatorem.png" width="17" height="16" />
+  <tilesheet id="mage_guild/xhak_vik.png" width="20" height="16" />
+  <tile id="asim" sheet="mage_guild/asim.png" x="0" y="0" />
+  <animation id="asim.idle" x="4" count="1" />
+  <animation id="asim.talk" x="5" count="5" />
+  <animation id="asim.walk" x="0" count="4" />
+  <animation id="asim.attack" x="5" count="8" />
+  <tile id="umazz" sheet="mage_guild/umazz.png" x="0" y="0" />
+  <animation id="umazz.idle" x="4" count="1" />
+  <animation id="umazz.talk" x="5" count="5" />
+  <animation id="umazz.walk" x="0" count="4" />
+  <animation id="umazz.attack" x="5" count="8" />
+  <tile id="oviar" sheet="mage_guild/oviar.png" x="0" y="0" />
+  <animation id="oviar.idle" x="4" count="1" />
+  <animation id="oviar.talk" x="5" count="5" />
+  <animation id="oviar.walk" x="0" count="4" />
+  <animation id="oviar.attack" x="5" count="8" />
+  <tile id="mundatorem" sheet="mage_guild/mundatorem.png" x="0" y="0" />
+  <animation id="mundatorem.idle" x="4" count="1" />
+  <animation id="mundatorem.talk" x="5" count="5" />
+  <animation id="mundatorem.walk" x="0" count="4" />
+  <animation id="mundatorem.attack" x="5" count="8" />
+  <tile id="xhak_vik" sheet="mage_guild/xhak_vik.png" x="0" y="0" />
+  <animation id="xhak_vik.idle" x="4" count="1" />
+  <animation id="xhak_vik.talk" equals="xhak_vik.idle" />
+  <animation id="xhak_vik.walk" x="0" count="4" />
+  <animation id="xhak_vik.summon" x="5" count="10" />
+
+  <!--Bandits-->
+
+
+  <!--Misc-->
+
+  <tile id="iterol" sheet="misc/iterol.png" x="0" y="0" />
+  <animation id="iterol.idle" equals="gilbert.idle" />
+  <animation id="iterol.walk" equals="gilbert.walk" />
+  <animation id="iterol.talk" equals="gilbert.talk" />
+
+</art>

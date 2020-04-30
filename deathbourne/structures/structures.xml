@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<structures>
+	<structure id="deathbourne_cave_door" extends="ice_doorway">
+			<operate><teleport area="deathbourne_cave" x="5" y="5" with="ellipse_fast" /><stop/></operate>
+		</structure>
+		<structure id="deathbourne_cave_exit" extends="ice_doorway_exit">
+			<operate><teleport area="magic1" x="40" y="-15" with="ellipse_fast" /><stop/></operate>
+		</structure>
+</structures>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<airom>
+  <area id="thirallan_maze">
+    <exit area="start" x="1" y="1" />
+
+    <set id="ar" value="[18,18,54,18,90,18,18,44,54,44,90,44,19,70,54,70,90,70]" /><action>shuffleN(ar, 2);</action>
+
+    <set id="exits" value="[]" /><set id="structures" value="[]" /><set id="i" value="0" />
+    <action>
+      //Doors are 2x2
+      //Two sets of linked doors
+      for(i in 0...4) exits.push({area:"thirallan_maze", x:0, y:0});
+
+      function makeRoom(startX, startY){
+        for(x in startX...startX+20) for(y in startY...startY+10) setBack(x, y, "magic1.stone");
+      }
+      function makeDoor(x,y){
+        setBack(x, y, "magic1.stone"); setBack(x+1, y, "magic1.stone"); setBack(x, y-1, "magic1.stone"); setBack(x+1, y-1, "magic1.stone");
+      }
+      makeRoom(ar[0],ar[1]);
+      makeRoom(ar[2],ar[3]);
+      makeRoom(ar[4],ar[5]);
+
+      makeRoom(ar[6],ar[7]);
+      makeRoom(ar[8],ar[9]);
+      makeRoom(ar[10],ar[11]);
+
+      makeRoom(ar[12],ar[13]);
+      makeRoom(ar[14],ar[15]);
+      makeRoom(ar[16],ar[17]);
+    </action>
+
+    <maze floor="bedrock" wall="blackstone" width="128" height="98" tilesPerCell="2" /><light x="64" y="64" size="3" />
+    <init><runAreaLoad /></init>
+  </area>
+</airom>

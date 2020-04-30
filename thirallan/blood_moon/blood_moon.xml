@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <!--Blood Moon Enemies-->
+  <tilesheet id="blood_spit.png" width="16" height="10" />
+  <tile id="blood_spit" sheet="blood_spit.png" x="0" y="0" />
+  <tile id="blood_zombie" sheet="blood_moon.png" x="0" y="0" />
+  <tile id="floating_blood" sheet="blood_moon.png" x="4" y="2" />
+  <animation id="blood_zombie.idle">
+    <frame x="0" length="2" />
+    <frame x="4" />
+    <frame x="5" />
+    <frame x="6" />
+    <frame x="7" />
+  </animation>
+  <animation id="blood_zombie.walk" x="0" count="4" />
+  <animation id="blood_zombie.attack1" x="8" count="3" length="2" />
+  <animation id="blood_zombie.attack2" x="11" count="3" length="2" />
+  <animation id="floating_blood.idle">
+    <frame x="0" />
+    <frame x="1" offsetY="-2" />
+    <frame x="2" offsetY="-2" />
+    <frame x="3" />
+    <frame x="0" offsetY="2" />
+  </animation>
+  <animation id="floating_blood.pre_attack" x="4" count="3" />
+  <animation id="floating_blood.attack" x="7" count="6" />
+
+  <enemy id="blood_zombie" tile="blood_zombie" health="10" defense="1" speed="2" range="15" type="surface" underground="true" vertical="true" ignoreHit="true">
+    <attack type="melee" damage="5" animation="attack1" hits="2">
+      <cont animation="attack2" />
+    </attack>
+  </enemy>
+  <enemy id="floating_blood" tile="floating_blood" health="6" speed="0.5" range="10" type="surface" vertical="true" ignoreHit="true" flying="true">
+    <attack type="projectile" damage="5" animation="attack" range="10">
+      <pre><play object='this' animation="pre_attack" /></pre>
+      <projectile tile="blood_spit" animation="item3" speed="1" homing="true" />
+    </attack>
+  </enemy>
+
+  <!--Blood Moon Init-->
+  <procedure id="check_blood_moon">
+    <choose>
+      <section if="isNight()">
+        <run procedure="init_blood_moon" />
+      </section>
+      <section>
+        <invokeLater seconds="10">
+          <run procedure="check_blood_moon" />
+        </invokeLater>
+      </section>
+    </choose>
+  </procedure>
+  <procedure id="init_blood_moon">
+    <section if="isNight() && randInt(0,99) &lt; 10">
+      <show tooltip="popup" text="common.blood_moon" x="0.5" y="0.4" hold="30" />
+      <action>
+        setFlag('blood_moon',true);
+        getParallaxLayer("thirallan_sky").getChildAt(0).playAnimation("thirallan_sky.blood_sky", true, function(p){p.playAnimation("single", true);});
+        getParallaxLayer("thirallan_sky").getChildAt(1).playAnimation("thirallan_sky.blood_sky", true, function(p){p.playAnimation("single", true);});
+        setSpriteColor(getParallaxLayer("thirallan_sky").getChildAt(2),0x5C0000);
+        getParallaxLayer("thirallan_moon").getChildAt(0).playAnimation("thirallan_moon.blood_moon", true, function(p){p.playAnimation("single", true);});
+      </action>
+      <runAreaLoad/>
+      <run procedure="blood_moon_purifier" />
+      <run procedure="blood_moon" />
+    </section>
+  </procedure>
+  <procedure id="blood_moon">
+    <invokeLater seconds="1">
+      <choose>
+        <section if="!isNight()">
+          <action>
+            setFlag('blood_moon',false);
+            getParallaxLayer("thirallan_sky").getChildAt(0).playAnimation("thirallan_sky.sky", true, function(p){p.playAnimation("single", true);});
+            getParallaxLayer("thirallan_sky").getChildAt(1).playAnimation("thirallan_sky.sky", true, function(p){p.playAnimation("single", true);});
+            setSpriteColor(getParallaxLayer("thirallan_sky").getChildAt(2),0x1F2A1F);
+            getParallaxLayer("thirallan_moon").getChildAt(0).playAnimation("thirallan_moon.none", true, function(p){p.playAnimation("single", true);});
+          </action>
+          <runAreaLoad/>
+          <stop/>
+        </section>
+        <section>
+          <run procedure="blood_moon" />
+          <section if="!player.questComplete('blood_moon') && !getFlag('MOS_imbound')">
+            <action>setFlag('MOS_imbound',true);</action>
+            <invokeLater seconds="30">
+              <object id="MOS_hotspot" x="65" y="-1" area="thirallan_zargoroth" />
+              <show tooltip="popup" text="common.beckoning" x="0.5" y="0.4" hold="120" />
+            </invokeLater>
+          </section>
+        </section>
+      </choose>
+    </invokeLater>
+  </procedure>
+</data>

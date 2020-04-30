@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <quest id="guild_init" giver="asim" exp="1000">
+    <item id="init_rite" count="1" />
+  </quest>
+  <quest id="lost_artifact" giver="umazz" exp="2000">
+    <item id="lost_artifact" count="1" />
+  </quest>
+
+  <npc id="asim" tile="asim" talk_sfx="talking2" action="talk" night="true">
+    <operate>
+      <section if="!player.hasQuest('guild_init')">
+        <dialogue section="asim" id="greetings1" speaker='this' />
+        <dialogue section="asim" id="greetings2" speaker='this' />
+        <quest id="guild_init" />
+      </section>
+      <choose if="!player.questComplete('guild_init')">
+        <section if="!player.canCompleteQuest('guild_init')">
+          <dialogue section="asim" id="guild_init1" speaker='this' />
+        </section>
+        <section>
+          <dialogue section="asim" id="guild_init2" speaker='this' />
+          <dialogue section="asim" id="guild_init3" speaker='this' />
+          <complete quest="guild_init" />
+        </section>
+      </choose>
+    </operate>
+  </npc>
+
+
+  <npc id="umazz" tile="umazz" talk_sfx="talking2" action="talk" night="true">
+    <operate>
+      <dialogue section="umazz" id="new_one" speaker='this' if="!player.hasQuest('guild_init')" />
+      <section if="player.hasQuest('guild_init') && !player.hasQuest('lost_artifact')">
+        <dialogue section="umazz" id="greetings1" speaker='this' />
+        <dialogue section="umazz" id="greetings2" speaker='this' />
+        <quest id="lost_artifact" />
+      </section>
+      <choose if="!player.questComplete('lost_artifact')">
+        <section if="!player.canCompleteQuest('lost_artifact')">
+          <dialogue section="umazz" id="lost_artifact1" speaker='this' />
+        </section>
+        <section>
+          <dialogue section="umazz" id="lost_artifact2" speaker='this' />
+          <item id="init_rite" count="1" />
+          <complete quest="lost_artifact" />
+        </section>
+      </choose>
+    </operate>
+  </npc>
+
+
+  <npc id="oviar" tile="oviar" talk_sfx="talking2" action="talk" night="true">
+    <operate>
+      <section if="!getFlag('pathAsim')">
+        <quest/>
+        <dialogue section="oviar" id="greetings1" speaker='this' />
+        <run procedure="guild_pathAsim" />
+        <dialogue section="oviar" id="greetings2" speaker='this' />
+      </section>
+      <dialogue section="oviar" id="greetings2" speaker='this' if="!player.hasQuest('guild_init')" />
+      <dialogue section="oviar" id="guild_init" speaker='this' if="player.hasQuest('guild_init') && !player.questComplete('guild_init')" />
+      <dialogue section="oviar" id="guild_accept" speaker='this' if="player.questComplete('guild_init')" />
+    </operate>
+  </npc>
+
+
+  <npc id="xhak_vik" tile="xhak_vik" talk_sfx="talking2" action="talk" night="true">
+    <operate>
+      <dialogue section="xhak_vik" id="new_one" speaker='this' if="!player.questComplete('guild_init')" />
+    </operate>
+  </npc>
+
+
+  <npc id="mundatorem" tile="mundatorem" action="talk">
+    <operate>
+      <dialogue section="player" id="mundatorem" speaker='player' />
+    </operate>
+  </npc>
+
+</npcs>

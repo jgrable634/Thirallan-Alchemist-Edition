@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<enemies>
+	<tile id="corrupted_boar" sheet="corrupted.boar.png" x="0" y="0" />
+	<animation id="corrupted_boar.idle" count="9">
+		<frame count="2" />
+		<frame x="1" y="2" />
+		<frame x="3" y="0" count="6" />
+		<frame count="9" />
+		<frame count="9" />
+	</animation>
+	<animation id="corrupted_boar.roar" count="4">
+		<frame x="2" y="2" count="5" />
+	</animation>
+	<animation id="corrupted_boar.walk" count="7" x="3" y="3" />
+	<animation id="corrupted_boar.attack" count="6" x="2" y="5" />
+	<animation id="corrupted_boar.hit" count="5" x="0" y="7"><frame x="0" count="3" /></animation>
+	<enemy id="corrupted_boar" tile="corrupted_boar" defense="4" health="16" damage="10" range="14" type="surface" trapped="pig" capture="2" death_sfx="boar_death">
+		<capture trapped="corrupted_boar" minCapture="5" />
+		<run><play object="this" animation="roar" /></run>
+		<loot p="4" />
+		<loot id="milk" p="1" />
+		<loot id="meat" p="16" />
+	</enemy>
+
+	<tile id="corrupted_spider" sheet="corrupted_spider.png" x="0" y="0" />
+	<animation id="corrupted_spider.pre_attack" x="8" count="8" />
+	<animation id="corrupted_spider.attack" x="16" count="8" />
+	<animation id="corrupted_spider.hit" x="24" count="1" length="3" />
+	<animation id="corrupted_spider.idle" x="25" count="10" />
+	<animation id="corrupted_spider.walk" x="35" count="4" />
+	<animation id="corrupted_spider.web" count="8" offsetX="-6" color="490068" />
+
+	<enemy id="corrupted_spider" tile="corrupted_spider" health="12" speed="2" range="7" type="surface" passEnemies="true" night="true" glow="true" capture="10" trapped="spider" death_sfx="spider_death" attack_sfx="spider_attack">
+		<loot p="1" /><loot id="silk" p="2" />
+		<attack type="melee" damage="6">
+			<pre><play object="this" animation="pre_attack" /></pre>
+			<hitEffect tile="corrupted_spider" animation="corrupted_spider.web" freeze="1" canFlip="true" />
+		</attack>
+	</enemy>
+
+	<enemy id="corrupted_one" />
+
+</enemies>

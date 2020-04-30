@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+  <tile id="corruption_dirt" sheet="tiles.png" x="0" y="0" />
+  <dig id="corruption_dirt" cost="2" />
+  <tile id="corruption_stone" sheet="tiles.png" x="0" y="1" />
+  <dig id="corruption_stone" cost="4" />
+</tiles>

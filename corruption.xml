@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<airom>
+  <item id="corrupted_item" icon="alien_heart.ico" type="equipment" weight="5" corruptible="false"/>
+  <action>
+    function isCorruptible(xml){
+      return (xml.get('corruptible') == null || xml.get('corruptible') == true) && (xml.get('type') == 'tool' || xml.get('type') == 'equipment' || xml.get('type') == 'animal');
+    }
+    function nameCorrupted(player,i){
+      name = 'p' + i.id + '&Corrupted ' + i.getName().get();
+      player.addItems(getItem('corrupted_item'),1,null,name);
+      return '[item=' + i.id + ']';
+    }
+    function corruptItem(player){
+      corruptedItem = null;
+      for(s in player.equipment.slots){
+        if(s.get() != null){
+          i = s.get().info;
+          if(isCorruptible(i.xml)){
+            corruptedItem = nameCorrupted(player,i);
+            s.set(null);
+            return corruptedItem;
+          }
+        }
+      }
+      cItems = [];
+      for(i in player.inventory.items) if(isCorruptible(i.item.xml)) cItems.push(i.item);
+      if(cItems.length > 0){
+        cItem = cItems[Std.random(cItems.length)];
+        corruptedItem = nameCorrupted(player,cItem);
+        player.inventory.addItems(getItem(cItem.id),-1);
+        return corruptedItem;
+      }
+    }
+  </action>
+
+  <object id="corrupted.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">
+    <addedToArea>
+      <action>Movement.seek(this, player, 10);</action>
+    </addedToArea>
+    <over><sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
+      <section if="corruptedItem != null"><show tooltip="popup" text="warning.item_corrupted{item:[global=corruptedItem]}" x="0.5" y="0.4" /></section>
+    <remove object="this" /></over>
+  </object>
+  <object id="corrupted.corpse" tile="spirit.corpse" animation="spirit.corpse" removeOnComplete="true" layer="enemy" save="false">
+    <onComplete><object id="corrupted.orb" x="this.xPos/Tile.SIZE" y="this.yTile/Tile.SIZE"/></onComplete>
+  </object>
+  <procedure id="corrupted.death"><section if="killer != null">
+    <object id="corrupted.corpse" x="this.xPos/Tile.SIZE-0.5" y="this.yTile/Tile.SIZE+0.5"/>
+  </section></procedure>
+</airom>

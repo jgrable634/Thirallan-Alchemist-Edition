@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+	<area id="RB.crater">
+		<shape type="trapezoid">
+			<top y="0" fromX="0" toX="48" />
+			<bottom y="22" fromX="16" toX="32" />
+		</shape>
+		<appendArea id="RB.crater.mined" offsetX="0" offsetY="0" />
+	</area>
+	<area id="RB.crater.mined">
+		<shape type="trapezoid">
+			<top y="0" fromX="10" toX="45" />
+			<bottom y="6" fromX="19" toX="29" />
+		</shape>
+		<mine start="0" end="1" light="3" />
+		<structure id="crashed_ship" x="11" y="20" />
+		<structure id="RB_old_ship_door" x="20.8125" y="4.625" />
+		<object id="RB_old_ship_notice" x="10" y="22" />
+	</area>
+	<area id="robot_start" width="256" height="96" background="stars.dwarf" planet="robot_rebellion" looping="true">
+		<tiles id="sci1.grass.scorched" y="0" />
+		<tiles id="scorched.dirt" start="0" end="0.5" />
+		<tiles id="obsidian" start="0.5" end="1" />
+		<tiles id="blackstone" y="95" />
+		<ore id="coal" start="0.2" end="0.4" percent="0.0125" tile="scorched.dirt" />
+		<ore id="sulfur" start="0.4" end="0.5" percent="0.02" tile="scorched.dirt" />
+		<ore id="quartz" start="0.4" end="0.5" percent="0.01" tile="scorched.dirt" />
+		<ore id="sulfur" start="0.5" end="0.8" percent="0.02" tile="obsidian" />
+		<ore id="lava" start="0.7" end="0.9" percent="1" tile="obsidian" />
+		<ore id="titanium" start="0.8" end="1" percent="0.0075" tile="obsidian" />
+		<ore id="uranium" start="0.9" end="1" percent="0.005" tile="obsidian" />
+		<ore id="exotic_matter" start="0.9" end="1" percent="0.004" tile="obsidian" />
+		<appendArea id="RB.crater" offsetX="120" offsetY="60" />
+		<objects id="large_drone" startX="1" endX="255" startY="-3" endY="-3" minDist="60" maxDist="75" count="5" />
+		<spawner id="large_drone" time="500" count="8" fromX="1" toX="255" fromY="-3" toY="-3" ground="false" />
+		<objects id="small_tank" startX="1" endX="255" startY="-1" endY="-1" minDist="80" maxDist="85" count="5" />
+		<spawner id="small_tank" time="500" count="6" fromX="1" toX="255" fromY="-1" toY="-1" />
+		<init><runAreaLoad/><action>for(x in 131...163) for(y in 57...79) mine(x, y);</action></init>
+		<onLoad><music id="orbit" seconds="1" /></onLoad>
+	</area>
+	<area id="RB_old_ship_boss" width="32" height="16" external="robot_start">
+		<tiles id="ship" start="0" end="1" />
+		<action>for(y in 5...10) for(x in 8...24) mine(x, y);</action>
+		<structure id="RB_old_ship_door.exit" x="20" y="9.1" />
+		<light x="20" y="8" size="3" /><light x="21" y="8" size="3" /><light x="20" y="9" size="3" /><light x="21" y="9" size="3" />
+		<structure id="sci1.light" x="10" y="9" />
+		<structure id="sci1.light" x="14" y="9" />
+		<structure id="sci1.light" x="18" y="9" />
+		<structure id="sci1.light" x="22" y="9" />
+		<structure id="RB_old_ship.bridge.entrance" x="8" y="9.1" />
+		<object id="RB_boss" x="8" y="10" />
+		<init><runAreaLoad/></init>
+		<onLoad><section if="area.getObject('RB_boss') != null"><run procedure="RB_boss_start" /></section></onLoad>
+	</area>
+	<area id="RB.bridge" x="-8" y="-8" width="32" height="25">
+		<tiles id="obsidian" start="0" end="1" />
+		<mine start="0" end="1" /><tiles id="empty" start="0" end="1" />
+		<action>
+			for(x in 10...14) mine(x, 1); mine(13,2); for(y in 2...4) for(x in 7...13) mine(x, y);
+			mine(6, 3); for(x in 6...11) mine(x, 4); for(x in 8...11) mine(x, 5); for(x in 8...10) mine(x, 6);
+		</action>
+		<structure id="science1.bridge" x="0" y="8" />
+		<object id="RB.bridge.exit" x="7" y="6" />
+		<object id="RB.bridge.nav" x="5" y="4" />
+		<object id="RB.bridge.nav.broken" x="6" y="2" />
+		<object id="RB.bridge.nav.broken" x="11" y="4" />
+		<object id="RB.bridge.nav.broken" x="14" y="1" />
+		<light x="7" y="5" size="3" /><light x="7" y="6" size="3" />
+	</area>
+	<procedure id="RB_old_ship_opening">
+		<object id="RB_old_ship.decoy" x="138.125" y="77.0625" />
+		<light x="138.125" y="77.0625" size="10" />
+		<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
+		<wait seconds="0.5" />
+		<object id="RB.explosion" x="138.125" y="77.0625" />
+		<object id="RB_old_ship.crack2" x="138.125" y="77.0625" />
+		<sound id="explosion" />
+		<wait seconds="2">
+			<operate object="area.getObject('RB.explosion')" />
+		</wait>
+	</procedure>
+	<area id="RB_ship_robots" width="64" height="32" external="robot_start">
+		<tiles id="ship" start="0" end="1" />
+		<action>for(y in 10...24) for(x in 10...56) mine(x, y)</action>
+		<tiles id="obsidian" start="0.5" end="1" empty="true" />
+		<action>for(y in 0...2) for(x in 0...6){setTile(12+x*8, 12+y*8, "ship"); setTile(13+x*8, 12+y*8, "ship"); setTile(12+x*8, 13+y*8, "ship"); setTile(13+x*8, 13+y*8, "ship");}</action>
+		<structure id="crashed_ship.crack1.ret" x="6" y="22" />
+		<init><runAreaLoad /></init>
+		<onLoad>
+			<music id="science1" seconds="1" />
+		</onLoad>
+	</area>
+	<area id="RB_old_ship.cave2" width="74" height="32">
+		<tiles id="ship" start="0" end="1" />
+		<action>for(x in 12...66){mine(x, 18); mine(x, 21);} mine(65, 20); mine(65, 19);</action>
+		<action>for(y in 22...25) for(x in 12...16) mine(x, y); mine(12, 16); mine(12, 17); for(y in 14...16) for(x in 12...66) mine(x, y); setTile('62', '14', 'ship'); for(x in 2...12){mine(x, 21); mine(x, 18);} for(x in 65...72) mine(x, 21);</action>
+		<structure id="RB_old_ship.crack2.ret" x="12" y="24" /><light x="14" y="23" size="4" />
+		<set id="ar" value="[15,19,23,37,31,35,39,43,47,51,55,59]" /><action>shuffle(ar);</action>
+		<structure id="medivat1" x="ar[0]" y="15" />
+		<structure id="medivat2" x="ar[1]" y="15" />
+		<structure id="medivat3" x="ar[2]" y="15" />
+		<structure id="medivat4" x="ar[3]" y="15" />
+		<structure id="medivat.full1" x="ar[4]" y="15" />
+		<structure id="medivat.full2" x="ar[5]" y="15" />
+		<structure id="medivat.full3" x="ar[6]" y="15" />
+		<structure id="medivat.full4" x="ar[7]" y="15" />
+		<structure id="medivat1" x="ar[8]" y="15" />
+		<structure id="medivat2" x="ar[9]" y="15" />
+		<structure id="medivat3" x="ar[10]" y="15" />
+		<structure id="medivat4" x="ar[11]" y="15" />
+		<structure id="sci1.light.off" x="ar[0]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[1]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[2]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[3]-1" y="15" />
+		<structure id="sci1.light" x="ar[4]-1" y="15" />
+		<structure id="sci1.light" x="ar[5]-1" y="15" />
+		<structure id="sci1.light" x="ar[6]-1" y="15" />
+		<structure id="sci1.light" x="ar[7]-1" y="15" />
+		<structure id="sci1.light.off" x="ar[8]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[9]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[10]-1" y="15" />
+		<structure id="sci1.light.broken" x="ar[11]-1" y="15" />
+		<object id="RB_ship_training_enter" x="11" y="21" />
+		<object id="RB_ship_storage_enter" x="11" y="18" />
+		<object id="RB_ship_quarters_enter" x="66" y="21" />
+		<object id="RB_ship_robot_permission" x="62" y="15" />
+		<structure id="RB_robots_door" x="64" y="15" />
+	</area>
+	<area id="RB_ship_training" width="64" height="64">
+		<tiles id="ship" start="0" end="1" />
+	</area>
+
+	<planet id="robot_rebellion" height="42">
+		<orbit id="robot_rebellion.orbit" width="406" height="64" background="stars.dwarf.orbit" name="system.planet.robot">
+			<area id="robot_start" x="0" />
+			<spawner id="alien.fighter" time="50000" count="1" fromX="2" toX="402" fromY="10" toY="54" ground="false" />
+			<init><runAreaLoad /><action>area.spawner.spawnAll("alien.fighter")</action></init>
+			<onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+		</orbit>
+	</planet>
+</areas>

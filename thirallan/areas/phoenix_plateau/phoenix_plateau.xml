@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+
+  <include id="parallax/parallax.xml" />
+
+  <area id="thirallan_phoenix_plateau" width="100" height="100" background="phoenix_plateau" looping="true" planet="thirallan_alchemist">
+    <tiles id="dirt" start="0" end="0.2" />
+    <tiles id="stone" start="0.2" end="1" />
+    <tiles id="grass" y="0" />
+    <tiles id="blackstone" y="99" />
+    <ore id="iron" start="0.1" end="0.2" percent="0.000625" tile="dirt" />
+    <ore id="coal" start="0.0" end="0.2" percent="0.0375" tile="dirt" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0.2" end="1.0" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.2" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+    <objects id="tree" y="-1" startX="0" endX="25" minDist="6" maxDist="6" array="left" />
+    <objects id="tree" y="-1" startX="75" endX="100" minDist="6" maxDist="6" array="right" />
+    <objects id="undead" fromX="0" toX="150" fromY="-1" toY="-1" count="6" />
+    <spawner id="undead" time="100" count="3" fromX="0" toX="150" fromY="-1" toY="-1" enabled="!getFlag('blood_moon')" />
+    <structure id="encampment_door" x="50" y="-1" />
+    <structure id="undead_shrine" x="25" y="-1" />
+    <init><runAreaLoad /></init>
+    <onLoad>
+      <music id="magic2" seconds="1" />
+      <weather type="fog" alpha="1" color="1F2A1F" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" />
+    </onLoad>
+  </area>
+
+  <area id="encampment.phoenixes" extends="encampment_template">
+  </area>
+
+</areas>

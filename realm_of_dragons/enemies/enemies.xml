@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <animation id="young_dragon.idle" equals="young_dragon.fly" />
+  <animation id="young_dragon.talk" equals="young_dragon.fly" />
+  <animation id="young_dragon.walk" equals="young_dragon.fly" />
+ <enemy id="child_dragon_npc" tile="young_dragon" animation="young_dragon" health="10" defense="2000" fps="10" type="surface" range="5" speed="2" hostile="false" friendlyFire="false" passEnemies="true" passPlayer="true" vertical="true" flying="true" death_sfx="dragon_death" ignoreHit="true" soundScale="2" targetFriendly="false" passFence="true">
+	 <tooltip section="npc" id="talk" /><target id="boar" />
+	 <attack type="breath" damage="1" range="10" animation="fire" repeat="2" sfx="dragon_atk">
+		 <projectile tile="fire" glow="true" speed="2" frames="8" breakTile="1" breakPower="8" scaleTo="2" offsetX="-24" offsetY="1" hitEffect="fire_sm" hitTrees="true" color="f9be0b" colorScale="2">
+			 <light tile="light.small" color="cc5500" />
+		 </projectile>
+	 </attack>
+   <operate>
+     <section>
+       <action>this.moveTalk(player, 0.75);</action>
+       <set id="ROD_youth" value="this" />
+       <run procedure="ROD_youth_talk" />
+     </section>
+   </operate>
+ </enemy>
+ <enemy id="ROD_youth_tag" tile="young_dragon" animation="young_dragon" health="10" defense="2000" fps="10" type="surface" speed="2" range="10" friendlyFire="false" passEnemies="true" passPlayer="true" vertical="true" flying="true" death_sfx="dragon_death" ignoreHit="true" soundScale="2" targetFriendly="false" passFence="true">
+   <tooltip section="npc" id="talk" />
+   <flee id="player" />
+   <attack type="breath" damage="0" range="20" repeat="2" animation="fire" sfx="dragon_atk">
+     <projectile tile="fire" glow="true" speed="2" frames="8" breakTile="5" breakPower="6" scaleTo="3" hitEffect="fire_sm_dot">
+       <light tile="light.small" color="cc5500" />
+     </projectile>
+   </attack>
+   <operate>
+     <section>
+       <action>this.moveTalk(player, 0.75);</action>
+       <set id="ROD_youth" value="this" />
+       <run procedure="ROD_youth_talk" />
+     </section>
+   </operate>
+ </enemy>
+ <enemy id="ROD_youth_dummy" tile="young_dragon" animation="young_dragon" health="10" defense="2000" fps="10" type="surface" range="10" friendlyFire="false" passEnemies="true" passPlayer="true" vertical="true" flying="true" death_sfx="dragon_death" ignoreHit="true" soundScale="2" targetFriendly="false" passFence="true">
+   <tooltip section="npc" id="talk" />
+   <operate>
+     <section>
+       <action>this.moveTalk(player, 0.75);</action>
+       <set id="ROD_youth" value="this" />
+       <run procedure="ROD_youth_talk" />
+     </section>
+   </operate>
+ </enemy>
+ <tilesheet id="guard_dragon.png" width="52" height="42" />
+ <tile id="ROD_guard" sheet="guard_dragon.png" x="0" y="0" />
+ <enemy id="ROD_guard" tile="ROD_guard" animation="young_dragon" health="75" defense="2000" speed="1" hostileFlag="ROD.betrayal" death_sfx="dragon_death" friendlyFire="false" passEnemies="true" passPlayer="true" vertical="true" ignoreHit="true" soundScale="2" targetFriendly="false" passFence="true">
+   <tooltip section="npc" id="talk" if="!getFlag('ROD.betrayal')" />
+   <tooltip section="object.tooltip" id="enemy" />
+   <operate>
+     <section if="!getFlag('ROD.betrayal')">
+       <section>
+         <action>this.moveTalk(player, 0.75)</action>
+         <set id="ROD_guard" value="this" />
+         <run procedure="ROD_guard.npc" />
+       </section>
+       <stop />
+     </section>
+   </operate>
+ </enemy>
+ <enemy id="ROD_rogue_guard" tile="ROD_guard" animation="young_dragon" health="75" defense="6" speed="1.5" range="10" flying="true" vertical="true" type="surface">
+   <flee id="player" />
+   <inRange><section if="!getFlag('ROD_rogue_intro')"><dialogue section="dragon_realm" id="rogue_guard1" /><action>setFlag('ROD_rogue_intro', true);</action></section></inRange>
+   <attack type="breath" damage="7" range="20" repeat="2" animation="fire" sfx="dragon_atk">
+     <projectile tile="fire" glow="true" speed="2" frames="8" breakTile="5" breakPower="6" scaleTo="3" hitEffect="fire_sm_dot">
+       <light tile="light.small" color="cc5500" />
+     </projectile>
+   </attack>
+   <onDeath><dialogue section="dragon_realm" id="rogue_guard2" /><item id="exiled_dragon_prisoner" count="1" /></onDeath>
+ </enemy>
+	<!--include id="dark_dragon.xml" includeRoot="true" />
+	<tile id="dark_dragon" sheet="dark_dragon.png" x="0" y="0" />
+	<enemy id="dark_dragon" tile="dark_dragon" health="150" defense="12" fps="10" type="dragon" bgm="Ridley" element="corruption">
+		<lootSet><loot id="evo_gem" /></lootSet><sound id="death" value="dragon_death" /><sound id="hit" value="dragon_hit" />
+		<lootSet><loot id="dragonblood" count="20" /></lootSet>
+		<attack type="breath" damage="11" range="20" repeat="2" animation="fire" state="standing" sfx="dragon_atk">
+			<projectile tile="dark_fire" glow="true" speed="2" frames="8" breakTile="5" breakPower="6" scaleTo="3" offsetX="-40" offsetY="8" hitEffect="fire_lg_dot">
+				<light tile="light.small" color="cc5500" />
+			</projectile>
+		</attack>
+		<attack type="breath" damage="11" range="20" repeat="2" animation="hover_fire" state="flying" sfx="dragon_atk">
+			<projectile tile="dark_fire" glow="true" speed="2" frames="8" breakTile="5" breakPower="6" scaleTo="3" offsetX="-33" offsetY="-5" hitEffect="fire_lg_dot">
+				<light tile="light.small" color="cc5500" />
+			</projectile>
+		</attack>
+	</enemy-->
+  <tilesheet id="alchemist_dragon.png" width="115" height="30" />
+  <tile id="alchemist_dragon" sheet="alchemist_dragon.png" x="0" y="0" />
+  <animation id="alchemist_dragon.idle" x="0" count="1" />
+  <animation id="alchemist_dragon.walk" x="1" count="5" />
+  <animation id="alchemist_dragon.pre_claw1" x="7" count="3" />
+  <animation id="alchemist_dragon.claw1" x="10" count="6" />
+  <animation id="alchemist_dragon.slam1" x="16" count="3" />
+  <animation id="alchemist_dragon.fire1" x="19" count="3" />
+  <enemy id="alchemist_dragon" tile="alchemist_dragon" health="200" hits="2" defense="7" fps="8" range="25" speed="1" type="surface" bgm="boss">
+    <attack type="melee" damage="15" range="0.5" hits="2" animation="claw1" knockback="5">
+      <pre><play object='this' animation="pre_claw1" /></pre>
+        <cont damage="25" animation="slam1">
+          <post>
+            <section>
+              <action>trace("Post Works");</action>
+              <attack type="breath" damage="8" repeat="2" range="20" animation="fire1" sfx="dragon_atk">
+                <projectile tile="fire" glow="true" speed="2" frames="8" breakTile="5" breakPower="6" scaleTo="3" offsetX="-33" offsetY="-5" hitEffect="fire_lg_dot">
+                  <light tile="light.small" color="cc5500" />
+                </projectile>
+              </attack>
+            </section>
+          </post>
+        </cont>
+    </attack>
+  </enemy>
+</data>

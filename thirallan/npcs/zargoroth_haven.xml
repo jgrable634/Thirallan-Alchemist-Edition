@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+    <procedure id="mirrows.npc" extends="mirrows.npc">
+      <section if="player.hasQuest('Thirallan') || player.hasQuest('Thirallan2')">
+        <remove quest="Thirallan" />
+        <remove quest="Thirallan2" />
+      </section>
+    </procedure>
+
+    <quest id="proving_worth" giver="zargoroth_npc" exp="500" useResources="false">
+      <item id="malumite_pickaxe" count="1" allowEquipped="true" />
+      <item id="malumite_sword" count="1" allowEquipped="true" />
+      <item id="malumite_shield" count="1" allowEquipped="true" />
+      <item id="malumite_armor" count="1" allowEquipped="true" />
+    </quest>
+    <quest id="undead_rumors" giver="zargoroth_npc" exp="1000">
+      <kill id="fallen_angel" count="1" name="quests.misc.thirallan_fallen_angel" hidden="true" />
+    </quest>
+    <quest id="find_jacominus" giver="andreas" exp="500">
+      <kill id="jacominus" count="1" name="quests.misc.thirallan_jacominus" hidden="true" />
+    </quest>
+    <quest id="blood_moon" giver="zargoroth_npc" exp="2000">
+      <kill id="mess_of_souls" count="1" name="quests.misc.thirallan_MOS" hidden="true" />
+    </quest>
+    <quest id="undead_shrines" giver="zargoroth_npc" exp="2000">
+      <kill id="fallen_angel" count="6" name="quests.misc.thirallan_shrines" />
+    </quest>
+
+    <procedure id="zargoroth.proving_worth">
+      <section if="player.hasQuest('proving_worth')">
+        <dialogue section="zargoroth" id="proving_worth4" speaker='this' />
+        <item id="steel_pickaxe" />
+      </section>
+      <section if="!player.hasQuest('proving_worth')">
+        <dialogue section="zargoroth" id="proving_worth5" speaker='this' />
+        <action>setFlag('proving_worth_denied',true);</action>
+      </section>
+    </procedure>
+
+    <procedure id="zargoroth.current_objective">
+      <choose>
+        <dialogue section="zargoroth" id="proving_worth7" speaker='guard_chief' if="!player.questComplete('proving_worth')" />
+        <dialogue section="zargoroth" id="undead_rumors3" speaker='guard_chief' if="!player.questComplete('undead_rumors')" />
+        <dialogue section="zargoroth" id="peredur_blood_moon" speaker='guard_chief' if="!player.questComplete('blood_moon')" />
+        <dialogue section="zargoroth" id="explore_thirallan" speaker='guard_chief' />
+      </choose>
+    </procedure>
+    <npc id="guard_chief" talk_sfx="talking4" />
+    <npc id="zargoroth_npc" tile="guard_chief" action="talk" talk_sfx="talking4" night="true" animation="guard_chief">
+      <idle class="hunt" fromX="60" toX="75" maxWeight="30">
+        <attack type="melee" damage="5" range="1" animation="attack" />
+      </idle>
+      <operate>
+        <choose>
+          <section if="!getFlag('TAE_first')">
+            <dialogue section="zargoroth" id="proving_worth1" speaker='this' />
+          </section>
+          <section if="!player.hasQuest('proving_worth') && !getFlag('proving_worth_denied')">
+            <dialogue section="player" id="zargoroth_proving_worth1" speaker='player' />
+            <dialogue section="zargoroth" id="proving_worth2" speaker='this' />
+            <dialogue section="zargoroth" id="proving_worth3" speaker='this' />
+            <quest id="proving_worth" />
+            <set id="this" value="this" />
+            <run procedure="zargoroth.proving_worth" />
+          </section>
+          <section if="!player.hasQuest('proving_worth') && getFlag('proving_worth_denied')">
+            <dialogue section="zargoroth" id="proving_worth6" speaker='this' />
+            <quest id="proving_worth" />
+            <set id="this" value="this" />
+            <run procedure="zargoroth.proving_worth" />
+          </section>
+          <choose if="!player.questComplete('proving_worth') && player.hasQuest('proving_worth')">
+            <section if="!player.canCompleteQuest('proving_worth')">
+              <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
+            </section>
+            <section>
+              <dialogue section="zargoroth" id="proving_worth8" speaker='this' />
+              <object id="andreas" x="90" y="-1" />
+              <complete quest="proving_worth" />
+            </section>
+          </choose>
+          <section if="!player.hasQuest('undead_rumors')">
+            <dialogue section="zargoroth" id="undead_rumors1" speaker='this' />
+            <dialogue section="zargoroth" id="undead_rumors2" speaker='this' />
+            <quest id="undead_rumors" />
+          </section>
+          <choose if="player.hasQuest('undead_rumors') && !player.questComplete('undead_rumors')">
+            <section if="!player.canCompleteQuest('undead_rumors')">
+              <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
+            </section>
+            <section>
+              <dialogue section="zargoroth" id="undead_rumors4" speaker='this' />
+              <dialogue section="player" id="undead_rumors1" speaker='player' />
+              <dialogue section="zargoroth" id="undead_rumors5" speaker='this' />
+              <item id="thirallan_map" count="1" modal="true" />
+              <quest id="blood_moon" ask="false" />
+              <complete quest="undead_rumors" />
+            </section>
+          </choose>
+          <section if="getFlag('merchants_recruited') && getFlag('andreas_recruited') && !player.questComplete('rebuild_monastery')">
+            <dialogue section="zargoroth" id="recruiting" speaker='this' />
+          </section>
+          <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
+        </choose>
+      </operate>
+    </npc>
+
+
+    <procedure id="shopkeeper.restock">
+      <action>
+        this.inventory.clear(); this.inventory.addItems(getItem("iron_sword"), 5); this.inventory.addItems(getItem("map"), 1);
+        this.inventory.addItems(getItem("coal"), 15); this.inventory.addItems(getItem("gold"), 5);
+        this.inventory.addItems(getItem("diamond"), 3); this.inventory.addItems(getItem("iron_armor"), 3); this.inventory.addItems(getItem("iron_bar"), 2);
+        this.inventory.addItems(getItem("iron"), 10); this.inventory.addItems(getItem("titanium"), 5); this.inventory.addItems(getItem("horn"), 5);
+        this.inventory.addItems(getItem("uranium"), 3); this.inventory.addItems(getItem("net"), 10); this.inventory.addItems(getItem("rusty_axe"), 3);
+      </action>
+    </procedure>
+
+    <procedure id="merchants.invite">
+      <menu section="common">
+        <dialogue section="player" id="merchants_invite" />
+        <choice id="yes">
+          <dialogue section="player" id="merchants_invite1" speaker='player' />
+          <dialogue section="pyrrhos" id="merchants_invite1" speaker='this' />
+          <dialogue section="player" id="merchants_invite2" speaker='player' />
+          <dialogue section="pyrrhos" id="merchants_invite2" speaker='this' />
+          <action>setFlag('merchants_recruited',true);</action>
+        </choice>
+        <choice id="no" />
+      </menu>
+    </procedure>
+
+    <npc id="shopkeeper" talk_sfx="talking1" />
+    <npc id="pyrrhos" tile="shopkeeper" action="talk" talk_sfx="talking1" animation="shopkeeper">
+      <idle class="wander" fromX="70" toX="90" />
+      <operate>
+        <section if="!getFlag('pyrrhos_met')">
+          <quest/>
+          <dialogue section="pyrrhos" id="first_interaction1" speaker='this' />
+          <action>setFlag('pyrrhos_met', true);</action>
+          <window type="store" inventory="this.inventory" price="1">
+            <buy type="equipment" />
+            <buy type="resource" />
+            <buy type="food" />
+            <buy type="animal" />
+            <buy type="object" />
+            <buy type="tool" />
+          </window>
+          <dialogue section="pyrrhos" id="first_interaction2" speaker='this' />
+        </section>
+        <section if="this.inventory.hasItem()">
+          <quest if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
+          <dialogue section="pyrrhos" id="normal1" speaker="this" />
+          <section if="!player.hasItem('coin_purse') && !getFlag('purse_given')">
+            <dialogue section="pyrrhos" id="purse" speaker='this' />
+            <item id="coin_purse" value="0" count="1" />
+            <action>setFlag('purse_given',true);</action>
+          </section>
+          <window type="store" inventory="this.inventory" price="1">
+            <buy type="equipment" />
+            <buy type="resource" />
+            <buy type="food" />
+            <buy type="animal" />
+            <buy type="object" />
+            <buy type="tool" />
+          </window>
+          <dialogue section="pyrrhos" id="normal2" speaker='this' if="!player.hasQuest('rebuild_monastery') || getFlag('merchants_recruited')" />
+          <set id="this" value="this" />
+          <run procedure="merchants.invite" if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
+        </section>
+      </operate>
+      <init><run procedure="shopkeeper.restock" /></init>
+      <awaken><run procedure="shopkeeper.restock" /></awaken>
+    </npc>
+
+    <npc id="mage" talk_sfx="talking2" />
+    <npc id="peredur" tile="mage" action="talk" talk_sfx="talking2" night="true" animation="mage">
+      <idle class="hunt" maxWeight="30">
+        <attack type="projectile" damage="10" range="10" animation="attack">
+          <projectile tile="magic_orb" range="10" speed="3" delay="5" />
+        </attack>
+      </idle>
+      <operate>
+        <dialogue section="peredur" id="stranger" speaker='this' if="!player.questComplete('undead_rumors')" />
+        <section if="player.hasQuest('blood_moon') && !player.questComplete('blood_moon') && !getFlag('blood_moon')">
+          <dialogue section="peredur" id="speak" speaker='this' />
+          <scene id="thirallan_alchemist" show="blood_moon" with="fade" />
+        </section>
+        <section if="player.questComplete('blood_moon') && !player.hasSeenItem('peredur')">
+          <menu section="common">
+            <dialogue section="peredur" id="departure" speaker='this' />
+            <choice id="yes">
+              <dialogue section="peredur" id="departure2" speaker='this' />
+              <action>player.equipment.forceEquip("familiar",player,getItem("peredur").asItem());</action>
+              <remove object='this' />
+              <quest id="undead_shrines" ask="false" />
+            </choice>
+            <choice id="no">
+              <dialogue section="peredur" id="departure3" speaker='this' />
+            </choice>
+          </menu>
+        </section>
+      </operate>
+    </npc>
+
+
+    <npc id="tomkin" tile="tomkin" action="talk" talk_sfx="talking4" animation="guard_chief">
+      <idle class="hunt" fromX="60" toX="75" maxWeight="30">
+        <attack type="melee" damage="5" range="1" animation="attack" />
+      </idle>
+      <operate>
+        <dialogue section="tomkin" id="stranger" speaker='this' />
+      </operate>
+    </npc>
+
+
+    <procedure id="andreas.invite">
+      <menu section="common">
+        <dialogue section="player" id="andreas_invite" />
+        <choice id="yes">
+          <dialogue section="player" id="andreas_invite1" speaker='player' />
+          <dialogue section="andreas" id="andreas_invite1" speaker='this' />
+          <dialogue section="player" id="andreas_invite2" speaker='player' />
+          <dialogue section="andreas" id="andreas_invite2" speaker='this' />
+          <remove object="this" />
+          <action>setFlag('andreas_recruited',true);</action>
+        </choice>
+        <choice id="no" />
+      </menu>
+    </procedure>
+
+    <npc id="andreas" tile="andreas" action="talk" talk_sfx="talking5" animation="andreas">
+      <idle class="wander" flee="true" />
+      <operate>
+        <choose>
+          <section if="!player.questComplete('proving_worth')">
+            <dialogue section="andreas" id="stranger" speaker='this' />
+          </section>
+          <section if="player.hasQuest('undead_rumors') && !player.hasQuest('find_jacominus')">
+            <dialogue section="andreas" id="rumors1" speaker='this' />
+            <dialogue section="andreas" id="rumors2" speaker='this' />
+            <item id="torch" count="1" />
+            <quest id="find_jacominus" ask="false" />
+          </section>
+          <choose if="player.hasQuest('find_jacominus') && !player.questComplete('undead_rumors')">
+            <section if="!player.questComplete('find_jacominus') && !player.canCompleteQuest('find_jacominus')">
+              <dialogue section="andreas" id="rumors3" speaker='this' />
+            </section>
+            <section if="!player.questComplete('find_jacominus') && player.canCompleteQuest('find_jacominus')">
+              <dialogue section="player" id="andreas_second1" speaker='player' />
+              <dialogue section="andreas" id="rumors4" speaker='this' />
+              <facing object="this" dir="left" />
+              <action>this.playAnimation("walk")</action>
+              <lerp object="this" deltaX="-20" seconds="1" />
+              <move object="this" x="player.tile_x-20" y="-1" />
+              <wait seconds="1">
+                <operate object="this" />
+              </wait>
+              <dialogue section="player" id="andreas_second2" speaker='player' />
+              <complete quest="find_jacominus" />
+            </section>
+            <section if="player.questComplete('find_jacominus') && !getFlag('to_mines')">
+              <quest/>
+              <dialogue section="andreas" id="rumors5" speaker='this' />
+              <action>setFlag('to_mines',true);</action>
+              <teleport area="thirallan_zargoroth.mines" x="30" y="75" with="ellipse" />
+            </section>
+            <dialogue section="andreas" id="rumors6" speaker='this' />
+          </choose>
+          <section if="player.hasQuest('rebuild_monastery') && !getFlag('andreas_recruited')">
+            <quest />
+            <set id="this" value="this" />
+            <run procedure="andreas.invite" />
+          </section>
+          <dialogue section="andreas" id="rumors6" speaker='this' />
+        </choose>
+      </operate>
+    </npc>
+
+
+</npcs>

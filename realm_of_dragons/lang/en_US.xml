@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ <lang id="en_US">
+  <section id="common">
+     <text id="ROD_reset1">Please Wait.[pause=5].[pause=5].[pause=5] The old version of "The Realm of Dragons" has been completely removed from your save file, use the teleporter again to begin the new version.</text>
+     <text id="secret_vault">Secret Vault</text>
+  </section>
+  <section id="structure.tooltip">
+    <text id="secret_vault">Enter</text>
+  </section>
+	<section id="actions">
+		<text id="travel">Travel</text>
+		<text id="read">Read</text>
+    <text id="talk">Talk</text>
+	</section>
+	<section id="item.names">
+		<text id="dragon_teleporter">Dragon Teleporter</text>
+    <text id="exiled_dragon_prisoner">Rogue Dragon Guard</text>
+	</section>
+	<section id="item.descriptions">
+		<text id="dragon_teleporter">A magic tome that should bring me to the kingdom of dragons.</text>
+	</section>
+	<section id="dragon_realm">
+    <text id="king1">Greetings little one, how did you find your way into my Realm? Regardless, welcome!</text>
+    <text id="king2">Say, I have an idea, how about you go talk to the residents of the Realm to get to know the place better? This is actually quite an interesting place to be!</text>
+    <text id="king3">Well? Aren't you going to explore the Realm? I'll make it worth your while trust me!</text>
+    <text id="king4">Great work Human, I've gotten word from all 3 groups that you have assisted them in some way. As a token of my esteem, I'd like to show you something...</text>
+    <text id="king5">I'd appreciate it if you didn't take everything we have in there, but I'd like to give you access to that. Thanks again human!</text>
+    <text id="youth">Woah, are you a Human? Ooo... Ahh...</text>
+    <text id="youth1">Hey Human! Wanna play a game?</text>
+    <text id="youth2">I think you humans call it "tag", wanna play?</text>
+    <text id="youth3">Ok! 3,[pause=10] 2[pause=10] 1[pause=10] Go!</text>
+    <text id="youth4">Aww... That's ok... We can play amongst ourselves I guess...</text>
+    <text id="youth5">Wow! You're good, but can you get all of us?</text>
+    <text id="youth6">You're really good at this Human, you won! Thanks for playing!</text>
+    <text id="guards">Interesting. A human. Don't stir trouble outsider.</text>
+    <text id="guards1">Heh, haven't seen a human for a while, interesting to see you in our realm however.</text>
+    <text id="guards2">Hmm... You mind doing us a favor? There is a member of our Guard that went rogue recently, I think he's still in the Realm, could you find, defeat, and bring him to us?</text>
+    <text id="guards3">You have him? Excellent! We'll send word to the [object=dragon_king] that the rogue has been captured.</text>
+    <text id="guards4">Once the King is finished with you, come back to us, we have some more odd jobs that you could do, for a reward of course.</text>
+    <text id="rogue_guard1">A human? Wait, you aren't on the Guard's side are you? They backstabbed me, so I left, don't do this!</text>
+    <text id="rogue_guard2">Alright alright alright! I'll go with you! Just don't hurt me more please...</text>
+    <text id="elders">[font=drachenklaue]Is that a human? Best to keep to myself and act like it isn't there.[/font]</text>
+    <text id="elders1">Hello human! Are you from another Realm? Oh wait of course you are, silly me!</text>
+    <text id="elders2">What brings you to the Realm of Dragons? I'll tell you what, I've actually been eager to see something from the Realm of Humans. Could you actually get me one?</text>
+    <text id="elders3">Great! Now allow my son to show you the way out, [font=drachenklaue]JimBob[/font]!</text>
+    <text id="elders4">Could you show this Human the way out of this Realm? He's on an errand for me.</text>
+    <text id="elders5">Follow my Son, he'll show you the way out.</text>
+    <text id="elders6">Wow! An actual [item=diamond]! It's so shiny! This is just the kind of thing I wanted!</text>
+    <text id="elders7">Thank you Human! I'm in your debt!</text>
+    <text id="elder_child1">Yes Father? You need something?</text>
+    <text id="elder_child2">Of course Father. Human! Follow me!</text>
+    <text id="elder_child3">The gateway to other Realms is just this way, follow me!</text>
+    <text id="elder_child4">Go through here, wherever you were when you used whatever brought you here, you'll go right back there by entering this gateway!</text>
+	</section>
+	<section id="quests">
+    <text id="ROD_welcome">Welcome to the Realm</text>
+    <text id="welcomeFlag1">The Youth</text>
+    <text id="welcomeFlag2">The Guards</text>
+    <text id="welcomeFlag3">The Elders</text>
+    <text id="ROD_youth">Game Time</text>
+    <text id="ROD_youth_tag">Tag the Youth</text>
+    <text id="ROD_guards">Rogue Guard</text>
+    <text id="ROD_elders">Human Realm</text>
+	</section>
+	<section id="quest.description">
+		<text id="ROD_welcome">requests you meet the residents the Realm.</text>
+    <text id="ROD_youth">Play tag with the Youth of the Dragon Realm!</text>
+    <text id="ROD_guards">Defeat and return the Rogue Dragon Guard.</text>
+    <text id="ROD_elders">Give the Elder Dragon a [item=diamond] to interest him.</text>
+	</section>
+	<section id="npc">
+		<text id="dragon_king">The Dragon King</text>
+	</section>
+</lang>

@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scenes>
+	<scene id="spirit" extends="spirit" extendAppend="true">
+		<show id="deal">
+			<layer id="spirit_bg" />
+			<layer id="mid" />
+			<layer id="spirit_clouds" />
+			<layer id="top" />
+			<layer id="spirit_guide" />
+			<wait seconds="1" />
+			<menu section="spirit" width="120" closeable="true">
+				<dialogue section="spirit" id="deal" />
+				<choice id="knowledge">
+					<menu section="spirit" width="180" closeable="true" showCoins="true">
+						<dialogue section="spirit" id="knowledge_title" />
+						<choice id="enemy" if="!player.hasQuest('spirit_hq')">
+							<run procedure="spirit.knowledge" /><choose>
+							<section if="getFlag('final_boss_defeat')">
+								<dialogue section="spirit" id="enemypost1" speaker="spirit_guide" />
+								<dialogue section="spirit" id="enemypost2" speaker="spirit_guide" />
+								<dialogue section="spirit" id="enemy4" speaker="spirit_guide" />
+							</section>
+							<section>
+								<dialogue section="spirit" id="enemy1" speaker="spirit_guide" />
+								<dialogue section="spirit" id="enemy2" speaker="spirit_guide" />
+								<dialogue section="spirit" id="enemy3" speaker="spirit_guide" />
+								<dialogue section="spirit" id="enemy4" speaker="spirit_guide" />
+							</section></choose><quest id="spirit_hq" />
+						</choice>
+						<choice id="venatrix" if="player.hasQuest('activate_hq_structures') && !player.questComplete('activate_hq_structures')">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="venatrix1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="venatrix2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="venatrix3" speaker="spirit_guide" />
+						</choice>
+						<choice id="spirits">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="spirits1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirits2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirits3" speaker="spirit_guide" />
+						</choice>
+						<choice id="spirit">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="spirit1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirit2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirit3" speaker="spirit_guide" />
+						</choice>
+						<choice id="world">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="world1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="world2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="world3" speaker="spirit_guide" />
+						</choice>
+						<choice id="elements">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="elements1" speaker="spirit_guide" />
+							<show type="tile" tile="pentagram" id="pentagram" x="0.5" y="0.5" seconds="0.16" />
+							<wait /><hide id="pentagram" seconds="0.16" />
+							<item id="element_table" modal="true" />
+							<dialogue section="spirit" id="spirits3" speaker="spirit_guide" />
+							<dialogue section="spirit" id="elements2" speaker="spirit_guide" />
+						</choice>
+						<choice id="corruption_scene" if="player.questComplete('guild_init')">
+							<dialogue section="spirit" id="corruption1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="corruption2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="corruption3" speaker="spirit_guide" />
+						</choice>
+						<choice id="spirit_fish" if="player.seen_items.exists('spirit_fish')">
+							<run procedure="spirit.knowledge" />
+							<dialogue section="spirit" id="spirit_fish1" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirit_fish2" speaker="spirit_guide" />
+							<dialogue section="spirit" id="spirit_fish3" speaker="spirit_guide" />
+						</choice>
+					</menu>
+				</choice>
+				<choice id="power">
+					<window type="shop" title="spirit.buy" currency="spirit" currencyIcon="spirit" name="common.spirit">
+						<item id="spirit_glaive" cost="10" />
+						<item id="spirit_gem" cost="20" />
+						<item id="evo_shard" cost="20" />
+						<item id="staff" cost="50" />
+						<item id="alien_heart" cost="50" />
+						<item id="spirit_gem2" cost="60" />
+						<item id="exotic_matter" cost="60" />
+						<item id="storehouse_seed" cost="100" />
+						<item id="venatrix_seed" cost="100" />
+						<item id="spirit_fox_helm" cost="100" />
+						<item id="spirit_robes" cost="100" />
+						<item id="spirit_box" cost="200" if="player.getItemCount('spirit_box') == 0" />
+					</window>
+				</choice>
+			</menu>
+			<wait seconds="1" />
+		</show>
+	</scene>
+	<include id="{core}/scenes/hut/scene.xml" />
+	<scene id="thirallan" extends="hut">
+		<tilesheet id="guard_chief.png" width="70" height="70" />
+		<tilesheet id="shopkeeper.png" width="70" height="70" />
+		<tilesheet id="mage.png" width="70" height="70" />
+		<tilesheet id="UC_scientist.png" width="70" height="70" />
+		<tilesheet id="purifiers_commander.png" width="70" height="70" />
+		<tilesheet id="thirallan_bg.png" width="256" height="144" />
+		<tilesheet id="UC_bg.png" width="256" height="144" />
+		<tilesheet id="UC_full_bg.png" width="256" height="144" />
+		<tilesheet id="purifiers_bg.png" width="256" height="144" />
+		<tilesheet id="purifiers_full_bg.png" width="256" height="144" />
+		<tilesheet id="thirallan_travel_bg.png" width="256" height="144" />
+		<tilesheet id="thirallan_map.png" width="108" height="128" />
+		<tile id="guard_chief" sheet="guard_chief.png" x="0" y="0" />
+		<tile id="shopkeeper" sheet="shopkeeper.png" x="0" y="0" />
+		<tile id="mage" sheet="mage.png" x="0" y="0" />
+		<tile id="UC_scientist" sheet="UC_scientist.png" x="0" y="0" />
+		<tile id="purifiers_commander" sheet="purifiers_commander.png" x="0" y="0" />
+		<tile id="thirallan_bg" sheet="thirallan_bg.png" x="0" y="0" />
+		<tile id="UC_bg" sheet="UC_bg.png" x="0" y="0" />
+		<tile id="UC_full_bg" sheet="UC_full_bg.png" x="0" y="0" />
+		<tile id="purifiers_bg" sheet="purifiers_bg.png" x="0" y="0" />
+		<tile id="purifiers_full_bg" sheet="purifiers_full_bg.png" x="0" y="0" />
+		<tile id="thirallan_travel_bg" sheet="thirallan_travel_bg.png" x="0" y="0" />
+		<tile id="thirallan_map" sheet="thirallan_map.png" x="0" y="0" />
+		<animation id="guard_chief.idle" x="0" count="1" />
+		<animation id="guard_chief.talk" x="1" count="3" />
+		<!--animation id="shopkeeper.idle" x="0" count="1" />
+		<animation id="shopkeeper.talk" x="1" count="1" />
+		<animation id="mage.idle" x="0" count="1" />
+		<animation id="mage.talk" x="1" count="1" />
+		<animation id="mage.teleport" x="1" count="1" /-->
+		<tilesheet id="farmer.png" width="12" height="83" />
+		<tile id="farmer" sheet="farmer.png" x="0" y="0" />
+		<animation id="farmer.idle" count="12">
+			<frame x="12" count="15" />
+			<frame x="1" count="11" />
+			<frame x="12" count="15" />
+			<frame x="27" count="15" />
+			<frame x="27" count="15" />
+			<frame x="12" count="15" />
+			<frame x="1" count="11" />
+		</animation>
+		<animation id="farmer.talk">
+			<frame x="42" count="6" offsetX="-4" />
+			<frame x="48" count="9" />
+		</animation>
+		<tilesheet id="builder.png" width="92" height="67" />
+		<tile id="builder" sheet="builder.png" x="0" y="0" />
+		<animation id="builder.idle" count="13">
+			<frame x="13" count="24" />
+			<frame x="25" count="12" />
+			<frame x="1" count="12" />
+		</animation>
+		<animation id="builder.talk" x="37" count="12" />
+		<animation id="UC_scientist.idle" x="0" count="1" />
+		<animation id="UC_scientist.talk" x="1" count="3" />
+		<animation id="purifiers_commander.idle" x="0" count="1" />
+		<animation id="purifiers_commander.talk" x="0" count="1" />
+		<animation id="thirallan_bg.full" x="0" y="0" count="1" />
+		<animation id="thirallan_bg.half" x="0" y="1" count="1" />
+		<animation id="thirallan_bg.third" x="0" y="2" count="1" />
+		<animation id="UC_bg.half" x="0" count="1" />
+		<animation id="UC_bg.third" x="1" count="1" />
+		<animation id="purifiers_bg.third" x="0" count="1" />
+		<animation id="purifiers_full_bg.full" x="0" count="6" />
+		<animation id="thirallan_map.none" x="0" count="1" />
+		<animation id="thirallan_map.thirallan_beast_forest" x="1" count="1" />
+		<animation id="thirallan_map.thirallan_zargoroth" x="2" count="1" />
+		<animation id="thirallan_map.thirallan_undying_peninsula" x="3" count="1" />
+		<animation id="thirallan_map.thirallan_mountains" x="4" count="1" />
+		<animation id="thirallan_map.thirallan_rotting_forest" x="5" count="1" />
+		<animation id="thirallan_map.thirallan_fang_plains" x="6" count="1" />
+		<animation id="thirallan_map.thirallan_phoenix_plateau" x="7" count="1" />
+		<animation id="thirallan_map.thirallan_gold_diggers_haven" x="8" count="1" />
+		<animation id="thirallan_map.thirallan_gold_excavation" x="9" count="1" />
+		<animation id="thirallan_map.thirallan_holy_hills" x="10" count="1" />
+		<animation id="thirallan_map.thirallan_desert" x="11" count="1" />
+		<layer id="bg" image="{core}/scenes/hut/hut.png" />
+		<layer id="guard_chief" tile="guard_chief" animation="guard_chief.idle" talk="guard_chief.talk" y="84" />
+		<layer id="shopkeeper" tile="farmer" animation="farmer.idle" talk="farmer.talk" x="70" y="70" />
+		<layer id="mage" tile="builder" animation="builder.idle" talk="builder.talk" x="164" y="77" />
+		<layer id="UC_scientist" tile="UC_scientist" animation="UC_scientist.idle" talk="UC_scientist.talk" x="164" y="77" />
+		<layer id="purifiers_commander" tile="purifiers_commander" animation="purifiers_commander.idle" talk="purifiers_commander.talk" x="190" y="77" />
+		<layer id="thirallan_bg" tile="thirallan_bg" animation="thirallan_bg.full" />
+		<layer id="UC_bg" tile="UC_bg" animation="UC_bg.half" />
+		<layer id="UC_full_bg" tile="UC_full_bg" />
+		<layer id="purifiers_bg" tile="purifiers_bg" animation="purifiers_bg.third" />
+		<layer id="purifiers_full_bg" tile="purifiers_full_bg" animation="purifiers_full_bg.full" />
+		<layer id="thirallan_travel_bg" tile="thirallan_travel_bg" />
+		<layer id="thirallan_map" tile="thirallan_map" animation="thirallan_map.none" y="17" />
+		<show id="thirallan_first">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="fire" />
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="first1" speaker='guard_chief' />
+			<dialogue section="player" id="first1" speaker='player' />
+			<dialogue section="guard_chief" id="first2" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="first3" speaker='guard_chief' />
+			<dialogue section="player" id="first2" speaker='player' />
+			<dialogue section="shopkeeper" id="first1" speaker='shopkeeper' />
+			<dialogue section="shopkeeper" id="first2" speaker='shopkeeper' />
+			<dialogue section="player" id="first3" speaker='player' />
+			<dialogue section="guard_chief" id="first4" speaker='guard_chief' />
+			<lerp object="guard_chief" alpha="0" seconds="0.25" />
+			<wait seconds="1" />
+			<dialogue section="shopkeeper" id="first3" speaker='shopkeeper' />
+			<dialogue section="shopkeeper" id="first4" speaker='shopkeeper' />
+			<action>setFlag('thirallan_first', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="thirallan_second">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="mage" />
+			<layer id="fire" />
+			<action>mage.alpha = 0;</action>
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="second1" speaker='guard_chief' />
+			<dialogue section="shopkeeper" id="second1" speaker='shopkeeper' />
+			<dialogue section="guard_chief" id="second2" speaker='guard_chief' />
+			<action>mage.alpha = 1;</action>
+			<!--play object="mage" animation="mage.teleport" modal="true" /-->
+			<dialogue section="mage" id="second1" speaker='mage' />
+			<dialogue section="guard_chief" id="second1" speaker='guard_chief' />
+			<lerp object="guard_chief" alpha="0" seconds="0.25" />
+			<wait seconds="1" />
+			<dialogue section="shopkeeper" id="second2" speaker='shopkeeper' />
+			<dialogue section="mage" id="second2" speaker='mage' />
+			<dialogue section="shopkeeper" id="second3" speaker='shopkeeper' />
+			<dialogue section="mage" id="second3" speaker='mage' />
+			<dialogue section="player" id="second1" speaker='player' />
+			<action>setFlag('thirallan_second', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="thirallan_third">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="fire" />
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="third1" speaker='guard_chief' />
+			<dialogue section="shopkeeper" id="third1" speaker='shopkeeper' />
+			<dialogue section="player" id="third1" speaker='player' />
+			<dialogue section="guard_chief" id="third2" speaker='guard_chief' />
+			<dialogue section="shopkeeper" id="third2" speaker='shopkeeper' />
+			<lerp object="shopkeeper" alpha="0" seconds="0.25" />
+			<dialogue section="guard_chief" id="third3" speaker='guard_chief' />
+			<dialogue section="player" id="third2" speaker='player' />
+			<dialogue section="guard_chief" id="third4" speaker='guard_chief' />
+			<lerp object="guard_chief" alpha="0" seconds="0.25" />
+			<dialogue section="player" id="third3" speaker='player' />
+			<action>setFlag('thirallan_third', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="UC_first">
+			<layer id="UC_full_bg" />
+			<layer id="UC_scientist" />
+			<wait seconds="1" />
+			<dialogue section="UC" id="scientist.player" speaker='player' />
+			<dialogue section="UC" id="scientist1" speaker='UC_scientist' />
+			<wait seconds="2" />
+		</show>
+		<show id="UC_second">
+			<layer id="UC_full_bg" />
+			<layer id="UC_scientist" />
+			<wait seconds="1" />
+			<dialogue section="UC" id="scientist.lore" speaker='player' />
+			<dialogue section="UC" id="scientist.lore2" speaker='UC_scientist' />
+			<dialogue section="UC" id="scientist.lore3" speaker='UC_scientist' />
+			<action>setFlag('lore_password.hint', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="purifiers_first">
+			<layer id="purifiers_full_bg" />
+			<layer id="purifiers_commander" />
+			<wait seconds="1" />
+			<dialogue section="purifiers" id="first1" speaker='purifiers_commander' />
+			<dialogue section="player" id="purifiers_first1" speaker='player' />
+			<dialogue section="purifiers" id="first2" speaker='purifiers_commander' />
+			<dialogue section="player" id="purifiers_first2" speaker='player' />
+			<dialogue section="purifiers" id="first3" speaker='purifiers_commander' />
+			<dialogue section="purifiers" id="first4" speaker='purifiers_commander' />
+			<quest id="the_purifiers" />
+			<section if="!player.hasQuest('the_purifiers')">
+				<action>setFlag('the_purifiers_rejection', true);</action>
+			</section>
+			<wait seconds="2" />
+		</show>
+		<show id="purifiers_second">
+			<layer id="purifiers_full_bg" />
+			<layer id="purifiers_commander" />
+			<wait seconds="1" />
+			<dialogue section="purifiers" id="second1" speaker='purifiers_commander' />
+			<dialogue section="purifiers" id="second2" speaker='purifiers_commander' />
+			<item id="flamethrower" count="1" modal="true" />
+			<dialogue section="player" id="purifiers_second1" speaker='player' />
+			<complete quest="the_purifiers" />
+			<wait seconds="2" />
+		</show>
+		<show id="thirallan_conflict">
+			<layer id="UC_bg" />
+			<layer id="thirallan_bg" />
+			<layer id="purifiers_bg" />
+			<layer id="guard_chief" />
+			<layer id="UC_scientist" />
+			<layer id="purifiers_commander" />
+			<action>UC_bg.alpha = 0; purifiers_bg.alpha = 0;</action>
+			<action>UC_scientist.alpha = 0; purifiers_commander.alpha = 0;</action>
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="scene1" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="scene2" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="scene3" speaker='guard_chief' />
+			<dialogue section="UC" id="scene1" speaker='UC_scientist' />
+			<play object="thirallan_bg" animation="thirallan_bg.half" loop="true" />
+			<lerp object="UC_bg" alpha="1" seconds="0.25" />
+			<lerp object="UC_scientist" alpha="1" seconds="0.25" />
+			<dialogue section="UC" id="scene2" speaker='UC_scientist' />
+			<dialogue section="player" id="scene1" speaker='player' />
+			<dialogue section="UC" id="scene3" speaker='UC_scientist' />
+			<dialogue section="UC" id="scene4" speaker='UC_scientist' />
+			<dialogue section="UC" id="scene5" speaker='UC_scientist' />
+			<dialogue section="guard_chief" id="scene4" speaker='guard_chief' />
+			<wait seconds="2" />
+			<dialogue section="guard_chief" id="scene5" speaker='guard_chief' />
+			<dialogue section="UC" id="scene6" speaker='UC_scientist' />
+			<dialogue section="guard_chief" id="scene6" speaker='guard_chief' />
+			<dialogue section="UC" id="scene7" speaker='UC_scientist' />
+			<dialogue section="guard_chief" id="scene7" speaker='guard_chief' />
+			<play object="thirallan_bg" animation="thirallan_bg.third" loop="true" />
+			<play object="UC_bg" animation="UC_bg.third" loop="true" />
+			<action>UC_scientist.x = 90;</action>
+			<lerp object="purifiers_bg" alpha="1" seconds="0.25" />z
+			<lerp object="purifiers_commander" alpha="1" seconds="0.25" />
+			<dialogue section="purifiers" id="scene1" speaker='purifiers_commander' />
+			<dialogue section="player" id="scene2" speaker='player' />
+			<dialogue section="UC" id="scene8" speaker='UC_scientist' />
+			<dialogue section="purifiers" id="scene2" speaker='purifiers_commander' />
+			<dialogue section="guard_chief" id="scene8" speaker='guard_chief' />
+			<dialogue section="purifiers" id="scene3" speaker='purifiers_commander' />
+			<dialogue section="UC" id="scene9" speaker='UC_scientist' />
+			<dialogue section="guard_chief" id="scene9" speaker='guard_chief' />
+			<dialogue section="purifiers" id="scene4" speaker='purifiers_commander' />
+			<dialogue section="UC" id="scene1" speaker='UC_scientist' />
+			<dialogue section="guard_chief" id="scene1" speaker='guard_chief' />
+			<dialogue section="UC" id="scene11" speaker='UC_scientist' />
+			<dialogue section="purifiers" id="scene5" speaker='purifiers_commander' />
+			<menu type="common">
+				<dialogue section="common" id="scene" />
+				<choice id="Martian Colony">
+					<quest id="martians_side" ask="false" />
+					<dialogue section="guard_chief" id="scene11" speaker='guard_chief' />
+				</choice>
+				<choice id="The UC">
+					<quest id="UC_side" ask="false" />
+					<dialogue section="UC" id="scene12" speaker='UC_scientist' />
+				</choice>
+				<choice id="The Purifiers">
+					<quest id="purifiers_side" ask="false" />
+					<dialogue section="purifiers" id="scene6" speaker='purifiers_commander' />
+				</choice>
+			</menu>
+			<wait seconds="2" />
+			<invokeLater seconds="1">
+				<section if="!player.hasQuest('martians_side')">
+					<run procedure="unknown_start" />
+				</section>
+			</invokeLater>
+		</show>
+		<show id="martians_victory">
+			<layer id="thirallan_bg" />
+			<layer id="guard_chief" />
+			<wait seconds="1" />
+			<dialogue section="guard_chief" id="victory1" speaker='guard_chief' />
+			<item id="magic_spear" count="1" modal="true" />
+			<dialogue section="guard_chief" id="victory2" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="victory3" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="victory4" speaker='guard_chief' />
+			<complete quest="martians_side" />
+			<achievement id="zargoroth" />
+			<wait seconds="2" />
+		</show>
+		<show id="UC_victory">
+			<layer id="UC_full_bg" />
+			<layer id="UC_scientist" />
+			<wait seconds="1" />
+			<dialogue section="UC" id="victory1" speaker='UC_scientist' />
+			<item id="orbs_shield" count="1" modal="true" />
+			<dialogue section="UC" id="victory2" speaker='UC_scientist' />
+			<dialogue section="UC" id="victory3" speaker='UC_scientist' />
+			<achievement id="UC" />
+			<complete quest="UC_side" />
+			<wait seconds="2" />
+		</show>
+		<show id="purifiers_victory">
+			<layer id="purifiers_full_bg" />
+			<layer id="purifiers_commander" />
+			<wait seconds="1" />
+			<dialogue section="purifiers" id="victory1" speaker='purifiers_commander' />
+			<object id="firebat" x="40" y="-1" />
+			<dialogue section="purifiers" id="victory2" speaker='purifiers_commander' />
+			<dialogue section="purifiers" id="victory3" speaker='purifiers_commander' />
+			<achievement id="commander" />
+			<complete quest="purifiers_side" />
+			<wait seconds="2" />
+		</show>
+	</scene>
+	<scene id="scavenger" extends="scavenger">
+		<tilesheet id="guard_chief.png" width="70" height="70" />
+		<tile id="guard_chief" sheet="guard_chief.png" x="0" y="0" />
+		<animation id="guard_chief.idle" x="0" count="1" />
+		<animation id="guard_chief.talk" x="1" count="3" />
+		<layer id="guard_chief" tile="guard_chief" animation="guard_chief.idle" talk="guard_chief.talk" y="84" />
+		<show id="invite_zargoroth">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="com" />
+			<wait seconds="2" />
+			<dialogue section="guard_chief" id="research2" speaker='guard_chief' />
+			<dialogue section="guard_chief" id="research3" speaker='guard_chief' />
+			<wait seconds="1" />
+		</show>
+	</scene>
+	<scene id="thirallan_alchemist" extends="thirallan">
+		<tilesheet id="floating_blood.png" width="70" height="70" />
+		<tile id="floating_blood" sheet="floating_blood.png" x="0" y="0" />
+		<layer id="floating_blood" tile="floating_blood" y="84" />
+		<show id="thirallan_move">
+			<layer id="thirallan_travel_bg" />
+			<layer id="thirallan_map" />
+			<action>thirallan_map.alpha = 0;</action>
+			<wait seconds="1" />
+			<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+			<wait seconds="0.5" />
+			<menu section="common" xalign="1" scrollRows="9" closeable="true" width="110">
+				<dialogue section="map" id="selection_location" xalign="1" />
+				<choice id="beast_forest">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_beast_forest" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_beast_forest" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_beast_forest" x="75" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="zargoroth">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_zargoroth" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_zargoroth" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_zargoroth" x="75" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="undying_peninsula">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_undying_peninsula" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_undying_peninsula" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_undying_peninsula" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="mountains">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_mountains" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_mountains" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_mountains" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="rotting_forest">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_rotting_forest" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_rotting_forest" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_rotting_forest" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="fang_plains">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_fang_plains" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_fang_plains" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_fang_plains" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="phoenix_plateau">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_phoenix_plateau" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_phoenix_plateau" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_phoenix_plateau" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="gold_diggers_haven">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_gold_diggers_haven" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_gold_diggers_haven" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_gold_diggers_haven" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="gold_excavation">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_gold_excavation" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_gold_excavation" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_gold_excavation" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="holy_hills">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_holy_hills" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_holy_hills" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_holy_hills" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="desert">
+					<play object="thirallan_map" animation="thirallan_map.thirallan_desert" loop="true" />
+					<window type="prompt" xalign="1" message="map.travel_desert" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_desert" x="50" y="-1" with="ellipse" /></invokeLater></window>
+				</choice>
+				<choice id="stash" if="getFlag('get_out')">
+					<invokeLater seconds="0.25"><teleport area="purifier_get_fucked" x="30" y="-1" /></invokeLater>
+				</choice>
+			</menu>
+			<wait seconds="1" />
+		</show>
+		<show id="zargoroth_first">
+			<layer id="thirallan_bg" />
+			<layer id="guard_chief" />
+			<action>thirallan_bg.alpha = 0; guard_chief.alpha = 0;</action>
+			<teleport area="thirallan_zargoroth" x="50" y="-1" />
+			<dialogue section="zargoroth" id="found1" speaker="guard_chief" />
+			<wait seconds="1" />
+			<dialogue section="zargoroth" id="found2" speaker="guard_chief" />
+			<wait seconds="0.5" />
+			<lerp object="thirallan_bg" alpha="1" seconds="1" />
+			<wait seconds="0.5" />
+			<lerp object="guard_chief" alpha="1" seconds="0.25" />
+			<dialogue section="zargoroth" id="found3" speaker="guard_chief" />
+			<dialogue section="player" id="zargoroth_found1" speaker="player" />
+			<dialogue section="zargoroth" id="found4" speaker="guard_chief" />
+			<dialogue section="player" id="zargoroth_found2" speaker="player" />
+			<dialogue section="zargoroth" id="found5" speaker="guard_chief" />
+			<wait seconds="1" />
+		</show>
+		<show id="zargoroth_second">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="fire" />
+			<wait seconds="1" />
+			<dialogue section="zargoroth" id="first1" speaker='guard_chief' />
+			<dialogue section="player" id="first1" speaker='player' />
+			<dialogue section="zargoroth" id="first2" speaker='guard_chief' />
+			<dialogue section="zargoroth" id="first3" speaker='guard_chief' />
+			<dialogue section="player" id="first2" speaker='player' />
+			<dialogue section="pyrrhos" id="first1" speaker='shopkeeper' />
+			<dialogue section="pyrrhos" id="first2" speaker='shopkeeper' />
+			<dialogue section="player" id="first3" speaker='player' />
+			<dialogue section="zargoroth" id="first4" speaker='guard_chief' />
+			<lerp object="guard_chief" alpha="0" seconds="0.25" />
+			<wait seconds="1" />
+			<dialogue section="pyrrhos" id="first3" speaker='shopkeeper' />
+			<dialogue section="pyrrhos" id="first4" speaker='shopkeeper' />
+			<action>setFlag('TAE_first', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="zargoroth_third">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="mage" />
+			<layer id="fire" />
+			<action>mage.alpha = 0;</action>
+			<wait seconds="1" />
+			<dialogue section="zargoroth" id="second1" speaker='guard_chief' />
+			<dialogue section="pyrrhos" id="second1" speaker='shopkeeper' />
+			<dialogue section="zargoroth" id="second2" speaker='guard_chief' />
+			<action>mage.alpha = 1;</action>
+			<!--play object="mage" animation="mage.teleport" modal="true" /-->
+			<dialogue section="peredur" id="second1" speaker='mage' />
+			<dialogue section="zargoroth" id="second1" speaker='guard_chief' />
+			<lerp object="guard_chief" alpha="0" seconds="0.25" />
+			<wait seconds="1" />
+			<dialogue section="pyrrhos" id="second2" speaker='shopkeeper' />
+			<dialogue section="peredur" id="second2" speaker='mage' />
+			<dialogue section="pyrrhos" id="second3" speaker='shopkeeper' />
+			<dialogue section="peredur" id="second3" speaker='mage' />
+			<dialogue section="player" id="second1" speaker='player' />
+			<dialogue section="peredur" id="second3" speaker='mage' />
+			<action>setFlag('TAE_second', true);</action>
+			<wait seconds="2" />
+		</show>
+		<show id="blood_moon">
+			<layer id="bg" />
+			<layer id="mage" />
+			<layer id="floating_blood" />
+			<layer id="fire" />
+			<action>floating_blood.alpha = 0; setGameTime(22);</action>
+			<action>
+				setFlag('blood_moon',true);
+				getParallaxLayer("thirallan_sky").getChildAt(0).playAnimation("thirallan_sky.blood_sky", true, function(p){p.playAnimation("single", true);});
+        getParallaxLayer("thirallan_sky").getChildAt(1).playAnimation("thirallan_sky.blood_sky", true, function(p){p.playAnimation("single", true);});
+        setSpriteColor(getParallaxLayer("thirallan_sky").getChildAt(2),0x5C0000);
+        getParallaxLayer("thirallan_moon").getChildAt(0).playAnimation("thirallan_moon.blood_moon", true, function(p){p.playAnimation("single", true);});
+			</action>
+			<remove object="area.getObject('peredur')" />
+			<remove object="area.getObject('zargoroth_npc')" />
+			<wait seconds="1" />
+			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
+			<dialogue section="player" id="blood_moon1" speaker='player' />
+			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
+			<dialogue section="player" id="blood_moon1" speaker='player' />
+			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
+			<lerp object="bg" alpha="0" seconds="1" modal="false" />
+			<lerp object="fire" alpha="0" seconds="1" modal="false" />
+			<lerp object="mage" alpha="0" seconds="1" modal="false" />
+			<wait seconds="1.5" />
+			<dialogue section="player" id="blood_moon3" speaker='player' />
+			<wait seconds="0.5" />
+			<lerp object="bg" alpha="1" seconds="1" modal="false" />
+			<lerp object="fire" alpha="1" seconds="1" modal="false" />
+			<lerp object="floating_blood" alpha="1" seconds="1" modal="false" />
+			<wait seconds="0.5" />
+			<dialogue section="player" id="blood_moon4" speaker='player' />
+			<run procedure="blood_moon" />
+			<runAreaLoad/>
+			<wait seconds="0.5" />
+		</show>
+		<show id="zargoroth_info">
+			<layer id="thirallan_bg" />
+			<layer id="guard_chief" />
+			<layer id="thirallan_map" />
+			<action>thirallan_map.alpha = 0;</action>
+			<wait seconds="1" />
+			<menu section="common" width="110" cols="2" closeable="true">
+				<dialogue section="zargoroth_info" id="selection" speaker='guard_chief' />
+				<choice id="current_objective">
+					<run procedure="zargoroth.current_objective" />
+				</choice>
+				<choice id="town">
+					<dialogue section="zargoroth_info" id="zargoroths_haven" speaker='guard_chief' />
+				</choice>
+				<choice id="island">
+					<dialogue section="zargoroth_info" id="thirallan1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="thirallan2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="thirallan3" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="thirallan4" speaker='guard_chief' />
+				</choice>
+				<choice id="travelers">
+					<dialogue section="zargoroth_info" id="travelers" speaker='guard_chief' />
+				</choice>
+				<choice id="himself">
+					<dialogue section="zargoroth_info" id="zargoroth1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="zargoroth2" speaker='guard_chief' />
+				</choice>
+				<choice id="peredur">
+					<dialogue section="zargoroth_info" id="peredur1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="peredur2" speaker='guard_chief' />
+				</choice>
+				<choice id="pyrrhos">
+					<dialogue section="zargoroth_info" id="pyrrhos1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="pyrrhos2" speaker='guard_chief' />
+				</choice>
+				<choice id="andreas" if="player.hasQuest('find_jacominus')">
+					<dialogue section="zargoroth_info" id="andreas1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="andreas2" speaker='guard_chief' />
+				</choice>
+				<choice id="tomkin" if="!player.questComplete('blood_moon')">
+					<dialogue section="zargoroth_info" id="tomkin1" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="tomkin2" speaker='guard_chief' />
+				</choice>
+				<choice id="monastery" if="player.questComplete('blood_moon')">
+					<dialogue section="zargoroth_info" id="monastery1" speaker='guard_chief' />
+					<play object="thirallan_map" animation="thirallan_map.thirallan_rotting_forest" loop="true" />
+					<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+					<wait />
+					<lerp object="thirallan_map" alpha="0" seconds="0.25" />
+					<dialogue section="zargoroth_info" id="monastery2" speaker='guard_chief' />
+				</choice>
+				<choice id="bandits" if="player.questComplete('blood_moon')">
+					<menu section="common" width="110">
+						<dialogue section="zargoroth_info" id="bandits1" speaker='guard_chief' />
+						<choice id="beasts">
+							<dialogue section="zargoroth_info" id="beasts1" speaker='guard_chief' />
+							<play object="thirallan_map" animation="thirallan_map.thirallan_beast_forest" loop="true" />
+							<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+							<wait />
+							<lerp object="thirallan_map" alpha="0" seconds="0.25" />
+							<dialogue section="zargoroth_info" id="beasts2" speaker='guard_chief' />
+						</choice>
+						<choice id="fangs">
+							<dialogue section="zargoroth_info" id="fangs1" speaker='guard_chief' />
+							<play object="thirallan_map" animation="thirallan_map.thirallan_fang_plains" loop="true" />
+							<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+							<wait />
+							<lerp object="thirallan_map" alpha="0" seconds="0.25" />
+							<dialogue section="zargoroth_info" id="fangs2" speaker='guard_chief' />
+						</choice>
+						<choice id="phoenixes">
+							<dialogue section="zargoroth_info" id="phoenixes1" speaker='guard_chief' />
+							<play object="thirallan_map" animation="thirallan_map.thirallan_phoenix_plateau" loop="true" />
+							<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+							<wait />
+							<lerp object="thirallan_map" alpha="0" seconds="0.25" />
+							<dialogue section="zargoroth_info" id="phoenixes2" speaker='guard_chief' />
+						</choice>
+					</menu>
+				</choice>
+				<choice id="gold_diggers_haven_about" if="player.areas.exists('thirallan_gold_diggers_haven')">
+					<dialogue section="zargoroth_info" id="gold_diggers_haven1" speaker='guard_chief' />
+					<play object="thirallan_map" animation="thirallan_map.thirallan_gold_excavation" loop="true" />
+					<lerp object="thirallan_map" alpha="1" seconds="0.25" />
+					<wait />
+					<lerp object="thirallan_map" alpha="0" seconds="0.25" />
+					<dialogue section="zargoroth_info" id="gold_diggers_haven2" speaker='guard_chief' />
+				</choice>
+			</menu>
+		</show>
+
+	</scene>
+</scenes>

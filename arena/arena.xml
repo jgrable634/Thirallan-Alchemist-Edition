@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<arena>
+  <area id="colosseum.mess_of_souls" width="150" height="8" background="thirallan_colosseum" forceTime="12">
+    <tiles id="dirt" start="0" end="0.5" />
+    <tiles id="stone" start="0.5" end="1" />
+    <tiles id="grass" y="0" />
+    <tiles id="blackstone" y="99" />
+    <objects id="tree" y="-1" startX="0" endX="50" minDist="6" maxDist="6" array="left" />
+    <objects id="tree" y="-1" startX="100" endX="150" minDist="6" maxDist="6" array="right" />
+    <spawner id="blood_zombie" time="100" count="2" fromX="0" toX="150" fromY="-1" toY="-1" />
+    <spawner id="floating_blood" time="100" count="2" fromX="0" toX="150" fromY="-1" toY="-3" ground="false" />
+    <objects id="mess_of_souls" fromX="30" toX="70" count="1" y="-1" />
+    <structure id="colosseum_exit" x="50" y="-1" />
+    <init><runAreaLoad /></init>
+    <onLoad><weather type="fog" alpha="0.75" color="5C0000" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" /></onLoad>
+  </area>
+  <procedure id="colosseum.mess_of_souls">
+    <action>
+      setGlobal("originalPlayer", player); setGlobal("originalArea", player.area); setGlobal("points", 100);
+      var map = new StringMap(); map.set("mess_of_souls", 1); setGlobal("killCounts", map); changePlayer("player.colosseum", false);
+      player.inventory.addItems(getItem("dragonblood"), 10); player.stats.get("speed").permaBuff(3);
+    </action>
+    <equip id="malumite_sword" fromInventory="false" />
+    <equip id="malumite_pickaxe" fromInventory="false" />
+    <equip id="malumite_armor" fromInventory="false" />
+    <equip id="malumite_shield" fromInventory="false" />
+    <teleport area="colosseum.mess_of_souls" x="52.5" y="-1" temporary="true" />
+  </procedure>
+  <procedure id="colosseum.new_rooms3">
+    <structure id="boss_room" x="3/Tile.SIZE" y="-33">this.name = 'mess_of_souls'; this.updateRenderer();</structure>
+  </procedure>
+  <tilesheet id="mess_of_souls_colosseum.png" width="40" height="32" />
+  <tile id="colosseum.mess_of_souls" sheet="mess_of_souls_colosseum.png" x="0" y="0" />
+  <animation id="colosseum.mess_of_souls" count="8" />
+  <area id="colosseum.arena" extends="colosseum.arena" extendAppend="true">
+    <onLoad>
+      <section if="area.getStructureById('colosseum.cap').tile_y == -25">
+        <remove structure="area.getStructureById('colosseum.cap')" />
+        <structure id="colosseum.stack" x="0" y="-25" />
+        <structure id="colosseum.cap" x="0" y="-33" />
+        <structure id="colosseum.stairs_l.off" x="10/Tile.SIZE" y="-29" />
+        <structure id="colosseum.stairs_r.off" x="226/Tile.SIZE" y="-29" />
+        <action>for(x in 0...2){setTile(7+x, -28, null); setTile(7+x, -36, "empty");} trace("it ran");</action>
+        <run procedure="colosseum.new_rooms3" />
+      </section>
+    </onLoad>
+  </area>
+</arena>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+	<tilesheet id="bg_test.png" width="512"  height="298" />
+	<parallax id="dragon_start" magBGHeight="50">
+		<layer p="0.1" py="0.3">
+			<tile sheet="bg_test.png" x="0" y="0" offsetX="-90" offsetY="-140" loop="false" />
+		</layer>
+	</parallax>
+	<area id="dragon_start" width="75" height="96" background="dragon_start" looping="true">
+		<tiles id="stone" start="0" end="1" />
+		<tiles id="markings1" y="0" />
+		<tiles id="blackstone" y="95" />
+		<spawner id="child_dragon_npc" time="1500" count="7" fromX="5" toX="70" fromY="-1" toY="-4" ground="false" enabled="!getFlag('children.spawn')" />
+		<objects id="boar" fromX="5" toX="70" y="-1" count="20" />
+		<spawner id="boar" time="500" count="6" fromX="5" toX="70" y="-1" />
+		<structure id="ROD_throne_entrance" x="37.5" y="-1" />
+		<structure id="ROD_elders_entrance" x="20" y="-1" />
+		<structure id="ROD.ret" x="5" y="-1" />
+		<init><runAreaLoad /><action>area.spawner.spawnAll('child_dragon_npc'); setFlag('children.spawn', true);</action></init>
+		<onLoad>
+			<music id="magic1" seconds="1" />
+			<section if="(!player.questComplete('ROD_guards') && player.hasQuest('ROD_guards') || !player.questComplete('ROD_guards_1-1') && player.hasQuest('ROD_guards_1-1')) && !player.hasItem('exiled_dragon_prisoner') && area.getObject('ROD_rogue_guard') == null">
+				<object id="ROD_rogue_guard" x="25" y="-2" />
+			</section>
+			<section if="player.hasQuest('ROD_elders') && !player.questComplete('ROD_elders') && area.getObject('elder_child') == null">
+				<run procedure="elder_childToExit" />
+			</section>
+			<section if="player.questComplete('ROD_elders') && area.getObject('elder_child') != null">
+				<remove object="area.getObject('elder_child')" />
+			</section>
+		</onLoad>
+	</area>
+	<area id="dragon_throne_room" width="30" height="15" external="dragon_start">
+		<tiles id="blackstone" start="0" end="1" />
+		<object id="dragon_king" x="17" y="12" />
+		<structure id="ROD_throne.ret" x="1" y="13" />
+		<structure id="sealed_vault" x="12" y="13" />
+		<spawner id="ROD_guard" time="1500" count="3" fromX="5" toX="20" fromY="1" toY="13" enabled="!getFlag('guards.spawn')" />
+		<init><runAreaLoad/><action>for (x in 1...29) for (y in 1...14) mine(x, y); for(x in 19...29) setTile(x, 13, "blackstone"); area.spawner.spawnAll('ROD_guard'); setFlag('guards.spawn', true);</action></init>
+	</area>
+	<area id="dragon_elders_room" width="30" height="15" external="dragon_start">
+		<tiles id="blackstone" start="0" end="1" />
+		<object id="dragon_elder" x="17" y="13" />
+		<structure id="ROD_elders.ret" x="1" y="13" />
+		<init><runAreaLoad/><action>for (x in 1...29) for (y in 1...14) mine(x, y);</action></init>
+	</area>
+</areas>

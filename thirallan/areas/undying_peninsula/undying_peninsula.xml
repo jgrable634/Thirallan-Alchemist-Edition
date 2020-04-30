@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+
+  <include id="parallax/parallax.xml" />
+
+  <area id="thirallan_undying_peninsula" background="thirallan_undying_peninsula" width="60" height="100" looping="true" name="common.thirallan_undying_peninsula" planet="thirallan_alchemist">
+    <tiles id="dirt" start="0" end="0.5" />
+    <tiles id="stone" start="0.6" end="1" />
+    <tiles id="grass" y="0" />
+    <tiles id="blackstone" y="99" />
+    <ore id="quartz" start="0.4" end="0.5" percent="0.0025" tile="dirt" />
+    <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="dirt" />
+    <ore id="iron" start="0.1" end="0.2" percent="0.000625" tile="dirt" />
+    <ore id="coal" start="0.0" end="0.4" percent="0.0375" tile="dirt" />
+    <ore id="gold" start="0.4" end="0.5" percent="0.000625" tile="dirt" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+    <structure id="undead_shrine" x="25" y="-1" />
+    <objects id="undead_shrineDefender" count="7" fromX="15" toX="35" fromY="-1" toY="-1" />
+    <init><runAreaLoad/></init>
+    <onLoad><music id="magic2" seconds="1" /></onLoad>
+  </area>
+
+</areas>

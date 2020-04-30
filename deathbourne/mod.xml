@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mod>
+    <init>
+      <!--include id="music/music.xml" />
+      <include id="tiles/tiles.xml" /-->
+      <include id="lang/en_US.xml" includeRoot="true" />
+      <include id="items/items.xml" />
+      <include id="enemies/enemies.xml" />
+      <!--include id="npcs/npcs.xml" /-->
+      <include id="structures/structures.xml" />
+      <include id="areas/planet.xml" />
+      <!--include id="scenes/scenes.xml" /-->
+    </init>
+</mod>

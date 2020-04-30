@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <tile id="UC_king" sheet="art/uc/UC_king.png" x="0" y="0" />
+
+  <npc id="UC_king" tile="UC_king" action="talk" talk_sfx="talking1" />
+  
+</npcs>

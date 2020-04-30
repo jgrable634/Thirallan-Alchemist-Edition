@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+	<quest id="ROD_welcome" exp="5000" giver="dragon_king">
+		<flag id="path1" name="quests.welcomeFlag1" tile="young_dragon.ico" />
+		<flag id="path2" name="quests.welcomeFlag2" tile="ROD_guard.ico" />
+		<flag id="path3" name="quests.welcomeFlag3" tile="ancient_dragon.ico" />
+	</quest>
+	<quest id="ROD_guards" exp="500">
+		<item id="exiled_dragon_prisoner" count="1" />
+	</quest>
+	<quest id="ROD_elders" exp="500">
+		<item id="diamond" count="2" />
+	</quest>
+	<quest id="ROD_youth" exp="500">
+		<kill id="ROD_youth_tag" name="quests.ROD_youth_tag" count="7" />
+	</quest>
+	<quest id="ROD_guards_1-1" exp="500">
+		<item id="exiled_dragon_prisoner" count="1" />
+	</quest>
+	<quest id="ROD_guards_1-2" exp="1500">
+		<item id="exiled_dragon_prisoner" count="3" />
+	</quest>
+	<quest id="ROD_guards_1-3" exp="2500">
+		<item id="ROD_hostage" count="1" />
+	</quest>
+	<quest id="ROD_guards_1-boss" exp="5000">
+		<item id="ROD_rebel_head" count="1" />
+	</quest>
+	<npc id="dragon_king" tile="ancient_dragon2" animation="ancient_dragon" idle_anim="ancient_dragon.sleep" action="talk" stopForPlayer="false" icon="ancient_dragon2.ico" indicatorX="-24" indicatorY="-24">
+		<hitbox x="0" y="0" width="50" height="64" />
+		<operate>
+			<section>
+				<pan y="96-this.yTile" seconds="0.5" />
+				<choose>
+					<section if="!player.hasQuest('ROD_welcome')">
+						<dialogue section="dragon_realm" id="king1" speaker='this' />
+						<dialogue section="dragon_realm" id="king2" speaker='this' />
+						<quest id="ROD_welcome" />
+					</section>
+					<section if="player.hasQuest('ROD_welcome') && !player.canCompleteQuest('ROD_welcome')">
+						<dialogue section="dragon_realm" id="king3" speaker='this' />
+					</section>
+					<section if="player.hasQuest('ROD_welcome') && player.canCompleteQuest('ROD_welcome')">
+						<dialogue section="dragon_realm" id="king4" speaker='this' />
+						<remove strucure="area.getStructureById('sealed_vault')" />
+						<structure id="secret_vault" x="12" y="13" />
+						<play object="area.getStructureById('secret_vault')" animation="secret_vault.opening" />
+						<wait seconds="1">
+							<operate object="area.getStructureById('secret_vault')" />
+						</wait>
+						<dialogue section="dragon_realm" id="king5" speaker='this' />
+						<complete quest="ROD_welcome" />
+					</section>
+				</choose>
+			</section>
+		</operate>
+	</npc>
+	<procedure id="ROD_guards_loop">
+		<choose if="!player.questComplete('ROD_guards_1-boss') && (!getFlag('ROD_guards_1-1') || !getFlag('ROD_guards_1-2') || !getFlag('ROD_guards_1-3')) && (!player.canCompleteQuest('ROD_guards_1-1') && !player.canCompleteQuest('ROD_guards_1-2') && !player.canCompleteQuest('ROD_guards_1-3'))">
+			<action>var tier1RandInt = randInt(1,3);</action>
+			<section if="tier1RandInt == 1">
+				<dialogue section="dragon_realm" id="guards7" />
+				<remove quest="ROD_guards_1-1" />
+				<quest id="ROD_guards_1-1" />
+			</section>
+			<section if="tier1RandInt == 2">
+				<dialogue section="dragon_realm" id="guards8" />
+				<remove quest="ROD_guards_1-2" />
+				<quest id="ROD_guards_1-2" />
+			</section>
+			<section if="tier1RandInt == 3">
+				<dialogue section="dragon_realm" id="guards9" />
+			</section>
+		</choose>
+	</procedure>
+
+	<procedure id="ROD_guard.npc">
+		<section if="!player.hasQuest('ROD_welcome')">
+			<dialogue section="dragon_realm" id="guards" speaker='ROD_guard' />
+		</section>
+		<section if="player.hasQuest('ROD_welcome') && !player.hasQuest('ROD_guards')">
+			<dialogue section="dragon_realm" id="guards1" speaker='ROD_guard' />
+			<dialogue section="dragon_realm" id="guards2" speaker='ROD_guard' />
+			<quest id="ROD_guards" />
+		</section>
+		<section if="player.hasQuest('ROD_guards') && player.canCompleteQuest('ROD_guards')">
+			<dialogue section="dragon_realm" id="guards3" speaker='ROD_guard' />
+			<dialogue section="dragon_realm" id="guards4" speaker='ROD_guard' />
+			<complete quest="ROD_guards" />
+			<action>setFlag('path2', true);</action>
+		</section>
+		<section if="player.questComplete('ROD_guards') && !player.questComplete('ROD_welcome')">
+			<dialogue section="dragon_realm" id="guards4" speaker='ROD_guard' />
+		</section>
+		<section if="player.questComplete('ROD_welcome') && !getFlag('ROD_guards_quests_intro')">
+			<dialogue section="dragon_realm" id="guards5" speaker='ROD_guard' />
+			<dialogue section="dragon_realm" id="guards6" speaker='ROD_guard' />
+			<run procedure="ROD_guards_loop" />
+		</section>
+	</procedure>
+	<npc id="elder_child" tile="young_dragon" animation="young_dragon" action="talk" idle_anim="young_dragon.fly">
+		<operate>
+			<dialogue section="dragon_realm" id="elder_child4" />
+		</operate>
+	</npc>
+	<procedure id="elder_childToExit">
+		<object id="elder_child" x="player.tile_x-2" y="-1" facing="right" />
+		<dialogue section="dragon_realm" id="elder_child3" />
+		<facing object="area.getObject('elder_child')" dir="left" />
+		<lerp object="area.getObject('elder_child')" deltaX="-15" seconds="2" />
+		<remove object="area.getObject('elder_child')" />
+		<wait seconds="2">
+			<operate object="area.getObject('elder_child')" />
+		</wait>
+		<object id="elder_child" x="5" y="-1" facing="right" />
+	</procedure>
+	<npc id="dragon_elder" tile="ancient_dragon" animation="ancient_dragon" idle_anim="ancient_dragon.sleep" action="talk" stopForPlayer="false" icon="ancient_dragon.ico" indicatorX="-24" indicatorY="-24">
+		<hitbox x="0" y="0" width="50" height="64" />
+		<operate>
+			<section>
+				<pan y="96-this.yTile" seconds="0.5" />
+				<choose>
+					<section if="!player.hasQuest('ROD_elders') && player.hasQuest('ROD_welcome')">
+						<dialogue section="dragon_realm" id="elders1" speaker='this' />
+						<dialogue section="dragon_realm" id="elders2" speaker='this' />
+						<quest id="ROD_elders" />
+						<section if="player.hasQuest('ROD_elders')">
+							<dialogue section="dragon_realm" id="elders3" speaker='this' />
+							<object id="elder_child" x="4" y="10" facing="right" />
+							<lerp object="area.getObject('elder_child')" deltaX="11" seconds="2" />
+							<wait seconds="1">
+								<operate object="area.getObject('elder_child')" />
+							</wait>
+							<dialogue section="dragon_realm" id="elder_child1" />
+							<dialogue section="dragon_realm" id="elders4" speaker='this' />
+							<dialogue section="dragon_realm" id="elder_child2" />
+							<facing object="area.getObject('elder_child')" dir="left" />
+							<lerp object="area.getObject('elder_child')" deltaX="-11" seconds="2" />
+							<remove object="area.getObject('elder_child')" />
+							<wait seconds="1">
+								<operate object="area.getObject('elder_child')" />
+							</wait>
+							<stop/>
+						</section>
+					</section>
+					<section if="player.hasQuest('ROD_elders') && !player.canCompleteQuest('ROD_elders') && !player.questComplete('ROD_elders')">
+						<dialogue section="dragon_realm" id="elders5" speaker='this' />
+					</section>
+					<section if="player.hasQuest('ROD_elders') && player.canCompleteQuest('ROD_elders')">
+						<dialogue section="dragon_realm" id="elders6" speaker='this' />
+						<dialogue section="dragon_realm" id="elders7" speaker='this' />
+						<complete quest="ROD_elders" />
+						<action>setFlag('path3', true);</action>
+					</section>
+					<section if="player.questComplete('ROD_elders')">
+						<dialogue section="dragon_realm" id="elders7" speaker='this' />
+					</section>
+				</choose>
+			</section>
+		</operate>
+	</npc>
+	<procedure id="ROD_youth_talk">
+		<choose>
+			<section if="!player.hasQuest('ROD_welcome') || player.questComplete('ROD_youth')">
+				<dialogue section="dragon_realm" id="youth" />
+			</section>
+			<section if="!player.hasQuest('ROD_youth') && player.hasQuest('ROD_welcome')">
+				<dialogue section="dragon_realm" id="youth1" />
+				<dialogue section="dragon_realm" id="youth2" />
+				<quest id="ROD_youth" />
+				<section if="player.hasQuest('ROD_youth')">
+					<dialogue section="dragon_realm" id="youth3" />
+					<objects id="ROD_youth_tag" fromX="5" toX="70" fromY="-1" toY="-1" count="7" />
+					<action>for (o in area.getObjectsById('child_dragon_npc')) o.remove();</action>
+					<stop/>
+				</section>
+				<section if="!player.hasQuest('ROD_youth')">
+					<dialogue section="dragon_realm" id="youth4" />
+				</section>
+			</section>
+			<section if="player.hasQuest('ROD_youth') && ROD_youth.info.id == 'ROD_youth_tag' && player.getKillCount('ROD_youth_tag') < 6">
+				<dialogue section="dragon_realm" id="youth5" />
+				<action>player.setKillCount("ROD_youth_tag", (player.getKillCount('ROD_youth_tag')+1));</action>
+				<object id="ROD_youth_dummy" x="this.tile_x" y="this.tile_y" />
+				<remove object="this" />
+				<action>trace("You Got Him");</action>
+			</section>
+			<section if="player.hasQuest('ROD_youth') && ROD_youth.info.id == 'ROD_youth_dummy'">
+				<dialogue section="dragon_realm" id="youth5" />
+				<action>trace("You Already Got This One!");</action>
+			</section>
+			<section if="player.hasQuest('ROD_youth') && ROD_youth.info.id == 'ROD_youth_tag' && player.getKillCount('ROD_youth_tag') == 6">
+				<dialogue section="dragon_realm" id="youth6" />
+				<action>player.setKillCount("ROD_youth_tag", (player.getKillCount('ROD_youth_tag')+1));</action>
+				<complete quest="ROD_youth" />
+				<action>for (o in area.getObjectsById('ROD_youth_dummy')) o.remove(); setFlag('children.spawn', false); area.spawner.spawnAll('child_dragon_npc'); setFlag('children.spawn', true); setFlag('path1', true);</action>
+				<remove object="this" />
+			</section>
+		</choose>
+	</procedure>
+</npcs>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+
+    <include id="parallax/parallax.xml" />
+
+    <!-- TILES -->
+    <tilesheet id="tiles.png" />
+    <tile id="d_sand.top" sheet="tiles.png" x="1" />
+    <tile id="d_sand" sheet="tiles.png" x="0" />
+    <tile id="d_sand_stone" sheet="tiles.png" x="2" />
+    <tile id="d_sand_rock" sheet="tiles.png" x="3" />
+    <tile id="d_sand_bedrock" sheet="tiles.png" x="4" />
+    <tile id="d_sand_bedrock_unmineable" sheet="tiles.png" x="4" />
+    <tile id="d_canyon_wall" sheet="tiles.png" x="5" />
+    <tile id="d_canyon_wall_edge" sheet="tiles.png" x="6" />
+	  <dig id="d_sand.top" cost="2" />
+    <dig id="d_sand" cost="2" />
+    <dig id="d_sand_stone" cost="4" />
+    <dig id="d_sand_rock" cost="6" />
+    <dig id="d_sand_bedrock" cost="8" />
+    <dig id="d_sand_bedrock_unmineable" cost="999" />
+
+    <!-- AREA DEFINITION -->
+    <area id="thirallan_desert" background="thirallan_desert" width="97" height="164" looping="true" name="common.thirallan_desert" planet="thirallan_alchemist">
+        <tiles id="d_sand" start="0" end="0.3"/>
+        <tiles id="d_sand_stone" start="0.3" end="0.45" />
+        <tiles id="d_sand_rock" start="0.45" end="0.6" />
+        <tiles id="d_sand_bedrock" start="0.6" end="1" />
+        <ore id="sulfur" start="0.1" end="0.8" percent="0.0245" tile="d_sand" />
+        <ore id="quartz" start="0.2" end="0.5" percent="0.0175" />
+        <ore id="malumite_ore" start="0.2" end="0.5" percent="0.045" />
+        <ore id="titanium" start="0.4" end="0.7" percent="0.0375" />
+        <ore id="titanium" start="0.7" end="1" percent="0.075" />
+        <ore id="gold" percent="0.014" tile="d_sand_stone" />
+        <ore id="gold" percent="0.028" tile="d_sand_rock" />
+		    <ore id="diamond"  percent="0.002" tile="d_sand_rock" />
+        <ore id="uranium" start="0.5" end="0.7" percent="0.01" tile="d_sand_rock" />
+        <ore id="diamond" percent="0.005" tile="d_sand_bedrock" />
+        <ore id="uranium" percent="0.03" tile="d_sand_bedrock" />
+        <appendArea id="dune.canyon.bottom" offsetX="65" offsetY="98" />
+        <appendArea id="dune.canyon.mine" offsetX="50" offsetY="0" />
+        <appendArea id="dune.dune" offsetX="3" offsetY="0" />
+        <appendArea id="dune.dune" offsetX="25" offsetY="0" />
+        <tiles id="d_sand_bedrock_unmineable" y="163" />
+
+		<init><runAreaLoad /></init>
+		<onLoad><music id="science1" seconds="1" /><weather type="fog" image="{core}/science1/sand.png" alpha="0.3" color="ffdd99" x="0" y="-10" width="100" height="12" dx="4" dy="0.05" if="area.getStructureById('terraformer') == null" /></onLoad>
+	</area>
+
+    <!-- Canyon flavor - background -->
+    <area id="dune.canyon.mine">
+        <shape type="trapezoid">
+            <top y="0" fromX="0" toX="40" />
+            <bottom y="98" fromX="15" toX="25" />
+        </shape>
+        <tiles id="d_canyon_wall" start="0" end="1" />
+        <tiles id="d_canyon_wall_edge" y="0" />
+        <mine start="0" end="1" light="3" />
+    </area>
+
+    <!-- The resource rich canyon floor! -->
+    <area id="dune.canyon.bottom">
+        <shape type="trapezoid">
+            <top y="0" fromX="0" toX="20" />
+            <bottom y="66" fromX="12" toX="28" />
+        </shape>
+        <tiles id="d_sand_stone" start="0" end="0.5" />
+        <tiles id="d_sand_rock" start="0.5" end="0.9" />
+        <tiles id="d_sand_bedrock" start="0.9" end="1" />
+        <ore id="exotic_matter" start="0.1" end="1" percent="0.01" />
+        <ore id="exotic_matter" start="0.4" end="1" percent="0.02" />
+        <ore id="exotic_matter" start="0.8" end="1" percent="0.06" />
+        <ore id="uranium" start="0.1" end="1" percent="0.0125" />
+        <ore id="uranium" start="0.4" end="1" percent="0.025" />
+        <ore id="uranium" start="0.8" end="1" percent="0.025" />
+        <ore id="titanium" start="0.1" end="1" percent="0.0375" />
+        <ore id="titanium" start="0.4" end="1" percent="0.0375" />
+        <ore id="titanium" start="0.8" end="1" percent="0.075" />
+    </area>
+
+    <!-- Flavour - dunes -->
+    <area id="dune.dune">
+		<shape type="trapezoid">
+			<top y="-4" fromX="12" toX="16" />
+			<bottom y="0" fromX="0" toX="24" />
+		</shape>
+		<tiles id="d_sand" start="0" end="1" />
+	</area>
+</data>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<planet>
+  <tilesheet id="planet.png" width="12" height="5" />
+  <tile id="ROD_planet" sheet="planet.png" x="0" y="0" />
+  <parallax id="stars.ROD.orbit" mapBG="0" skyColor="0">
+    <layer p="0" glow="true" max_depth="10000"><tile sheet="{mod:full_version}/space/night_bg.png" x="0" y="0" /></layer>
+    <layer p="0" glow="true" max_depth="10000">
+      <tile id="sun" animation="sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
+    </layer>
+    <layer type="back" />
+  </parallax>
+  
+  <planet id="ROD_planet">
+    <orbit id="realm_of_dragons_entrance.orbit" width="100" height="80" background="stars.ROD.orbit">
+      <appendArea id="realm_of_dragons_entrance" offsetX="30" offsetY="50" />
+      <init><runAreaLoad/></init>
+      <onLoad><music id="heights" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+    </orbit>
+  </planet>
+
+  <area id="realm_of_dragons_entrance">
+    <shape type="trapezoid">
+      <top y="0" fromX="0" toX="40" />
+      <bottom y="20" fromX="10" toX="30" />
+    </shape>
+    <tiles eval="'markings'+randInt(1,9)" start="0" end="1" />
+    <ore id="evo_shard" start="0.5" end="1" count="5" />
+    <structure id="realm_of_dragons_fromOrbit_entrance" x="15" y="-1" />
+  </area>
+
+  <include id="areas.xml" />
+</planet>

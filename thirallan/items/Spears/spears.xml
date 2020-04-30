@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<spears>
+<tilesheet id="chess_spears.png" width="32" height="16" />
+<tile id="science_spear" sheet="chess_spears.png" x="1" y="6" />
+<animation id="equipment.science_spear.idle" x="0" count="1" offsetX="-8" offsetY="4" />
+<animation id="equipment.science_spear">
+  <frame x="0" offsetX="-8" offsetY="4" />
+  <frame x="0" offsetX="-11" offsetY="4" />
+  <frame x="0" offsetX="-14" offsetY="4" />
+  <frame x="0" offsetX="-11" offsetY="4" />
+  <frame x="0" offsetX="-8" offsetY="4" />
+  <frame x="0" offsetX="-8" offsetY="4" />
+</animation>
+<tile id="magic_spear" sheet="chess_spears.png" x="0" y="0" />
+<animation id="equipment.magic_spear.idle" equals="equipment.science_spear.idle" />
+<animation id="equipment.magic_spear" equals="equipment.science_spear" />
+<tile id="cyborg_lance" sheet="chess_spears.png" x="2" y="6" />
+<animation id="equipment.cyborg_lance.idle" x="0" count="4" offsetX="-8" offsetY="4" />
+<animation id="equipment.cyborg_lance">
+  <frame x="0" offsetX="-8" offsetY="4" />
+  <frame x="1" offsetX="-11" offsetY="4" />
+  <frame x="2" offsetX="-14" offsetY="4" />
+  <frame x="0" offsetX="-11" offsetY="4" />
+  <frame x="1" offsetX="-8" offsetY="4" />
+  <frame x="2" offsetX="-8" offsetY="4" />
+</animation>
+<tile id="exotic_spear" sheet="chess_spears.png" x="2" y="7" />
+<animation id="equipment.exotic_spear.idle" equals="equipment.cyborg_lance.idle" />
+<animation id="equipment.exotic_spear" equals="equipment.cyborg_lance" />
+<tile id="alchemy_spear" sheet="chess_spears.png" x="1" y="0" />
+<animation id="equipment.alchemy_spear.idle" x="0" count="20" offsetX="-8" offsetY="4" />
+<animation id="equipment.alchemy_spear">
+  <frame x="0" offsetX="-8" offsetY="4" />
+  <frame x="1" offsetX="-11" offsetY="4" />
+  <frame x="2" offsetX="-14" offsetY="4" />
+  <frame x="3" offsetX="-11" offsetY="4" />
+  <frame x="4" offsetX="-8" offsetY="4" />
+  <frame x="5" offsetX="-8" offsetY="4" />
+</animation>
+<tile id="dragon_lance" sheet="spears_placeholders.png" x="1" y="5" />
+<animation id="equipment.dragon_lance.idle" equals="equipment.cyborg_lance.idle" />
+<animation id="equipment.dragon_lance" equals="equipment.cyborg_lance" />
+<tilesheet id="chess_spears_icons.png" width="16" height="8" />
+<tile id="cyborg_lance.ico" sheet="chess_spears_icons.png" x="2" y="6" />
+<tile id="exotic_spear.ico" sheet="chess_spears_icons.png" x="2" y="7" />
+<tile id="alchemy_spear.ico" sheet="chess_spears_icons.png" x="1" y="0" />
+<tile id="dragon_lance.ico" sheet="chess_spears_icons.png" x="1" y="5" />
+<tile id="science_spear.ico" sheet="chess_spears_icons.png" x="1" y="6" />
+<tile id="magic_spear.ico" sheet="chess_spears_icons.png" x="0" y="0" />
+<item id="cyborg_lance" type="none" slot="weapon" attack="25" power="20" knockback="5" stamina="10" cost="0" weight="0" melee_range="2" icon="cyborg_lance.ico" unequip="false">
+  <action id="use" name="common.remove" closeWindow="false"><run procedure="remove_cyborg" /></action>
+  <use slot="shield" />
+</item>
+<recipe id="attach_cyborg_lance" creates="cyborg_lance" type="operation_table" enabled="player.questComplete('cyborg_lance')">
+  <item id="titanium" cout="8" /><item id="ship_parts" count="1" /><item id="carapace" count="3" />
+</recipe>
+<item id="exotic_spear" type="equipment" slot="weapon" cost="5000" weight="8" melee_range="1" icon="exotic_spear.ico" critical="true" attack="12" stamina="3" durability="250" durabilityName="common.fuel" breakable="false" durabilityWarning="warning.fuel" movement_walk="walk_rswing" underwater="true" sfx="dragonsword">
+  <action id="equip" /><action id="feed" alt="feed_all" alt_name="fuel_all" name="common.fuel" full="warning.max_fuel" auto="common.auto_fuel" select="common.add_fuel" />
+  <food id="exotic_matter" value="50" />
+</item>
+<recipe id="create_exotic_spear" creates="exotic_spear" type="exo_factory" enabled="player.questComplete('exotic_spear')">
+  <item id="titanium" count="5" /><item id="chromium" count="5" /><item id="ship_parts" count="2" />
+</recipe>
+<item id="alchemy_spear.fire" type="none"><modifiers attack="2" spirit="1" element="fire" color="ff3333" colorScale="1.5" /></item>
+<item id="alchemy_spear.water" type="none"><modifiers attack="2" spirit="1" element="water" color="3333ff" colorScale="1.5" /></item>
+<item id="alchemy_spear.ice" type="none"><modifiers attack="2" spirit="1" element="ice" color="33ffff" colorScale="1.5" /></item>
+<item id="alchemy_spear.earth" type="none"><modifiers attack="2" spirit="1" element="earth" color="ffcc33" colorScale="1.5" /></item>
+<item id="alchemy_spear.plant" type="none"><modifiers attack="2" spirit="1" element="plant" color="33ff33" colorScale="1.5" /></item>
+<item id="alchemy_spear" type="equipment" slot="weapon" cost="5000" weight="10" melee_range="1" icon="alchemy_spear.ico" attack="20" spirit="1" stamina="5" breakable="false" underwater="true">
+  <action id="equip" /><action id="use" name="elements.change" closeWindow="false"><run procedure="change_element_focus" /></action>
+</item>
+<item id="dragon_lance" type="equipment" slot="weapon" cost="8000" weight="15" melee_range="2" icon="dragon_lance.ico" attack="25" stamina="10" element="fire" breakable="false">
+  <action id="equip" /><use slot="shield" />
+</item>
+<item id="science_spear" type="equipment" slot="weapon" cost="200" weight="5" melee_range="1" icon="science_spear.ico" attack="5" stamina="5" breakable="false">
+  <action id="equip" />
+</item>
+<item id="magic_spear" extends="science_spear" icon="magic_spear.ico" />
+</spears>

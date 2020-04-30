@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <quest id="exotic_warhammer" giver="professor" exp="500">
+    <item id="exotic_matter" count="2" />
+    <item id="chromium" count="5" />
+    <item id="titanium" count="8" />
+    <item id="ship_parts" count="1" />
+  </quest>
+  <npc id="professor" extends="professor">
+    <operate>
+      <choose if="player.questComplete('rebuild_monastery') && !player.questComplete('exotic_warhammer') && player.questComplete('virus')">
+        <section if="!player.hasQuest('exotic_warhammer')">
+          <dialogue section="professor" id="exotic_warhammer1" speaker='this' />
+          <dialogue section="professor" id="exotic_warhammer2" speaker='this' />
+          <quest id="exotic_warhammer" />
+        </section>
+        <section if="!player.canCompleteQuest('exotic_warhammer')">
+          <dialogue section="professor" id="exotic_warhammer3" speaker='this' />
+        </section>
+        <section id="player.canCompleteQuest('exotic_warhammer')">
+          <dialogue section="professor" id="exotic_warhammer4" speaker='this' />
+          <item id="exotic_warhammer" />
+          <complete quest="exotic_warhammer" />
+        </section>
+      </choose>
+    </operate>
+  </npc>
+
+</npcs>

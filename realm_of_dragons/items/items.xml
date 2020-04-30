@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+	<procedure id="ROD_reset">
+		<action>
+			setFlag('deathbourne_issue', false);
+			setFlag('banished', false);
+			setFlag('befriending', false);
+			setFlag('fight', false);
+			setFlag('dragon_chaos', false);
+			setFlag('king_hostile', false);
+			setFlag('king2_hostile', false);
+			setFlag('kingdom_wars_begins', false);
+			player.areas.remove('dragon_cave');
+			player.areas.remove('dragon_cave2');
+			player.areas.remove('dragon_home');
+		</action>
+		<remove quest="dragon_cave_sacrifice" />
+		<remove quest="kingdom_beatdown" />
+		<remove quest="dragon_cave_execution" />
+		<remove quest="foolish_revival" />
+		<action>setFlag('ROD_reset', true);</action>
+	</procedure>
+	<item id="dragon_teleporter" type="spellbook" weight="1" cost="200" icon="spellbook.ico" animation="magic_book.ico">
+		<action id="use" name="travel">
+			<section if="getFlag('ROD_reset')">
+				<action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action>
+				<action>player.renderer.useItem(this)</action>
+				<wait seconds="0.5" modal="false" />
+				<hitEffect object="player" tile="alchemist" animation="alchemist.teleport" runPaused="true" />
+				<lerp object="player" alpha="0" seconds="0.5" modal="true" />
+				<section with="fade">
+					<teleport area="dragon_start" x="5" y="-1" />
+				</section>
+				<stop/>
+			</section>
+			<section>
+				<dialogue section="common" id="ROD_reset1" />
+				<run procedure="ROD_reset" />
+			</section>
+		</action>
+	</item>
+	<tilesheet id="icons.png" width="16" height="10" />
+	<tile id="ROD_guard.ico" sheet="icons.png" x="0" y="0" />
+	<item id="exiled_dragon_prisoner" type="animal" canStore="false" icon="ROD_guard.ico" />
+	<recipe id="craft_dragon_teleporter" type="dragon_teleportation" creates="dragon_teleporter" available="player.questComplete('oldone')">
+		<item id="teleport_book" count="1" />
+		<item id="evo_gem" count="1" />
+	</recipe>
+</items>

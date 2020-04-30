@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+
+  <include id="parallax/parallax.xml" />
+
+
+
+  <area id="thirallan_gold_excavation.sides" width="20" height="150">
+    <tiles id="dirt" start="0" end="0.5" />
+    <tiles id="stone" start="0.5" end="1" />
+    <tiles id="grass" y="0" />
+    <tiles id="blackstone" y="149" />
+    <ore id="quartz" start="0.4" end="0.5" percent="0.0025" tile="dirt" />
+    <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="dirt" />
+    <ore id="iron" start="0.1" end="0.2" percent="0.000625" tile="dirt" />
+    <ore id="coal" start="0.0" end="0.4" percent="0.0375" tile="dirt" />
+    <ore id="gold" start="0.4" end="0.5" percent="0.000625" tile="dirt" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+  </area>
+
+  <area id="thirallan_gold_excavation.mined">
+    <shape type="trapezoid">
+      <top y="0" fromX="0" toX="100" />
+      <bottom y="50" fromX="45" toX="55" />
+    </shape>
+    <mine start="0" end="1" />
+  </area>
+
+  <area id="thirallan_gold_excavation.center" width="100" height="150">
+    <tiles id="stone" start="0" end="1" />
+    <appendArea id="thirallan_gold_excavation.mined" />
+    <mine start="0.4" end="0.45" />
+    <mine start="0.6" end="0.7" />
+    <mine start="0.8" end="0.9" />
+    <tiles id="blackstone" y="149" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0" end="0.7" percent="0.0125" tile="stone" />
+    <ore id="gold" start="0.7" end="1.0" percent="0.05" tile="stone" />
+    <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+    <objects id="gold_golem" start="0.4" end="0.45" percent="0.00375" />
+    <objects id="gold_golem" start="0.6" end="0.7" percent="0.00375" />
+    <objects id="gold_golem" start="0.8" end="0.9" percent="0.00375" />
+  </area>
+
+  <area id="thirallan_gold_excavation" background="gold_excavation">
+    <appendArea id="thirallan_gold_excavation.sides" />
+    <appendArea id="thirallan_gold_excavation.center" offsetX="20" />
+    <appendArea id="thirallan_gold_excavation.sides" offsetX="120" />
+    <spawner id="gold_golem" time="100" count="3" fromX="0" toX="150" fromY="50" toY="150" />
+  </area>
+
+</areas>

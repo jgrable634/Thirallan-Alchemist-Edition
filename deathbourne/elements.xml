@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<element id="resist" overwrites="resist"><resist id="fire" /><resist id="water" /><resist id="ice" /><resist id="earth" /><resist id="plant" /><resist id="arcane" /></element>
+	<element id="arcane" extends="resist"><critical id="earth" /><critical id="calamari" /><critical id="plant" /><critical id="ice" /><critical id="corruption" /></element>
+	<element id="calamari" />
+</data>

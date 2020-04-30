@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+  <quest id="alchemist_system_alch" giver="alchemist">
+    <kill id="corrupted_one" hidden="true" name="quests.corrupted_one" />
+  </quest>
+  <npc id="alchemist" extends="alchemist">
+    <operate>
+      <section if="!player.hasQuest('alchemist_system_alch') && (player.questComplete('dragon_ship') || getFlag('final_boss_defeat')) && !player.hasQuest('alchemist_system_pres')">
+        <dialogue section="system.entry" id="alchemist_system_entry_alch1" speaker='this' />
+        <dialogue section="system.entry" id="alchemist_system_entry_alch2" speaker='this' />
+        <quest id="alchemist_system_alch" ask="false" />
+      </section>
+    </operate>
+  </npc>
+
+  <quest id="alchemist_system_pres" giver="president">
+    <kill id="corrupted_one" hidden="true" name="quests.corrupted_one" />
+  </quest>
+  <npc id="president" extends="president">
+    <operate>
+      <section if="!player.hasQuest('alchemist_system_pres') && (player.hasQuest('virus') || getFlag('final_boss_defeat')) && !player.hasQuest('alchemist_system_alch')">
+        <dialogue section="system.entry" id="alchemist_system_entry_pres1" speaker='this' />
+        <dialogue section="system.entry" id="alchemist_system_entry_pres2" speaker='this' />
+        <quest id="alchemist_system_pres" ask="false" />
+      </section>
+    </operate>
+  </npc>
+</npcs>

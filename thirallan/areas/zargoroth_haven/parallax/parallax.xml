@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<parallax>
+		<tilesheet id="sky.png" width="256" height="64" />
+		<tilesheet id="moon1.png" width="45" height="42" />
+		<tile id="thirallan_sky" sheet="sky.png" x="0" y="0" />
+		<animation id="thirallan_sky.blood_sky" x="1" count="1" />
+		<animation id="thirallan_sky.sky" x="0" count="1" />
+		<tile id="thirallan_sun" sheet="moon1.png" x="0" y="0" />
+		<animation id="thirallan_sun.sun" x="0" count="10" />
+		<tile id="thirallan_moon" sheet="moon1.png" x="1" y="3" />
+		<animation id="thirallan_moon.blood_moon" x="10" count="1" />
+		<animation id="thirallan_moon.none" x="11" count="1" />
+
+	<parallax id="thirallan_zargoroth" mapBG="1F2A1F" mapBGHeight="30" waterLevel="0">
+		<layer p="0" name="thirallan_sky">
+			<tile id="thirallan_sky" animation="thirallan_sky.sky" offsetY="17" />
+			<tile id="thirallan_sky" animation="thirallan_sky.sky" offsetY="-45" />
+			<rect color="1F2A1F" x="0" y="80" width="256" height="64" />
+		</layer>
+		<layer p="0" storm="false" name="thirallan_sun">
+			<tile id="thirallan_sun" animation="thirallan_sun.sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
+		</layer>
+		<layer p="0" storm="false" name="thirallan_moon" glow="moon">
+			<tile id="thirallan_moon" animation="thirallan_moon.none" rise="22" set="6" dir="left" pathHeight="96" pathTop="-16" />
+		</layer>
+		<layer p="0.75" py="1">
+      <tile sheet="{core}/science1/parallax/town.png" x="0" y="0" offsetX="624" loop="false" />
+      <tile sheet="{core}/science1/parallax/town.png" x="0" y="1" offsetX="864" loop="false" />
+		</layer>
+		<layer type="back" /><run procedure="start.water" />
+	</parallax>
+	<parallax id="thirallan_colosseum" mapBG="5C0000" mapBGHeight="30" waterLevel="0">
+		<layer p="0" day="false">
+			<tile id="thirallan_sky" animation="thirallan_sky.blood_sky" offsetY="17" />
+			<tile id="thirallan_sky" animation="thirallan_sky.blood_sky" offsetY="-45" />
+			<rect color="5C0000" x="0" y="80" width="256" height="64" />
+		</layer>
+		<layer p="0" glow="moon">
+			<tile id="thirallan_moon" animation="thirallan_moon.blood_moon" rise="22" set="6" dir="left" pathHeight="96" pathTop="-16" />
+		</layer>
+	</parallax>
+</parallax>

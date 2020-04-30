@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <include id="parallax/parallax.xml" />
+  <planet id="corruption" height="80">
+    <orbit id="corruption.orbit" width="256" height="80" background="corruption.orbit" type="none" distress="player.hasQuest('into_corruption')">
+      <area id="corruption.start" x="0" />
+      <init><runAreaLoad/></init>
+      <onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+    </orbit>
+  </planet>
+
+  <area id="corruption.start" width="96" height="96" background="corruption.start" planet="corruption">
+    <tiles id="corruption_dirt" start="0" end="0.5" />
+    <tiles id="corruption_stone" start="0.6" end="1" />
+  </area>
+
+  <animation id="planet.corruption">
+    <append tile="planet6" animation="single" color="301934" />
+    <append tile="planet6.land2" animation="single" color="8E16F4" />
+    <append tile="planet6.clouds" animation="single" color="301934" colorScale="2" />
+    <append tile="planet6.shadow" animation="single" /><frame visible="false" />
+  </animation>
+</data>

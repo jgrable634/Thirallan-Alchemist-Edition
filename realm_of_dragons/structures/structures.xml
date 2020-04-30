@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<structures>
+	<structure id="dragon_lair2" extends="dragon_lair2">
+		<recipe type="dragon_teleportation" />
+	</structure>
+	<tilesheet id="throne_door.png" width="128" height="128" />
+	<tile id="throne_door" sheet="throne_door.png" x="0" y="0" />
+	<tile id="elders_door" sheet="throne_door.png" x="1" y="0" />
+	<tile id="leave_door" sheet="throne_door.png" x="0" y="1" />
+	<structure id="ROD_throne_entrance" tile="throne_door" name="enter">
+		<operate><teleport area="dragon_throne_room" x="5" y="13" allowReturn="true" with="ellipse" /></operate>
+	</structure>
+	<structure id="ROD_throne.ret" tile="throne_door" name="enter">
+		<operate><return with="ellipse" /></operate>
+	</structure>
+	<structure id="ROD_elders_entrance" tile="elders_door" name="enter">
+		<operate><teleport area="dragon_elders_room" x="5" y="13" allowReturn="true" with="ellipse" /></operate>
+	</structure>
+	<structure id="ROD_elders.ret" tile="elders_door" name="enter">
+		<operate><return with="ellipse" /></operate>
+	</structure>
+	<structure id="ROD.ret" tile="leave_door" name="enter">
+		<operate><section with="ellipse"><action>var loc = getGlobal('location'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
+	</structure>
+	<structure id="realm_of_dragons_fromOrbit_entrance" tile="leave_door" name="enter">
+		<operate><action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" /></operate>
+	</structure>
+	<animation id="secret_vault.opening" count="4" length="3" />
+	<animation id="secret_vault.closing" count="4" reverse="true" length="3" />
+	<structure id="sealed_vault" image="secret_vault.png" width="64" height="128" />
+	<structure id="secret_vault" extends="sealed_vault" type="storehouse" main="true" animation="secret_vault">
+		<operate>
+			<action if="!getFlag('secret_vault_filled')">this.inventory.addItems(Item.get("dragonblood"), 250); this.inventory.addItems(Item.get("fire_gem"), 40); this.inventory.addItems(Item.get("evo_gem"), 4); this.inventory.addItems(Item.get("cow"), 500); setFlag('secret_vault_filled', true);</action>
+		</operate>
+		<over><play object="this" animation="secret_vault.opening" /></over>
+		<out><play object="this" animation="secret_vault.closing" /></out>
+	</structure>
+</structures>

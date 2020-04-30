@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<areas>
+
+  <include id="parallax/parallax.xml" />
+
+  <area id="thirallan_beast_forest" width="100" height="100" background="beast_forest" looping="true" planet="thirallan_alchemist">
+    <tiles id="dirt" start="0" end="0.5" />
+    <tiles id="stone" start="0.5" end="1" />
+    <tiles id="grass" y="0" />
+    <tiles id="blackstone" y="99" />
+    <ore id="quartz" start="0.4" end="0.5" percent="0.0025" tile="dirt" />
+    <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="dirt" />
+    <ore id="iron" start="0.1" end="0.2" percent="0.000625" tile="dirt" />
+    <ore id="coal" start="0.0" end="0.4" percent="0.0375" tile="dirt" />
+    <ore id="gold" start="0.4" end="0.5" percent="0.000625" tile="dirt" />
+    <ore id="diamond" start="0.9" end="1.0" percent="0.0025" tile="stone" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="stone" />
+    <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
+    <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
+    <objects id="tree" y="-1" startX="0" endX="50" minDist="3" maxDist="3" array="left" />
+    <objects id="tree" y="-1" startX="50" endX="100" minDist="3" maxDist="3" array="right" />
+    <objects id="undead" fromX="0" toX="150" fromY="-1" toY="-1" count="6" />
+    <spawner id="undead" time="100" count="3" fromX="0" toX="150" fromY="-1" toY="-1" enabled="!getFlag('blood_moon')" />
+    <structure id="encampment_door" x="50" y="-1" />
+    <init><runAreaLoad /></init>
+    <onLoad>
+      <music id="magic2" seconds="1" />
+      <weather type="fog" alpha="1" color="1F2A1F" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" />
+    </onLoad>
+  </area>
+
+  <area id="encampment.beasts" extends="encampment_template">
+  </area>
+
+</areas>
