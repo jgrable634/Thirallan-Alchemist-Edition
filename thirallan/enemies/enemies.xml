@@ -16,7 +16,7 @@
 		<attack type="melee" damage="5" animation="attack">
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>
-		<onDeath><run procedure="corrupted.death" /></onDeath>
+		<defeatedBy><run procedure="corrupted.death" /></defeatedBy>
 	</enemy>
 
 	<enemy id="undead_shrineDefender" extends="undead" />
@@ -25,7 +25,7 @@
 		<attack type="melee" damage="7">
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>
-		<onDeath><run procedure="corrupted.death" /></onDeath>
+		<defeatedBy><run procedure="corrupted.death" /></defeatedBy>
 	</enemy>
 
 	<tilesheet id="art/purifier/fallen_angel.png" width="32" height="32" />
