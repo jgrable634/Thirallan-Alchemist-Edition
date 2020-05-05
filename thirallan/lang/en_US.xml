@@ -176,6 +176,10 @@
     <text id="blood_moon1">So, we have a similar goal, so let's work together on this.</text>
     <text id="blood_moon2">I'm referring to you going out and investigating these other shrines. I have no doubt that these shrines will lead to a breakthrough in my research. So, I shall accompany with you on this investigation.</text>
     <text id="blood_moon3">Great! We leave in the morning!</text>
+    <text id="rotting_forestShrine1">Ah! There is a shrine here as well, I think I can extract a gem from this, give me just a minute...</text>
+    <text id="rotting_forestShrine2">Wait... Something's wrong. I feel like...</text>
+    <text id="rotting_forestShrine3">Umazz!?</text>
+    <text id="rotting_forestShrine4">What was he... Forget it. I'm not answering anything about that right now... I'll get the gem.</text>
   </section>
   <section id="tomkin">
     <text id="stranger">Oh... Hello. Don't recognize you, if you are new around here, I advise you work with [object=zargoroth_npc] before you do anything else.</text>

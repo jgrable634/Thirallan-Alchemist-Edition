@@ -30,6 +30,64 @@
     </operate>
   </structure>
   <structure id="undead_shrine_useless" tile="undead_shrine_destroyed" />
+
+  <object id="magic_orb_cutscene" tile="magic_orb" layer="top" fps="10" save="false" />
+  <tilesheet id="umazz_cutscene.png" width="32" height="20" />
+  <tile id="umazz_cutscene" sheet="umazz_cutscene.png" x="0" y="0" />
+  <animation id="umazz_cutscene.revealed" x="0" count="9" />
+  <animation id="umazz_cutscene.portal" x="10" count="14" />
+  <object id="umazz_cutscene" tile="umazz_cutscene" />
+  <object id="central_point" width="16" height="16" />
+
+  <npc id="peredurShrine" tile="mage" animation="mage" talk_sfx="talking2" night="true" />
+
+  <structure id="undead_shrine.thirallan_rotting_forest" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
+    <operate>
+      <section>
+        <section with="fade">
+          <move object="player" x="this.tile_x+1" y="-1" />
+          <object id="peredurShrine" x="this.tile_x+3" y="-1" facing="left" />
+          <object id="central_point" x="this.tile_x+7" y="-1" />
+          <object id="umazz_cutscene" x="this.tile_x+11" y="-1" />
+          <action>player.equipment.unequip("familiar",player,true);</action>
+        </section>
+        <set id="peredur" value="area.getObject('peredurShrine')" />
+        <dialogue section="peredur" id="rotting_forestShrine1" speaker="peredur" />
+        <dialogue section="peredur" id="rotting_forestShrine2" speaker="peredur" />
+        <action>area.getObject('peredurShrine').renderer.set_scaleX(-area.getObject('peredurShrine').renderer.get_scaleX());</action>
+        <play object="peredur" animation="peredurShrine.attack" modal="true" />
+        <object id="magic_orb_cutscene" x="peredur.tile_x+1" y="1" />
+        <pan toObject="area.getObject('central_point')" seconds="0.5" modal="true" />
+        <lerp object='magic_orb_cutscene' deltaX="6" seconds="0.5" />
+        <wait seconds="0.25">
+          <operate object="area.getObject('magic_orb_cutscene')" />
+        </wait>
+        <play object="area.getObject('magic_orb_cutscene')" animation="magic_orb.impact" modal="true" />
+        <remove object="area.getObject('magic_orb_cutscene')" />
+        <play object="area.getObject('umazz_cutscene')" animation="umazz_cutscene.revealed" modal="true" />
+        <dialogue section="peredur" id="rotting_forestShrine3" speaker="peredur" />
+        <play object="area.getObject('umazz_cutscene')" animation="umazz_cutscene.portal" modal="true" />
+        <remove object="area.getObject('umazz_cutscene')" />
+        <wait seconds="0.5">
+          <operate object="area.getObject('umazz_cutscene')" />
+        </wait>
+        <pan toObject="peredur" seconds="0.5" modal="true" />
+        <dialogue section="peredur" id="rotting_forestShrine4" speaker="peredur" />
+        <item id="red_purifier_gem" count="1" />
+        <remove object="area.getObject('peredurShrine')" />
+        <wait seconds="0.5">
+          <operate object="area.getObject('peredurShrine')" />
+        </wait>
+        <action>player.equipment.equip(getItem('peredur'),player);</action>
+        <pan toObject="player" seconds="0.25" modal="true" />
+        <wait seconds="0.5" />
+        <play object="this" animation="awaken" modal="true" />
+        <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+        <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </operate>
+  </structure>
+
   <structure id="thirallan_zargoroth.mines" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
     <operate>
       <choose>
