@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<npcs>
-	<quest id="RB_old_ship" exp="2000">
-		<kill id="RB_boss" name="quests.RB_old_ship" hidden="true" />
-	</quest>
-
-</npcs>

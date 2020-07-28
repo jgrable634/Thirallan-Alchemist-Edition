@@ -2,11 +2,16 @@
 <lang id="en_US">
 	<section id="actions">
 		<text id="enter">Enter</text>
+		<text id="operate">Operate</text>
+	</section>
+	<section id="warning">
+		<text id="heat_protection">WARNING: The heat is too intense with current equipment! Evacuate the area!</text>
 	</section>
 	<section id="common">
 		<text id="robot_factory_access">Robot Factory</text>
 		<text id="ship_storage_access">Ship Storage</text>
-		<text id="training_room_access">Training Room</text>
+		<text id="projection_room_access">Holo Projection Facility</text>
+		<text id="power_room_access">Power Facilities</text>
 		<text id="view_logs">View Logs</text>
 		<text id="5/1">5/1 - Departure</text>
 		<text id="5/9">5/9 - Early Trials</text>
@@ -17,52 +22,70 @@
 		<text id="5/1y">5/1 - One Year</text>
 	</section>
 	<section id="quests">
-		<text id="RB_old_ship">Strange Signal</text>
-		<text id="RB_old_ship">The Old Ship</text>
+		<text id="RB_old_ship">A Strange Signal</text>
 	</section>
 	<section id="quest.description">
-		<text id="RB_old_ship">I should check out that weird signal my </text>
+		<text id="RB_old_ship">I should check out that weird signal my [item=com_device] is picking up.</text>
+	</section>
+
+	<section id="structure">
+		<text id="repair_power_cores">Would you like to repair the [color=770000]Power Cores[/color] with the following resources?</text>
+		<text id="moltanium_forge">Moltanium Forge</text>
 	</section>
 
 	<section id="structure.tooltip">
-		<text id="robot_factory">Craft</text>
+		<text id="moltanium_forge">Craft</text>
+		<text id="RB_room_door">Enter</text>
 	</section>
 
 	<section id="item.names">
-		<text id="robot_core">Robot Core</text>
-		<text id="robot_leg">Robot Leg</text>
-		<text id="robot_wheel">Robot Wheel</text>
-		<text id="robot_thruster">Robot Thruster</text>
-		<text id="robot_blaster">Robot Blaster</text>
+		<text id="robot_core">Robotic Core</text>
+		<text id="robot_wheel">Moltanium Wheel</text>
+		<text id="robot_thruster">Moltanium Thruster</text>
+		<text id="robot_blaster">Moltanium Blaster</text>
 		<text id="whip_bot">Whip Bot</text>
 		<text id="small_tank">Small Tank</text>
-		<text id="small_drone">Small Drone</text>
 		<text id="large_drone">Large Drone</text>
-		<text id="robot_sword">Robot Blade</text>
+		<text id="robot_sword">Moltanium Blade</text>
 		<text id="abyssal_blade">Blade Of The Abyss</text>
-		<text id="robot_whip">Robot Whip</text>
+		<text id="robot_whip">Moltanium Whip</text>
+		<text id="moltanium_ore">Moltanium Ore</text>
+		<text id="moltanium">Moltanium</text>
+		<text id="RB_keycard">Captain's Keycard</text>
+		<text id="moltanium_forge_blueprint">Moltanium Forge Blueprint</text>
+	</section>
+
+	<section id="item.descriptions">
+		<text id="moltanium_ore">Born from the melting of titanium in the forming of Unoiks 187c, this material has hardened on the outside, but still holds magma within.</text>
 	</section>
 
 	<section id="player">
-		<text id="RB_old_ship_notice">What the... Why is there a Colony ship so deep underground?</text>
-		<text id="RB_old_ship_closed">The door just refuses to open!</text>
+		<text id="RB_old_ship_notice">How did this Colony Ship get so far underground?</text>
+		<text id="RB_old_ship_detect">I'm picking up a strange signal further on this planet, but it's quite faint...</text>
+		<text id="RB_old_ship_detect_near">The signal appears to be coming from underground, strange...</text>
 	</section>
 
 	<section id="robots">
-		<text id="boss1">Error: Detected unknown entity. Scanning...</text>
-		<text id="boss2">Entity has weaponry; Opening fire.</text>
-		<text id="boss3">System Diagnosis: Critical Failure. Powering Down.</text>
+		<text id="boss1">Detected unknown entity. Scanning...</text>
+		<text id="boss2">Unrecognized Entity, removing entity.</text>
 	</section>
 
 	<section id="ship">
+		<text id="moltanium_forge">What is this structure? I can get a blueprint for it, but I'm noticing some strange energy, I shouldn't stay here long.</text>
+		<text id="lava">Now why would I want to just go straight back into the lava?</text>
+		<text id="keycard">[item=RB_keycard] obtained!</text>
+		<text id="deactivated">The door won't open, the power is off.</text>
+		<text id="ship_repair">Do you really need another colony ship? Stop being an overachiever.</text>
 		<text id="no_access">Error: Unauthorized Personel Detected.</text>
 		<text id="access">Access Granted.</text>
-		<text id="advanced_terminal">Hello Commander! Select an option to begin!</text>
-		<text id="no_power">Error: No Power in Entrance Chamber</text>
+		<text id="advanced_terminal">Select facility to view status, or view logs. Many Structural Breaches detected.</text>
+		<text id="no_power">Power Core Facilities are deactivated, potential damage to facilities.</text>
 		<text id="robots">Highly explosive material detected in the facilities.</text>
 		<text id="robots1">Error: Only Autorized Personel allowed to remote open door.</text>
-		<text id="training">Error: Power off in Training Facilities.</text>
-		<text id="storage">Error: Power off in Storage Facilities.</text>
+		<text id="projection">No critical damage detected, facility functioning at relative normal. Data drive heavily damaged. Little data left.</text>
+		<text id="storage">Few storage containers intact, much needed resources depleted. Please stock up at your nearest Stellar Outpost.</text>
+		<text id="power">Power generation[pause=10].[pause=10].[pause=10].[pause=20] adequate.</text>
+		<text id="power_error">Critical damage to Power Generator. [item=exotic_matter] not detected in cores. Core repair required.</text>
 		<text id="logs">Select Log to review:</text>
 		<text id="5/1_logs">Well. This is it, it's time to travel the unknown... There has been so much peace in this world it's just amazing. So amazing that the world is joining together to research ways to make colonization better! No conflict at all! Let's hope it stays that way!</text>
 		<text id="5/9_logs">We were already aware that this was going to be difficult. But I'm alraedy having second thoughts about this, but of course it's too late anyway. People are already beginning to get worried about the success of this trip. However we should have enough supplies to find somewhere habitable.</text>
@@ -72,21 +95,13 @@
 		<text id="3/26_logs">I don't know how it happened, but suddenly the power in the Robot Facilities shut off. When we sent someone in there, he didn't come back out. We locked the door for now. I'm not sure what is in there right now. But it definitely isn't friendly. I thought the Robot Factory was safe! This can't just be a setup can it?</text>
 		<text id="5/1y_logs">This will be my last entry. I don't know what happened in the night, but whatever it was, it killed the entire crew, except me for now. All I hope is that whatever that thing is is destroyed one way or another, if anyone finds this terminal, know that the Robot Factory is not safe, and should be destroyed. Don't try to fix it, I'm sure it will break again. This is Commander Monroe, signing off for the last time.</text>
 	</section>
-	<section id="robot_commander">
-		<text id="disruptions1">Hello, I require assistance. I was sent here by the Colony to scout out the planet, but my ship was shot down, and hostile robots are everywhere.</text>
-		<text id="disruptions2">I'm getting a faint signal from a Colony ship nearby, but I can't track it down, I think the robots are disrupting the signal. Help?</text>
-		<text id="disruptions2_5">We should get rid of these robots to track down the origin of the signal.</text>
-		<text id="disruptions3">There, the signal has a better strength. Strange, the signal's origin appears to be deep underground.</text>
-		<text id="disruptions4">I set the signal to be located with your [item=com_device], perhaps you should investigate?</text>
-		<text id="ship0_5">You should investigate the signal in case there are any survivors making the signal.</text>
-		<text id="ship1">A tough robot was making that signal? There was an entire Colony Ship down there? That far?</text>
-		<text id="ship2">I need you to investigate that ship further. There has got to be something more to it.</text>
-	</section>
-	<section id="npc">
-		<text id="robot_commander">Robot Fighter</text>
-	</section>
 
-	<section id="colony">
-		<text id="only_dialogue">Could you search [color=770000]Unoiks 187b[/color] in the [color=770000]Unoiks 187[/color] for us? The Robot we sent there to report the status of the planet hasn't communicated back with us.</text>
+	<section id="projector">
+		<text id="captain1">Error: Heavy Data Drive damage detected.</text>
+		<text id="captain2">Searching[pause=10].[pause=10].[pause=10].[pause=10] One recording recovered. Playing back...</text>
+		<text id="captain3">This is becoming hopeless. This will be the last time I am in this room. I will retreat to the bridge after this recording.</text>
+		<text id="captain4">The robots have completely gone haywire. They are tearing people apart. I don't know what caused this, or who. But I believe there is a way to stop them.</text>
+		<text id="captain5">My keycard will be hidden under a monitor on the Bridge. No one will be allowed in that Robot Factory, right now, stopping them is a futile effort, there are too many of them. But if anyone sees this in the aftermath. Please, take my keycard and stop the factory, we thought they would've bee-</text>
+		<text id="captain6">Error: 2nd portion of recording corrupted. Unable to recover file.</text>
 	</section>
 </lang>

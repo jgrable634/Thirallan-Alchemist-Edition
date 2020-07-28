@@ -2,41 +2,61 @@
 <enemies>
 	<tilesheet id="whip_bot2.png" width="40" height="32" />
 	<tile id="whip_bot" sheet="whip_bot2.png" x="0" y="0" />
-	<animation id="whip_bot.idle" x="0" count="6" length="2" />
-	<animation id="whip_bot.walk" x="5" count="6" length="2" />
-	<animation id="whip_bot.attack" x="11" count="6" length="2" />
-	<enemy id="whip_bot" tile="whip_bot" health="25" defense="6" speed="1.5" damage="15" range="30" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
-		<loot id="titanium" p="16" />
+	<animation id="whip_bot.idle">
+		<frame x="0" />
+		<frame x="1" />
+		<frame x="2" />
+		<frame x="3" length="3" />
+	</animation>
+	<animation id="whip_bot.walk" x="4" count="3" />
+	<animation id="whip_bot.attack" x="7" count="6" />
+	<enemy id="whip_bot" tile="whip_bot" health="25" defense="6" speed="1.5" damage="15" range="30" type="surface" passEnemies="true" friendlyFire="false">
+		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
-		<loot id="robot_leg" p="5" />
+		<loot id="robot_wheel" p="5" />
 		<loot id="robot_whip" p="3" />
 	</enemy>
-	<tilesheet id="robot_drone.L.png" width="32" height="16" />
-	<tile id="large_drone" sheet="robot_drone.L.png" x="0" y="0" />
-	<animation id="large_drone.idle" x="0" count="2" length="2" />
-	<animation id="large_drone.walk" equals="large_drone.idle" />
-	<animation id="large_drone.attack" x="2" count="3" length="3" />
-	<enemy id="large_drone" tile="large_drone" health="35" defense="4" speed="2" range="30" type="surface" flying="true" vertical="true" passEnemies="true" friendlyFire="false">
-		<loot id="titanium" p="16" />
+	<tilesheet id="moltanium_drone.png" width="32" height="16" />
+	<tile id="moltanium_drone" sheet="moltanium_drone.png" x="0" y="0" />
+	<animation id="moltanium_drone.idle">
+		<frame x="0" />
+		<frame x="1" offsetY="-2" />
+		<frame x="2" offsetY="-4" />
+		<frame x="2" offsetY="-4" />
+		<frame x="0" offsetY="-2 "/>
+		<frame x="1" />
+		<frame x="2" offsetY="-3" />
+	</animation>
+	<animation id="moltanium_drone.walk">
+		<frame x="3" />
+		<frame x="4" offsetY="-2" />
+		<frame x="5" offsetY="-4" />
+		<frame x="5" offsetY="-4" />
+		<frame x="3" offsetY="-2 "/>
+		<frame x="4" />
+		<frame x="5" offsetY="-3" />
+	</animation>
+	<enemy id="large_drone" tile="moltanium_drone" health="35" defense="4" speed="2" range="10" type="surface" flying="true" vertical="true" passEnemies="true" friendlyFire="false">
+		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
 		<loot id="robot_thruster" p="5" />
 		<loot id="robot_blaster" p="3" />
-		<attack type="projectile" damage="20" range="15" animation="attack">
-				<projectile tile="laser_bolt" animation="laser_bolt" speed="5" range="20" delay="6" />
+		<attack type="projectile" damage="20" range="15" cooldown="120">
+				<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
 	</enemy>
-	<tilesheet id="robot_normals.png" width="32" height="20" />
-	<tile id="small_tank" sheet="robot_normals.png" x="0" y="0" />
-	<animation id="small_tank.idle" x="0" count="4" length="3" />
-	<animation id="small_tank.walk" x="4" count="3" length="2" />
-	<animation id="small_tank.attack" x="6" count="4" length="3" />
-	<enemy id="small_tank" tile="small_tank" health="25" defense="5" speed="2" range="30" type="surface" passEnemies="true" friendlyFire="false">
-		<loot id="titanium" p="16" />
+	<tilesheet id="robot_miniTank.png" width="32" height="20" />
+	<tile id="moltanium_tank" sheet="robot_miniTank.png" x="0" y="0" />
+	<animation id="moltanium_tank.idle" x="0" count="1" />
+	<animation id="moltanium_tank.walk" x="0" count="3" />
+	<animation id="moltanium_tank.attack" x="3" count="3" />
+	<enemy id="small_tank" tile="moltanium_tank" health="25" defense="5" speed="2" range="10" type="surface" passEnemies="true" friendlyFire="false">
+		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
 		<loot id="robot_blaster" p="5" />
 		<loot id="robot_wheel" p="5" />
-		<attack type="projectile" damage="25" range="15" animation="attack">
-				<projectile tile="laser_bolt" animation="laser_bolt" speed="5" range="15" delay="10" />
+		<attack type="projectile" damage="25" range="15" animation="attack" cooldown="60">
+				<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="15" />
 		</attack>
 	</enemy>
 	<tilesheet id="robot_ship.png" width="32" height="32" />
@@ -44,8 +64,11 @@
 	<animation id="RB_enemy_ship.idle" x="0" count="4" />
 	<animation id="RB_enemy_ship.walk" equals="RB_enemy_ship.idle" />
 	<animation id="RB_enemy_ship.attack" x="0" count="4" />
-	<enemy id="RB_enemy_ship" tile="RB_enemy_ship" health="50" defense="6" flying="true" range="20" speed="2" type="surface" passEnemies="true" friendlyFire="false">
-		<attack type="projectile" damage="8" range="20" animation="attack">
+	<enemy id="RB_enemy_ship" tile="RB_enemy_ship" health="50" defense="6" flying="true" range="20" speed="2" type="surface" passEnemies="true" friendlyFire="false" vertical="true">
+		<loot id="moltanium" p="16" />
+		<loot id="robot_core" p="10" />
+		<loot id="robot_blaster" p="5" />
+		<attack type="projectile" damage="30" range="20" animation="attack">
 			<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
 	</enemy>
@@ -55,45 +78,172 @@
 	<animation id="RB_boss.walk" equals="RB_boss.idle" />
 	<animation id="RB_boss.attack" x="2" count="4" />
 	<animation id="RB_boss.omni" x="6" count="3" />
-	<tilesheet id="RB_orb.png" width="25" height="25" />
-	<tile id="RB_orb" sheet="RB_orb.png" x="0" y="0" />
-	<animation id="RB_orb.idle" equals="magic_orb.idle" />
-	<animation id="RB_orb.impact" equals="magic_orb.impact" />
-	<object id="RB_orb" tile="RB_orb" animation="RB_orb.idle" layer="player" save="false" width="16" height="16" overlapVehicle="true">
-		<over>
-			<hitEffect object="this" tile="RB_orb" animation="RB_orb.impact" /><sound id="fireball" />
-			<damage object="player" attacker="this" damage="25" directional="false" /><remove object="this" />
-		</over>
-	</object>
-	<procedure id="RB_boss_defense_matrix">
-				<set id="orbs" value="[]" if="!exists('orbs')" />
-				<action>while(orbs.length > 0) Movement.seek(orbs.pop(), player, 4);</action>
-				<action>
-			function addOrb(dx, dy){
-				var o = getObject("RB_orb").create(this.xPos+dx, this.yTile+dy);
-				area.addObject(o); Movement.circle(o, this, 1.25, 4); orbs.push(o);
-			}
-			addOrb(100, 100);
-			addOrb(100, -100);
-			addOrb(-100, 100);
-			addOrb(-100, -100);
-			Movement.seek(orbs.pop(), player, 4);
-			Movement.seek(orbs.pop(), player, 4);
-			Movement.seek(orbs.pop(), player, 4);
-			Movement.seek(orbs.pop(), player, 4);
-		</action>
-		<stop/>
-	</procedure>
 	<procedure id="RB_boss_start">
 		<pan toObject="area.getObject('RB_boss')" seconds="1" />
 		<dialogue section="robots" id="boss1" />
 		<dialogue section="robots" id="boss2" />
 	</procedure>
-	<enemy id="RB_boss" tile="RB_boss" health="30" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
-		<attack type="projectile" damage="10" range="20" animation="attack">
+	<tile id="RB_smallBoss" sheet="RB_boss_small.png" x="0" y="0" />
+	<animation id="RB_smallBoss.idle" x="0" count="2" />
+	<animation id="RB_smallBoss.walk" equals="RB_smallBoss.idle" />
+	<animation id="RB_smallBoss.attack" x="2" count="4" />
+	<animation id="RB_smallBoss.omni" x="6" count="3" />
+	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
+		<attack type="projectile" damage="20" range="20" animation="attack">
 			<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
-		<onHit><attack type="omni" damage="5" range="2" hits="3" animation="omni" /><run procedure="RB_boss_defense_matrix" /></onHit>
-		<onDeath><dialogue section="robots" id="boss3" /></onDeath>
+		<onHit><attack type="omni" damage="10" range="2" knockback="20" animation="omni" /></onHit>
+		<onDeath>
+			<complete quest="RB_old_ship" />
+			<object id="RB_smallBoss" x="this.tile_x+1" y="this.tile_y" if="area.hasTile(this.tile_x+1,this.tile_y,'front') == false"/>
+			<object id="RB_smallBoss" x="this.tile_x-1" y="this.tile_y" if="area.hasTile(this.tile_x-1,this.tile_y,'front') == false"/>
+			<object id="RB_smallBoss" x="this.tile_x" y="this.tile_y+1" if="area.hasTile(this.tile_x,this.tile_y+1,'front') == false"/>
+			<object id="RB_smallBoss" x="this.tile_x" y="this.tile_y-1" if="area.hasTile(this.tile_x,this.tile_y-1,'front') == false"/>
+		</onDeath>
 	</enemy>
+	<enemy id="RB_smallBoss" extends="RB_boss" tile="RB_smallBoss" health="15" speed="2.5">
+		<onDeath><stop/></onDeath>
+	</enemy>
+
+	<tile id="flame_tile" sheet="flame_tile.png" x="0" y="0" />
+	<object id="flame_wall" tile="flame_tile" animation="item5">
+		<light tile="light.small" color="e2dca7" />
+		<addedToArea>
+			<action>setTile(this.tile_x,this.tile_y,"empty");</action>
+		</addedToArea>
+		<removedFromArea>
+			<action>setTile(this.tile_x,this.tile_y,null);</action>
+		</removedFromArea>
+	</object>
+
+		<enemy id="moltanium_tank_abyssalFight" extends="small_tank" vertical="true" underground="true">
+			<onDeath>
+				<section if="player.getKillCount('moltanium_tank_abyssalFight') == 3">
+					<action>
+						enemystring = "";
+						for( y in [15,20] ) {
+							for( x in [15,18] ) {
+								enemystring += '&lt;object id="moltanium_drone_abyssalFight" x="' +x+ '" y="' +y+ '" />';
+							}
+							enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
+						}
+						evalXml(enemystring);
+					</action>
+				</section>
+			</onDeath>
+		</enemy>
+		<enemy id="moltanium_drone_abyssalFight" extends="large_drone" vertical="true" underground="true">
+			<onDeath>
+				<section if="player.getKillCount('moltanium_drone_abyssalFight') == 3">
+					<action>
+						enemystring = "";
+						for( y in [15,20] ) {
+							for( x in [15,18] ) {
+								enemystring += '&lt;object id="moltanium_whip_bot_abyssalFight" x="' +x+ '" y="' +y+ '" />';
+							}
+							enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
+						}
+						evalXml(enemystring);
+					</action>
+				</section>
+			</onDeath>
+		</enemy>
+		<enemy id="moltanium_whip_bot_abyssalFight" extends="whip_bot" vertical="true" underground="true">
+			<onDeath>
+				<section if="player.getKillCount('moltanium_whip_bot_abyssalFight') == 3">
+					<action>
+						enemystring = "";
+							for( x in [15,18] ) {
+								enemystring += '&lt;object id="moltanium_RB_boss_abyssalFight" x="' +x+ '" y="15" />';
+							}
+						evalXml(enemystring);
+					</action>
+				</section>
+			</onDeath>
+		</enemy>
+		<enemy id="moltanium_RB_boss_abyssalFight" extends="RB_boss">
+			<onDeath>
+				<choose>
+					<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && !getFlag('deathEventOne')">
+						<action>
+							firestring = "";
+							fireName = "'flame_wall'";
+							for( i in 0...30 ) {
+
+								firestring += '&lt;remove object="area.getObject('+fireName+')" />';
+								firestring += '&lt;wait seconds="'+2/i+'" modal="false" />';
+							}
+							evalXml(firestring);
+
+							firestring = "";
+							for( y in 10...24 ) {
+								for( x in [14,20] ) {
+									setTile(x,y,null);
+								}
+							}
+
+							setFlag('deathEventOne',true);
+						</action>
+						<runAreaLoad/>
+						<stop/>
+					</section>
+					<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && getFlag('deathEventOne')">
+						<action>
+							fireName = "'flame_wall'";
+							for(y in 14...18){evalXml('&lt;remove object="area.getObject('+fireName+')" />'); setTile(13,y,null);}
+						</action>
+					</section>
+				</choose>
+			</onDeath>
+		</enemy>
+
+	<tilesheet id="abyssal_one.png" width="32" height="32" />
+	<tile id="abyssal_one" sheet="abyssal_one.png" x="0" y="0" />
+	<animation id="abyssal_one.reach_out">
+		<frame x="1" length="4" />
+		<frame x="2" length="4" />
+		<frame x="3" length="4" />
+		<frame x="4" />
+		<frame x="5" />
+		<frame x="6" />
+	</animation>
+	<object id="abyssal_blast" tile="magic_blast" animation="magic_blast" removeOnComplete="true" layer="top" save="false" fps="10" />
+	<object id="abyssal_one_starter" tile="abyssal_one" />
+	<object id="abyssal_one_hotspot" width="16" height="256">
+		<over>
+			<remove object="this" />
+			<set id="abyssal" value="area.getObject('abyssal_one_starter')" />
+			<move object="abyssal" x="player.tile_x-2" y="player.tile_y" />
+			<wait seconds="0.25">
+				<operate object="abyssal" />
+			</wait>
+			<lerp object="abyssal" alpha="0.3" seconds="1" modal="true" />
+			<play object="abyssal" animation="abyssal_one.reach_out" modal="true" />
+			<object id="abyssal_blast" x="player.tile_x-1" y="player.tile_y+1" />
+			<damage object="player" damage="30" knockback="90" attacker="abyssal" />
+			<wait seconds="1" modal="false" />
+			<action>
+			  firestring = "";
+			  for( y in 10...24 ) {
+			    for( x in [14,20] ) {
+			      firestring += '&lt;object id="flame_wall" x="' +x+ '" y="' +y+ '" />';
+			    }
+			    firestring += '&lt;wait seconds="'+4/y+'"/>';
+			  }
+			  evalXml(firestring);
+			</action>
+			<action>
+					enemystring = "";
+					for( y in [15,20] ) {
+						for( x in [15,18] ) {
+							enemystring += '&lt;object id="moltanium_tank_abyssalFight" x="' +x+ '" y="' +y+ '" />';
+						}
+						enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
+					}
+					evalXml(enemystring);
+			</action>
+			<music id="purification1" seconds="1" />
+			<remove object="area.getObject('abyssal_one_starter')" />
+		</over>
+	</object>
 </enemies>

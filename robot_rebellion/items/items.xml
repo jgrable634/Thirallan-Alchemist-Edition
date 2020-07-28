@@ -23,35 +23,53 @@
 	<tile id="whip_bot.ico" sheet="item_tiles.png" x="3" y="1" />
 	<tile id="large_drone.ico" sheet="item_tiles.png" x="1" y="2" />
 	<tile id="small_tank.ico" sheet="item_tiles.png" x="2" y="2" />
-	<tile id="robot_core.ico" sheet="item_tiles.png" x="0" y="3" />
-	<animation id="robot_core" count="7" length="3" />
-	<tile id="keycard1_robo.ico" sheet="item_tiles.png" x="3" y="4" />
-	<tile id="keycard2_robo.ico" sheet="item_tiles.png" x="0" y="5" />
-	<tile id="keycard3_robo.ico" sheet="item_tiles.png" x="1" y="5" />
-	<tile id="keycard4_robo.ico" sheet="item_tiles.png" x="2" y="5" />
-	<tile id="keycard5_robo.ico" sheet="item_tiles.png" x="3" y="5" />
-	<tile id="robot_wheel.ico" sheet="item_tiles.png" x="0" y="6" />
-	<tile id="robot_thruster.ico" sheet="item_tiles.png" x="1" y="6" />
+	<tile id="robot_core.ico" sheet="item_tiles.png" x="1" y="3" />
+	<tile id="robot_wheel.ico" sheet="item_tiles.png" x="3" y="4" />
+	<tile id="robot_thruster.ico" sheet="item_tiles.png" x="1" y="5" />
+	<tile id="moltanium_ore.ico" sheet="item_tiles.png" x="2" y="5" />
+	<tile id="moltanium.ico" sheet="item_tiles.png" x="3" y="5" />
+	<tile id="RB_keycard.ico" sheet="item_tiles.png" x="0" y="6" />
 	<!--items-->
-	<item id="robot_sword" type="equipment" slot="weapon" cost="1000" weight="10" attack="15" stamina="10" durability="1000" icon="robot_sword.ico" repair="titanium">
+	<item id="robot_sword" type="equipment" slot="weapon" cost="1000" weight="10" attack="12" critical="true" stamina="10" durability="1000" icon="robot_sword.ico" repair="titanium">
 		<action id="equip" name="equip" />
 	</item>
-	<item id="abyssal_blade" type="equipment" slot="weapon" cost="1000" weight="10" attack="30" stamina="50" durability="1000" icon="abyssal_blade.ico" repair="exotic_matter">
+	<item id="abyssal_blade" type="equipment" slot="weapon" cost="1000" weight="10" attack="21" critical="true" stamina="50" durability="1000" icon="abyssal_blade.ico" repair="exotic_matter">
 		<action id="equip" name="equip" />
 	</item>
 	<item id="robot_blaster" type="resource" cost="1000" weight="3" animation="robot_blaster" icon="robot_blaster.ico" />
 	<item id="robot_whip" type="equipment" slot="weapon" cost="1000" weight="8" attack="12" stamina="15" durability="1000" icon="robot_whip.ico" repair="titanium">
 		<action id="equip" name="equip" />
 	</item>
-	<item id="robot_leg" type="resource" cost="250" weight="2" icon="robot_leg.ico" />
-	<item id="robot_core" type="resource" cost="750" weight="5" animation="robot_core" icon="robot_core.ico" />
-	<item id="robot_wheel" type="resource" cost="250" weight="5" icon="robot_wheel.ico" />
+	<item id="robot_core" type="resource" cost="750" weight="5" animation="item6" icon="robot_core.ico" />
+	<item id="robot_wheel" type="resource" cost="250" weight="5" icon="robot_wheel.ico" animation="item2" />
 	<item id="robot_thruster" type="resource" cost="500" weight="3" icon="robot_thruster.ico" />
+
+	<item id="moltanium_ore" type="resource" cost="100" weight="5" icon="moltanium_ore.ico" />
+	<item id="moltanium" type="resource" cost="200" weight="5" icon="moltanium.ico" />
+
+	<item id="RB_keycard" type="tool" icon="RB_keycard.ico"/>
+
+	<item id="water_pump" extends="water_pump">
+		<onEquip>
+			<section if="area.planet.id == 'robot_rebellion'">
+				<dialogue text="Nice try... You're not vacuuming up my precious lava." />
+				<action>player.equipment.unequip("back",player,true);</action>
+			</section>
+		</onEquip>
+	</item>
+
+	<item id="moltanium_forge_blueprint" type="blueprint" cost="5000" weight="0" icon="blueprint.ico">
+		<action id="build" structure="moltanium_forge" underground="true">
+			<item id="moltanium" count="10" />
+			<item id="exotic_matter" count="2" />
+		</action>
+	</item>
+
 	<!--robots-->
 	<familiar id="whip_bot" type="ground">
 		<attack type="melee" damage="13" cost="10" />
 	</familiar>
-	<item id="whip_bot" type="animal" cost="2500" durability="1500" weight="30" slot="familiar" icon="whip_bot.ico">
+	<item id="whip_bot" type="animal" cost="2500" durability="1500" weight="30" slot="familiar" icon="whip_bot.ico" animation="item2">
 		<action id="equip" /><action id="rename" /><action id="feed" alt="feed_all" />
 		<food id="titanium" value="100" />
 		<food id="robot_core" value="500" />
@@ -62,7 +80,7 @@
 				<projectile tile="laser_bolt" animation="laser_bolt" speed="5" range="15" delay="10" />
 		</attack>
 	</familiar>
-	<item id="small_tank" type="animal" cost="2500" durability="2000" weight="50" slot="familiar" icon="small_tank.ico">
+	<item id="small_tank" type="animal" cost="2500" durability="2000" weight="50" slot="familiar" icon="small_tank.ico" animation="item2">
 		<action id="equip" /><action id="rename" /><action id="feed" alt="feed_all" />
 		<food id="titanium" value="100" />
 		<food id="robot_core" value="500" />
@@ -81,48 +99,47 @@
 	</item>
 	<!--recipes-->
 	<recipe id="create_robot_core" creates="robot_core" type="robot_factory">
-		<item id="steel_bar" count="3" />
+		<item id="moltanium" count="3" />
 		<item id="exotic_matter" count="1" />
-		<item id="battery" count="2" />
+	</recipe>
+	<recipe id="create_robot_wheel" creates="robot_wheel" type="robot_factory">
+		<item id="moltanium" count="1" />
+	</recipe>
+	<recipe id="create_robot_thruster" creates="robot_thruster" type="robot_factory">
+		<item id="moltanium" count="1" />
 	</recipe>
 	<recipe id="create_robot_whip" creates="robot_whip" type="robot_factory">
-		<item id="titanium" count="3" />
+		<item id="moltanium" count="3" />
 		<item id="exotic_matter" count="1" />
-		<item id="robot_core" count="2" />
+		<item id="robot_core" count="1" />
 	</recipe>
 	<recipe id="create_whip_bot" creates="whip_bot" type="robot_factory">
 		<item id="robot_whip" count="1" />
-		<item id="titanium" count="10" />
+		<item id="moltanium" count="14" />
 		<item id="exotic_matter" count="2" />
-		<item id="robot_leg" count="4" />
-		<item id="robot_core" count="3" />
+		<item id="robot_wheel" count="2" />
+		<item id="robot_core" count="2" />
 	</recipe>
 	<recipe id="create_small_tank" creates="small_tank" type="robot_factory">
 		<item id="robot_blaster" count="1" />
-		<item id="titanium" count="15" />
+		<item id="moltanium" count="12" />
 		<item id="exotic_matter" count="2" />
 		<item id="robot_wheel" count="2" />
-		<item id="robot_core" count="4" />
-	</recipe>
-	<recipe id="create_small_drone" creates="small_drone" type="robot_factory">
-		<item id="laser_gun" count="1" />
-		<item id="titanium" count="5" />
-		<item id="robot_thruster" count="2" />
-		<item id="robot_core" count="2" />
+		<item id="robot_core" count="3" />
 	</recipe>
 	<recipe id="create_large_drone" creates="large_drone" type="robot_factory">
 		<item id="robot_blaster" count="1" />
-		<item id="titanium" count="10" />
+		<item id="moltanium" count="8" />
 		<item id="robot_thruster" count="4" />
 		<item id="exotic_matter" count="1" />
-		<item id="robot_core" count="4" />
+		<item id="robot_core" count="3" />
 	</recipe>
 	<recipe id="create_robot_sword" creates="robot_sword" type="robot_factory">
-		<item id="titanium" count="5" />
+		<item id="moltanium" count="5" />
 		<item id="exotic_matter" count="1" />
 		<item id="robot_core" count="2" />
 	</recipe>
-	<recipe id="create_abyssal_blade" creates="abyssal_blade" type="robot_factory">
+	<recipe id="create_abyssal_blade" creates="abyssal_blade" type="robot_factory" available="player.hasSeenItem('abyssal_shard')">
 		<item id="abyssal_shard" count="2" />
 		<item id="evo_gem" count="2" />
 		<item id="exotic_matter" count="4" />

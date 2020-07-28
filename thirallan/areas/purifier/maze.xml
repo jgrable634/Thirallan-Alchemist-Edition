@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<airom>
+<airomButAlchemistFinishedIt>
   <area id="thirallan_maze">
     <exit area="start" x="1" y="1" />
 
@@ -10,27 +10,37 @@
       //Doors are 2x2
       //Two sets of linked doors
       for(i in 0...4) exits.push({area:"thirallan_maze", x:0, y:0});
-
-      function makeRoom(startX, startY){
-        for(x in startX...startX+20) for(y in startY...startY+10) setBack(x, y, "magic1.stone");
+      exits.push({area: "purifiers_teaser", x:1, y:-1});
+      exits.push({area: "purifier_void", x:1, y:-1});
+      i = 0;
+      while(i &lt; 18){
+        for(x in ar[i]...ar[i]+20) for(y in ar[i+1]...ar[i+1]+10){setBack(x, y, "bedrock"); area.setLightTile(x,y);}
+        if(exits[i] != null){
+          if(exits[i].area == "thirallan_maze"){
+            var s = buildStructure("maze_linked_door",ar[i]+10,ar[i+1]+9);
+            var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
+            structures.push(s);
+          } else if(exits[i].area == "purifiers_teaser"){
+            var s = buildStructure("purifiers_teaser_door",ar[i]+7,ar[i+1]+9);
+            var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
+            structures.push(s);
+          } else if(exits[i].area == "purifier_void"){
+            var s = buildStructure("maze_exit",ar[i]+10,ar[i+1]+9);
+            var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
+            structures.push(s);
+          }
+        } else{
+            var s = buildStructure("maze_key_fragment",ar[i]+10,ar[i+1]+9);
+            i++;
+        }
       }
-      function makeDoor(x,y){
-        setBack(x, y, "magic1.stone"); setBack(x+1, y, "magic1.stone"); setBack(x, y-1, "magic1.stone"); setBack(x+1, y-1, "magic1.stone");
-      }
-      makeRoom(ar[0],ar[1]);
-      makeRoom(ar[2],ar[3]);
-      makeRoom(ar[4],ar[5]);
 
-      makeRoom(ar[6],ar[7]);
-      makeRoom(ar[8],ar[9]);
-      makeRoom(ar[10],ar[11]);
-
-      makeRoom(ar[12],ar[13]);
-      makeRoom(ar[14],ar[15]);
-      makeRoom(ar[16],ar[17]);
+      i = 0; while(i &lt; 4){var s1 = structures[i]; var s2 = structures[i+1]; s1.x = s2.xPos; s1.y = s2.yPos; s2.x = s1.xPos; s2.y = s1.yPos; i += 2;}
     </action>
+
+
 
     <maze floor="bedrock" wall="blackstone" width="128" height="98" tilesPerCell="2" /><light x="64" y="64" size="3" />
     <init><runAreaLoad /></init>
   </area>
-</airom>
+</airomButAlchemistFinishedIt>

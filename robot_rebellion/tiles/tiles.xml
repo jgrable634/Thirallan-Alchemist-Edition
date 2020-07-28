@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+  <tile id="moltanium_ore" sheet="tiles.png" x="0" y="0" />
+  <tile id="RB_lava" sheet="lava.png" x="0" y="0" />
+  <animation id="RB_lava" count="8" length="2" />
+</tiles>

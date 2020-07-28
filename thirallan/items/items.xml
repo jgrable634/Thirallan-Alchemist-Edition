@@ -94,7 +94,7 @@
 
   <item id="steel_warhammer" slot="weapon" type="equipment" cost="250" durability="500" melee_range="2" weight="12" attack="5" stamina="10" icon="steel_warhammer.ico" action="equip" knockback="5" repair="steel_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
 
-  <item id="malumite_warhammer" slot="weapon" type="equipment" cost="250" durability="500" melee_range="2" weight="12" attack="5" stamina="10" corruptible="false" icon="steel_warhammer.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
+  <item id="malumite_warhammer" slot="weapon" type="equipment" cost="250" durability="500" melee_range="2" weight="12" attack="5" stamina="10" corruptible="false" icon="steel_warhammer.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="hammer" />
 
   <item id="exotic_warhammer" slot="weapon" type="equipment" cost="8000" weight="20" melee_range="2" attack="18" critical="true" knockback="5" stamina="2" icon="exotic_warhammer.ico" durability="250" durabilityName="common.fuel" breakable="false" durabilityWarning="warning.fuel" movement_walk="walk_rswing" underwater="true" sfx="dragonsword">
     <action id="equip" /><action id="feed" alt="feed_all" alt_name="fuel_all" name="common.fuel" full="warning.max_fuel" auto="common.auto_fuel" select="common.add_fuel" sfx="fuel" />

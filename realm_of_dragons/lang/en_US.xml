@@ -15,6 +15,8 @@
 	<section id="item.names">
 		<text id="dragon_teleporter">Dragon Teleporter</text>
     <text id="exiled_dragon_prisoner">Rogue Dragon Guard</text>
+    <text id="draemordion_helm">Draemordion Helm</text>
+    <text id="draemordion_armor">Draemordion Armor</text>
 	</section>
 	<section id="item.descriptions">
 		<text id="dragon_teleporter">A magic tome that should bring me to the kingdom of dragons.</text>

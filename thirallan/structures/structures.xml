@@ -305,4 +305,22 @@
     </operate>
   </structure>
 
+  <tilesheet id="maze_door.png" width="32" height="32" />
+  <tile id="maze_door" sheet="maze_door.png" x="0" y="0" />
+  <animation id="maze_door.opening" count="5" />
+  <animation id="maze_door.closing" count="5" reverse="true" />
+  <structure id="maze_linked_door" tile="maze_door" name="enter" type="door" behind="true">
+    <over><sound id="ship_door" structure="this" /></over>
+  </structure>
+  <structure id="maze_exit" tile="maze_door" type="door" name="enter">
+    <operate><section><dialogue text="nope." /><stop/></section></operate>
+    <over><sound id="ship_door" structure="this" /></over>
+  </structure>
+  <area id="purifiers_teaser" width="96" height="40" powered="true" looping="true">
+    <tiles id="blackstone" start="0" end="1" />
+  </area>
+  <structure id="purifiers_teaser_door" tile="alchemist.portal" animation="alchemist_portal.idle" fps="5" fullOverlap="true" fullHeight="true" name="portal" type="door">
+
+  </structure>
+  <structure id="maze_key_fragment" extends="undead_shrine" />
 </structures>
