@@ -7,15 +7,13 @@
     <text id="alchemist_system">M-type star 33 light years from Earth. 4 confirmed exoplanets.</text>
   </section>
   <section id="system.planet">
-    <text id="thirallan_alchemist">Unoiks 187e</text>
-    <text id="deathbourne.planet">Unoiks 187b</text>
+    <text id="thirallan_alchemist">Unoiks 187d</text>
     <text id="ROD_planet">???</text>
-    <text id="robot_rebellion">Unoiks 187c</text>
-    <text id="corruption">Unoiks 187d</text>
+    <text id="robot_rebellion">Unoiks 187b</text>
+    <text id="corruption">Unoiks 187c</text>
   </section>
   <section id="system.planet.desc">
     <text id="thirallan_alchemist">Found during the Unoiks Colony Project, atmosphere was considered unsatisfactory. \nConfirmed location of the Mars Colony.</text>
-    <text id="deathbourne.planet">A dwarf planet that has somehow shared it's orbit with Unoiks 187c. Rejected for the same reasons as Unoiks 428b.</text>
     <text id="ROD_planet">A strange hunk of rock that is mysteriously held in place.</text>
     <text id="robot_rebellion">A combination of many asteroids melted together by the system's star. \n[color=ff2222]Heat incredibly intense, extreme caution advised.[color=ff2222]</text>
     <text id="corruption">An incredibly abnormal planet, strange surges of energy eminate from it's atmosphere. \nSuspected of being an [color=ff2222]Enemy Experiment[/color].</text>

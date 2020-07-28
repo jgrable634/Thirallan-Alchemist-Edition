@@ -29,7 +29,6 @@
         <planet id="thirallan_alchemist" tile="planet7" animation="planet.thirallan" orbit="orbit4" offsetX="53" offsetY="38" name="system.thirallan">
           <onJump><action>trace("jump to thirallan")</action></onJump>
         </planet>
-        <planet id="deathbourne.planet" tile="planet2" animation="planet.start.dwarf" orbit="orbit1" offsetX="-35" offsetY="-40" />
         <planet id="ROD_planet" tile="ROD_planet" offsetX="50" offsetY="100" />
         <planet id="robot_rebellion" tile="planet2" animation="planet.start.dwarf" orbit="orbit1" offsetX="-75" offsetY="-4" name="planet.robot" />
         <planet id="corruption" tile="planet6" animation="planet.corruption" orbit="orbit3" offsetX="26" offsetY="-20" />
