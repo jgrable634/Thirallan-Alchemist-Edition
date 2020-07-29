@@ -126,34 +126,11 @@
 		<operate><teleport area="robot_start" x="138.125" y="77.0625" with="ellipse" /></operate>
 	</structure>
 	<object id="RB_old_ship.crack2" tile="crashed_ship.crack2" action="enter">
-		<operate><teleport area="RB_old_ship.cave2" x="14" y="23" allowReturn="true" with="ellipse" /></operate>
+		<operate><teleport area="RB_old_ship.cave2" x="14" y="43" allowReturn="true" with="ellipse" /></operate>
 	</object>
-	<structure id="RB_room_door" tile="ship.doorh" name="enter" type="door" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
-		<operate>
-			<choose>
-				<section if="getFlag('RB_old_ship.powered')" />
-				<section if="this.area.id == 'RB_old_ship.cave2' && this.tile_x == 66 && this.tile_y == 18" />
-				<section if="this.area.id == 'RB_ship_power' && this.tile_x == 10 && this.tile_y == 15" />
-				<section>
-					<dialogue section="ship" id="deactivated" />
-					<stop/>
-				</section>
-			</choose>
-		</operate>
-	</structure>
-	<structure id="RB_room_door_left" extends="RB_room_door">
-		<addedToArea>
-			<action>setTile(this.tile_x-1,this.tile_y,"empty");</action>
-		</addedToArea>
-	</structure>
-	<structure id="RB_room_door_right" extends="RB_room_door">
-		<addedToArea>
-			<action>setTile(this.tile_x+1,this.tile_y,"empty");</action>
-		</addedToArea>
-	</structure>
-	<object id="RB_robots_access_door" tile="ship.doorh" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
-		<over><play object="this" animation="ship.door.open" /></over>
-		<out><play object="this" animation="ship.door.close" /></out>
+	<object id="RB_room_door" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
+		<addedToArea><action>setTile(this.tile_x,this.tile_y,"empty");</action></addedToArea>
+		<operate><dialogue section="ship" id="deactivated" /></operate>
 	</object>
 	<object id="RB_ship_robot_permission" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
 		<addedToArea>
@@ -168,15 +145,9 @@
 				<dialogue section="ship" id="access" />
 				<action>setTile(this.tile_x, this.tile_y, null);</action>
 				<remove object="this" />
-				<object id="RB_robots_access_door" x="this.tile_x" y="this.tile_y" />
+				<object id="ship.doorh" x="this.tile_x" y="this.tile_y" />
 			</section>
 		</operate>
-	</object>
-	<object id="RB_ship.ret" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
-		<addedToArea>
-			<action>setTile(this.tile_x, this.tile_y, "empty");</action>
-		</addedToArea>
-		<operate><return with="ellipse" /></operate>
 	</object>
 	<structure id="RB_robots_door" image="robots_door.png" width="32" height="32" name="enter" type="door" />
 	<object id="RB_old_ship.decoy" width="64" height="64" />
@@ -218,7 +189,7 @@
 			<window type="build" title="structure.repair_power_cores" requirementsXml="getQuest('placeholder_power_cores_repair').xml" includeStorehouse="true" build="actions.repair">
 				<remove object='this' />
 				<object id="RB_power_cores" x="this.tile_x" y="this.tile_y" />
-				<action>setFlag('RB_old_ship.powered',true);</action>
+				<run procedure="unlock_RB_doors" />
 			</window>
 		</operate>
 	</object>
@@ -229,7 +200,7 @@
 		<over><action>this.loopAnimation("golem_factory.active")</action></over>
 		<out><action>this.loopAnimation("golem_factory.idle")</action></out>
 		<operate>
-			<section if="area.id == 'RB_ship_robots'">
+			<section if="area.id == 'RB_ship_robots' && !player.hasSeenItem('moltanium_forge_blueprint')">
 				<dialogue section="ship" id="moltanium_forge" />
 				<item id="moltanium_forge_blueprint" count="1" modal="false" />
 				<invokeLater seconds="0.5">

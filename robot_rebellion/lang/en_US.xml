@@ -74,14 +74,14 @@
 		<text id="moltanium_forge">What is this structure? I can get a blueprint for it, but I'm noticing some strange energy, I shouldn't stay here long.</text>
 		<text id="lava">Now why would I want to just go straight back into the lava?</text>
 		<text id="keycard">[item=RB_keycard] obtained!</text>
-		<text id="deactivated">The door won't open, the power is off.</text>
+		<text id="deactivated">The door won't open, the ship's power is off.</text>
 		<text id="ship_repair">Do you really need another colony ship? Stop being an overachiever.</text>
 		<text id="no_access">Error: Unauthorized Personel Detected.</text>
 		<text id="access">Access Granted.</text>
 		<text id="advanced_terminal">Select facility to view status, or view logs. Many Structural Breaches detected.</text>
 		<text id="no_power">Power Core Facilities are deactivated, potential damage to facilities.</text>
 		<text id="robots">Highly explosive material detected in the facilities.</text>
-		<text id="robots1">Error: Only Autorized Personel allowed to remote open door.</text>
+		<text id="robots1">Error: Remote Door Interaction disabled.</text>
 		<text id="projection">No critical damage detected, facility functioning at relative normal. Data drive heavily damaged. Little data left.</text>
 		<text id="storage">Few storage containers intact, much needed resources depleted. Please stock up at your nearest Stellar Outpost.</text>
 		<text id="power">Power generation[pause=10].[pause=10].[pause=10].[pause=20] adequate.</text>

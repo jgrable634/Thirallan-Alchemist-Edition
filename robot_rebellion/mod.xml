@@ -8,33 +8,6 @@
         <include id="enemies/enemies.xml" />
 		    <include id="npcs/npcs.xml" />
         <include id="structures/structures.xml" />
-        <action>
-          // Done by Etrotta
-
-          function generateOreChunk(area,centerX,centerY,ore,radius,p){
-            var i = area.addTileIndex(ore); //do not worry, if it already exists it returns instead of re-adding.
-            for (x in -radius...radius+1){
-              for (y in 0...radius-Math.abs(x)){
-                if (Math.random() &lt; p) area.setTile(centerX + x, centerY + y, ORE_LAYER, i);
-                if (Math.random() &lt; p) area.setTile(centerX + x, centerY - y, ORE_LAYER, i);
-              }
-            }
-          }
-          function generateWaterChunk(area,centerX,centerY,radius,p){
-            for (x in -radius...radius+1){
-              for (y in 0...radius-Math.abs(x)){
-                if (Math.random() &lt; p){mine(centerX + x, centerY - y); area.setWater(centerX + x, centerY + y);}
-                if (Math.random() &lt; p){mine(centerX + x, centerY - y); area.setWater(centerX + x, centerY - y);}
-              }
-            }
-          }
-        </action>
 		    <include id="areas/planet.xml" />
     </init>
 </mod>
-
-function clamp(number,min,max){
-  if (number &lt; min) return number;
-  else if (number &gt; max) return max;
-  else return number;
-}
