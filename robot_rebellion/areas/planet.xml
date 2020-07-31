@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
 	<area id="RB.crater">
-		<shape type="trapezoid">
-			<top y="0" fromX="0" toX="48" />
-			<bottom y="22" fromX="16" toX="32" />
-		</shape>
-		<appendArea id="RB.crater.mined" offsetX="0" offsetY="0" />
-	</area>
-	<area id="RB.crater.mined">
-		<shape type="trapezoid">
-			<top y="0" fromX="10" toX="45" />
-			<bottom y="6" fromX="19" toX="29" />
-		</shape>
-		<mine start="0" end="1" light="3" />
 		<structure id="RB_crashed_ship" x="11" y="20" />
 		<structure id="RB_old_ship_door" x="20.8125" y="4.625" />
 		<object id="RB_old_ship.marker" x="20.8125" y="4.625" />
 		<object id="RB_old_ship_notice" x="10" y="22" />
 	</area>
 	<procedure id="heat_damage">
-		<section if="getFlag('on_RB_planet') && area.vehicle == null">
+		<section if="Area.getXML(area.id).xml.get('allowHeatDamage') == 'true' && area.vehicle == null && player.vehicle == null">
 			<action>
 				if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-					player.damage(5,FLAG_IGNORE_DEFENSE);
+					player.loseHealth(5,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
+					player.damageNotification(5,false,player);
 				}
 			</action>
 			<action>
 				if(area.isWater(player.tile_x,player.tile_y)){
-					player.damage(20,FLAG_IGNORE_DEFENSE);
+					player.loseHealth(20,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
+					player.damageNotification(20,false,player);
 				}
 			</action>
 			<invokeLater seconds="0.25">
@@ -35,7 +25,7 @@
 			</invokeLater>
 		</section>
 	</procedure>
-	<area id="robot_start" width="256" height="96" background="stars.dwarf" planet="robot_rebellion" looping="true" water="RB_lava" water_anim="RB_lava">
+	<area id="robot_start" width="256" height="96" background="stars.dwarf" planet="robot_rebellion" looping="true" water="RB_lava" water_anim="RB_lava" allowHeatDamage="true">
 		<tiles id="sci1.grass.scorched" y="0" />
 		<tiles id="scorched.dirt" start="0" end="0.5" />
 		<tiles id="obsidian" start="0.5" end="1" />
@@ -54,8 +44,6 @@
 			<runAreaLoad/>
 			<action>
 				// Done by Etrotta
-				//k let me see
-				// brb
 				function generateOreChunk(area,centerX,centerY,ore,radius,p){
 					var i = area.addTileIndex(ore); //do not worry, if it already exists it returns instead of re-adding.
 					for (x in -radius...radius+1){
@@ -75,11 +63,21 @@
 				}
 			</action>
 			<action>
-				for(x in 131...163) for(y in 57...79) mine(x, y);
 				var i = 0;
-				var chunksCount = 30;
+				var chunksCount = 15;
 				while (i &lt; chunksCount){
-					var x = randInt(5,250);
+					var x = randInt(5,130);
+					var y = randInt(10,90);
+					var p = Utils.clamp(Math.random(),0.25,0.75);
+					var radius = randInt(3,6);
+					generateOreChunk(area,x,y,"moltanium_ore",radius,p);
+					generateWaterChunk(area,x,y,radius+2,p+0.2);
+					i++;
+				}
+
+				i = 0;
+				while (i &lt; chunksCount){
+					var x = randInt(160,250);
 					var y = randInt(10,90);
 					var p = Utils.clamp(Math.random(),0.25,0.75);
 					var radius = randInt(3,6);
@@ -97,7 +95,7 @@
 			</section>
 			<section>
 				<action>
-					setFlag('on_RB_planet',true);
+					area.renderer.addChildAt(area.renderer.getChildAt(1), 6);
 					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
 						player.showWarning(getText('warning.heat_protection'));
 					}
@@ -108,10 +106,20 @@
 				<dialogue text='Nice try... You are not vacuuming up my precious lava. Lemme unequip that [item="water_pump"] for you.' />
 				<action>player.equipment.unequip("back",player,true);</action>
 			</section>
+			<section if="area.getObject('RB_old_ship.crack2') == null && player.getKillCount('RB_boss') > 0">
+					<object id="RB_old_ship.decoy" x="138.125" y="77.0625" />
+					<light x="138.125" y="77.0625" size="10" />
+					<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
+					<wait seconds="0.5" />
+					<object id="RB.explosion" x="138.125" y="77.0625" />
+					<object id="RB_old_ship.crack2" x="138.125" y="77.0625" />0
+					<sound id="explosion" />
+					<action>for(x in 138...142) for(y in 74...78) mine(x,y);</action>
+					<wait seconds="2">
+						<operate object="area.getObject('RB.explosion')" />
+					</wait>
+			</section>
 		</onLoad>
-		<onLeave>
-			<action>setFlag('on_RB_planet',false);</action>
-		</onLeave>
 	</area>
 	<area id="RB_old_ship_boss" width="32" height="16" external="robot_start">
 		<tiles id="ship" start="0" end="1" />
@@ -127,7 +135,7 @@
 		<init><runAreaLoad/></init>
 		<onLoad><section if="area.getObject('RB_boss') != null"><run procedure="RB_boss_start" /></section></onLoad>
 	</area>
-	<area id="RB.bridge" x="-8" y="-8" width="32" height="25">
+	<area id="RB.bridge" x="-8" y="-8" width="32" height="25" allowHeatDamage="true">
 		<tiles id="obsidian" start="0" end="1" />
 		<mine start="0" end="1" /><tiles id="empty" start="0" end="1" />
 		<action>
@@ -145,7 +153,6 @@
 		<onLoad>
 			<section>
 				<action>
-					setFlag('on_RB_planet',true);
 					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
 						player.showWarning(getText('warning.heat_protection'));
 					}
@@ -153,21 +160,21 @@
 				<run procedure="heat_damage" />
 			</section>
 		</onLoad>
-		<onLeave>
-			<action>setFlag('on_RB_planet',false);</action>
-		</onLeave>`
 	</area>
 	<procedure id="RB_old_ship_opening">
-		<object id="RB_old_ship.decoy" x="138.125" y="77.0625" />
-		<light x="138.125" y="77.0625" size="10" />
-		<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
-		<wait seconds="0.5" />
-		<object id="RB.explosion" x="138.125" y="77.0625" />
-		<object id="RB_old_ship.crack2" x="138.125" y="77.0625" />
-		<sound id="explosion" />
-		<wait seconds="2">
-			<operate object="area.getObject('RB.explosion')" />
-		</wait>
+		<section>
+			<object id="RB_old_ship.decoy" x="138.125" y="77.0625" />
+			<light x="138.125" y="77.0625" size="10" />
+			<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
+			<wait seconds="0.5" />
+			<action>for(x in 138...143) for(y in 73...78) mine(x,y);</action>
+			<object id="RB.explosion" x="138.125" y="77.0625" />
+			<object id="RB_old_ship.crack2" x="138.125" y="77.0625" />0
+			<sound id="explosion" />
+			<wait seconds="2">
+				<operate object="area.getObject('RB.explosion')" />
+			</wait>
+		</section>
 	</procedure>
 
 	<procedure id="RB_ship_robots_lava">
@@ -205,7 +212,7 @@
 		</invokeLater>
 	</procedure>
 
-	<area id="RB_ship_robots" width="64" height="32" external="robot_start" planet="robot_rebellion" water="RB_lava" water_anim="RB_lava">
+	<area id="RB_ship_robots" width="64" height="32" external="robot_start" planet="robot_rebellion" water="RB_lava" water_anim="RB_lava" allowHeatDamage="true">
 		<tiles id="ship" start="0" end="1" />
 		<action>for(y in 10...24) for(x in 10...56) mine(x, y);</action>
 		<action>for(y in 10...24){setTile(12,y,"ship"); setTile(13,y,"ship");} for(y in 14...18){mine(12,y); mine(13,y);}</action>
@@ -229,7 +236,7 @@
 			</section>
 			<section>
 				<action>
-					setFlag('on_RB_planet',true);
+					area.renderer.addChildAt(area.renderer.getChildAt(1), 6);
 					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
 						player.showWarning(getText('warning.heat_protection'));
 					}
@@ -237,9 +244,6 @@
 				<run procedure="heat_damage" />
 			</section>
 		</onLoad>
-		<onLeave>
-			<action>setFlag('on_RB_planet',false);</action>
-		</onLeave>
 	</area>
 
 	<area id="RB_old_ship.cave2" width="74" height="64" powered="this.getObject('RB_power_cores') != null">
@@ -284,6 +288,9 @@
 		<structure id="RB_robots_door" x="64" y="15">
 			<teleport area="RB_ship_robots" x="10" y="15" />
 		</structure>
+		<objects id="whip_bot" startX="13" endX="60" startY="14" endY="14" minDist="5" maxDist="7" count="5" />
+		<spawner id="whip_bot" time="750" count="4" fromX="13" toX="60" fromY="14" toY="14" />
+		<objects id="whip_bot" startX="38" endX="95" startY="45" endY="65" minDist="5" maxDist="7" count="5" />
 	</area>
 	<procedure id="unlock_RB_doors">
 		<remove object="area.getObject('RB_room_door')" />
@@ -322,7 +329,7 @@
 			this.inventory.addItems(Item.get("titanium"), 20);
 			this.inventory.addItems(Item.get("exotic_matter"), 2);
 			this.inventory.addItems(Item.get("ship_parts"),2);
-			this.inventory.addItems(Item.get("sulphur"),20);
+			this.inventory.addItems(Item.get("sulfur"),20);
 			this.inventory.addItems(Item.get("steel_bar"),30);
 			this.inventory.addItems(Item.get("coal"),20);
 			this.inventory.addItems(Item.get("silicon"),20);
@@ -364,3 +371,335 @@
 		</orbit>
 	</planet>
 </areas>
+
+DifficultyMode.hx:52: Overwrite Difficulty Mode: default
+ModHandler.hx:151: Enable Mod: Core
+Music.hx:37: Overwrite Music: start
+Music.hx:37: Overwrite Music: nightly
+Music.hx:37: Overwrite Music: science1
+Music.hx:37: Overwrite Music: magic1
+EventHandler.hx:107: Overwrite Procedure: player.addItem
+EventHandler.hx:107: Overwrite Procedure: player.changeEquip
+ItemInfo.hx:506: Overwrite Item: fire_gem
+ItemInfo.hx:506: Overwrite Item: alter_gem
+Lang.hx:206: Overwrite Text: common.save_prompt_magic
+Lang.hx:206: Overwrite Text: common.save_prompt_science
+Lang.hx:206: Overwrite Text: common.save_prompt_magic
+Lang.hx:206: Overwrite Text: common.save_prompt_science
+Lang.hx:206: Overwrite Text: common.save_prompt_magic
+Lang.hx:206: Overwrite Text: common.save_prompt_science
+ObjectInfo.hx:76: Overwrite Object: alien
+EventHandler.hx:107: Overwrite Procedure: start.doodad
+ObjectInfo.hx:76: Overwrite Object: builder
+ObjectInfo.hx:76: Overwrite Object: farmer
+ObjectInfo.hx:76: Overwrite Object: miner
+ObjectInfo.hx:76: Overwrite Object: trader
+Generate.hx:280: Overwrite Area: science1
+Generate.hx:280: Overwrite Area: start
+Generate.hx:280: Overwrite Area: farming
+Generate.hx:280: Overwrite Area: water_cave
+Generate.hx:280: Overwrite Area: snow_island
+EventHandler.hx:107: Overwrite Procedure: science1_end
+EventHandler.hx:107: Overwrite Procedure: magic1_end
+Scene.hx:113: Overwrite Scene: alchemist
+EventHandler.hx:107: Overwrite Procedure: mirrows.npc
+ObjectInfo.hx:76: Overwrite Object: mechanic
+ObjectInfo.hx:76: Overwrite Object: fisherman
+EventHandler.hx:107: Overwrite Procedure: player.init
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+ObjectInfo.hx:76: Overwrite Object: player.ancient
+ItemInfo.hx:506: Overwrite Item: horn
+ItemInfo.hx:506: Overwrite Item: ice_heart
+StructureInfo.hx:117: Overwrite Structure: magic_forge
+ObjectInfo.hx:76: Overwrite Object: fly_adult_dragon
+ItemInfo.hx:506: Overwrite Item: dark_fur
+ItemInfo.hx:506: Overwrite Item: helium_sac
+ObjectInfo.hx:76: Overwrite Object: fire_bird
+ObjectInfo.hx:76: Overwrite Object: icer
+ObjectInfo.hx:76: Overwrite Object: yeti
+ObjectInfo.hx:76: Overwrite Object: crawler
+ObjectInfo.hx:76: Overwrite Object: fire_boar
+ObjectInfo.hx:76: Overwrite Object: shadow_cat
+ObjectInfo.hx:76: Overwrite Object: minotaur
+StructureInfo.hx:117: Overwrite Structure: evo_chamber
+StructureInfo.hx:117: Overwrite Structure: magic_house
+ObjectInfo.hx:76: Overwrite Object: magic_wyrm
+StructureInfo.hx:117: Overwrite Structure: wyrm_pen
+StructureInfo.hx:117: Overwrite Structure: crashed_ship
+ObjectInfo.hx:76: Overwrite Object: hunter
+StructureInfo.hx:117: Overwrite Structure: farm
+Scene.hx:113: Overwrite Scene: inn
+StructureInfo.hx:117: Overwrite Structure: inn
+EventHandler.hx:107: Overwrite Procedure: lurker.restock
+EventHandler.hx:107: Overwrite Procedure: science1.doodad
+ObjectInfo.hx:76: Overwrite Object: alchemist_magic
+EventHandler.hx:107: Overwrite Procedure: alchemist.idle
+ObjectInfo.hx:76: Overwrite Object: alchemist
+Generate.hx:280: Overwrite Area: magic1
+ItemInfo.hx:506: Overwrite Item: fire_gem
+EventHandler.hx:107: Overwrite Procedure: spirit.death
+Generate.hx:280: Overwrite Area: magic1
+ObjectInfo.hx:76: Overwrite Object: leech
+ModHandler.hx:151: Enable Mod: Full Version
+ModHandler.hx:151: Enable Mod: Immature Comedy
+ModHandler.hx:151: Enable Mod: Music Player
+StructureInfo.hx:117: Overwrite Structure: growth
+ModHandler.hx:151: Enable Mod: Seed Crafting
+ItemCategory.hx:27: Overwrite Item Type: blueprint
+ModHandler.hx:151: Enable Mod: Blueprint storing
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+ModHandler.hx:151: Enable Mod: Space Catwalks
+ModHandler.hx:151: Enable Mod: Underground Bunker
+ModHandler.hx:151: Enable Mod: Better Nets
+ModHandler.hx:151: Enable Mod: geomorpher
+Tile.hx:66: Overwrite Tile: empty.ico
+ModHandler.hx:151: Enable Mod: Tranquilizer Gun
+ItemInfo.hx:506: Overwrite Item: spirit_scythe
+ItemInfo.hx:506: Overwrite Item: spirit_bow
+ItemInfo.hx:506: Overwrite Item: spirit_glaive
+ObjectInfo.hx:76: Overwrite Object: player.ancient
+CropInfo.hx:54: Overwrite Crop: spirit_fish
+ObjectInfo.hx:76: Overwrite Object: spirit_fish
+ObjectInfo.hx:76: Overwrite Object: spirit_fox
+ObjectInfo.hx:76: Overwrite Object: spirit_imp
+ObjectInfo.hx:76: Overwrite Object: spirit_ox
+ObjectInfo.hx:76: Overwrite Object: venatrix
+ObjectInfo.hx:76: Overwrite Object: water_elemental
+ObjectInfo.hx:76: Overwrite Object: fire_elemental
+ObjectInfo.hx:76: Overwrite Object: ice_elemental
+ObjectInfo.hx:76: Overwrite Object: earth_elemental
+ObjectInfo.hx:76: Overwrite Object: plant_elemental
+Generate.hx:280: Overwrite Area: spirit
+Generate.hx:280: Overwrite Area: start
+Generate.hx:280: Overwrite Area: pumpkin_cave
+ObjectInfo.hx:76: Overwrite Object: alchemist
+ObjectInfo.hx:76: Overwrite Object: fish_librarian
+ObjectInfo.hx:76: Overwrite Object: ancient_dragon_npc
+ObjectInfo.hx:76: Overwrite Object: worker_bot.farmer
+ObjectInfo.hx:76: Overwrite Object: farmer
+ObjectInfo.hx:76: Overwrite Object: farmer2
+ObjectInfo.hx:76: Overwrite Object: spirit_guide
+Scene.hx:113: Overwrite Scene: spirit
+StructureInfo.hx:117: Overwrite Structure: magic_forge
+ModHandler.hx:151: Enable Mod: Spirits Plus
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+ModHandler.hx:151: Enable Mod: Magical Houses
+ModHandler.hx:151: Enable Mod: Letter Placer
+ObjectInfo.hx:76: Overwrite Object: mechanic
+SolarSystem.hx:40: Overwrite System: start
+SolarSystem.hx:40: Overwrite System: sol
+SolarSystem.hx:40: Overwrite System: alien_hq
+SolarSystem.hx:32: No System found: UAMT_system1
+SolarSystem.hx:40: Overwrite System: UAMT_system1
+ModHandler.hx:151: Enable Mod: Asteroids
+SolarSystem.hx:40: Overwrite System: UAMT_system1
+Lang.hx:206: Overwrite Text: system.UAMT_system1
+Lang.hx:206: Overwrite Text: system.desc.UAMT_system1
+ModHandler.hx:151: Enable Mod: Wyrm Planet
+ModHandler.hx:151: Enable Mod: Ore Scanner
+ModHandler.hx:151: Enable Mod: Utility Bots
+ModHandler.hx:151: Enable Mod: Book of Cows
+ModHandler.hx:151: Enable Mod: Found Item List
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+StructureInfo.hx:117: Overwrite Structure: station.module.xlarge.interior
+ModHandler.hx:151: Enable Mod: More Modules
+ModHandler.hx:151: Enable Mod: Vehicle Locator
+ModHandler.hx:151: Enable Mod: Mod Configurator
+ObjectInfo.hx:76: Overwrite Object: alchemist
+ModHandler.hx:151: Enable Mod: Treekiller Axe
+EventHandler.hx:107: Overwrite Procedure: stocks.mirrows
+EventHandler.hx:107: Overwrite Procedure: mirrows.store
+Scene.hx:113: Overwrite Scene: spirit
+EventHandler.hx:107: Overwrite Procedure: player.init
+Lang.hx:206: Overwrite Text: item.names.earth_chainsaw
+Tile.hx:66: Overwrite Tile: magic1.grass
+ItemInfo.hx:506: Overwrite Item: plant_eye
+Autotile.hx:25: Overwrite Autotile: rail
+Tile.hx:66: Overwrite Tile: rail
+ItemInfo.hx:506: Overwrite Item: rail
+Tile.hx:66: Overwrite Tile: cable
+ItemInfo.hx:506: Overwrite Item: cable
+Tile.hx:66: Overwrite Tile: cable_rail
+ItemInfo.hx:506: Overwrite Item: focus_gem
+EventHandler.hx:107: Overwrite Procedure: player.init
+ObjectInfo.hx:76: Overwrite Object: spirit.orb
+ItemInfo.hx:506: Overwrite Item: earth_hammer
+ItemInfo.hx:506: Overwrite Item: moissanite
+ItemInfo.hx:506: Overwrite Item: exo_fighter
+StructureInfo.hx:117: Overwrite Structure: magic_forge
+ItemInfo.hx:506: Overwrite Item: pig
+ItemInfo.hx:506: Overwrite Item: cow
+StructureInfo.hx:117: Overwrite Structure: stall
+StructureInfo.hx:117: Overwrite Structure: wyrm_pen
+StructureInfo.hx:117: Overwrite Structure: coral_pen
+ObjectInfo.hx:76: Overwrite Object: boar
+ObjectInfo.hx:76: Overwrite Object: golem
+ObjectInfo.hx:76: Overwrite Object: gold_golem
+ObjectInfo.hx:76: Overwrite Object: purple_golem
+ObjectInfo.hx:76: Overwrite Object: golemech
+ObjectInfo.hx:76: Overwrite Object: megolemech
+ObjectInfo.hx:76: Overwrite Object: meat_tree_wasp
+ObjectInfo.hx:76: Overwrite Object: nursery.crab
+CropInfo.hx:54: Overwrite Crop: pig
+CropInfo.hx:54: Overwrite Crop: spirit_fish
+FamiliarType.hx:84: Overwrite Familiar: worker_bot
+ObjectInfo.hx:76: Overwrite Object: fire_boar
+ObjectInfo.hx:76: Overwrite Object: stinger
+ObjectInfo.hx:76: Overwrite Object: blue_crab
+ObjectInfo.hx:76: Overwrite Object: lampfish
+ObjectInfo.hx:76: Overwrite Object: lampfish2
+StructureInfo.hx:117: Overwrite Structure: hydroponics
+StructureInfo.hx:117: Overwrite Structure: laurel_growth
+StructureInfo.hx:117: Overwrite Structure: earth.computer2
+StructureInfo.hx:117: Overwrite Structure: evo_house
+StructureInfo.hx:117: Overwrite Structure: alien_hq.factory
+StructureInfo.hx:117: Overwrite Structure: colony.cafeteria
+EventHandler.hx:107: Overwrite Procedure: lurker.restock
+EventHandler.hx:107: Overwrite Procedure: stocks.mirrows
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+StructureInfo.hx:117: Overwrite Structure: blueprint_printer
+ObjectInfo.hx:76: Overwrite Object: ride_golemech
+ObjectInfo.hx:76: Overwrite Object: ride_megolemech
+ObjectInfo.hx:76: Overwrite Object: sub
+ObjectInfo.hx:76: Overwrite Object: fighter
+ObjectInfo.hx:76: Overwrite Object: research
+ObjectInfo.hx:76: Overwrite Object: colony_ship
+ObjectInfo.hx:76: Overwrite Object: dragon_ship
+ObjectInfo.hx:76: Overwrite Object: dragon_fighter
+ObjectInfo.hx:76: Overwrite Object: dragon_bomber
+ObjectInfo.hx:76: Overwrite Object: dragon_cruiser
+Generate.hx:280: Overwrite Area: dragon_ship.interior
+Generate.hx:280: Overwrite Area: dragon_fighter.interior
+Generate.hx:280: Overwrite Area: dragon_bomber.interior
+Generate.hx:280: Overwrite Area: dragon_cruiser.interior
+ItemInfo.hx:506: Overwrite Item: alter_gem
+Recipe.hx:114: Overwrite Recipe: craft_coral_pen_seed
+Recipe.hx:114: Overwrite Recipe: craft_coral_farm_seed
+Recipe.hx:114: Overwrite Recipe: create_exotic_matter
+Recipe.hx:114: Overwrite Recipe: create_bppaper
+Generate.hx:280: Overwrite Area: science1
+Generate.hx:280: Overwrite Area: magic1
+Generate.hx:280: Overwrite Area: mars
+Generate.hx:280: Overwrite Area: mercury
+Generate.hx:280: Overwrite Area: spirit
+Generate.hx:280: Overwrite Area: magic2.floating.big
+Generate.hx:280: Overwrite Area: start.dwarf
+StructureInfo.hx:117: Overwrite Structure: fish.market
+StructureInfo.hx:117: Overwrite Structure: tindle.store
+StructureInfo.hx:117: Overwrite Structure: food_market
+StructureInfo.hx:117: Overwrite Structure: sci1.food_market
+StructureInfo.hx:117: Overwrite Structure: bunker_merchant.food
+StructureInfo.hx:117: Overwrite Structure: colony.food_market
+StructureInfo.hx:117: Overwrite Structure: weaps_market
+StructureInfo.hx:117: Overwrite Structure: sci1.weaps_market
+StructureInfo.hx:117: Overwrite Structure: bunker_merchant.weaps
+StructureInfo.hx:117: Overwrite Structure: colony.weaps_market
+StructureInfo.hx:117: Overwrite Structure: colony.mineral_market
+StructureInfo.hx:117: Overwrite Structure: vending_machine
+EventHandler.hx:107: Overwrite Procedure: stocks.beastmaster
+EventHandler.hx:107: Overwrite Procedure: stocks.spirit
+EventHandler.hx:107: Overwrite Procedure: stocks.spirit
+ItemInfo.hx:506: Overwrite Item: spirit_essence
+StructureInfo.hx:117: Overwrite Structure: coral_pen
+ModHandler.hx:81: Overwrite Data[spirit_world]: spirit_maze
+ItemInfo.hx:506: Overwrite Item: hunter_spirit
+ObjectInfo.hx:76: Overwrite Object: skyfish
+EventHandler.hx:107: Overwrite Procedure: stocks.mirrows
+ObjectInfo.hx:76: Overwrite Object: player.ancient
+ObjectInfo.hx:76: Overwrite Object: player.werewolf
+EventHandler.hx:107: Overwrite Procedure: player.init
+EventHandler.hx:107: Overwrite Procedure: player.handleSecond
+ModHandler.hx:151: Enable Mod: Recolligo
+ObjectInfo.hx:76: Overwrite Object: leech
+Recipe.hx:114: Overwrite Recipe: craft_laser_sword
+Recipe.hx:114: Overwrite Recipe: make_ice_boomerang
+Recipe.hx:114: Overwrite Recipe: make_fire_boomerang
+Recipe.hx:114: Overwrite Recipe: make_water_boomerang
+Recipe.hx:114: Overwrite Recipe: make_plant_boomerang
+ModHandler.hx:151: Enable Mod: Backer Weapons
+EventHandler.hx:107: Overwrite Procedure: mirrows.npc
+ObjectInfo.hx:76: Overwrite Object: professor
+StructureInfo.hx:117: Overwrite Structure: hut
+Scene.hx:113: Overwrite Scene: spirit
+Scene.hx:113: Overwrite Scene: hut
+Scene.hx:113: Overwrite Scene: scavenger
+Lang.hx:206: Overwrite Text: common.complete
+Lang.hx:206: Overwrite Text: actions.open
+TileAnimation.hx:103: Overwrite Animation: young_dragon.idle
+Requirement.hx:121: No item: ROD_hostage
+Requirement.hx:121: No item: ROD_rebel_head
+StructureInfo.hx:117: Overwrite Structure: dragon_lair2
+ItemInfo.hx:506: Overwrite Item: water_pump
+Requirement.hx:121: No item: abyssal_shard
+ObjectInfo.hx:76: Overwrite Object: alchemist
+ObjectInfo.hx:76: Overwrite Object: president
+Generate.hx:280: Overwrite Area: colosseum.arena
+ModHandler.hx:151: Enable Mod: Thirallan: Alchemist Edition
+EventHandler.hx:107: Overwrite Procedure: player.init
+StructureInfo.hx:117: Overwrite Structure: stall
+StructureInfo.hx:117: Overwrite Structure: wyrm_pen
+ItemInfo.hx:506: Overwrite Item: sunflower_seed
+Generate.hx:280: Overwrite Area: science1
+Generate.hx:280: Overwrite Area: magic1
+Generate.hx:280: Overwrite Area: magic2
+Generate.hx:280: Overwrite Area: farming
+StructureInfo.hx:117: Overwrite Structure: sci1.food_market
+StructureInfo.hx:117: Overwrite Structure: bunker_merchant.food
+StructureInfo.hx:117: Overwrite Structure: colony.food_market
+StructureInfo.hx:117: Overwrite Structure: hydroponics
+ObjectInfo.hx:76: Overwrite Object: tree
+EventHandler.hx:107: Overwrite Procedure: blueprint_printer_recipes
+StructureInfo.hx:117: Overwrite Structure: cloning_vat
+ModHandler.hx:151: Enable Mod: Expert Farming
+Inventory.hx:66: No Item found: gene_lab_blueprint
+Inventory.hx:66: No Item found: entity_locator
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Inventory.hx:66: No Item found: gene_grower_blueprint
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Inventory.hx:66: No Item found: gene_lab_blueprint
+Inventory.hx:66: No Item found: entity_locator
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Inventory.hx:66: No Item found: gene_grower_blueprint
+Inventory.hx:66: No Item found: gene_lab_blueprint
+Inventory.hx:66: No Item found: entity_locator
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Inventory.hx:66: No Item found: gene_grower_blueprint
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Inventory.hx:66: No Item found: terminal
+Inventory.hx:66: No Item found: foss_blueprint
+Tile.hx:70: No Tile found: cable_v
+Tile.hx:70: No Tile found: cable_v
+Generate.hx:309: Generate robot_start: 0.075s
+area.getXML(area.id).first.xml.get("allowHeatDamage")
+    Null Object Reference
+area.getXML(area.id).first.xml
+    Null Object Reference
+area.getXML(area.id).first
+    Null Object Reference
+area.getXML(area.id).
+    EUnexpected(<eof>)
+area.getXML(area.id)
+    Null Object Reference
+area.getXML(this.id
+    EUnexpected(<eof>)
+area.getXML(this.id)
+    EUnknownVariable(this)
+area.getXML()
+    Null Object Reference
+area.getXml(area.id).first.xml.get("allowHeatDamage")
+    Null Object Reference
+area.getXml(area.id).first.xml
+    Null Object Reference
+area.getXml(area.id).first
+    Null Object Reference
+area.getXml(area.id)
+    Null Object Reference
+area
+    [Area]
+classFields(area)
+    [__dispatching,__targetDispatcher,__eventMap,__newEventMap,addEventListener,dispatchEvent,hasEventListener,removeEventListener,__dispatchEvent,tile_index,floor,tile_index_map,tile_index_count,addTileIndex,getTileId,isNeighbor,getTile,update_autotile,setTile,write,read,id,structures,objects,spawner,projectiles,runInit,__name,external,lights,openTiles,waterLevel,left,right,vehicle,up,down,planet,hasO2,tidallyLocked,hasO2Func,definedWidth,readXml,getStartX,getEndX,renderer,isInit,load,unload,init,destroy,flood_time,__loopX,__flood,isSurrounded,flood,dronePlayers,temporaryTime,enter_frame,getCrack,getTileBreak,getTileAnim,getTileScale,getOreAnim,getWaterTile,getWaterAltTile,getWaterAnim,getWaterBlock,getWaterBlockAnim,getInvisibleBlock,getInvisibleBlockAnim,hasTile,getLiveCount,addStructure,__addStructure,getExit,getCustomFlag,removeObjects,removeObjectsInLayer,removeStructures,removeStructure,_addStructure,getStructures,getStructure,getStructureInTile,overlapsStructure,getStructuresInBounds,getObjectsInBounds,getStructureById,getStructuresById,getStructureByClass,getMainStorehouse,getObject,getObjectsById,getNPC,canGetNPC,addObject,objectHasPlayer,hasPlayer,hasActivePlayer,removeObject,moveObject,getAllObjects,getObjects,getActionObject,getClosestPlayer,insertFill,floodFill,intersectsLoop,breakBrick,hasBlocker,hasObjectInLayer,hasHostile,hasObject,hasObjectInBounds,canShovel,getInterior,getInventory,hasObjectInTile,hasObjectIdInTile,getObjectsInTile,addProjectile,removeProjectile,getProjectiles,set_name,get_name,getTileString,getFlags,hasFlags,setFlags,addFlags,isOpenWater,isWater,isTrueWater,getWaterDepth,setWater,removeWaterLater,removeWater,addAdjacentOpen,isWaterBlock,setWaterBlock,removeWaterBlock,hasOpenTile,addToOpen,removeWaterTile,isLit,setLit,setUnlit,isBlockNPC,setBlockNPC,unsetBlockNPC,isBlockPlayer,setBlockPlayer,unsetBlockPlayer,isBlockVehicle,setBlockVehicle,unsetBlockVehicle,setLightTile,insertNode,emptyTile,isEmptyTile,isGrass,lightTiles,getPlanet,getSystem,getBaseTile,mine,isFishable,updateChunk,updateChunks,onLoad,setVehicle,shouldLight,canFly,isOrbitInterior,isOrbit,isLooping,viewHidden,fixedCamera,shouldRunInit,isVisitable,getDropoff,clearReturn,vars,getVars,getBackDarkness,showLightTiles,isPowered,isTemporary,forceNPCWander,generateO2,hasOxygen,getLoop,getWidth,getDisplay,isActivePlayer,adjustDx,__id,__assignId,__loadId,__recycleId]

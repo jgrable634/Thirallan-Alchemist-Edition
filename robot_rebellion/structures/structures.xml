@@ -27,7 +27,7 @@
 	</structure>
 	<structure id="RB_old_ship_door.exit" tile="ship_door" behind="true" remove="false">
 		<tooltip id="enter" if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null" />
-		<operate><section if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null"><return with="ellipse" /><section if="area.getObject('RB_old_ship.crack2') == null"><run procedure="RB_old_ship_opening" /></section></section></operate>
+		<operate><section if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null"><return with="ellipse" /></section></operate>
 		<over><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.opening", false)</action></over>
 		<out><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.closing", false)</action></out>
 	</structure>
@@ -45,7 +45,7 @@
 			<menu section="common" closeable="true">
 				<dialogue section="ship" id="advanced_terminal" />
 				<choice id="robot_factory_access">
-					<section if="getFlag('RB_old_ship.powered')">
+					<section if="player.areas.get('RB_old_ship.cave2').getObject('RB_power_cores') != null">
 						<dialogue section="ship" id="robots1" />
 						<choice id="RB_ask">
 							<dialogue section="ship" id="robots" />
@@ -56,21 +56,21 @@
 					<dialogue section="ship" id="no_power" />
 				</choice>
 				<choice id="ship_storage_access">
-					<section if="getFlag('RB_old_ship.powered')">
+					<section if="player.areas.get('RB_old_ship.cave2').getObject('RB_power_cores') != null">
 						<dialogue section="ship" id="storage" />
 						<stop/>
 					</section>
 					<dialogue section="ship" id="no_power" />
 				</choice>
 				<choice id="projection_room_access">
-					<section if="getFlag('RB_old_ship.powered')">
+					<section if="player.areas.get('RB_old_ship.cave2').getObject('RB_power_cores') != null">
 						<dialogue section="ship" id="projection" />
 						<stop/>
 					</section>
 					<dialogue section="ship" id="no_power" />
 				</choice>
 				<choice id="power_room_access">
-					<section if="getFlag('RB_old_ship.powered')">
+					<section if="player.areas.get('RB_old_ship.cave2').getObject('RB_power_cores') != null">
 						<dialogue section="ship" id="power" />
 						<stop/>
 					</section>
@@ -81,24 +81,35 @@
 						<dialogue section="ship" id="logs" />
 						<choice id="5/1">
 							<dialogue section="ship" id="5/1_logs" />
+							<dialogue section="ship" id="5/1_logs2" />
+							<dialogue section="ship" id="5/1_logs3" />
 						</choice>
 						<choice id="5/9">
 							<dialogue section="ship" id="5/9_logs" />
+							<dialogue section="ship" id="5/9_logs2" />
 						</choice>
 						<choice id="6/1">
 							<dialogue section="ship" id="6/1_logs" />
+							<dialogue section="ship" id="6/1_logs2" />
 						</choice>
 						<choice id="12/25">
 							<dialogue section="ship" id="12/25_logs" />
+							<dialogue section="ship" id="12/25_logs2" />
 						</choice>
 						<choice id="1/1">
 							<dialogue section="ship" id="1/1_logs" />
+							<dialogue section="ship" id="1/1_logs2" />
 						</choice>
 						<choice id="3/26">
 							<dialogue section="ship" id="3/26_logs" />
+							<dialogue section="ship" id="3/26_logs2" />
 						</choice>
 						<choice id="5/1y">
 							<dialogue section="ship" id="5/1y_logs" />
+							<dialogue section="ship" id="5/1y_logs2" />
+							<dialogue section="ship" id="5/1y_logs3" />
+							<dialogue section="ship" id="5/1y_logs4" />
+							<dialogue section="ship" id="5/1y_logs5" />
 						</choice>
 					</menu>
 				</choice>

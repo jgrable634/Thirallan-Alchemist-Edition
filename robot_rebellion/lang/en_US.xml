@@ -13,13 +13,13 @@
 		<text id="projection_room_access">Holo Projection Facility</text>
 		<text id="power_room_access">Power Facilities</text>
 		<text id="view_logs">View Logs</text>
-		<text id="5/1">5/1 - Departure</text>
-		<text id="5/9">5/9 - Early Trials</text>
-		<text id="6/1">6/1 - One Month</text>
-		<text id="12/25">12/25 - Christmas</text>
-		<text id="1/1">1/1 - New Year</text>
-		<text id="3/26">3/26 - Terror</text>
-		<text id="5/1y">5/1 - One Year</text>
+		<text id="5/1">May 1st</text>
+		<text id="5/9">May 9th</text>
+		<text id="6/1">June 1st</text>
+		<text id="12/25">December 25th</text>
+		<text id="1/1">January 1st</text>
+		<text id="3/26">March 26th</text>
+		<text id="5/1y">May 1st</text>
 	</section>
 	<section id="quests">
 		<text id="RB_old_ship">A Strange Signal</text>
@@ -87,13 +87,24 @@
 		<text id="power">Power generation[pause=10].[pause=10].[pause=10].[pause=20] adequate.</text>
 		<text id="power_error">Critical damage to Power Generator. [item=exotic_matter] not detected in cores. Core repair required.</text>
 		<text id="logs">Select Log to review:</text>
-		<text id="5/1_logs">Well. This is it, it's time to travel the unknown... There has been so much peace in this world it's just amazing. So amazing that the world is joining together to research ways to make colonization better! No conflict at all! Let's hope it stays that way!</text>
-		<text id="5/9_logs">We were already aware that this was going to be difficult. But I'm alraedy having second thoughts about this, but of course it's too late anyway. People are already beginning to get worried about the success of this trip. However we should have enough supplies to find somewhere habitable.</text>
-		<text id="6/1_logs">It's been a whole month since we left Earth. My wife and kids are back on Earth, as only people who were trained for this kind of thing were allowed on. This seems a little worrying, that I may never see my family again. But this is for the benefit of the entire human race! I must not be selfish!</text>
-		<text id="12/25_logs">It's been a long time since my last entry. I figured it would be nice to make a log on a what should be a great day. I think there is some virus going about, Some people are getting very sick. Our antibiotics aren't seeming to work, I may have to order a quarantine, which I don't want to do.</text>
-		<text id="1/1_logs">It's a new year... And you wanna know what this new year brings? A new planet! It took us this long... but we found a planet! It's got atmosphere as well! Finally!</text>
-		<text id="3/26_logs">I don't know how it happened, but suddenly the power in the Robot Facilities shut off. When we sent someone in there, he didn't come back out. We locked the door for now. I'm not sure what is in there right now. But it definitely isn't friendly. I thought the Robot Factory was safe! This can't just be a setup can it?</text>
-		<text id="5/1y_logs">This will be my last entry. I don't know what happened in the night, but whatever it was, it killed the entire crew, except me for now. All I hope is that whatever that thing is is destroyed one way or another, if anyone finds this terminal, know that the Robot Factory is not safe, and should be destroyed. Don't try to fix it, I'm sure it will break again. This is Commander Monroe, signing off for the last time.</text>
+		<text id="5/1_logs">Experiment #178: Designation: Project Colonial Robotics. Me and our technicians are proving that Artificial Intelligence can do just about anything.</text>
+		<text id="5/1_logs2">The goal is to be able to put robots on a planet, and watch them create civilization. They have succeeded on Earth in most climates and areas.</text>
+		<text id="5/1_logs3">Therefore we need to find a planet that is a bit less habitable than your average planet. We have our eyes on Unoiks 163.</text>
+		<text id="5/9_logs">Throughout the trip the technicians are doing daily tests on these robots to ensure they are working fine.</text>
+		<text id="5/9_logs2">So far they are working as we intended them too, but the potential of the Projection Room isn't as good as we thought. Nevertheless, we'll make this work.</text>
+		<text id="6/1_logs">We are noticing the repeat tests are starting to wear down on the robots. We only have so many materials to replace and repair the robots.</text>
+		<text id="6/1_logs2">I ordered a switch from daily tests to weekly tests. That should increase their lifespan.</text>
+		<text id="12/25_logs">It's been a while since my last entry, there has been a lot going on with the robots.</text>
+		<text id="12/25_logs2">They're acting quite strange, glitching up more often. We've had to keep someone on watch day and night. I'm realizing we should have hired more people. I'm sure we'll be fine.</text>
+		<text id="1/1_logs">I've been away from the bridge so much I didn't even notice the plotted course was altered. The Navigation System works fine... Unless I try to change the course back to normal.</text>
+		<text id="1/1_logs2">The altered course seems to be going to Unoiks 187. Specifically a dwarf planet, Unoiks 187b. I don't know who changed the course, and also broke the system, but I'm sure they'll own up soon enough.</text>
+		<text id="3/26_logs">We reached the dwarf planet. What I didn't realize was how close this planet was to the star of this system.</text>
+		<text id="3/26_logs2">I'm not sure how well the Ship can take all this heat and radiation, it has become significantly warmer in the entire ship, but no radiation effects that I've seen.</text>
+		<text id="5/1y_logs">Everything happened all at once. The ship was able to take the radiation and heat, but not for an entire month.</text>
+		<text id="5/1y_logs2">It's currently 130 degrees farenheit in here. I feel the radiation eating at me as I type this. I managed to get a recording into the projection room before I retreated to the Bridge.</text>
+		<text id="5/1y_logs3">To make matters worse. The robots have gone haywire. The seem to be strangely sentient, using the Robotics Factory to create weapons. There is nothing close to anything like that in their code.</text>
+		<text id="5/1y_logs4">The worst of all, I have no control over the Ship anymore. Just like the robots, it is issuing actions without any kind of human input, It is obvious where it is going. Right into the planet. My time is up.</text>
+		<text id="5/1y_logs5">If anyone manages to find this ship, and is reading these logs. Please, find your way to the Robotics Factory and shut it down.</text>
 	</section>
 
 	<section id="projector">

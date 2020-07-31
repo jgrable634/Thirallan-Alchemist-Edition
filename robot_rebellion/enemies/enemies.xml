@@ -89,7 +89,7 @@
 	<animation id="RB_smallBoss.attack" x="2" count="4" />
 	<animation id="RB_smallBoss.omni" x="6" count="3" />
 	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
-		<attack type="projectile" damage="20" range="20" animation="attack">
+		<attack type="projectile" damage="20" range="20" animation="attack" cooldown="60">
 			<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
 		<onHit><attack type="omni" damage="10" range="2" knockback="20" animation="omni" /></onHit>
@@ -122,7 +122,7 @@
 					<action>
 						enemystring = "";
 						for( y in [15,20] ) {
-							for( x in [15,18] ) {
+							for( x in [15,22] ) {
 								enemystring += '&lt;object id="moltanium_drone_abyssalFight" x="' +x+ '" y="' +y+ '" />';
 							}
 							enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
@@ -138,7 +138,7 @@
 					<action>
 						enemystring = "";
 						for( y in [15,20] ) {
-							for( x in [15,18] ) {
+							for( x in [15,22] ) {
 								enemystring += '&lt;object id="moltanium_whip_bot_abyssalFight" x="' +x+ '" y="' +y+ '" />';
 							}
 							enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
@@ -153,7 +153,7 @@
 				<section if="player.getKillCount('moltanium_whip_bot_abyssalFight') == 3">
 					<action>
 						enemystring = "";
-							for( x in [15,18] ) {
+							for( x in [15,22] ) {
 								enemystring += '&lt;object id="moltanium_RB_boss_abyssalFight" x="' +x+ '" y="15" />';
 							}
 						evalXml(enemystring);
@@ -177,7 +177,7 @@
 
 							firestring = "";
 							for( y in 10...24 ) {
-								for( x in [14,20] ) {
+								for( x in [14,24] ) {
 									setTile(x,y,null);
 								}
 							}
@@ -220,12 +220,12 @@
 			<lerp object="abyssal" alpha="0.3" seconds="1" modal="true" />
 			<play object="abyssal" animation="abyssal_one.reach_out" modal="true" />
 			<object id="abyssal_blast" x="player.tile_x-1" y="player.tile_y+1" />
-			<damage object="player" damage="30" knockback="90" attacker="abyssal" />
+			<damage object="player" damage="30" knockback="114" attacker="abyssal" />
 			<wait seconds="1" modal="false" />
 			<action>
 			  firestring = "";
 			  for( y in 10...24 ) {
-			    for( x in [14,20] ) {
+			    for( x in [14,24] ) {
 			      firestring += '&lt;object id="flame_wall" x="' +x+ '" y="' +y+ '" />';
 			    }
 			    firestring += '&lt;wait seconds="'+4/y+'"/>';
@@ -235,7 +235,7 @@
 			<action>
 					enemystring = "";
 					for( y in [15,20] ) {
-						for( x in [15,18] ) {
+						for( x in [15,22] ) {
 							enemystring += '&lt;object id="moltanium_tank_abyssalFight" x="' +x+ '" y="' +y+ '" />';
 						}
 						enemystring += '&lt;invokeLater seconds="'+10/y+'"/>';
