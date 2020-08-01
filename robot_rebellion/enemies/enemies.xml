@@ -89,6 +89,7 @@
 	<animation id="RB_smallBoss.attack" x="2" count="4" />
 	<animation id="RB_smallBoss.omni" x="6" count="3" />
 	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
+		<light tile="light.large" color="059800" />
 		<attack type="projectile" damage="20" range="20" animation="attack" cooldown="60">
 			<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
@@ -161,7 +162,7 @@
 				</section>
 			</onDeath>
 		</enemy>
-		<enemy id="moltanium_RB_boss_abyssalFight" extends="RB_boss">
+		<enemy id="moltanium_RB_boss_abyssalFight" extends="RB_boss" friendlyFire="false">
 			<onDeath>
 				<choose>
 					<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && !getFlag('deathEventOne')">

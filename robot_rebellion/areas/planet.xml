@@ -123,7 +123,7 @@
 	</area>
 	<area id="RB_old_ship_boss" width="32" height="16" external="robot_start">
 		<tiles id="ship" start="0" end="1" />
-		<action>for(y in 5...10) for(x in 8...24) mine(x, y);</action>
+		<action>for(y in 5...10) for(x in 8...24) mine(x, y,2);</action>
 		<structure id="RB_old_ship_door.exit" x="20" y="9.1" />
 		<light x="20" y="8" size="3" /><light x="21" y="8" size="3" /><light x="20" y="9" size="3" /><light x="21" y="9" size="3" />
 		<structure id="sci1.light" x="10" y="6" />
@@ -131,7 +131,7 @@
 		<structure id="sci1.light" x="18" y="6" />
 		<structure id="sci1.light" x="22" y="6" />
 		<structure id="RB_old_ship.bridge.entrance" x="8" y="9.1" />
-		<object id="RB_boss" x="8" y="10" />
+		<object id="RB_boss" x="8" y="9" facing="right" />
 		<init><runAreaLoad/></init>
 		<onLoad><section if="area.getObject('RB_boss') != null"><run procedure="RB_boss_start" /></section></onLoad>
 	</area>
@@ -178,28 +178,19 @@
 	</procedure>
 
 	<procedure id="RB_ship_robots_lava">
-		<object id="RB_old_ship.decoy" x="38" y="9" />
-		<light x="30" y="8" size="5" />
-		<light x="50" y="8" size="5" />
-		<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
-		<wait seconds="0.5" />
 		<object id="RB.explosion" x="27" y="11" />
 		<action>for(x in 30...33){mine(x,9); area.setWater(x,9);}</action>
-		<wait seconds="1.5">
-			<operate object="area.getObject('RB.explosion')" />
-		</wait>
 		<sound id="explosion" />
 		<object id="RB.explosion" x="47" y="11" />
 		<action>for(x in 50...53){mine(x,9); area.setWater(x,9);}</action>
-		<wait seconds="1.5">
-			<operate object="area.getObject('RB.explosion')" />
-		</wait>
 		<sound id="explosion" />
 		<action>for(y in 14...18) evalXml('&lt;object id="flame_wall" x="13" y="'+y+'" />'); player.setKillCount('moltanium_RB_boss_abyssalFight',0);</action>
 		<object id="moltanium_RB_boss_abyssalFight" x="20" y="15" />
 		<object id="moltanium_RB_boss_abyssalFight" x="40" y="15" />
 		<object id="RB_old_ship_crack1" x="148.8125" y="74.375" area="robot_start" />
-		<structure id="RB_old_ship.crack1.ret" x="9" y="15" />
+		<structure id="RB_old_ship.crack1.ret" x="9" y="15">
+			<teleport area="robot_start" x="148.8125" y="74.375" with="ellipse" />
+		</structure>
 		<remove structure="player.areas.get('RB_old_ship.cave2').getStructureById('RB_robots_door')" />
 		<run procedure="RB_ship_robots_moarLava" />
 	</procedure>

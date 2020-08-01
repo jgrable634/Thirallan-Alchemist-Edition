@@ -98,6 +98,12 @@
 		<familiar id="large_drone" tile="large_drone" animation="large_drone" />
 	</item>
 	<!--recipes-->
+	<recipe id="melt_moltanium" creates="moltanium" type="advanced_lab">
+		<item id="moltanium_ore" count="2" />
+	</recipe>
+	<recipe id="melt_moltanium_better" creates="moltanium" type="robot_factory">
+		<item id="moltanium_ore" count="1" />
+	</recipe>
 	<recipe id="create_robot_core" creates="robot_core" type="robot_factory">
 		<item id="moltanium" count="3" />
 		<item id="exotic_matter" count="1" />

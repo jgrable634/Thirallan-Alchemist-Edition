@@ -127,8 +127,8 @@
 			</choose>
 		</operate>
 	</object>
-	<structure id="RB_old_ship.crack1.ret" tile="crashed_ship.crack1" name="enter">
-		<operate><teleport area="robot_start" x="148.8125" y="74.375" with="ellipse" /></operate>
+	<structure id="RB_old_ship.crack1.ret" tile="crashed_ship.crack1" name="enter" type="door">
+		<afterTeleport><dig x="player.tile_x" y="player.tile_y" speed="2" /></afterTeleport>
 	</structure>
 	<object id="RB_old_ship_crack1" tile="crashed_ship.crack1" action="enter">
 		<operate><dialogue section="ship" id="lava" speaker='player' /></operate>
