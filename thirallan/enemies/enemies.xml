@@ -143,74 +143,76 @@
 	  <tile id="campaign_purifier_head" sheet="art/purifier/purifier_campaign.png" x="0" y="0" />
 	  <tile id="campaign_purifier_hand_l" sheet="art/purifier/purifier_campaign.png" x="1" y="0" />
 	  <tile id="campaign_purifier_hand_r" sheet="art/purifier/purifier_campaign.png" x="0" y="1" />
-	  <action>
-	    score = 0; setGlobal("mini-key",null); EvalXml = null;
-	    function getRandomKey(){
-	      return ["left","up","right","down"][Std.random(4)];
-	    }
-	    function popUps(arg){
-	        trace(arg);
-	        evalXml(arg);
-	    }
-	    function pressMinigame(evt,player_movement){
-	      trace(evt); trace(evt.key); trace(getGlobal("mini-key")); trace(score);
-		    if (getGlobal("mini-key") == null){
-		      setGlobal("mini-key",getRandomKey());
-		    }
-		    if(getGlobal("mini-key") == "up"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_up" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
-		    else if(getGlobal("mini-key") == "left"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_left" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
-		    else if(getGlobal("mini-key") == "right"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_right" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
-		    else if(getGlobal("mini-key") == "down"){popUps('&lt;show tooltip="popup" scale="2" hold="20" text="common.strangle_break_down" x="0.5" y="0.25" color="ffff00" bg="66000000" />');}
-		    if (evt.key == getGlobal("mini-key")){
-		      if (score >= 3) { trace("You Did It!"); player_movement.destroy(); removePress(pressMinigame); return; }
-		      score++;
-		      setGlobal("mini-key",getRandomKey());
-		    }
-		    else if(evt.key == "left" || evt.key == "up" || evt.key == "right" || evt.key == "down") {
-		      score = 0;
-		    }
-		  }
-	  //manually run " score = 0; key = null; addPress(pressMinigame); watch score; watch key; "
-	  </action>
+		<include id="fake_fishing.xml" />
+		<procedure id="hand_movementEnd">
+		<invokeLater seconds="2" >
+				<action>
+					if(getLocalPlayer().area.getObject('campaign_purifier_hand_l').movement != null){getLocalPlayer().area.getObject('campaign_purifier_hand_l').movement.destroy(); getLocalPlayer().area.getObject('campaign_purifier_hand_l').movement = null;}
+					if(getLocalPlayer().area.getObject('campaign_purifier_hand_r').movement != null){getLocalPlayer().area.getObject('campaign_purifier_hand_r').movement.destroy(); getLocalPlayer().area.getObject('campaign_purifier_hand_r').movement = null;}
+				</action>
+				<move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
+				<move object="area.getObject('campaign_purifier_hand_r')" x="14" y="-3" />
+			</invokeLater>
+		</procedure>
 	  <procedure id="hand_l.attackSelection">
+			<set id="orbs" value="[]" if="!exists('orbs')" />
 	    <action>
-	      var attackSelection = 2;
+				function addOrb(dx, dy){
+					var o = getObject("magic_orb").create(this.xPos+dx, this.yTile+dy);
+					area.addObject(o); Movement.circle(o, this, 1.25, 4); orbs.push(o);
+					Movement.seek(orbs.pop(), player, 4);
+				}
+	      var attackSelection = randInt(1,3);
+				trace(attackSelection);
 	      if(attackSelection == 1){
-	        for(x in 25...30) addOrb(x, x);
+	        for(x in 25...27){
+						addOrb(x, -x);
+						addOrb(-x, x);
+					}
 	      }
-	      else{
-	       Movement.seek(area.getObject('campaign_purifier_hand_l'),player,1,false,0,0,10);
-	       for(x in 0...10){
-	        count += frames;
-	        if(campaign_purifier_hand_l.tile_x == player.tile_x && campaign_purifier_hand_l.tile_y == player.tile_y){
-	          runProcedure('purifier_strangle');
-	        }
-	        if(count >= 10){
-	          count -= 10; campaign_purifier_hand_l.tile_x = 10; campaign_purifier_hand_l.tile_y = -3;
-	        }
-	       }
-	      }
+	      else {
+					Movement.seek(area.getObject('campaign_purifier_hand_l'),player,2,false,0,0,10);
+					runProcedure("hand_movementEnd");
+				}
 	    </action>
 	  </procedure>
 	  <procedure id="purifier_strangle">
 	    <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
-	    <teleport area="purifier_void" x="10" y="-3" />
-	    <invokeLater seconds="1">
-	      <action>
-	        Movement.seek(player, area.getObject('campaign_purifier_hand_l'),50,false,0,0);
-	        addPress(function(evt){pressMinigame(evt,player.movement);});
-	      </action>
-	    </invokeLater>
+	    <move object="player" x="10" y="-3" />
+			<action>
+				trace("Begin");
+				beginMinigame();
+			</action>
 	  </procedure>
+		<procedure id="strangleDamage">
+			<section if="player.movement != null">
+				<damage object="player" damage="10" />
+				<invokeLater seconds="0.5">
+					<run procedure="strangleDamage" />
+				</invokeLater>
+			</section>
+		</procedure>
 	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10">
 			<onHit><move object="this" x="12" y="-5" /></onHit>
 	  </enemy>
 	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l">
-	    <onFrame>count += frames; if(count >= 10 && player.tile_x == 10 && player.tile_y == -3){count = 0; runProcedure("hand_l.attackSelection");}</onFrame>
+			<addedToArea><action>handTicks = 0;</action></addedToArea>
+	    <onFrame>
+				if (!exists("handTicks") || handTicks == null || handTicks &lt;= 0) handTicks = 300;
+				handTicks -= 1;
+				setGlobal("handTicks",handTicks);
+				if(handTicks &lt;= 0 && player.movement == null){
+					trace("initiate attack");
+					runProcedure("hand_l.attackSelection");
+				}
+				if(getDistance(this,player) &lt; 16 && player.movement == null){
+					runProcedure('purifier_strangle');
+					this.movement.destroy();
+					runProcedure('strangleDamage');
+				}
+			</onFrame>
 	  </object>
-	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r">
-	    <!--onFrame>count += frames; if(count >= 15){count = 0; runProcedure("hand_r.attack");}</onFrame-->
-	  </object>
+	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r" extends="campaign_purifier_hand_l" />
 
 	<tilesheet id="art/unknown/unknown.png" width="32" height="32" />
 	<tilesheet id="art/unknown/unknown_2nd.png" width="32" height="40" />

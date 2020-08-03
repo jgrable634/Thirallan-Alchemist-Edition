@@ -1,0 +1,107 @@
+<data>
+
+  <include id="frameworks.xml" />
+  <procedure id="movementToNull">
+    <invokeLater seconds="1">
+      <action>
+        getLocalPlayer().movement = null;
+      </action>
+    </invokeLater>
+  </procedure>
+  <action>
+
+    function _stayStill(o,x,y,s){
+      if (o.setPosition != null){
+      o.setPosition(x,y);
+      }
+      if (o.renderer != null && o.renderer.scaleX != null){
+        o.renderer.scaleX = s;
+      }
+      if (o.renderer != null && o.renderer.setAnimation != null){
+        o.renderer.setAnimation("single");
+      }
+    }
+    function stayStill(o){
+      var x = o.xPos;
+      var y = o.yTile;
+      var s = o.getFacing();
+      return new Movement(o, function(o,ct,frames){return _stayStill(o,x,y,s);});
+    }
+
+
+    function beginMinigame(){
+      setGlobal("score",0);
+      getLocalPlayer().area.addObject(getObject("placeholder_strangle").create(0,0));
+      stayStill(getLocalPlayer());
+      getContainer().stage.addEventListener("keyDown",minigameControl);
+    }
+    function minigameControl(){
+      tickMinigame();
+      setGlobal("key",null);
+    }
+    function tickMinigame(){
+      var key = getGlobal("key");
+      if (key == null) return;
+      for (x in 37...41){
+        if (inputMap.get(x) == 1 && key != x){
+          // FAIL
+          trace("FAIL");
+          setGlobal("score",0);
+        }
+      }
+      if (inputMap.get(key) == 1){
+        // SUCCESS
+        var score = getGlobal("score");
+        setGlobal("score",score+1);
+        if (score >= 4){
+          finishGame();
+        }
+      }
+    }
+    function updateKey(){
+      var keys = [37,38,39,40]; //left up right down
+      setGlobal("key",keys[randInt(0,keys.length)]);
+      trace("will it still work?");
+      if(getGlobal("key") == 37){getLocalPlayer().showWarning(getText("warning.strangle_break_left"));}
+      if(getGlobal("key") == 38){getLocalPlayer().showWarning(getText("warning.strangle_break_up"));}
+      if(getGlobal("key") == 39){getLocalPlayer().showWarning(getText("warning.strangle_break_right"));}
+      if(getGlobal("key") == 40){getLocalPlayer().showWarning(getText("warning.strangle_break_down"));}
+    }
+    function keyName(){
+      var key = getGlobal("key");
+      switch(key){
+        case 37: return "left"; break;
+        case 38: return "up"; break;
+        case 39: return "right"; break;
+        case 40: return "down"; break;
+      }
+    }
+    function finishGame(){
+      getLocalPlayer().movement.destroy();
+      runProcedure("movementToNull");
+      getContainer().stage.removeEventListener("keyDown",minigameControl);
+      for (global in ["key","score"]){
+        setGlobal(global,null);
+      }
+      var area = getLocalPlayer().area;
+      area.removeObject(area.getObject("placeholder_strangle"));
+    }
+  </action>
+
+  <object id="placeholder_strangle" tile="empty">
+    <addedToArea><action>ticks = 0; tickedScore = 0;</action></addedToArea>
+    <onFrame>
+      if (!exists("ticks") || ticks == null || ticks &lt;= 0) ticks = 180;
+      ticks -= 1;
+      if (ticks &lt;= 0){
+        if (getGlobal("score") == tickedScore){
+          setGlobal("score",0); //if it did not change since the last tick, FAIL
+        }
+        updateKey();
+        tickedScore = getGlobal("score");
+      }
+    </onFrame>
+  </object>
+
+
+</data>

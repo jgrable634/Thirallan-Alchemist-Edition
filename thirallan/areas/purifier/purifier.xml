@@ -7,7 +7,6 @@
     <object id="campaign_purifier_hand_l" x="10" y="-3" />
     <object id="campaign_purifier_hand_r" x="14" y="-3" />
     <onLoad>
-      <action>EvalXml = evalXml;</action>
     </onLoad>
   </area>
 </areas>

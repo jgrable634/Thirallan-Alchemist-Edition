@@ -50,6 +50,9 @@
     <text id="fangs">About [color=770000]The Fangs[/color]</text>
     <text id="phoenixes">About [color=770000]The Phoenixes[/color]</text>
     <text id="gold_diggers_haven_about">About [color=770000]Gold Digger's Haven[/color]</text>
+  </section>
+
+  <section id="warning">
     <text id="strangle_break_up">Press [key=up]!</text>
     <text id="strangle_break_left">Press [key=left]!</text>
     <text id="strangle_break_right">Press [key=right]!</text>

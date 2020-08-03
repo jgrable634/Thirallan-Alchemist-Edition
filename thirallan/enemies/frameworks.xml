@@ -1,0 +1,272 @@
+<!-- All by Etrotta -->
+<data>
+  <!-- MISC -->
+  <action>
+    function getDistance(o1,o2){
+      if (o1 == null || o2 == null || o1.getCenterX == null || o2.getCenterX == null || o1.getCenterY == null || o2.getCenterY == null) {
+        return 0;
+      }
+      if (o1.vehicle != null) o1 = o1.vehicle;
+      if (o2.vehicle != null) o1 = o2.vehicle;
+      var dx = o1.getCenterX() - o2.getCenterX();
+      var dy = o1.getCenterY() - o2.getCenterY();
+      return Math.sqrt( dx*dx + dy*dy );
+    }
+    function getDXY(o1,o2,?speed){
+      if (o1.vehicle != null) o1 = o1.vehicle;
+      if (o2.vehicle != null) o1 = o2.vehicle;
+      if (speed == null) speed = 1;
+      var total = getDistance(o1,o2);
+      var dx = o1.getCenterX() - o2.getCenterX();
+      var dy = o1.getCenterY() - o2.getCenterY();
+      dx = -speed * dx / total;
+      dy = -speed * dy / total;
+      return {dx:dx,dy:dy};
+    }
+  </action>
+  <!-- MOUSE -->
+  <action>
+  mousePos = {
+    x:128,
+    y:64
+  };
+  mousePos.getCenterX = function(){
+    var origin = getLocalPlayer(); if (origin.vehicle != null) origin = origin.vehicle;
+    return origin.getCenterX() + Math.round( mousePos.x-128 )*getGameScale();
+  }
+  mousePos.getCenterY = function(){
+    var origin = getLocalPlayer(); if (origin.vehicle != null) origin = origin.vehicle;
+    return origin.getCenterY() + Math.round( mousePos.y-75 )*getGameScale();
+  }
+   function updateMousePos(evt){
+     mousePos.x = Math.floor(getMousePos(evt).x);
+     mousePos.y = Math.floor(getMousePos(evt).y);
+   }
+  </action>
+
+  <onLoad>
+    <action> addMouseMove(updateMousePos); </action>
+  </onLoad>
+  <!-- COOLDOWN -->
+  <action>
+    cooldowns = [];
+    loops = [];
+    function addCooldown(id,seconds,?action){
+      cooldowns.push({id:id,time:seconds,action:action});
+    }
+    function cancelCooldown(id,?runAction){
+      for (c in cooldowns){
+        if (c.id == id){
+          if (runAction) eval(c.action);
+          cooldowns.remove(c);
+        }
+      }
+    }
+    function isInCooldown(id){
+      for (c in cooldowns){
+        if (c.id == id) return true;
+      }
+      return false;
+    }
+    function updateCooldowns(){
+      for (c in cooldowns){
+        c.time--;
+        if (c.time == 0){
+          if (c.action != null) eval(c.action);
+          cooldowns.remove(c);
+        }
+      }
+    }
+
+    function addLoop(id,seconds,action){
+      loops.push({id:id,time:seconds,action:action,originalTime:seconds});
+    }
+    function removeLoop(id,?runAction){
+      for (l in loops) if (l.id == id) {
+        if (runAction){
+          eval(l.action);
+        }
+        loops.remove(l);
+      }
+    }
+    function isLooping(id){
+      for (l in loops){
+        if (l.id == id) return true;
+      }
+      return false;
+    }
+    function updateLoops(){
+      for (l in loops){
+        l.time--;
+        if (l.time == 0){
+          l.time = l.originalTime;
+          eval(l.action);
+        }
+      }
+    }
+  </action>
+
+  <procedure id="player.handleSecond" extends="player.handleSecond">
+    <action>
+      updateCooldowns();
+      updateLoops();
+    </action>
+  </procedure>
+  <!-- Custom Controls -->
+
+    <data type="key">
+      // this.number = this.xml.get("number"); //letter code
+      this.id = this.xml.get("id"); //control name
+      this.keyCode = this.xml.get("keyCode"); //keyCode
+      this.name = this.xml.get("name"); //key name, for displaying on the list
+
+      this.hold = this.xml.get("hold") == "true";
+
+      this._action = "";
+        for (actions in this.xml.elementsNamed("action")){
+          for (children in actions.children){
+            this._action += children.nodeValue;
+          }
+        }
+        if (this._action == "") _this.action = null;
+
+      this._loop = "";
+        for (actions in this.xml.elementsNamed("loop")){
+          for (children in actions.children){
+            this._loop += children.nodeValue;
+          }
+        }
+        if (this._loop == "") this._loop = null;
+      this.action = null;
+      this.loop = null;
+      //action and loop are defined onLoad, based on _action and _loop
+    </data>
+
+    <action>
+    function checkControlsUp(evt){ checkControls(evt,0); }
+    function checkControlsDown(evt){ checkControls(evt,1); }
+
+      //Value : 1 means HOLD, 0 means RELEASE
+
+  inputMap = new IntMap();
+
+      function checkControls(evt,value){
+        if (isPaused()) return;
+        for (d in getDataByType("key")){
+           if (Std.parseInt(d.keyCode) == evt.keyCode && (d.hold || !inputMap.get(d.keyCode)) ) {
+             if (d.action != null) d.action(value);
+            }
+          }
+        inputMap.set(evt.keyCode,value);
+      }
+
+      function tickLoops(){
+        for (data in getDataByType("key")) {
+          if (inputMap.get(data.id)){
+            if (data.loop != null) data.loop();
+          }
+        }
+      }
+
+      // format: [{"id":"spell","keyCode":82}]
+      function applyCustomKeysSettings(){
+        var getString = getLocalPlayer().getString;
+        if (getString("customkeys_config") != null) {
+          for (key in parseJson(getString("customkeys_config"))){
+            var k = getData("key",key.id);
+            if (k != null){
+              k.keyCode = key.keyCode;
+            }
+          }
+        }
+      }
+      function changeCustomKey(id,input){
+        var getString = getLocalPlayer().getString;
+        var setString = getLocalPlayer().setString;
+        var key = getData("key",id);
+        var code = Std.parseInt(input) == null ? input.toUpperCase().charCodeAt(0) : Std.parseInt(input);
+        key.keyCode = code;
+        var array = getString("customkeys_config") == null ? [] : parseJson(getString("customkeys_config"));
+        var _set = false;
+        for (existing in array){
+          if (existing.id == id){
+            existing.keyCode = code;
+            _set = true;
+          }
+        }
+        if (!_set) array.push({id:id,keyCode:code});
+        setString("customkeys_config",stringifyJson(array));
+      }
+      function listCustomKey(key) {
+        var name = 'magicplus.eval{text:'+key.name+'}'; //I couldn't care less about localisation...
+        var list =
+        '&lt;listItem icon="magic_box.ico" title="'+name+'" animation="single">
+        &lt;window type="input" initial="\''+key.keyCode+'\'" message="magicplus.customkeys">
+          &lt;action> changeCustomKey("'+key.id+'",result) &lt;/action>
+          &lt;closeWindows modal="true" />
+        &lt;/window>
+        &lt;tooltip>
+        &lt;/tooltip>
+        &lt;/listItem>';
+        return list;
+    };
+    function resetCustomKeys(){
+      getLocalPlayer().setString("customkeys_config",null);
+      applyCustomKeysSettings();
+    }
+    </action>
+
+    <procedure id="tickLoop">
+      <invokeLater seconds="0"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.1"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.2"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.3"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.4"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.5"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.6"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.7"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.8"><action>tickLoops();</action></invokeLater>
+      <invokeLater seconds="0.9"><action>tickLoops();</action></invokeLater>
+    </procedure>
+
+    <onLoad>
+      <action>
+        for (key in getDataByType("key")){
+          if (key._action != null) key.action = eval("function(value){"+key._action+"}");
+          if (key._loop != null) key.loop = eval("function(){"+key._loop+"}");
+        }
+        applyCustomKeysSettings();
+      </action>
+      <action>
+        if (getGlobal("remove_listeners_on_load") != null){
+          for (listener in getGlobal("remove_listeners_on_load")){
+            getContainer().stage.removeEventListener(listener.id,listener.func);
+          }
+        }
+        setGlobal("remove_listeners_on_load",[]);
+
+        getGlobal("remove_listeners_on_load").push({id:"keyDown",func:checkControlsDown});
+        getGlobal("remove_listeners_on_load").push({id:"keyUp",func:checkControlsUp});
+
+        getContainer().stage.addEventListener("keyDown",checkControlsDown);
+        getContainer().stage.addEventListener("keyUp",checkControlsUp);
+
+        addLoop("tickLoops",1,'runProcedure("tickLoop")');
+      </action>
+    </onLoad>
+    <procedure id="customkeys_config">
+      <action>
+        var window = "&lt;window type='craft' title='magicplus.customkeys_title'>";
+        for (key in getDataByType("key")){
+          window += listCustomKey(key);
+        }
+        window += "&lt;/window>";
+        evalXml(window);
+      </action>
+    </procedure>
+    <key id="config" keyCode="79" name="Open Config">
+      <action>
+        runProcedure("customkeys_config");
+      </action>
+    </key>
+</data>
