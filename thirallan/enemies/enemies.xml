@@ -144,6 +144,12 @@
 	  <tile id="campaign_purifier_hand_l" sheet="art/purifier/purifier_campaign.png" x="1" y="0" />
 	  <tile id="campaign_purifier_hand_r" sheet="art/purifier/purifier_campaign.png" x="0" y="1" />
 		<include id="fake_fishing.xml" />
+		<object id="magic_orb_purifier" tile="magic_orb" animation="magic_orb.loop" layer="player" save="false" width="16" height="16" overlapVehicle="true" removeOnComplete="true" attack_sfx="orb_impact">
+			<over>
+				<hitEffect object="this" tile="magic_orb" animation="magic_orb.impact" />
+				<damage object="player" attacker="this" damage="10" directional="false" /><remove object="this" />
+			</over>
+		</object>
 		<procedure id="hand_movementEnd">
 		<invokeLater seconds="2" >
 				<action>
@@ -176,14 +182,48 @@
 				}
 	    </action>
 	  </procedure>
-	  <procedure id="purifier_strangle">
-	    <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
-	    <move object="player" x="10" y="-3" />
+		<procedure id="hand_r.attackSelection">
+			<set id="orbs" value="[]" if="!exists('orbs')" />
 			<action>
-				trace("Begin");
-				beginMinigame();
+				function addOrb(dx, dy){
+					var o = getObject("magic_orb").create(this.xPos+dx, this.yTile+dy);
+					area.addObject(o); Movement.circle(o, this, 1.25, 4); orbs.push(o);
+					Movement.seek(orbs.pop(), player, 4);
+				}
+				var attackSelection = randInt(1,3);
+				trace(attackSelection);
+				if(attackSelection == 1){
+					for(x in 25...27){
+						addOrb(x, -x);
+						addOrb(-x, x);
+					}
+				}
+				else {
+					Movement.seek(area.getObject('campaign_purifier_hand_r'),player,2,false,0,0,10);
+					runProcedure("hand_movementEnd");
+				}
 			</action>
+		</procedure>
+	  <procedure id="purifier_strangle.lHand">
+			<section>
+				  <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
+				  <move object="player" x="11" y="-4" />
+					<action>
+					trace("Begin");
+					beginMinigame();
+					</action>
+			</section>
 	  </procedure>
+		<procedure id="purifier_strangle.rHand">
+			<section>
+					<move object="area.getObject('campaign_purifier_hand_r')" x="14" y="-3" />
+					<move object="player" x="15" y="-4" />
+					<action>
+						trace("Begin");
+						beginMinigame();
+					</action>
+			</section>
+		</procedure>
 		<procedure id="strangleDamage">
 			<section if="player.movement != null">
 				<damage object="player" damage="10" />
@@ -195,8 +235,18 @@
 	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10">
 			<onHit><move object="this" x="12" y="-5" /></onHit>
 	  </enemy>
-	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l">
-			<addedToArea><action>handTicks = 0;</action></addedToArea>
+	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l" action="struggle">
+			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>
+			<operate>
+				<action>
+					if (getGlobal("score") == tickedScore){
+	          setGlobal("score",0); //if it did not change since the last tick, FAIL
+	        }
+	        trace("update");
+	        updateKey(evalXml);
+	        tickedScore = getGlobal("score");
+				</action>
+			</operate>
 	    <onFrame>
 				if (!exists("handTicks") || handTicks == null || handTicks &lt;= 0) handTicks = 300;
 				handTicks -= 1;
@@ -206,13 +256,39 @@
 					runProcedure("hand_l.attackSelection");
 				}
 				if(getDistance(this,player) &lt; 16 && player.movement == null){
-					runProcedure('purifier_strangle');
+					runProcedure('purifier_strangle.lHand');
 					this.movement.destroy();
 					runProcedure('strangleDamage');
 				}
 			</onFrame>
 	  </object>
-	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r" extends="campaign_purifier_hand_l" />
+	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r" action="struggle">
+			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>
+			<operate>
+				<action>
+					if (getGlobal("score") == tickedScore){
+	          setGlobal("score",0); //if it did not change since the last tick, FAIL
+	        }
+	        trace("update");
+	        updateKey(evalXml);
+	        tickedScore = getGlobal("score");
+				</action>
+			</operate>
+			<onFrame>
+				if (!exists("handTicks") || handTicks == null || handTicks &lt;= 0) handTicks = 300;
+				handTicks -= 1;
+				setGlobal("handTicks",handTicks);
+				if(handTicks &lt;= 0 && player.movement == null){
+					trace("initiate attack");
+					runProcedure("hand_r.attackSelection");
+				}
+				if(getDistance(this,player) &lt; 16 && player.movement == null){
+					runProcedure('purifier_strangle.rHand');
+					this.movement.destroy();
+					runProcedure('strangleDamage');
+				}
+			</onFrame>
+		</object>
 
 	<tilesheet id="art/unknown/unknown.png" width="32" height="32" />
 	<tilesheet id="art/unknown/unknown_2nd.png" width="32" height="40" />

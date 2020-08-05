@@ -31,7 +31,6 @@
 
     function beginMinigame(){
       setGlobal("score",0);
-      getLocalPlayer().area.addObject(getObject("placeholder_strangle").create(0,0));
       stayStill(getLocalPlayer());
       getContainer().stage.addEventListener("keyDown",minigameControl);
     }
@@ -58,14 +57,14 @@
         }
       }
     }
-    function updateKey(){
+    function updateKey(evalXml){
+      trace("Key");
       var keys = [37,38,39,40]; //left up right down
       setGlobal("key",keys[randInt(0,keys.length)]);
-      trace("will it still work?");
-      if(getGlobal("key") == 37){getLocalPlayer().showWarning(getText("warning.strangle_break_left"));}
-      if(getGlobal("key") == 38){getLocalPlayer().showWarning(getText("warning.strangle_break_up"));}
-      if(getGlobal("key") == 39){getLocalPlayer().showWarning(getText("warning.strangle_break_right"));}
-      if(getGlobal("key") == 40){getLocalPlayer().showWarning(getText("warning.strangle_break_down"));}
+      if(getGlobal("key") == 37){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_left" x="0.5" y="0.2" hold="60" />');}
+      if(getGlobal("key") == 38){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_up" x="0.5" y="0.2" hold="60" />');}
+      if(getGlobal("key") == 39){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_right" x="0.5" y="0.2" hold="60" />');}
+      if(getGlobal("key") == 40){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_down" x="0.5" y="0.2" hold="60" />');}
     }
     function keyName(){
       var key = getGlobal("key");
@@ -87,21 +86,6 @@
       area.removeObject(area.getObject("placeholder_strangle"));
     }
   </action>
-
-  <object id="placeholder_strangle" tile="empty">
-    <addedToArea><action>ticks = 0; tickedScore = 0;</action></addedToArea>
-    <onFrame>
-      if (!exists("ticks") || ticks == null || ticks &lt;= 0) ticks = 180;
-      ticks -= 1;
-      if (ticks &lt;= 0){
-        if (getGlobal("score") == tickedScore){
-          setGlobal("score",0); //if it did not change since the last tick, FAIL
-        }
-        updateKey();
-        tickedScore = getGlobal("score");
-      }
-    </onFrame>
-  </object>
 
 
 </data>
