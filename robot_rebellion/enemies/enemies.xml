@@ -88,7 +88,7 @@
 	<animation id="RB_smallBoss.walk" equals="RB_smallBoss.idle" />
 	<animation id="RB_smallBoss.attack" x="2" count="4" />
 	<animation id="RB_smallBoss.omni" x="6" count="3" />
-	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
+	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false" underwater="true">
 		<light tile="light.large" color="059800" />
 		<attack type="projectile" damage="20" range="20" animation="attack" cooldown="60">
 			<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
@@ -162,39 +162,42 @@
 				</section>
 			</onDeath>
 		</enemy>
-		<enemy id="moltanium_RB_boss_abyssalFight" extends="RB_boss" friendlyFire="false">
+		<enemy id="moltanium_RB_boss_abyssalFight" extends="RB_boss">
 			<onDeath>
-				<choose>
-					<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && !getFlag('deathEventOne')">
-						<action>
-							firestring = "";
-							fireName = "'flame_wall'";
-							for( i in 0...30 ) {
+				<section>
+					<choose>
+						<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && !getFlag('deathEventOne')">
+							<action>
+								firestring = "";
+								fireName = "'flame_wall'";
+								for( i in 0...30 ) {
 
-								firestring += '&lt;remove object="area.getObject('+fireName+')" />';
-								firestring += '&lt;wait seconds="'+2/i+'" modal="false" />';
-							}
-							evalXml(firestring);
-
-							firestring = "";
-							for( y in 10...24 ) {
-								for( x in [14,24] ) {
-									setTile(x,y,null);
+									firestring += '&lt;remove object="area.getObject('+fireName+')" />';
+									firestring += '&lt;wait seconds="'+2/i+'" modal="false" />';
 								}
-							}
+								evalXml(firestring);
 
-							setFlag('deathEventOne',true);
-						</action>
-						<runAreaLoad/>
-						<stop/>
-					</section>
-					<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && getFlag('deathEventOne')">
-						<action>
-							fireName = "'flame_wall'";
-							for(y in 14...18){evalXml('&lt;remove object="area.getObject('+fireName+')" />'); setTile(13,y,null);}
-						</action>
-					</section>
-				</choose>
+								firestring = "";
+								for( y in 10...24 ) {
+									for( x in [14,24] ) {
+										setTile(x,y,null);
+									}
+								}
+
+								setFlag('deathEventOne',true);
+							</action>
+							<runAreaLoad/>
+							<stop/>
+						</section>
+						<section if="player.getKillCount('moltanium_RB_boss_abyssalFight') == 1 && getFlag('deathEventOne')">
+							<action>
+								fireName = "'flame_wall'";
+								for(y in 14...18){evalXml('&lt;remove object="area.getObject('+fireName+')" />'); setTile(13,y,null);}
+							</action>
+						</section>
+					</choose>
+					<stop/>
+				</section>
 			</onDeath>
 		</enemy>
 

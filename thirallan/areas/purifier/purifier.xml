@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
   <include id="maze.xml" />
-  <procedure id="evalXmlGlobal">
-  </procedure>
   <area id="purifier_void" width="25" height="1" background="black">
     <tiles id="blackstone" start="0" end="1" />
     <object id="campaign_purifier_head" x="12" y="-5" />
@@ -11,7 +9,6 @@
     <init><runAreaLoad/></init>
     <onLoad>
       <music id="purification1" seconds="1" />
-      <run procedure="evalXmlGlobal" />
     </onLoad>
   </area>
 </areas>

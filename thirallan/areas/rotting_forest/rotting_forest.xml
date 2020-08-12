@@ -114,8 +114,8 @@
     <ore id="quartz" start="0.6" end="0.7" percent="0.0125" tile="obsidian" />
     <ore id="uranium" start="0.7" end="1.0" percent="0.0025" tile="obsidian" />
     <ore id="lava" start="0.7" end="0.8" percent="1" tile="obsidian" />
-    <objects id="blood_tree" count="10" fromX="0" toX="50" y="-1" />
-    <objects id="blood_tree" count="10" fromX="100" toX="150" y="-1" />
+    <objects id="blood_tree" startX="0" endX="50" y="-1" minDist="6" maxDist="9" array="right" />
+    <objects id="blood_tree" startX="100" endX="150" y="-1" minDist="6" maxDist="9" array="right" />
     <structure id="undead_shrine.thirallan_rotting_forest" x="125" y="-1" />
     <structure id="monastery_entrance" x="59" y="-1" />
     <init><runAreaLoad/></init>

@@ -37,9 +37,9 @@
 		<over><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.opening", false)</action></over>
 		<out><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.closing", false)</action></out>
 	</structure>
-	<object id="RB.bridge.exit" layer="npc" action="structure.tooltip.enter" width="16" height="32">
+	<structure id="RB.bridge.exit" layer="npc" action="structure.tooltip.enter" width="16" height="32">
 		<operate><teleport area="RB_old_ship_boss" x="8.5" y="9" with="ellipse" /></operate>
-	</object>
+	</structure>
 	<object id="RB.bridge.nav" width="16" height="16" layer="npc" action="structure.tooltip.operate">
 		<operate>
 			<menu section="common" closeable="true">
@@ -130,15 +130,13 @@
 	<structure id="RB_old_ship.crack1.ret" tile="crashed_ship.crack1" name="enter" type="door">
 		<afterTeleport><dig x="player.tile_x" y="player.tile_y" speed="2" /></afterTeleport>
 	</structure>
-	<object id="RB_old_ship_crack1" tile="crashed_ship.crack1" action="enter">
+	<structure id="RB_old_ship_crack1" tile="crashed_ship.crack1" name="enter">
 		<operate><dialogue section="ship" id="lava" speaker='player' /></operate>
-	</object>
-	<structure id="RB_old_ship.crack2.ret" tile="crashed_ship.crack2" name="enter">
-		<operate><teleport area="robot_start" x="138.125" y="77.0625" with="ellipse" /></operate>
 	</structure>
-	<object id="RB_old_ship.crack2" tile="crashed_ship.crack2" action="enter">
-		<operate><teleport area="RB_old_ship.cave2" x="14" y="43" allowReturn="true" with="ellipse" /></operate>
-	</object>
+	<structure id="RB_old_ship.crack2.ret" tile="crashed_ship.crack2" name="enter" type="door">
+		<operate></operate>
+	</structure>
+	<structure id="RB_old_ship.crack2" tile="crashed_ship.crack2" name="enter" type="door" />
 	<object id="RB_room_door" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
 		<addedToArea><action>setTile(this.tile_x,this.tile_y,"empty");</action></addedToArea>
 		<operate><dialogue section="ship" id="deactivated" /></operate>
