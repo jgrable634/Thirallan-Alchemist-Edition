@@ -3,7 +3,7 @@
   <area id="thirallan_maze">
     <exit area="start" x="1" y="1" />
 
-    <set id="ar" value="[18,18,54,18,90,18,18,44,54,44,90,44,19,70,54,70,90,70]" /><action>shuffleN(ar, 2);</action>
+    <set id="ar" value="[[18,18],[54,18],[90,18],[18,44],[54,44],[90,44],[18,70],[54,70],[90,70],[18,96],[54,96],[90,96]]" /><action>shuffleN(ar, 2);</action>
 
     <set id="exits" value="[]" /><set id="structures" value="[]" /><set id="i" value="0" />
     <action>
@@ -13,24 +13,24 @@
       exits.push({area: "purifiers_teaser", x:1, y:-1});
       exits.push({area: "purifier_void", x:1, y:-1});
       i = 0;
-      while(i &lt; 18){
-        for(x in ar[i]...ar[i]+20) for(y in ar[i+1]...ar[i+1]+10){setBack(x, y, "bedrock"); area.setLightTile(x,y);}
+      while(i &lt; 12){
+        for(x in ar[i][0]...ar[i][0]+20) for(y in ar[i][1]...ar[i][1]+10){setBack(x, y, "bedrock"); area.setLightTile(x,y);}
         if(exits[i] != null){
           if(exits[i].area == "thirallan_maze"){
-            var s = buildStructure("maze_linked_door",ar[i]+10,ar[i+1]+9);
+            var s = buildStructure("maze_linked_door",ar[i][0]+10,ar[i][1]+9);
             var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
             structures.push(s);
           } else if(exits[i].area == "purifiers_teaser"){
-            var s = buildStructure("purifiers_teaser_door",ar[i]+7,ar[i+1]+9);
+            var s = buildStructure("purifiers_teaser_door",ar[i][0]+7,ar[i][1]+9);
             var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
             structures.push(s);
           } else if(exits[i].area == "purifier_void"){
-            var s = buildStructure("maze_exit",ar[i]+10,ar[i+1]+9);
+            var s = buildStructure("maze_exit",ar[i][0]+10,ar[i][1]+9);
             var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
             structures.push(s);
           }
         } else{
-            var s = buildStructure("maze_key_fragment",ar[i]+10,ar[i+1]+9);
+            var s = buildStructure("maze_key_fragment",ar[i][0]+10,ar[i][1]+9);
             i++;
         }
       }
@@ -40,7 +40,7 @@
 
 
 
-    <maze floor="bedrock" wall="blackstone" width="128" height="98" tilesPerCell="2" /><light x="64" y="64" size="3" />
-    <init><runAreaLoad /></init>
+    <maze floor="bedrock" wall="blackstone" width="64" height="60" tilesPerCell="2" /><light x="64" y="64" size="3" />
+    <init><runAreaLoad /><action>for(x in 64...66) for(y in 60...62){mine(x,y); area.setLightTile(x,y);}</action><structure id="maze_portal" x="64" y="61" /></init>
   </area>
 </airomButAlchemistFinishedIt>

@@ -6,6 +6,7 @@
     <object id="campaign_purifier_head" x="12" y="-5" />
     <object id="campaign_purifier_hand_l" x="10" y="-3" />
     <object id="campaign_purifier_hand_r" x="14" y="-3" />
+    <structure id="struggle_structure" x="10" y="-1" />
     <init><runAreaLoad/></init>
     <onLoad>
       <music id="purification1" seconds="1" />

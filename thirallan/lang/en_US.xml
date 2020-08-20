@@ -62,6 +62,7 @@
   <section id="structure.tooltip">
     <text id="monastery_weaps_market">Trade with Weapon Dealer</text>
     <text id="monastery_mineral_market">Trade with Ore Merchant</text>
+    <text id="struggle">Struggle</text>
   </section>
 
   <section id="item.names">

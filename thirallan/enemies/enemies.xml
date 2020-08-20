@@ -290,6 +290,22 @@
 			</onFrame>
 		</object>
 
+		<structure id="struggle_structure" image="art/purifier/struggle_structure.png" width="128" height="128">
+			<tooltip id="struggle" if="player.movement != null" />
+			<operate>
+				<action if="getGlobal('tickedScore_struggle') == null">setGlobal('tickedScore_struggle',0)</action>
+				<action>
+					if (getGlobal("score") == getGlobal('tickedScore_struggle')){
+						setGlobal("score",0); //if it did not change since the last tick, FAIL
+					}
+					trace("update");
+					updateKey(evalXml);
+					setGlobal('tickedScore_struggle',getGlobal("score"));
+				</action>
+			</operate>
+		</structure>
+
+
 	<tilesheet id="art/unknown/unknown.png" width="32" height="32" />
 	<tilesheet id="art/unknown/unknown_2nd.png" width="32" height="40" />
 	<tilesheet id="art/unknown/unknown_beam.png" width="64" height="16" />

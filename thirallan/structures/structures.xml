@@ -310,21 +310,49 @@
   </structure>
 
   <tilesheet id="maze_door.png" width="32" height="32" />
+  <tilesheet id="purifier_maze_end.png" width="32" height="32" />
+  <tile id="purifier_maze_end" sheet="purifier_maze_end.png" x="0" y="0" />
+  <animation id="purifier_maze_end.idle" count="1" x="0" />
+  <animation id="purifier_maze_end.purifier" count="15" x="0" />
   <tile id="maze_door" sheet="maze_door.png" x="0" y="0" />
   <animation id="maze_door.opening" count="5" />
   <animation id="maze_door.closing" count="5" reverse="true" />
   <structure id="maze_linked_door" tile="maze_door" name="enter" type="door" behind="true">
     <over><sound id="ship_door" structure="this" /></over>
   </structure>
-  <structure id="maze_exit" tile="maze_door" type="door" name="enter">
-    <operate><section><dialogue text="nope." /><stop/></section></operate>
-    <over><sound id="ship_door" structure="this" /></over>
+  <structure id="maze_exit" tile="purifier_maze_end" name="enter">
+    <operate>
+      <choose>
+        <section if="area.getStructureById('maze_key_fragment') != null">
+          <dialogue text="You feel the presence of additional Fallen Angels. You feel them glaring despite not being near them, you step away from the door, shook." />
+          <stop/>
+        </section>
+        <section>
+          <dialogue text="You've made it this far brave adventurer..." />
+          <play object="this" animation="purifier_maze_end.purifier" modal="true" />
+          <dialogue text="But are you ready to face your worst nightmare?" />
+          <menu type="common">
+            <choice id="Yes">
+              <teleport area="purifier_void" x="15" y="-1" with="fade" />
+            </choice>
+            <choice id="No">
+              <play object="this" animation="purifier_maze_end.idle" loop="true" />
+              <stop/>
+            </choice>
+          </menu>
+        </section>
+      </choose>
+    </operate>
   </structure>
   <area id="purifiers_teaser" width="96" height="40" powered="true" looping="true">
     <tiles id="blackstone" start="0" end="1" />
   </area>
-  <structure id="purifiers_teaser_door" tile="alchemist.portal" animation="alchemist_portal.idle" fps="5" fullOverlap="true" fullHeight="true" name="portal" type="door">
+  <structure id="purifiers_teaser_door" tile="alchemist.portal" animation="alchemist.portal.idle" fps="5" fullOverlap="true" fullHeight="true" name="portal" type="door">
 
   </structure>
   <structure id="maze_key_fragment" extends="undead_shrine" />
+
+  <animation id="maze_portal.idle" x="0" count="13" />
+  <structure id="maze_portal" image="maze_portal.png" width="32" height="32" type="door" name="enter" />
+
 </structures>

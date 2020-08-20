@@ -110,8 +110,9 @@
 		</init>
 		<onLoad>
 			<music id="orbit" seconds="1" />
-			<section if="player.getKillCount('RB_boss') == 0 && player.hasQuest('RB_old_ship')">
+			<section if="player.getKillCount('RB_boss') == 0 && player.hasQuest('RB_old_ship') && !getFlag('RB_ship_marked')">
 				<dialogue section="player" id="RB_old_ship_detect_near" speaker='player' />
+				<action>setFlag('RB_ship_marked',true);</action>
 				<locate id="RB_old_ship.marker" />
 			</section>
 			<section>
@@ -303,9 +304,9 @@
 		<structure id="RB_robots_door" x="64" y="15">
 			<teleport area="RB_ship_robots" x="10" y="15" />
 		</structure>
-		<objects id="whip_bot" startX="13" endX="60" startY="14" endY="14" minDist="5" maxDist="7" count="5" />
+		<objects id="whip_bot" startX="13" endX="60" startY="14" endY="14" minDist="5" maxDist="7" />
 		<spawner id="whip_bot" time="750" count="4" fromX="13" toX="60" fromY="14" toY="14" />
-		<objects id="whip_bot" startX="38" endX="95" startY="45" endY="65" minDist="5" maxDist="7" count="5" />
+		<objects id="whip_bot" startX="38" endX="95" startY="45" endY="65" minDist="5" maxDist="7" />
 	</area>
 	<procedure id="unlock_RB_doors">
 		<remove object="area.getObject('RB_room_door')" />
