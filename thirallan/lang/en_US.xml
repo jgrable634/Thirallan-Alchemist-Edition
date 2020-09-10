@@ -31,7 +31,7 @@
     <text id="spearAndArmor">Spear and Armor</text>
     <text id="diy">Do it myself</text>
     <text id="thirallan_mines_no">Are these mines? I probably shouldn't enter just yet, could be unstable.</text>
-    <text id="hut_stuff">I should probably check up on [object=zargoroth] in the [color=770000]Hut[/color].</text>
+    <text id="hut_stuff">I should probably check up on [object=zargoroth_npc] in the [color=770000]Hut[/color].</text>
     <text id="early_escape">So you decided to yolo and leave? Very well, get your shit out of the chest, and board your ship. You can go to orbit from here. Thanks for testing this.</text>
     <text id="blood_moon">The [color=770000]Blood Moon[/color] rises...</text>
     <text id="beckoning">You feel a strange voice inside your head beckoning you to the hut...</text>
@@ -80,12 +80,14 @@
     <text id="malumite_warhammer">Malumite Warhammer</text>
     <text id="steel_warhammer">Steel Warhammer</text>
     <text id="exotic_warhammer">Exotic Warhammer</text>
+    <text id="purifiers_entryItem">Strange Insignia</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
     <text id="init_rite">Bring this to [object=asim].</text>
     <text id="lost_artifact">Bring this to [object=umazz].</text>
     <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
+    <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>
@@ -98,7 +100,7 @@
     <text id="found3">Oh, you finally woke up, are you okay?</text>
     <text id="found4">I'm Zargoroth, you're in Thirallan, in my village, do you remember anything?</text>
     <text id="found5">You're fine, you're welcome to stay here as long as you like, once you've gotten better, feel free to ask me any more questions.</text>
-    <text id="first1">So must've come here for a reason... right?</text>
+    <text id="first1">So you must've come here for a reason... right?</text>
 		<text id="first2">Hmm, well, if there is a distress siganl, it wasn't us. We don't have access to that kind of technology, and we never will.</text>
 		<text id="first3">However, if you want help in finding it, I'm gonna ask that you help us. But we'll get to that later.</text>
 		<text id="first4">...I'm gonna go get some fresh air, sorry.</text>
@@ -235,6 +237,13 @@
   </section>
   <section id="purifier">
     <text id="blood_moon">Go mad under the [color=770000]Blood Moon[/color], as every other traveler has...</text>
+  </section>
+
+  <section id="purifiers">
+    <text id="teaser1">I've been waiting for you... I know who you are. I know what you want.</text>
+    <text id="teaser2">You want to rid this land of the arisen dead no? Heh... Well you are lucky to have found me here.</text>
+    <text id="teaser3">Take this. You'll need it to gain entry to my clan. It's not here however.</text>
+    <text id="teaser4">After you have bested the Dark God. Find us across the sea, and bring that insignia. You won't get in without it. Best of luck to you.</text>
   </section>
 
   <section id="gilbert">

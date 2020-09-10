@@ -546,7 +546,7 @@
 			<dialogue section="pyrrhos" id="second3" speaker='shopkeeper' />
 			<dialogue section="peredur" id="second3" speaker='mage' />
 			<dialogue section="player" id="second1" speaker='player' />
-			<dialogue section="peredur" id="second3" speaker='mage' />
+			<dialogue section="peredur" id="second4" speaker='mage' />
 			<action>setFlag('TAE_second', true);</action>
 			<wait seconds="2" />
 		</show>
@@ -568,9 +568,9 @@
 			<wait seconds="1" />
 			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
 			<dialogue section="player" id="blood_moon1" speaker='player' />
-			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
-			<dialogue section="player" id="blood_moon1" speaker='player' />
-			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
+			<dialogue section="peredur" id="blood_moon2" speaker='mage' />
+			<dialogue section="player" id="blood_moon2" speaker='player' />
+			<dialogue section="peredur" id="blood_moon3" speaker='mage' />
 			<lerp object="bg" alpha="0" seconds="1" modal="false" />
 			<lerp object="fire" alpha="0" seconds="1" modal="false" />
 			<lerp object="mage" alpha="0" seconds="1" modal="false" />

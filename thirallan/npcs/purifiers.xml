@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+
+  <npc id="purifiers_commander" tile="purifiers_commander" action="talk" talk_sfx="talking1" speed="1">
+    <operate>
+      <section if="this.area.id == 'purifiers_teaser'">
+        <section if="!player.hasSeenItem('purifiers_entryItem')">
+          <dialogue section="purifiers" id="teaser1" speaker='this' />
+          <dialogue section="purifiers" id="teaser2" speaker='this' />
+          <item id="purifiers_entryItem" count="1" modal="true" />
+          <dialogue section="purifiers" id="teaser3" speaker='this' />
+        </section>
+        <dialogue section="purifiers" id="teaser4" speaker='this' />
+      </section>
+    </operate>
+  </npc>
+
+</npcs>

@@ -159,6 +159,7 @@
     </projectile>
   </item>
 
-
+  <tile id="purifiers_entryItem.ico" sheet="icos.png" x="1" y="2" />
+  <item id="purifiers_entryItem" type="tool" corruptible="false" icon="purifiers_entryItem.ico" canStore="false" />
 
 </items>

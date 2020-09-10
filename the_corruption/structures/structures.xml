@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <structures>
+  <structure id="test_spawner_killer" image="alien_debris1.png" width="32" height="32" name="operate" animation="item4">
+    <addedToArea>
+      spawnerArray = this.area.spawner.spawners;
+      for(i in this.area.spawner.spawners){
+        i.time = 0;
+      }
+    </addedToArea>
+    <operate>
+      <choose>
+        <section if="this.area.spawner.spawners[0].time != 0">
+          <action>
+            spawnerArray = [];
+            for (spawner in area.spawner.spawners){
+              spawnerArray.push(spawner.time);
+              spawner.time = 0;
+            }
+          </action>
+          <dialogue text="Spawners Disabled." />
+        </section>
+        <section>
+          <action>
+            for (i in 0...spawnerArray.length){
+              area.spawner.spawners[i].time = spawnerArray[i];
+            }
+            spawnerArray = null;
+          </action>
+          <dialogue text="Spawners Reenabled." />
+        </section>
+      </choose>
+    </operate>
+    <removedFromArea>
+      <section if="this.area.spawner.spawners[0].time == 0">
+        <action>
+          for (i in 0...spawnerArray.length){
+            area.spawner.spawners[i].time = spawnerArray[i];
+          }
+          spawnerArray = null;
+        </action>
+      </section>
+    </removedFromArea>
+  </structure>
+
+  <item id="spawner_killer_blueprint" type="blueprint" cost="20000" weight="0" icon="blueprint.ico">
+		<action id="build" structure="test_spawner_killer" underground="true">
+      <item id="titanium" count="2" />
+		</action>
+	</item>
 
 </structures>

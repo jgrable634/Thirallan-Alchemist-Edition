@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<npcs>
-
-</npcs>
+<bandits>
+  <enemy id="marwood" tile="marwood" health="20" defense="5" type="surface" range="20" speed="1">
+    <attack type="melee" animation="slam" range="1" damage="20" knockback="30" cooldown="180">
+      <pre><play object="this" animation="preSlam" /></pre>
+      <post><action>spawner = this; x = 0; count = 4; side = 1; damage = 10; centerX = spawner.getCenterX();</action><run procedure="spell.earth.multi" /></post>
+    </attack>
+    <attack type="melee" animation="attack" range="1" damage="8" knockback="10" />
+  </enemy>
+</bandits>

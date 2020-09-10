@@ -55,11 +55,11 @@
         <dialogue section="peredur" id="rotting_forestShrine1" speaker="peredur" />
         <dialogue section="peredur" id="rotting_forestShrine2" speaker="peredur" />
         <action>area.getObject('peredurShrine').renderer.set_scaleX(-area.getObject('peredurShrine').renderer.get_scaleX());</action>
+        <pan toObject="area.getObject('central_point')" seconds="0.5" modal="true" />
         <play object="peredur" animation="peredurShrine.attack" modal="true" />
         <object id="magic_orb_cutscene" x="peredur.tile_x+1" y="1" />
-        <pan toObject="area.getObject('central_point')" seconds="0.5" modal="true" />
-        <lerp object='magic_orb_cutscene' deltaX="6" seconds="0.5" />
-        <wait seconds="0.25">
+        <lerp object='magic_orb_cutscene' deltaX="6" seconds="0.25" />
+        <wait seconds="0.2">
           <operate object="area.getObject('magic_orb_cutscene')" />
         </wait>
         <play object="area.getObject('magic_orb_cutscene')" animation="magic_orb.impact" modal="true" />
@@ -73,7 +73,6 @@
         </wait>
         <pan toObject="peredur" seconds="0.5" modal="true" />
         <dialogue section="peredur" id="rotting_forestShrine4" speaker="peredur" />
-        <item id="red_purifier_gem" count="1" />
         <remove object="area.getObject('peredurShrine')" />
         <wait seconds="0.5">
           <operate object="area.getObject('peredurShrine')" />
@@ -314,6 +313,7 @@
   <tile id="purifier_maze_end" sheet="purifier_maze_end.png" x="0" y="0" />
   <animation id="purifier_maze_end.idle" count="1" x="0" />
   <animation id="purifier_maze_end.purifier" count="15" x="0" />
+  <animation id="purifier_maze_end.done" count="15" x="0" reverse="true" />
   <tile id="maze_door" sheet="maze_door.png" x="0" y="0" />
   <animation id="maze_door.opening" count="5" />
   <animation id="maze_door.closing" count="5" reverse="true" />
@@ -333,6 +333,9 @@
           <dialogue text="But are you ready to face your worst nightmare?" />
           <menu type="common">
             <choice id="Yes">
+              <lerp object="player" alpha="0" seconds="0.25" />
+              <play object="this" animation="purifier_maze_end.done" modal="true" />
+              <wait seconds="0.5" />
               <teleport area="purifier_void" x="15" y="-1" with="fade" />
             </choice>
             <choice id="No">
@@ -344,12 +347,11 @@
       </choose>
     </operate>
   </structure>
-  <area id="purifiers_teaser" width="96" height="40" powered="true" looping="true">
-    <tiles id="blackstone" start="0" end="1" />
-  </area>
-  <structure id="purifiers_teaser_door" tile="alchemist.portal" animation="alchemist.portal.idle" fps="5" fullOverlap="true" fullHeight="true" name="portal" type="door">
-
+  <animation id="purifiers_teaser_door.idle" equals="item6" />
+  <structure id="purifiers_teaser_door" tile="alchemist.portal" fps="5" fullOverlap="true" fullHeight="true" name="portal" type="door">
+    <operate><section if="this.area.id == 'purifiers_teaser'"><return with="ellipse" /><stop/></section></operate>
   </structure>
+
   <structure id="maze_key_fragment" extends="undead_shrine" />
 
   <animation id="maze_portal.idle" x="0" count="13" />

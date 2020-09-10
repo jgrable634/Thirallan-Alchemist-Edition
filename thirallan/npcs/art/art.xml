@@ -83,6 +83,25 @@
 
   <!--Bandits-->
 
+  <tilesheet id="bandits/marwood.png" width="20" height="16" />
+  <tile id="marwood" sheet="bandits/marwood.png" x="0" y="0" />
+  <animation id="marwood.walk" x="1" count="9" />
+  <animation id="marwood.attack" x="10" count="11" />
+  <animation id="marwood.preSlam" x="21" count="15" />
+  <animation id="marwood.slam" x="36" count="10" />
+
+  <!--Purifiers-->
+
+  <tile id="pyronaut" sheet="purifiers/pyronaut.png" count="5" />
+  <animation id="pyronaut.idle" x="0" count="5" />
+  <animation id="pyronaut.attack" x="4" count="4" />
+  <animation id="pyronaut.talk" x="4" count="1" />
+  <animation id="pyronaut.walk" x="8" count="5" />
+  <tile id="purifiers_commander" sheet="purifiers/purifiers_commander.png" x="0" y="0" />
+  <animation id="purifiers_commander.walk" x="8" count="5" />
+  <animation id="purifiers_commander.idle" x="0" count="5" />
+  <animation id="purifiers_commander.attack" x="4" count="4" />
+  <animation id="purifiers_commander.talk" x="4" count="1" />
 
   <!--Misc-->
 

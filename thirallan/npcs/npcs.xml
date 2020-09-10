@@ -13,6 +13,8 @@
 
   <include id="UC.xml" />
 
+  <include id="purifiers.xml" />
+
   <procedure id="iterol.invite">
     <menu section="common">
       <dialogue section="iterol" id="invite_iterol" />
