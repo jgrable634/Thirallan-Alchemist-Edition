@@ -18,13 +18,13 @@
   </item>
   <familiar id="peredur" type="ground">
     <light tile="light.small" />
-    <attack type="projectile" damage="5" range="10" animation="attack">
+    <attack type="projectile" damage="2" range="10" animation="attack">
       <projectile tile="magic_orb" range="10" speed="3" delay="5" />
     </attack>
   </familiar>
 
   <tile id="peredur.ico" sheet="icos.png" x="0" y="0" />
-  <item id="peredur" type="animal" slot="familiar" icon="peredur.ico" corruptible="false">
+  <item id="peredur" type="animal" slot="familiar" icon="peredur.ico" corruptible="false" canStore="false">
     <action id="equip" /><action id="rename" />
     <familiar id="peredur" tile="mage" animation="mage" />
   </item>
@@ -101,10 +101,16 @@
     <food id="exotic_matter" value="50" />
   </item>
 
+  <tile id="malumite_helm" sheet="icos.png" x="0" y="3" />
+  <animation id="equipment.malumite_helm.idle" x="0" count="1" offsetY="-1" offsetX="2" />
+
   <item id="malumite_pickaxe" extends="iron_pickaxe" cost="250" durability="2000" weight="5" mine="2" stamina="1" corruptible="false" icon="steel_pickaxe.ico" color="490068" repair="malumite_bar" />
-  <item id="malumite_sword" type="equipment" slot="weapon" cost="165" weight="6" attack="3" stamina="2" durability="500" corruptible="false" icon="steel_sword.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
+  <item id="malumite_sword" type="equipment" slot="weapon" cost="165" weight="6" attack="5" stamina="2" durability="500" corruptible="false" icon="steel_sword.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
   <item id="malumite_armor" type="equipment" slot="armor" cost="330" durability="500" weight="12" defense="2" corruptible="false" icon="steel_armor.ico" color="490068" action="equip" repair="malumite_bar" />
   <item id="malumite_shield" type="equipment" slot="shield" use="block" cost="165" weight="6" defense="1" durability="700" corruptible="false" icon="kite_shield.ico" animation="malumite_shield" action="equip" movement_walk="walk_lswing" repair="malumite_bar" />
+  <item id="malumite_helm" type="tool" cost="150" slot="head" block="false" action="equip" weight="1" icon="malumite_helm" corruptible="false" hair="false">
+    <light tile="light.headlamp" offsetX="-61" />
+  </item>
 
   <recipe id="craft_malumite_pickaxe" creates="malumite_pickaxe" type="workshop" available="player.hasQuest('proving_worth')">
 		<item id="malumite_bar" count="3" />
@@ -123,6 +129,9 @@
   </recipe>
 	<recipe id="craft_malumite_armor" creates="malumite_armor" type="workshop" available="player.hasQuest('proving_worth')">
 		<item id="malumite_bar" count="4" />
+	</recipe>
+  <recipe id="craft_malumite_helm" creates="malumite_helm" type="workshop" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="2" />
 	</recipe>
 	<recipe id="craft_malumite_shield" creates="malumite_shield" type="workshop" available="player.hasQuest('proving_worth')">
 		<item id="malumite_bar" count="2" />

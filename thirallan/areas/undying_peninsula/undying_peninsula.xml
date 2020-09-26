@@ -17,8 +17,7 @@
     <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="stone" />
     <ore id="malumite_ore" start="0.5" end="0.9" percent="0.0375" tile="stone" />
     <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
-    <structure id="undead_shrine" x="25" y="-1" />
-    <objects id="undead_shrineDefender" count="7" fromX="15" toX="35" fromY="-1" toY="-1" />
+    <structure id="undead_shrine.undying_peninsula" x="25" y="-1" />
     <init><runAreaLoad/></init>
     <onLoad><music id="magic2" seconds="1" /></onLoad>
   </area>

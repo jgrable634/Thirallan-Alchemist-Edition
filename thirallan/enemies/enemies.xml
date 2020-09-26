@@ -65,7 +65,7 @@
 			<post><attack type="omni" damage="10" range="1" knockback="20" animation="omni" /><play object="this" animation="idle" /></post>
 		</attack>
 		<onDeath>
-			<section if="player.getKillCount('fallen_angel') >= 5 && !player.areas.get('thirallan_holy_hills').getStructureById('purifier_portal') == null">
+			<section if="player.getKillCount('fallen_angel') >= 5 && player.areas.get('thirallan_holy_hills').getStructureById('maze_portal') == null">
 				<dialogue text='I hope you wanted to get MY attention by ridding this island of my shrines. Because you are getting it! Come to those so called "Holy Hills" on your map, and come find me. You better be ready to fight a God.' />
 				<structure id="maze_portal" x="3" y="-1" area="thirallan_holy_hills">
 					<teleport area="thirallan_maze" x="65" y="61" with="ellipse" />
@@ -171,7 +171,9 @@
 			<pan toObject="area.getObject('purifier_illusion')" seconds="1" />
 			<play object="area.getObject('purifier_illusion')" animation="purifier_illusion.illusion" modal="true" />
 			<remove object="area.getObject('purifier_illusion')" />
-			<structure id="maze_portal" x="12" y="-1" />
+			<structure id="maze_portal" x="12" y="-1">
+				<teleport area="thirallan_holy_hills" x="4" y="-1" />
+			</structure>
 			<dialogue section="player" id="purifier_exit" speaker='player' />
 		</procedure>
 
@@ -276,6 +278,7 @@
 	          setGlobal("score",0); //if it did not change since the last tick, FAIL
 	        }
 	        trace("update");
+					trace(getGlobal("score"));
 	        updateKey(evalXml);
 	        tickedScore = getGlobal("score");
 				</action>
@@ -303,6 +306,7 @@
 	          setGlobal("score",0); //if it did not change since the last tick, FAIL
 	        }
 	        trace("update");
+					trace(getGlobal("score"));
 	        updateKey(evalXml);
 	        tickedScore = getGlobal("score");
 				</action>
@@ -332,6 +336,7 @@
 						setGlobal("score",0); //if it did not change since the last tick, FAIL
 					}
 					trace("update");
+					trace(getGlobal("score"));
 					updateKey(evalXml);
 					setGlobal('tickedScore_struggle',getGlobal("score"));
 				</action>

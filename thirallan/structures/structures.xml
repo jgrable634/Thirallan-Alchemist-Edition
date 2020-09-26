@@ -87,6 +87,66 @@
     </operate>
   </structure>
 
+  <structure id="undead_shrine.undying_peninsula" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
+    <operate>
+      <section if="!getFlag('domenic_encounter')">
+        <object id="domenic_object" x="10" y="-1" facing="right" />
+        <objects id="bandit_heavy" fromX="6" toX="10" count="2" y="-1" facing="right" />
+        <objects id="bandit_combo" fromX="6" toX="10" count="2" y="-1" facing="right" />
+        <dialogue section="domenic" id="undying_peninsula1" speaker="area.getObject('domenic_object')" />
+        <pan toObject="area.getObject('domenic_object')" seconds="1" />
+        <wait seconds="1" />
+        <dialogue section="domenic" id="undying_peninsula2" speaker="area.getObject('domenic_object')" />
+        <dialogue section="domenic" id="undying_peninsula3" speaker="area.getObject('domenic_object')" />
+        <remove object="area.getObject('domenic_object')" />
+        <object id="domenic_prePurifier" x="10" y="-1" facing="right" />
+        <action>setFlag('domenic_encounter',true);</action>
+      </section>
+      <section if="getFlag('domenic_encounter') && area.getObject('domenic_prePurifier') == null">
+        <wait seconds="0.5" />
+        <play object="this" animation="awaken" modal="true" />
+        <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+        <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </operate>
+  </structure>
+
+  <structure id="undead_shrine.placeholder" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
+    <operate>
+      <section>
+        <dialogue text="Unfortunately, I do not have the sprites for this special encounter, so I'll let you off easy, fight the angel and be done with it. Sorry." />
+        <wait seconds="0.5" />
+        <play object="this" animation="awaken" modal="true" />
+        <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+        <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </operate>
+  </structure>
+  <structure id="undead_shrine.gold_diggers_haven" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
+    <operate>
+      <section>
+        <object id="tomkin.ghost" x="this.tile_x+2" y="-1" facing="left" />
+        <action>area.getObject('tomkin.ghost').alpha = 0;</action>
+        <lerp object="area.getObject('tomkin.ghost')" alpha="1" seconds="2" />
+        <wait seconds="2">
+          <operate object="area.getObject('tomkin.ghost')" />
+        </wait>
+        <dialogue section="tomkin" id="ghost1" />
+        <dialogue section="tomkin" id="ghost2" />
+        <dialogue section="tomkin" id="ghost3" />
+        <lerp object="area.getObject('tomkin.ghost')" alpha="0" seconds="2" />
+        <wait seconds="2">
+          <operate object="area.getObject('tomkin.ghost')" />
+        </wait>
+        <remove object="area.getObject('tomkin.ghost')" />
+        <wait seconds="0.5" />
+        <play object="this" animation="awaken" modal="true" />
+        <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+        <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </operate>
+  </structure>
+
   <structure id="thirallan_zargoroth.mines" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
     <operate>
       <choose>
@@ -293,7 +353,7 @@
 
   <structure id="encampment_door" width="128" height="128" image="encampment.png" name="enter">
     <operate>
-      <choose>
+      <!--choose>
         <section if="area.id == 'thirallan_fang_plains'">
           <teleport area="encampment.fangs" x="15" y="-1" with="ellipse" allowReturn="true" />
         </section>
@@ -304,7 +364,8 @@
           <teleport area="encampment.phoenixes" x="15" y="-1" with="ellipse" allowReturn="true" />
         </section>
         <return with="ellipse" />
-      </choose>
+      </choose-->
+      <dialogue text="It would be suicide to try and go against the bandits now..." />
     </operate>
   </structure>
 

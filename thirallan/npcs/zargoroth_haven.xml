@@ -27,6 +27,21 @@
       <kill id="fallen_angel" count="6" name="quests.misc.thirallan_shrines" />
     </quest>
 
+    <quest id="thirallan_faction_war1" giver="zargoroth_npc" exp="1000">
+      <flag id="thirallan_bandits_pacified" name="quests.thirallan_faction_bandits" />
+      <flag id="thirallan_church_pacified" name="quests.thirallan_faction_church" />
+      <flag id="thirallan_guild_pacified" name="quests.thirallan_faction_guild" />
+    </quest>
+    <quest id="thirallan_faction_bandits" giver="zargoroth_npc" exp="3000">
+      <flag id="thirallan_bandits_pacified" name="quests.thirallan_bandits_faction" />
+    </quest>
+    <quest id="thirallan_faction_church" giver="zargoroth_npc" exp="3000">
+      <flag id="thirallan_church_pacified" name="quests.thirallan_church_faction" />
+    </quest>
+    <quest id="thirallan_faction_guild" giver="zargoroth_npc" exp="3000">
+      <flag id="thirallan_guild_pacified" name="quests.thirallan_guild_factions" />
+    </quest>
+
     <procedure id="zargoroth.proving_worth">
       <section if="player.hasQuest('proving_worth')">
         <dialogue section="zargoroth" id="proving_worth4" speaker='this' />
@@ -43,7 +58,9 @@
         <dialogue section="zargoroth" id="proving_worth7" speaker='guard_chief' if="!player.questComplete('proving_worth')" />
         <dialogue section="zargoroth" id="undead_rumors3" speaker='guard_chief' if="!player.questComplete('undead_rumors')" />
         <dialogue section="zargoroth" id="peredur_blood_moon" speaker='guard_chief' if="!player.questComplete('blood_moon')" />
-        <dialogue section="zargoroth" id="explore_thirallan" speaker='guard_chief' />
+        <dialogue section="zargoroth" id="explore_thirallan" speaker='guard_chief' if="!player.questComplete('undead_shrines')" />
+        <dialogue section="zargoroth" id="placeholder_scene" speaker='guard_chief' if="!player.hasQuest('thirallan_faction_war1')" />
+        <dialogue section="zargoroth" id="thirallan_faction_war1" speaker='guard_chief' if="!player.questComplete('thirallan_faction_war1')" />
       </choose>
     </procedure>
     <npc id="guard_chief" talk_sfx="talking4" />
@@ -101,19 +118,37 @@
           <section if="getFlag('merchants_recruited') && getFlag('andreas_recruited') && !player.questComplete('rebuild_monastery')">
             <dialogue section="zargoroth" id="recruiting" speaker='this' />
           </section>
+          <section if="player.questComplete('undead_shrines') && area.getObject('peredur') == null">
+            <action if="player.isEquipped('peredur')">player.equipment.unequip('familiar',player,true);</action>
+            <item id="peredur" count="-1" hidden="true" />
+            <object id="peredur" x="50" y="-1" />
+            <scene id="thirallan_alchemist" show="post_purifier1" with="fade" />
+          </section>
+          <!--section if="!player.hasQuest('thirallan_faction_war1') && player.questComplete('undead_shrines')">
+            <dialogue section="zargoroth" id="faction_war_island1" speaker='this' />
+            <dialogue section="zargoroth" id="faction_war_island2" speaker='this' />
+            <dialogue section="zargoroth" id="faction_war_island3" speaker='this' />
+            <dialogue section="zargoroth" id="faction_war_island4" speaker='this' />
+            <quest id="thirallan_faction_war1" />
+            <section if="player.hasQuest('thirallan_faction_war1')">
+              <quest id="thirallan_faction_bandits" ask="false" />
+              <quest id="thirallan_faction_church" ask="false" />
+              <quest id="thirallan_faction_guild" ask="false" />
+            </section>
+          </section-->
           <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
         </choose>
       </operate>
     </npc>
 
 
-    <procedure id="shopkeeper.restock">
+    <procedure id="pyrrhos.restock">
       <action>
-        this.inventory.clear(); this.inventory.addItems(getItem("iron_sword"), 5); this.inventory.addItems(getItem("map"), 1);
+        this.inventory.addItems(getItem("iron_sword"), 5); this.inventory.addItems(getItem("map"), 1);
         this.inventory.addItems(getItem("coal"), 15); this.inventory.addItems(getItem("gold"), 5);
         this.inventory.addItems(getItem("diamond"), 3); this.inventory.addItems(getItem("iron_armor"), 3); this.inventory.addItems(getItem("iron_bar"), 2);
-        this.inventory.addItems(getItem("iron"), 10); this.inventory.addItems(getItem("titanium"), 5); this.inventory.addItems(getItem("horn"), 5);
-        this.inventory.addItems(getItem("uranium"), 3); this.inventory.addItems(getItem("net"), 10); this.inventory.addItems(getItem("rusty_axe"), 3);
+        this.inventory.addItems(getItem("iron"), 10); this.inventory.addItems(getItem("titanium"), 5); this.inventory.addItems(getItem("net"), 10);
+        this.inventory.addItems(getItem("rusty_axe"), 3);
       </action>
     </procedure>
 
@@ -135,43 +170,45 @@
     <npc id="pyrrhos" tile="shopkeeper" action="talk" talk_sfx="talking1" animation="shopkeeper">
       <idle class="wander" fromX="70" toX="90" />
       <operate>
-        <section if="!getFlag('pyrrhos_met')">
-          <quest/>
-          <dialogue section="pyrrhos" id="first_interaction1" speaker='this' />
-          <action>setFlag('pyrrhos_met', true);</action>
-          <window type="store" inventory="this.inventory" price="1">
-            <buy type="equipment" />
-            <buy type="resource" />
-            <buy type="food" />
-            <buy type="animal" />
-            <buy type="object" />
-            <buy type="tool" />
-          </window>
-          <dialogue section="pyrrhos" id="first_interaction2" speaker='this' />
-        </section>
-        <section if="this.inventory.hasItem()">
-          <quest if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
-          <dialogue section="pyrrhos" id="normal1" speaker="this" />
-          <section if="!player.hasItem('coin_purse') && !getFlag('purse_given')">
-            <dialogue section="pyrrhos" id="purse" speaker='this' />
-            <item id="coin_purse" value="0" count="1" />
-            <action>setFlag('purse_given',true);</action>
+        <choose>
+          <section if="!getFlag('pyrrhos_met')">
+            <quest/>
+            <dialogue section="pyrrhos" id="first_interaction1" speaker='this' />
+            <action>setFlag('pyrrhos_met', true);</action>
+            <window type="store" inventory="this.inventory" price="1">
+              <buy type="equipment" />
+              <buy type="resource" />
+              <buy type="food" />
+              <buy type="animal" />
+              <buy type="object" />
+              <buy type="tool" />
+            </window>
+            <dialogue section="pyrrhos" id="first_interaction2" speaker='this' />
           </section>
-          <window type="store" inventory="this.inventory" price="1">
-            <buy type="equipment" />
-            <buy type="resource" />
-            <buy type="food" />
-            <buy type="animal" />
-            <buy type="object" />
-            <buy type="tool" />
-          </window>
-          <dialogue section="pyrrhos" id="normal2" speaker='this' if="!player.hasQuest('rebuild_monastery') || getFlag('merchants_recruited')" />
-          <set id="this" value="this" />
-          <run procedure="merchants.invite" if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
-        </section>
+          <section if="this.inventory.hasItem()">
+            <quest if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
+            <dialogue section="pyrrhos" id="normal1" speaker="this" />
+            <section if="!player.hasItem('coin_purse') && !getFlag('purse_given')">
+              <dialogue section="pyrrhos" id="purse" speaker='this' />
+              <item id="coin_purse" value="0" count="1" />
+              <action>setFlag('purse_given',true);</action>
+            </section>
+            <window type="store" inventory="this.inventory" price="1">
+              <buy type="equipment" />
+              <buy type="resource" />
+              <buy type="food" />
+              <buy type="animal" />
+              <buy type="object" />
+              <buy type="tool" />
+            </window>
+            <dialogue section="pyrrhos" id="normal2" speaker='this' if="!player.hasQuest('rebuild_monastery') || getFlag('merchants_recruited')" />
+            <set id="this" value="this" />
+            <run procedure="merchants.invite" if="player.hasQuest('rebuild_monastery') && !getFlag('merchants_recruited')" />
+          </section>
+        </choose>
       </operate>
-      <init><run procedure="shopkeeper.restock" /></init>
-      <awaken><run procedure="shopkeeper.restock" /></awaken>
+      <addedToArea><action>this.inventory.clear();</action><run procedure="pyrrhos.restock" /></addedToArea>
+      <awaken><action>this.inventory.clear();</action><run procedure="pyrrhos.restock" /></awaken>
     </npc>
 
     <npc id="mage" talk_sfx="talking2" />
@@ -214,6 +251,7 @@
       </operate>
     </npc>
 
+    <object id="tomkin.ghost" tile="tomkin.ghost" />
 
     <procedure id="andreas.invite">
       <menu section="common">
@@ -240,7 +278,6 @@
           <section if="player.hasQuest('undead_rumors') && !player.hasQuest('find_jacominus')">
             <dialogue section="andreas" id="rumors1" speaker='this' />
             <dialogue section="andreas" id="rumors2" speaker='this' />
-            <item id="torch" count="1" />
             <quest id="find_jacominus" ask="false" />
           </section>
           <choose if="player.hasQuest('find_jacominus') && !player.questComplete('undead_rumors')">

@@ -73,13 +73,13 @@
     <structure id="thirallan_zargoroth.mines.ret" x="1" y="15" />
     <structure id="undead_shrine" x="40" y="75" />
     <action>
-      setBack(1, 27, "fuck_off_stone"); setBack(2, 27, "fuck_off_stone"); setBack(1, 28, "fuck_off_stone"); setBack(2, 28, "fuck_off_stone");
-      dy = random()>0.5?1:30; for(y in 0...10) for(x in 30...40) setBack(x, y+dy, "fuck_off_stone");
+      setBack(1, 27, "stone"); setBack(2, 27, "stone"); setBack(1, 28, "stone"); setBack(2, 28, "stone");
+      dy = random()>0.5?1:30; for(y in 0...10) for(x in 30...40) setBack(x, y+dy, "stone");
     </action>
-    <maze floor="fuck_off_stone" wall="blackstone" width="30" height="99" />
+    <maze floor="stone" wall="blackstone" width="30" height="99" />
     <appendArea id="jacominus_rest" offsetX="30" offsetY="30" />
     <action>
-      for(x in 30...49) for(y in 1...99){setTile(x,y,"fuck_off_stone"); setBack(x,y,"fuck_off_stone"); mine(x,y);}
+      for(x in 30...49) for(y in 1...99){setTile(x,y,"stone"); setBack(x,y,"stone"); mine(x,y);}
       for(x in 30...49){setTile(x,0,"blackstone"); setTile(x,99,"blackstone");} for(y in 0...100) setTile(49,y,"blackstone");
       for(x in 31...48) for(y in 19...30) mine(x,y);
       for(x in 31...48) for(y in 1...13) mine(x,y);

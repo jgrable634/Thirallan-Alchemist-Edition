@@ -126,7 +126,7 @@
 		<animation id="mage.idle" x="0" count="1" />
 		<animation id="mage.talk" x="1" count="1" />
 		<animation id="mage.teleport" x="1" count="1" /-->
-		<tilesheet id="farmer.png" width="12" height="83" />
+		<tilesheet id="farmer.png" width="102" height="83" />
 		<tile id="farmer" sheet="farmer.png" x="0" y="0" />
 		<animation id="farmer.idle" count="12">
 			<frame x="12" count="15" />
@@ -421,9 +421,10 @@
 		</show>
 	</scene>
 	<scene id="thirallan_alchemist" extends="thirallan">
-		<tilesheet id="floating_blood.png" width="70" height="70" />
+		<tilesheet id="floating_blood.png" width="256" height="160" />
 		<tile id="floating_blood" sheet="floating_blood.png" x="0" y="0" />
-		<layer id="floating_blood" tile="floating_blood" y="84" />
+		<animation id="floating_blood" count="10" length="2" />
+		<layer id="floating_blood" tile="floating_blood" animation="floating_blood" />
 		<show id="thirallan_move">
 			<layer id="thirallan_travel_bg" />
 			<layer id="thirallan_map" />
@@ -565,6 +566,7 @@
 			</action>
 			<remove object="area.getObject('peredur')" />
 			<remove object="area.getObject('zargoroth_npc')" />
+			<remove object="area.getObject('tomkin')" />
 			<wait seconds="1" />
 			<dialogue section="peredur" id="blood_moon1" speaker='mage' />
 			<dialogue section="player" id="blood_moon1" speaker='player' />
@@ -625,7 +627,7 @@
 					<dialogue section="zargoroth_info" id="andreas1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="andreas2" speaker='guard_chief' />
 				</choice>
-				<choice id="tomkin" if="!player.questComplete('blood_moon')">
+				<choice id="tomkin" if="1player.questComplete('blood_moon')">
 					<dialogue section="zargoroth_info" id="tomkin1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="tomkin2" speaker='guard_chief' />
 				</choice>
@@ -676,6 +678,28 @@
 				</choice>
 			</menu>
 		</show>
-
+		<show id="post_purifier1">
+			<layer id="bg" />
+			<layer id="guard_chief" />
+			<layer id="shopkeeper" />
+			<layer id="mage" />
+			<layer id="fire" />
+			<wait seconds="1" />
+			<dialogue section="zargoroth" id="post_purifier1" speaker='guard_chief' />
+			<dialogue section="player" id="post_purifier1" speaker='player' />
+			<dialogue section="player" id="post_purifier2" speaker='player' />
+			<dialogue section="zargoroth" id="post_purifier2" speaker='guard_chief' />
+			<dialogue section="peredur" id="post_purifier1" speaker='mage' />
+			<dialogue section="zargoroth" id="post_purifier3" speaker='guard_chief' />
+			<dialogue section="peredur" id="post_purifier2" speaker='mage' />
+			<dialogue section="zargoroth" id="post_purifier4" speaker='guard_chief' />
+			<dialogue section="peredur" id="post_purifier3" speaker='mage' />
+			<dialogue section="zargoroth" id="post_purifier5" speaker='guard_chief' />
+			<dialogue section="peredur" id="post_purifier4" speaker='mage' />
+			<dialogue section="zargoroth" id="post_purifier6" speaker='guard_chief' />
+			<dialogue section="pyrrhos" id="post_purifier1" speaker='shopkeeper' />
+			<dialogue section="pyrrhos" id="post_purifier2" speaker='shopkeeper' />
+			<wait seconds="1" />
+		</show>
 	</scene>
 </scenes>

@@ -18,6 +18,7 @@
   <animation id="mage.walk" x="0" count="4" />
   <animation id="mage.attack" x="5" count="8" />
   <tile id="tomkin" sheet="zargoroth_haven/tomkin.png" x="0" y="0" />
+  <tile id="tomkin.ghost" sheet="zargoroth_haven/tomkin.png" x="2" y="4" />
   <tile id="andreas" sheet="zargoroth_haven/andreas.png" x="0" y="0" />
   <animation id="andreas.idle" x="0" count="1" />
   <animation id="andreas.talk" x="0" count="9" />
@@ -89,6 +90,12 @@
   <animation id="marwood.attack" x="10" count="11" />
   <animation id="marwood.preSlam" x="21" count="15" />
   <animation id="marwood.slam" x="36" count="10" />
+
+  <tilesheet id="bandits/domenic.png" width="24" height="16" />
+  <tile id="domenic" sheet="bandits/domenic.png" x="0" y="0" />
+  <animation id="domenic.walk" x="6" count="9" />
+  <animation id="domenic.attack" x="15" count="9" />
+  <animation id="domenic.attack2" x="24" count="3" length="3" />
 
   <!--Purifiers-->
 

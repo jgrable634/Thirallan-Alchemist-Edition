@@ -75,6 +75,7 @@
     <text id="malumite_sword">Malumite Sword</text>
     <text id="malumite_armor">Malumite Armor</text>
     <text id="malumite_shield">Malumite Shield</text>
+    <text id="malumite_helm">Malumite Helm</text>
     <text id="malumite_ore">Malumite Ore</text>
     <text id="malumite_bar">Malumite Bar</text>
     <text id="malumite_warhammer">Malumite Warhammer</text>
@@ -101,7 +102,7 @@
     <text id="found4">I'm Zargoroth, you're in Thirallan, in my village, do you remember anything?</text>
     <text id="found5">You're fine, you're welcome to stay here as long as you like, once you've gotten better, feel free to ask me any more questions.</text>
     <text id="first1">So you must've come here for a reason... right?</text>
-		<text id="first2">Hmm, well, if there is a distress siganl, it wasn't us. We don't have access to that kind of technology, and we never will.</text>
+		<text id="first2">Hmm, well, if there is a distress signal, it wasn't us. We don't have access to that kind of technology, and we never will.</text>
 		<text id="first3">However, if you want help in finding it, I'm gonna ask that you help us. But we'll get to that later.</text>
 		<text id="first4">...I'm gonna go get some fresh air, sorry.</text>
 		<text id="second1">Hmph.</text>
@@ -123,6 +124,17 @@
     <text id="peredur_blood_moon">I need you to do as [object=peredur] asks before you leave.</text>
     <text id="explore_thirallan">Please, explore Thirallan, figure out the secrets behind these [color=770000]Shrines[/color].</text>
     <text id="recruiting">Forgive me, but is there a reason you value the people at the [color=770000]Monastery[/color] enough to take my people? What have they done for you that I haven't? I don't get it.</text>
+
+    <text id="post_purifier1">You're back! Surprising the undead haven't seem to put a dent in you! So what did you find out about the shrines?</text>
+    <text id="post_purifier2">You... What? That has got to be the strangest thing I've ever heard... Regardless, what did killing this... "Purifier" do?</text>
+    <text id="post_purifier3">And how do you know that?</text>
+    <text id="post_purifier4">I see. As troubling as this is, there are still [color=490068]Corrupted[/color] out there! Are we supposed to just exterminate them all!?</text>
+    <text id="post_purifier5">Well, wasn't expecting such a straight forward answer to that. There are simply too many! We cannot take out all of them on our own!</text>
+    <text id="post_purifier6">That seems quite ambitious. I guess it's better than attempting to exterminate all the [color=490068]Corrupted[/color] ourselves. But where to begin...</text>
+    <text id="faction_war_island1">Ok so if we are really going to try this... You're gonna need some knowledge of the factions we need to deal with.</text>
+    <text id="faction_war_island2">So there are the Church Survivors in the Rotting Forest, my scouts suggest they are still huddled up in the rubble that is the Monastery there. It'll probably be difficult gaining their trust.</text>
+    <text id="faction_war_island3">Next is that Cult Peredur used to be in. It's been so long Peredur doesn't remember where their base is... He vaguely remembers that their entrance was incased Elevated Stone? My best guess would be the Mountain Range nearby...</text>
+    <text id="faction_war_island4">Honestly I'd just say fight the Bandits. They've done enough to hurt us and all innocent islanders. However, if you see fit, you can attempt to negotiate with them. I have more information on the Bandit Groups themselves if you are interested.</text>
   </section>
   <section id="zargoroth_info">
     <text id="selection">What is it? Do you need something?</text>
@@ -162,13 +174,15 @@
     <text id="purse">Oh... It appears you don't have a [item=coin_purse], I'll give you one.</text>
     <text id="merchants_invite1">Huh!? The [color=770000]Monastery[/color]? As in, in the Rotting Forest? I thought that place was abandoned?</text>
     <text id="merchants_invite2">Hmm... I guess you're right. I'll speak with [object=zargoroth_npc] about getting the merchants an escort, to ensure they get there safely.</text>
-    <text id="first1">Sorry, we've been a bit tense recently. Problems with the [color=490068]The Corrupted[/color] has been escalating.</text>
+    <text id="first1">Sorry, we've been a bit tense recently. Problems with the [color=490068]The Corrupted[/color] have been escalating.</text>
     <text id="first2">There seem to be more and more every day, even to the point of us losing at least 2 people per week. It truly has been difficult.</text>
     <text id="first3">So try not to ask Zargoroth about that helm, I know it looks weird, but it wasn't his choice to acquire it, he never told me what truly happened, just that he can't take it off, and said to drop it.</text>
     <text id="first4">Anyway, if you can, some help would be greatly appreciated with [color=490068]The Corrupted[/color]. Perhaps you can find what you're looking for while helping us?</text>
     <text id="second1">You seem troubled Zargoroth, what's wrong?</text>
     <text id="second2">Come on Peredur, you know he hates that tech, stop going out of your way to annoy him, he's under a lot of pressure.</text>
     <text id="second3">You need to practice empathy Peredur. It's something a lot of people here lack, and I'm sick of it.</text>
+    <text id="post_purifier1">Thinking about this... I don't see how that would be too much of an issue. I think everyone on the island can agree that [color=490068]The Corrupted[/color] are detrimental to a normal state of living.</text>
+    <text id="post_purifier2">Admitedly, it would be difficult to unite different groups of different beliefs and ideals, but come now, we are all human! I believe we can push our differences aside and unite to remove [color=490068]The Corrupted[/color] threat once and for all!</text>
   </section>
   <section id="peredur">
     <text id="stranger">Greetings stranger, I'd appreciate it if you worked with [object=zargoroth_npc] to get familiar with the area, as I can use your help for something...</text>
@@ -183,18 +197,26 @@
     <text id="blood_moon1">So, we have a similar goal, so let's work together on this.</text>
     <text id="blood_moon2">I'm referring to you going out and investigating these other shrines. I have no doubt that these shrines will lead to a breakthrough in my research. So, I shall accompany with you on this investigation.</text>
     <text id="blood_moon3">Great! We leave in the morning!</text>
-    <text id="rotting_forestShrine1">Ah! There is a shrine here as well, I think I can extract a gem from this, give me just a minute...</text>
+    <text id="rotting_forestShrine1">Ah! There is a shrine here as well, I feel something different about this one, give me just a minute...</text>
     <text id="rotting_forestShrine2">Wait... Something's wrong. I feel like...</text>
     <text id="rotting_forestShrine3">Umazz!?</text>
-    <text id="rotting_forestShrine4">What was he... Forget it. I'm not answering anything about that right now... I'll get the gem.</text>
+    <text id="rotting_forestShrine4">What was he... Forget it. It's none of your business, don't bother asking.</text>
+
+    <text id="post_purifier1">The Purifier was the reason this planet became plagued with [color=490068]The Corrupted[/color].</text>
+    <text id="post_purifier2">I am a former member of the cult that worshipped it.</text>
+    <text id="post_purifier3">Yes, why overcomplicate it?</text>
+    <text id="post_purifier4">Simple, we unite the remaining people of this island to assist in the restoring of the island.</text>
   </section>
   <section id="tomkin">
     <text id="stranger">Oh... Hello. Don't recognize you, if you are new around here, I advise you work with [object=zargoroth_npc] before you do anything else.</text>
+    <text id="ghost1">This is my one and only chance to warn you. STOP.</text>
+    <text id="ghost2">I looked into these statues, it didn't end well. You do not want to mess with the Purifier.</text>
+    <text id="ghost3">It doesn't take much to anger him... Turn back while you can...</text>
   </section>
   <section id="andreas">
     <text id="stranger">Hi... [pause=5]Uh, do.. [pause=5] I know you? Pl-.. [pause=5] Please talk to um... [pause=5][object=zargoroth_npc].</text>
     <text id="rumors1">Hel.. [pause=5] Sorry, can you help me with something? I.. [pause=5] I heard that you needed some help.. [pause=5] but I need your help first. There is a friend of mine by the name of.. [pause=5]Jacominus.</text>
-    <text id="rumors2">Ple.. [pause=5] Please look for him in the mines. Then I'll gui.. [pause=5] I'll guide you to what you seek. Here's a torch.</text>
+    <text id="rumors2">Ple.. [pause=5] Please look for him in the mines. Then I'll gui.. [pause=5] I'll guide you to what you seek.</text>
     <text id="rumors3">Please fi.. [pause=5] find Jacominus, I fear th.. [pause=5]the worst has happened.</text>
     <text id="rumors4">He... WHAT!? He's been dead all this time!?!? AAHHHHHH</text>
     <text id="rumors5">Sor.. [pause=5] Sorry about that. I.. [pause=5] I am scared of them... I can't.. [pause=5]I'll take you to the shrine... But do.. [pause=5]don't expect me to do anything else..[pause=5] Sorry...</text>
@@ -234,6 +256,9 @@
     <text id="andreas_invite">Ask [object=andreas] to join the [color=770000]Monastery[/color]?</text>
     <text id="andreas_invite1">Hey Andreas? How would you like to go to a place where you never have to see... those things ever again?</text>
     <text id="andreas_invite2">Yeah, it's in the [color=770000]Rotting Forest[/color]. Once you get there, you can never have to worry about them ever again!</text>
+    <text id="purifier_exit">Uh... Well that's on the list of things I never want to see again. I should probably go inform [object=zargoroth_npc] of my recent activities.</text>
+    <text id="post_purifier1">I might sound insane, but hear me out. I got the attention of a dark god that calls himself The Purifier. Apparently these shrines belonged to him, and had me go through a maze of sorts.</text>
+    <text id="post_purifier2">After finally finding my way through the maze, I came face to face with the "God" himself. It was a difficult battle, but I came out on top. He cast a strange illusion as he vanished, which is too strange to explain.</text>
   </section>
   <section id="purifier">
     <text id="blood_moon">Go mad under the [color=770000]Blood Moon[/color], as every other traveler has...</text>
@@ -299,6 +324,13 @@
   </section>
   <section id="xhak_vik">
     <text id="new_one">You aren't one of us yet, therefore you have no business with me. Begone.</text>
+  </section>
+
+  <section id="domenic">
+    <text id="undying_peninsula1">Hey! What are you doing here!?</text>
+    <text id="undying_peninsula2">You shouldn't even need half a brain to know that this is Beast Territory. I'm Domenic, and we Beasts own this Peninsula, unfortunate that Zargoroth decided to plop his village right in our territory.</text>
+    <text id="undying_peninsula3">Enough about that Coward, on the contrary, you're either brave or stupid for coming here. Either way, you'll soon regret it! Come at me you fool!</text>
+    <text id="undying_peninsula4">Impressive, perhaps I misjudged you... I'll have to retreat for now, but death is coming for you swiftly, and his name is Domenic!</text>
   </section>
 
   <section id="iterol">
@@ -367,6 +399,11 @@
     <text id="lost_artifact">Lost Artifact</text>
 
     <text id="exotic_warhammer">Exotic Warhammer</text>
+
+    <text id="thirallan_faction_war1">Unite the Island!</text>
+    <text id="thirallan_faction_guild">Pacify the Guild</text>
+    <text id="thirallan_faction_church">Pacify the Church</text>
+    <text id="thirallan_faction_bandits">Pacify the Bandits</text>
   </section>
   <section id="quests.misc">
     <text id="thirallan_undead">Kill Undead</text>
@@ -390,6 +427,8 @@
     <text id="lost_artifact">wants you to retrieve a [item=lost_artifact] from an "old statue".</text>
 
     <text id="exotic_warhammer">wants to make an [item=exotic_warhammer].</text>
+
+    <text id="thirallan_faction_war1">wants to unite the factions of Thirallan</text>
   </section>
   <section id="world">
     <text id="thirallan_zargoroth">Zargoroth's Safe Haven</text>

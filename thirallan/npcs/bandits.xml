@@ -7,4 +7,27 @@
     </attack>
     <attack type="melee" animation="attack" range="1" damage="8" knockback="10" />
   </enemy>
-</bandits>
+
+  <npc id="domenic_object" tile="domenic" animation="domenic" talk_sfx="talking1" action="talk" />
+
+  <enemy id="domenic_prePurifier" tile="domenic" animation="domenic" health="20" defense="1" type="surface" range="20" speed="1">
+    <attack type="melee" animation="attack" damage="5" hits="2">
+      <cont animation="attack2" damage="3" />
+      <post><wait seconds="1" modal="false" /></post>
+    </attack>
+    <onDeath>
+      <object id="domenic_object" x="this.tile_x" y="this.tile_y" />
+      <dialogue section="domenic" id="undying_peninsula4" speaker='area.getObject("domenic_object")' />
+      <invokeLater>
+        <lerp object="area.getObject('domenic_object')" deltaX="-50" seconds="5" />
+        <remove object="area.getObject('domenic_object')" />
+        <action>
+          while(area.getObject('bandit_heavy') != null || area.getObject('bandit_combo') != null){
+            area.removeObject('bandit_heavy'); area.removeObject('bandit_combo');
+          }
+        </action>
+      </invokeLater>
+    </onDeath>
+  </enemy>
+
+  </bandits>

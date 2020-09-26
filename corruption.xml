@@ -3,7 +3,7 @@
   <item id="corrupted_item" icon="alien_heart.ico" type="equipment" weight="5" corruptible="false"/>
   <action>
     function isCorruptible(xml){
-      return (xml.get('corruptible') == null || xml.get('corruptible') == true) && (xml.get('type') == 'tool' || xml.get('type') == 'equipment' || xml.get('type') == 'animal') && (Std.parseInt(xml.get('weight')) >= 1);
+      return (xml.get('corruptible') == null || xml.get('corruptible') == true) && (xml.get('type') == 'tool' || xml.get('type') == 'equipment' || xml.get('type') == 'animal') && (Std.parseInt(xml.get('weight')) >= 1) && (xml.get('slot') != 'back');
     }
     function nameCorrupted(player,i){
       name = 'p' + i.id + '&Corrupted ' + i.getName().get();
