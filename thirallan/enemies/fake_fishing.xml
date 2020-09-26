@@ -29,61 +29,56 @@
     }
 
 
-    function beginMinigame(){
+    function beginMinigame(?getGlobal,?setGlobal){
       setGlobal("score",0);
       stayStill(getLocalPlayer());
-      getContainer().stage.addEventListener("keyDown",minigameControl);
+      var fuckingFunction = function(evt){minigameControl(evt,getGlobal,setGlobal);}
+      setGlobal("fuckingFunction",fuckingFunction);
+      addPress(fuckingFunction);
     }
-    function minigameControl(){
-      tickMinigame();
-      setGlobal("key",null);
+    function minigameControl(evt,?getGlobal,?setGlobal){
+      tickMinigame(evt,getGlobal,setGlobal);
+      // setGlobal("key",null);
     }
-    function tickMinigame(){
+    function tickMinigame(evt,?getGlobal,?setGlobal){
       var key = getGlobal("key");
       if (key == null) return;
-      for (x in 37...41){
-        if (inputMap.get(x) == 1 && key != x){
+      var press = evt.key;
+      if (press != "left" && press != "up" && press != "right" && press != "down"){ return; }
+      if (press != key){
           // FAIL
           trace("FAIL");
           setGlobal("score",0);
-        }
       }
-      if (inputMap.get(key) == 1){
+      if (press == key){
         // SUCCESS
         var score = getGlobal("score");
         setGlobal("score",score+1);
         if (score >= 4){
-          finishGame();
+          finishGame(getGlobal,setGlobal);
         }
       }
     }
-    function updateKey(evalXml){
-      trace("Key");
-      var keys = [37,38,39,40]; //left up right down
-      setGlobal("key",keys[randInt(0,keys.length)]);
-      if(getGlobal("key") == 37){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_left" x="0.5" y="0.2" hold="60" />');}
-      if(getGlobal("key") == 38){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_up" x="0.5" y="0.2" hold="60" />');}
-      if(getGlobal("key") == 39){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_right" x="0.5" y="0.2" hold="60" />');}
-      if(getGlobal("key") == 40){evalXml('&lt;show tooltip="popup" text="warning.strangle_break_down" x="0.5" y="0.2" hold="60" />');}
+    function updateKey(evalXml,?getGlobal,?setGlobal){
+      var keys = ["left","up","right","down"]; //left up right down
+      var key = keys[randInt(0,keys.length)];
+      setGlobal("key",key);
+      evalXml('&lt;show tooltip="popup" text="warning.strangle_break_'+key+'" x="0.5" y="0.2" hold="60" />');
     }
-    function keyName(){
-      var key = getGlobal("key");
-      switch(key){
-        case 37: return "left"; break;
-        case 38: return "up"; break;
-        case 39: return "right"; break;
-        case 40: return "down"; break;
-      }
+    function keyName(?getGlobal,?setGlobal){
+      return getGlobal("key");
     }
-    function finishGame(){
+    function finishGame(?getGlobal,?setGlobal){
       getLocalPlayer().movement.destroy();
       runProcedure("movementToNull");
-      getContainer().stage.removeEventListener("keyDown",minigameControl);
+      removePress(getGlobal("fuckingFunction"));
       for (global in ["key","score"]){
         setGlobal(global,null);
       }
       var area = getLocalPlayer().area;
-      area.removeObject(area.getObject("placeholder_strangle"));
+      if (area.getObject(area.getObject("placeholder_strangle")) != null){
+        area.removeObject(area.getObject("placeholder_strangle"));
+      }
     }
   </action>
 
