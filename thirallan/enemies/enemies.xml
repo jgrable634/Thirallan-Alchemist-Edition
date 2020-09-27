@@ -164,7 +164,10 @@
 		<tile id="purifier_illusion" sheet="art/purifier/purifier_illusion.png" x="0" y="0" />
 		<animation id="purifier_illusion.illusion" x="0" count="43" length="2" />
 
-		<object id="purifier_illusion" tile="purifier_illusion" layer="top" save="false" fps="10" width="32" height="32" />
+		<object id="purifier_illusion" tile="purifier_illusion" layer="top" save="false" fps="10" width="32" height="32">
+			<light tile="light.large" color="5C0000" />
+		</object>
+
 
 		<procedure id="purifier_death">
 			<object id="purifier_illusion" x="12" y="-1" />
@@ -267,8 +270,9 @@
 			</section>
 		</procedure>
 	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10" bgm="purification2">
+			<light tile="light.large" color="5C0000" />
 			<onHit><move object="this" x="12" y="-5" /></onHit>
-			<onDeath></onDeath>
+			<onDeath><section><complete quest="undead_shrines" /><run procedure="hand_movementEnd" /><remove object="area.getObject('campaign_purifier_hand_l')" /><remove object="area.getObject('campaign_purifier_hand_r')" /><run procedure="purifier_death" /></section></onDeath>
 	  </enemy>
 	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l" action="struggle">
 			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>

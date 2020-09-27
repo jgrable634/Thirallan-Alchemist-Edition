@@ -389,6 +389,7 @@
           <stop/>
         </section>
         <section>
+          <save/>
           <dialogue text="You've made it this far brave adventurer..." />
           <play object="this" animation="purifier_maze_end.purifier" modal="true" />
           <dialogue text="But are you ready to face your worst nightmare?" />

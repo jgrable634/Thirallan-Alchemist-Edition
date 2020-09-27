@@ -9,7 +9,7 @@
     <structure id="struggle_structure" x="10" y="-1" />
     <init><runAreaLoad/></init>
     <onLoad>
-      <music id="purification1" seconds="1" />
+      <music id="purified_encounter" seconds="1" />
     </onLoad>
   </area>
 </areas>

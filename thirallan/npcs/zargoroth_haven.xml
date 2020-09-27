@@ -119,10 +119,17 @@
             <dialogue section="zargoroth" id="recruiting" speaker='this' />
           </section>
           <section if="player.questComplete('undead_shrines') && area.getObject('peredur') == null">
+            <quest/>
             <action if="player.isEquipped('peredur')">player.equipment.unequip('familiar',player,true);</action>
             <item id="peredur" count="-1" hidden="true" />
             <object id="peredur" x="50" y="-1" />
             <scene id="thirallan_alchemist" show="post_purifier1" with="fade" />
+            <menu section="common">
+              <dialogue text="This is the end of this mod for the current update. Would you like to save?" />
+          		<choice id="yes"><save fakeDismount="true" /></choice>
+          		<choice id="no" />
+          	</menu>
+          	<credits /><title with="fade" />
           </section>
           <!--section if="!player.hasQuest('thirallan_faction_war1') && player.questComplete('undead_shrines')">
             <dialogue section="zargoroth" id="faction_war_island1" speaker='this' />
