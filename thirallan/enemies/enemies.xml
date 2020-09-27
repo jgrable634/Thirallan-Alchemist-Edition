@@ -206,7 +206,7 @@
 					Movement.seek(orbs.pop(), player, 4);
 				}
 	      var attackSelection = randInt(1,3);
-				trace(attackSelection);
+				//trace(attackSelection);
 	      if(attackSelection == 1){
 	        for(x in 25...27){
 						addOrb(x, -x);
@@ -228,7 +228,7 @@
 					Movement.seek(orbs.pop(), player, 4);
 				}
 				var attackSelection = randInt(1,3);
-				trace(attackSelection);
+				//trace(attackSelection);
 				if(attackSelection == 1){
 					for(x in 25...27){
 						addOrb(x, -x);
@@ -246,8 +246,8 @@
 				  <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
 				  <move object="player" x="11" y="-4" />
 					<action>
-					trace("Begin");
-					beginMinigame();
+					//trace("Begin");
+					beginMinigame(getGlobal,setGlobal);
 					</action>
 			</section>
 	  </procedure>
@@ -256,8 +256,8 @@
 					<move object="area.getObject('campaign_purifier_hand_r')" x="14" y="-3" />
 					<move object="player" x="15" y="-4" />
 					<action>
-						trace("Begin");
-						beginMinigame();
+						//trace("Begin");
+						beginMinigame(getGlobal,setGlobal);
 					</action>
 			</section>
 		</procedure>
@@ -281,9 +281,9 @@
 					if (getGlobal("score") == tickedScore){
 	          setGlobal("score",0); //if it did not change since the last tick, FAIL
 	        }
-	        trace("update");
-					trace(getGlobal("score"));
-	        updateKey(evalXml);
+	        //trace("update");
+					//trace(getGlobal("score"));
+	        updateKey(evalXml,getGlobal,setGlobal);
 	        tickedScore = getGlobal("score");
 				</action>
 			</operate>
@@ -292,7 +292,7 @@
 				handTicks -= 1;
 				setGlobal("handTicks",handTicks);
 				if(handTicks &lt;= 0 && player.movement == null){
-					trace("initiate attack");
+					//trace("initiate attack");
 					runProcedure("hand_l.attackSelection");
 				}
 				if(getDistance(this,player) &lt; 16 && player.movement == null){
@@ -309,9 +309,9 @@
 					if (getGlobal("score") == tickedScore){
 	          setGlobal("score",0); //if it did not change since the last tick, FAIL
 	        }
-	        trace("update");
-					trace(getGlobal("score"));
-	        updateKey(evalXml);
+	        //trace("update");
+					//trace(getGlobal("score"));
+	        updateKey(evalXml,getGlobal,setGlobal);
 	        tickedScore = getGlobal("score");
 				</action>
 			</operate>
@@ -320,7 +320,7 @@
 				handTicks -= 1;
 				setGlobal("handTicks",handTicks);
 				if(handTicks &lt;= 0 && player.movement == null){
-					trace("initiate attack");
+					//trace("initiate attack");
 					runProcedure("hand_r.attackSelection");
 				}
 				if(getDistance(this,player) &lt; 16 && player.movement == null){
@@ -339,9 +339,9 @@
 					if (getGlobal("score") == getGlobal('tickedScore_struggle')){
 						setGlobal("score",0); //if it did not change since the last tick, FAIL
 					}
-					trace("update");
-					trace(getGlobal("score"));
-					updateKey(evalXml);
+					//trace("update");
+					//trace(getGlobal("score"));
+					updateKey(evalXml,getGlobal,setGlobal);
 					setGlobal('tickedScore_struggle',getGlobal("score"));
 				</action>
 			</operate>
