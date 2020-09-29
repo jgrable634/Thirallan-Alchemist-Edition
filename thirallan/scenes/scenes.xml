@@ -126,9 +126,9 @@
 		<animation id="mage.idle" x="0" count="1" />
 		<animation id="mage.talk" x="1" count="1" />
 		<animation id="mage.teleport" x="1" count="1" /-->
-		<tilesheet id="farmer.png" width="102" height="83" />
-		<tile id="farmer" sheet="farmer.png" x="0" y="0" />
-		<animation id="farmer.idle" count="12">
+		<!--tilesheet id="pyrrhos.png" width="102" height="83" />
+		<tile id="pyrrhos" sheet="pyrrhos.png" x="0" y="0" />
+		<animation id="pyrrhos.idle" count="12">
 			<frame x="12" count="15" />
 			<frame x="1" count="11" />
 			<frame x="12" count="15" />
@@ -137,10 +137,10 @@
 			<frame x="12" count="15" />
 			<frame x="1" count="11" />
 		</animation>
-		<animation id="farmer.talk">
+		<animation id="pyrrhos.talk">
 			<frame x="42" count="6" offsetX="-4" />
 			<frame x="48" count="9" />
-		</animation>
+		</animation-->
 		<tilesheet id="peredur.png" width="256" height="144" />
 		<tile id="peredur" sheet="peredur.png" x="0" y="0" />
 		<animation id="peredur.idle">
