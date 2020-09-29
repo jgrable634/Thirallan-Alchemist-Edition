@@ -23,7 +23,7 @@
 		<operate><section with="ellipse"><action>var loc = getGlobal('location'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
 	</structure>
 	<structure id="realm_of_dragons_fromOrbit_entrance" tile="leave_door" name="enter">
-		<operate><action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" /></operate>
+		<operate><!--action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" /--><dialogue text="This section of this mod is incomplete, and isn't ready for the competition's standards." /></operate>
 	</structure>
 	<animation id="secret_vault.opening" count="4" length="3" />
 	<animation id="secret_vault.closing" count="4" reverse="true" length="3" />

@@ -85,6 +85,7 @@
       for(x in 31...48) for(y in 1...13) mine(x,y);
       for(y in 13...20) mine(40,y);
       for(y in 1...98) mine(29,y);
+      for(x in 1...3) for(y in 14...16) mine(x,y);
     </action>
     <objects id="undead_shrineDefender" count="7" fromX="30" toX="49" fromY="80" toY="99" />
   </area>

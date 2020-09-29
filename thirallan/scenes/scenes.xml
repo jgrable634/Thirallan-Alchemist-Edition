@@ -141,14 +141,15 @@
 			<frame x="42" count="6" offsetX="-4" />
 			<frame x="48" count="9" />
 		</animation>
-		<tilesheet id="builder.png" width="92" height="67" />
-		<tile id="builder" sheet="builder.png" x="0" y="0" />
-		<animation id="builder.idle" count="13">
-			<frame x="13" count="24" />
-			<frame x="25" count="12" />
-			<frame x="1" count="12" />
+		<tilesheet id="peredur.png" width="256" height="144" />
+		<tile id="peredur" sheet="peredur.png" x="0" y="0" />
+		<animation id="peredur.idle">
+			<frame x="0" length="7" />
+			<frame x="2" />
+			<frame x="0" length="3" />
+			<frame x="1" length="7" />
 		</animation>
-		<animation id="builder.talk" x="37" count="12" />
+		<animation id="peredur.talk" x="3" count="10" />
 		<animation id="UC_scientist.idle" x="0" count="1" />
 		<animation id="UC_scientist.talk" x="1" count="3" />
 		<animation id="purifiers_commander.idle" x="0" count="1" />
@@ -175,7 +176,7 @@
 		<layer id="bg" image="{core}/scenes/hut/hut.png" />
 		<layer id="guard_chief" tile="guard_chief" animation="guard_chief.idle" talk="guard_chief.talk" y="84" />
 		<layer id="shopkeeper" tile="farmer" animation="farmer.idle" talk="farmer.talk" x="70" y="70" />
-		<layer id="mage" tile="builder" animation="builder.idle" talk="builder.talk" x="164" y="77" />
+		<layer id="mage" tile="peredur" animation="peredur.idle" talk="peredur.talk" />
 		<layer id="UC_scientist" tile="UC_scientist" animation="UC_scientist.idle" talk="UC_scientist.talk" x="164" y="77" />
 		<layer id="purifiers_commander" tile="purifiers_commander" animation="purifiers_commander.idle" talk="purifiers_commander.talk" x="190" y="77" />
 		<layer id="thirallan_bg" tile="thirallan_bg" animation="thirallan_bg.full" />
@@ -614,22 +615,27 @@
 				<choice id="himself">
 					<dialogue section="zargoroth_info" id="zargoroth1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="zargoroth2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="zargoroth3" speaker='guard_chief' />
 				</choice>
 				<choice id="peredur">
 					<dialogue section="zargoroth_info" id="peredur1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="peredur2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="peredur3" speaker='guard_chief' />
 				</choice>
 				<choice id="pyrrhos">
 					<dialogue section="zargoroth_info" id="pyrrhos1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="pyrrhos2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="pyrrhos3" speaker='guard_chief' />
 				</choice>
 				<choice id="andreas" if="player.hasQuest('find_jacominus')">
 					<dialogue section="zargoroth_info" id="andreas1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="andreas2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="andreas3" speaker='guard_chief' />
 				</choice>
-				<choice id="tomkin" if="1player.questComplete('blood_moon')">
+				<choice id="tomkin" if="!player.questComplete('blood_moon')">
 					<dialogue section="zargoroth_info" id="tomkin1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="tomkin2" speaker='guard_chief' />
+					<dialogue section="zargoroth_info" id="tomkin3" speaker='guard_chief' />
 				</choice>
 				<choice id="monastery" if="player.questComplete('blood_moon')">
 					<dialogue section="zargoroth_info" id="monastery1" speaker='guard_chief' />

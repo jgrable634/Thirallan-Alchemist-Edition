@@ -128,7 +128,7 @@
 				<dialogue text='Nice try... You are not vacuuming up my precious lava. Lemme unequip that [item="water_pump"] for you.' />
 				<action>player.equipment.unequip("back",player,true);</action>
 			</section>
-			<section if="area.getObject('RB_old_ship.crack2') == null && player.getKillCount('RB_boss') > 0">
+			<section if="area.getStructureById('RB_old_ship.crack2') == null && player.getKillCount('RB_boss') > 0">
 					<object id="RB_old_ship.decoy" x="138.125" y="77.0625" />
 					<light x="138.125" y="77.0625" size="10" />
 					<pan toObject="area.getObject('RB_old_ship.decoy')" seconds="1" />
@@ -167,7 +167,7 @@
 			mine(6, 3); for(x in 6...11) mine(x, 4); for(x in 8...11) mine(x, 5); for(x in 8...10) mine(x, 6);
 		</action>
 		<structure id="science1.bridge" x="0" y="8" />
-		<object id="RB.bridge.exit" x="7" y="6" />
+		<structure id="RB.bridge.exit" x="7" y="6" />
 		<object id="RB.bridge.nav" x="5" y="4" />
 		<object id="RB.bridge.nav.broken" x="6" y="2" />
 		<object id="RB.bridge.nav.broken" x="11" y="4" />
@@ -193,7 +193,7 @@
 			<wait seconds="0.5" />
 			<action>for(x in 138...143) for(y in 73...78) mine(x,y);</action>
 			<object id="RB.explosion" x="138.125" y="77.0625" />
-			<object id="RB_old_ship.crack2" x="138.125" y="77.0625" />0
+			<structure id="RB_old_ship.crack2" x="138.125" y="77.0625" />0
 			<sound id="explosion" />
 			<wait seconds="2">
 				<operate object="area.getObject('RB.explosion')" />
@@ -211,7 +211,7 @@
 		<action>for(y in 14...18) evalXml('&lt;object id="flame_wall" x="13" y="'+y+'" />'); player.setKillCount('moltanium_RB_boss_abyssalFight',0);</action>
 		<object id="moltanium_RB_boss_abyssalFight" x="20" y="15" />
 		<object id="moltanium_RB_boss_abyssalFight" x="40" y="15" />
-		<object id="RB_old_ship_crack1" x="148.8125" y="74.375" area="robot_start" />
+		<structure id="RB_old_ship_crack1" x="148.8125" y="74.375" area="robot_start" />
 		<structure id="RB_old_ship.crack1.ret" x="9" y="15">
 			<teleport area="robot_start" x="148.8125" y="74.375" with="ellipse" />
 		</structure>
