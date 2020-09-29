@@ -3,17 +3,17 @@
   <area id="thirallan_maze">
     <exit area="thirallan_maze" x="65" y="61" />
 
-    <set id="ar" value="[[18,18],[54,18],[90,18],[18,44],[54,44],[90,44],[18,70],[54,70],[90,70],[18,96],[54,96],[90,96]]" /><action>shuffleN(ar, 2);</action>
+    <set id="ar" value="[[18,18],[54,18],[90,18],[18,44],[54,44],[90,44],[18,70],[54,70],[90,70]]" /><action>shuffleN(ar, 2);</action>
 
     <set id="exits" value="[]" /><set id="structures" value="[]" /><set id="i" value="0" />
     <action>
       //Doors are 2x2
       //Two sets of linked doors
-      for(i in 0...4) exits.push({area:"thirallan_maze", x:0, y:0});
+      for(i in 0...2) exits.push({area:"thirallan_maze", x:0, y:0});
       exits.push({area: "purifiers_teaser", x:1, y:-1});
       exits.push({area: "purifier_void", x:1, y:-1});
       i = 0;
-      while(i &lt; 12){
+      while(i &lt; 8){
         for(x in ar[i][0]...ar[i][0]+20) for(y in ar[i][1]...ar[i][1]+10){setBack(x, y, "bedrock"); area.setLightTile(x,y);}
         if(exits[i] != null){
           if(exits[i].area == "thirallan_maze"){
@@ -34,13 +34,24 @@
         }
       }
 
-      i = 0; while(i &lt; 4){var s1 = structures[i]; var s2 = structures[i+1]; s1.x = s2.xPos; s1.y = s2.yPos; s2.x = s1.xPos; s2.y = s1.yPos; i += 2;}
+      i = 0; while(i &lt; 2){var s1 = structures[i]; var s2 = structures[i+1]; s1.x = s2.xPos; s1.y = s2.yPos; s2.x = s1.xPos; s2.y = s1.yPos; i += 2;}
     </action>
 
 
 
-    <maze floor="bedrock" wall="blackstone" width="64" height="60" tilesPerCell="2" /><light x="64" y="64" size="3" />
-    <init><runAreaLoad /><action>for(x in 64...66) for(y in 60...62){mine(x,y); area.setLightTile(x,y);}</action><structure id="maze_portal" x="64" y="61"><teleport area="thirallan_holy_hills" x="4" y="-1" /></structure></init>
+    <maze floor="bedrock" wall="blackstone" width="56" height="41" tilesPerCell="2" /><light x="64" y="64" size="3" />
+    <init>
+      <runAreaLoad />
+      <action>
+        for(x in 64...66) for(y in 60...62){mine(x,y); area.setLightTile(x,y);}
+      </action>
+      <structure id="maze_portal" x="64" y="61">
+        <teleport area="thirallan_holy_hills" x="4" y="-1" />
+      </structure>
+      <object id="treasure_chest" x="area.getStructureById('maze_exit').tile_x+2" y="area.getStructureById('maze_exit').tile_y">
+        this.inventory.addItems(Item.get("helium_pack"), 1);
+      </object>
+    </init>
   </area>
   <area id="purifiers_teaser" width="11" height="40" powered="true" canFly="false">
     <tiles id="blackstone" start="0" end="1" />

@@ -77,7 +77,7 @@
         <wait seconds="0.5">
           <operate object="area.getObject('peredurShrine')" />
         </wait>
-        <action>player.equipment.equip(getItem('peredur'),player);</action>
+        <action>player.equipment.equip(getItem('peredur').asItem(),player,true);</action>
         <pan toObject="player" seconds="0.25" modal="true" />
         <wait seconds="0.5" />
         <play object="this" animation="awaken" modal="true" />

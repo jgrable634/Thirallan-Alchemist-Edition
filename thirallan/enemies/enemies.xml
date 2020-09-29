@@ -12,7 +12,6 @@
 	<animation id="undead.attack" x="12" count="2" />
 
 	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" capture="4" underground="true" type="surface" fps="10" vertical="true">
-		<loot id="undead_flesh" p="0" />
 		<attack type="melee" damage="5" animation="attack">
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>

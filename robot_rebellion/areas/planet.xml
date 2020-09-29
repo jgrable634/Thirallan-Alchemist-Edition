@@ -220,11 +220,13 @@
 	</procedure>
 
 	<procedure id="RB_ship_robots_moarLava">
-		<action>for(x in 30...33) area.setWater(x,9);</action>
-		<action>for(x in 50...53) area.setWater(x,9);</action>
-		<invokeLater seconds="1">
-			<run procedure="RB_ship_robots_moarLava" />
-		</invokeLater>
+		<section if="area.id == 'RB_ship_robots'">
+			<action>for(x in 30...33) area.setWater(x,9);</action>
+			<action>for(x in 50...53) area.setWater(x,9);</action>
+			<invokeLater seconds="1">
+				<run procedure="RB_ship_robots_moarLava" />
+			</invokeLater>
+		</section>
 	</procedure>
 
 	<area id="RB_ship_robots" width="64" height="32" external="robot_start" planet="robot_rebellion" water="RB_lava" water_anim="RB_lava" allowHeatDamage="true">

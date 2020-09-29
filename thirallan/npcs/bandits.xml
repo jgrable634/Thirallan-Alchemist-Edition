@@ -19,11 +19,12 @@
       <object id="domenic_object" x="this.tile_x" y="this.tile_y" />
       <dialogue section="domenic" id="undying_peninsula4" speaker='area.getObject("domenic_object")' />
       <invokeLater>
+        <lerp object="this" alpha="0" />
         <lerp object="area.getObject('domenic_object')" deltaX="-50" seconds="5" />
         <remove object="area.getObject('domenic_object')" />
         <action>
           while(area.getObject('bandit_heavy') != null || area.getObject('bandit_combo') != null){
-            area.removeObject('bandit_heavy'); area.removeObject('bandit_combo');
+            area.removeObject(area.getObject('bandit_heavy')); area.removeObject(area.getObject('bandit_combo'));
           }
         </action>
       </invokeLater>

@@ -51,7 +51,7 @@
     </choose>
   </procedure>
   <procedure id="init_blood_moon">
-    <section if="isNight() && randInt(0,99) &lt; 10">
+    <section if="isNight() && randInt(0,99) &lt; 10 && getParallaxLayer('thirallan_sky') != null">
       <show tooltip="popup" text="common.blood_moon" x="0.5" y="0.4" hold="30" />
       <action>
         setFlag('blood_moon',true);
