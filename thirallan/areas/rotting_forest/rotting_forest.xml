@@ -22,7 +22,7 @@
     <objects id="blood_tree" count="10" fromX="0" toX="50" y="-1" />
   </area>
 
-  <area id="thirallan_monastery" background="thirallan_monastery" width="176" height="100" looping="true" name="common.thirallan_monastery" planet="thirallan_alchemist">
+  <area id="thirallan_monastery" background="thirallan_monastery" width="176" height="100" looping="true" canFly="false" name="common.thirallan_monastery" planet="thirallan_alchemist">
     <action>for(y in -10...0){setTile(50,y,"monastery_stone"); setTile(125,y,"monastery_stone");}</action>
     <tiles id="blood_dirt" start="0" end="0.5" />
     <tiles id="obsidian" start="0.5" end="1" />

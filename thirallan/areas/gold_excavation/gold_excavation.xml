@@ -5,7 +5,7 @@
 
 
 
-  <area id="thirallan_gold_excavation.sides" width="20" height="150">
+  <area id="thirallan_gold_excavation.sides" width="50" height="150">
     <tiles id="dirt" start="0" end="0.5" />
     <tiles id="stone" start="0.5" end="1" />
     <tiles id="grass" y="0" />
@@ -46,8 +46,8 @@
     <objects id="gold_golem" start="0.8" end="0.9" percent="0.00375" />
   </area>
 
-  <area id="thirallan_gold_excavation" background="gold_excavation" planet="thirallan_alchemist" looping="true">
-    <appendArea id="thirallan_gold_excavation.sides" />
+  <area id="thirallan_gold_excavation" background="gold_excavation" width="140" planet="thirallan_alchemist" looping="true">
+    <appendArea id="thirallan_gold_excavation.sides" offsetX="-30" />
     <appendArea id="thirallan_gold_excavation.center" offsetX="20" />
     <appendArea id="thirallan_gold_excavation.sides" offsetX="120" />
     <spawner id="gold_golem" time="100" count="3" fromX="0" toX="150" fromY="50" toY="150" />

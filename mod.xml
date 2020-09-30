@@ -3,7 +3,7 @@
     <name>Thirallan: Alchemist Edition</name>
     <description>This is a mash up mod, it mashes the following mods into a whole new experience: Thirallan, Deathbourne, The Realm of Dragons, Robot Rebellion, and a whole new project!</description>
     <author>Alchemist</author>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <requires>Full Version</requires>
     <loadAfter>Thirallan</loadAfter>
     <loadAfter>Deathbourne</loadAfter>
