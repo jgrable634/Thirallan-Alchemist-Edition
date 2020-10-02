@@ -382,6 +382,11 @@
 					<action>setFlag('on_RB_planet',true);</action>
 					<run procedure="heat_damage" />
 				</section>
+				<section if="!player.hasSeenItem('draemordion_helm')">
+					<dialogue text="Because this equipment that is needed to enter this planet isn't available any other way in this update, have the armor now." />
+					<item id="draemordion_helm" count="1" />
+					<item id="draemordion_armor" count="1" />
+				</section>
 			</onLoad>
 			<onLeave>
 				<action>setFlag('on_RB_planet',false);</action>
