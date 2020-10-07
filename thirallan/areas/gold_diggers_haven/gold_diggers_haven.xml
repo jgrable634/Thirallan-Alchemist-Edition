@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
 
-  <area id="thirallan_gold_diggers_haven" background="thirallan_zargoroth" width="150" height="100" name="common.thirallan_gold_diggers_haven" looping="true" planet="thirallan_alchemist">
+  <area id="thirallan_gold_diggers_haven" background="thirallan_zargoroth" width="150" height="100" looping="true" planet="thirallan_alchemist">
     <tiles id="dirt" start="0" end="0.5" />
     <tiles id="stone" start="0.5" end="1" />
     <tiles id="grass" y="0" />

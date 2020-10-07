@@ -13,6 +13,7 @@
     <text id="travel_gold_excavation">This Gold Excavation is the reason [color=770000]Gold Digger's Haven[/color] was ever established. It was discovered long ago that there was enough shining gold to make you blind. Would you like to go to the Gold Excavation?</text>
     <text id="travel_holy_hills">These hills were deemed holy by The Church long ago. the priests would come for repent, forgiveness, and requests to the god they worshipped. Would you like to go to The Holy Hills?</text>
     <text id="travel_desert">The desert has been ignored ever since the island was first colonized. It must be dangerous, as no one ever comes back from there. Would you like to go to The Desert?</text>
+    <text id="travel_confirm">Are you sure you want to visit {Area}?</text>
   </section>
 
   <section id="common">
@@ -28,11 +29,11 @@
     <text id="holy_hills">Holy Hills</text>
     <text id="desert">Thirallan Desert</text>
     <text id="thirallan_monastery">The Monastery</text>
+    <text id="map_explanation">Map Explanation</text>
     <text id="spearAndArmor">Spear and Armor</text>
     <text id="diy">Do it myself</text>
     <text id="thirallan_mines_no">Are these mines? I probably shouldn't enter just yet, could be unstable.</text>
     <text id="hut_stuff">I should probably check up on [object=zargoroth_npc] in the [color=770000]Hut[/color].</text>
-    <text id="early_escape">So you decided to yolo and leave? Very well, get your shit out of the chest, and board your ship. You can go to orbit from here. Thanks for testing this.</text>
     <text id="blood_moon">The [color=770000]Blood Moon[/color] rises...</text>
     <text id="beckoning">You feel a strange voice inside your head beckoning you to the hut...</text>
     <text id="current_objective">Current Objective</text>
@@ -57,6 +58,7 @@
     <text id="strangle_break_left">Press [key=left]!</text>
     <text id="strangle_break_right">Press [key=right]!</text>
     <text id="strangle_break_down">Press [key=down]!</text>
+    <text id="corruptedArea">You can feel the corruption eating at your equipment here!</text>
   </section>
 
   <section id="structure.tooltip">
@@ -82,6 +84,7 @@
     <text id="steel_warhammer">Steel Warhammer</text>
     <text id="exotic_warhammer">Exotic Warhammer</text>
     <text id="purifiers_entryItem">Strange Insignia</text>
+    <text id="jacominus_katana">Katana Fragment</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
@@ -89,6 +92,7 @@
     <text id="lost_artifact">Bring this to [object=umazz].</text>
     <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
     <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
+    <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>
@@ -106,11 +110,14 @@
 		<text id="first3">However, if you want help in finding it, I'm gonna ask that you help us. But we'll get to that later.</text>
 		<text id="first4">...I'm gonna go get some fresh air, sorry.</text>
 		<text id="second1">Hmph.</text>
-		<text id="second2">Peredur just... He won't grow up! He keeps doing things I tell him not to. </text>
+		<text id="second2">Peredur just... He contiunisly puts himself in danger! He won't listen to my warnings!</text>
     <text id="proving_worth1">Hey! I don't recognize you! Let's chat in the [color=770000]Hut[/color]!</text>
     <text id="proving_worth2">Ha! Like you are! You're new here, I get it. I was there. You see, [color=490068]The Corrupted[/color] aren't just mindless, they have an insane power at their disposal.</text>
-    <text id="proving_worth3">They have a power known as [color=490068]Corruption[/color]. It can infest your equipment, rendering them useless, I'm sure you've had it happen to at least one piece of your equipment. So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
-    <text id="proving_worth4">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. We haven't been able to get a workshop and smelter set up due to [color=490068]The Corrupted[/color]'s increased harassment of the town. Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Here's a [item=steel_pickaxe] in case yours got corrupted.</text>
+    <text id="proving_worth3a">They have a power known as [color=490068]Corruption[/color]. It can infest your equipment, rendering them useless, I'm sure you've had it happen to at least one piece of your equipment. There is something strange about it though...</text>
+    <text id="proving_worth3b">It infests stuff within your backpack, but never infests your entire backpack. So don't worry about replacing that.</text>
+    <text id="proving_worth3c">In some places, it takes just the nearby environment to corrupt your gear! So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
+    <text id="proving_worth4a">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. We haven't been able to get a workshop and smelter set up due to [color=490068]The Corrupted[/color]'s increased harassment of the town.</text>
+    <text id="proving_worth4b">Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Here's a [item=steel_pickaxe] in case yours got corrupted.</text>
     <text id="proving_worth5">That's fine, I understand, but if you change your mind, come talk to me again.</text>
     <text id="proving_worth6">Ah you're back, are you ready?</text>
     <text id="proving_worth7">I need you to collect [item=malumite_ore] for corruption resistant gear. You need at least [color=770000]11[/color] [item=malumite_bar]s.</text>
@@ -119,7 +126,8 @@
     <text id="undead_rumors2">I'd appreciate it if you investigated it... Be wary, I'm unsure of exactly what he found.</text>
     <text id="undead_rumors3">I need you to get [object=andreas] to show you what he found in the [color=770000]Mines[/color], so we can put this rumor to rest.</text>
     <text id="undead_rumors4">Ah, do you have something of worth to tell? The look on your face says you do.</text>
-    <text id="undead_rumors5">You... what? Well that's troubling. A few scouts have reported similar looking structures, I think it's time I give you a [item=thirallan_map]. But before you go anywhere, [object=peredur] wanted to speak with you.</text>
+    <text id="undead_rumors5">You... what? Well that's troubling. A few scouts have reported similar looking structures, I think it's time I give you a [item=thirallan_map].</text>
+    <text id="undead_rumors6">But before you go anywhere, [object=peredur] wanted to speak with you.</text>
     <text id="andreas_accomplishment">It appears [object=andreas] has built up a few new work stations, A workshop and a smelter if I'm not mistaken, feel free to use them!</text>
     <text id="peredur_blood_moon">I need you to do as [object=peredur] asks before you leave.</text>
     <text id="explore_thirallan">Please, explore Thirallan, figure out the secrets behind these [color=770000]Shrines[/color].</text>
@@ -170,6 +178,20 @@
     <text id="phoenixes2">Like I said, this group is actually quite reasonable, and from my understanding the most intelligent of the three groups, they perfer bows and crossbows. Instead of just brute force attacking like The Beasts, they perfer to take victims by surprise from afar. Their leader's name is [color=770000]Erskine[/color], and has a enchanted bow.</text>
     <text id="gold_diggers_haven1">Gold Digger's Haven, heh, been a while since I've seen that place, how's old [color=770000]Iterol[/color]? Still as irritable and paranoid as always I assume? Anyway Gold Digger's Haven was sprouted up upon the discovery of a massive gold vein. I'll mark the excavation on your map.</text>
     <text id="gold_diggers_haven2">Though I've heard that The Fangs are inhabiting the excavation, be careful around there.</text>
+
+    <text id="map_explanation">Because I have the time, I'll show you what is where.</text>
+    <text id="map_explanation1">Here is where we are, Zargoroth's Safe Haven, come back here when you want to rest.</text>
+    <text id="map_explanation2">South of us is the Undying Peninsula, seems fitting for a place being ravaged by Corrupted. The Beast Bandit group claims they own the place. That's where one of the shrines are.</text>
+    <text id="map_explanation3">Ah, right, north of us is Beast Forest. This is where the Beast Bandit group's encampment resides. I advise you avoid the area for now, they are quite tough.</text>
+    <text id="map_explanation4">Directly northeast of us is the mountain range, strange how these are the only mountains on the whole island, but with everything else going on, I hardly question it.</text>
+    <text id="map_explanation5">East of us is the Rotting Forest. This is where the Monastery resides, what used to be a huge bustling town before this whole island went to hell. That's where one of the shrines are.</text>
+    <text id="map_explanation6">On the contrary, southeast of us are what's called the Holy Hills. Back when this island was peaceful, it's where priests would worship their god, from my understanding.</text>
+    <text id="map_explanation7">On the northern side, there is the Fang Plains. Where another of the bandit groups, the Fangs, reside in their encampment. Another of the reported shrines reside here.</text>
+    <text id="map_explanation8">Further east, there is the Gold Excavation. The Fangs have men there if I'm not mistaken. I think there are also golems made of pure gold there. Speaking of gold...</text>
+    <text id="map_explanation9">On the east peninsula, there is Gold Digger's Haven. The village was built up for the sole purpose of mining that Excavation. A man named [color=770000]Iterol[/color] still resides there I believe. There is a shrine there.</text>
+    <text id="map_explanation10">Southwest of Gold Digger's Haven, there is the Pheonix Plateau. This place is the location of the encampment of the final bandit group, The Pheonixes. There is a shrine there.</text>
+    <text id="map_explanation11">Finally, there is the Desert. Not much is known about that place... The sandstorms there are pretty hazardous to most adventurers, but I think you can handle it.</text>
+    <text id="map_explanation12">That concludes the map explanation. Thanks for listening.</text>
   </section>
   <section id="pyrrhos">
     <text id="first_interaction1">Oh hello, I don't recognize you friend, name's Pyrrhos! I'm just what you'd call a mobile shopkeep! I've got some good wares today!</text>
@@ -184,7 +206,7 @@
     <text id="first3">So try not to ask Zargoroth about that helm, I know it looks weird, but it wasn't his choice to acquire it, he never told me what truly happened, just that he can't take it off, and said to drop it.</text>
     <text id="first4">Anyway, if you can, some help would be greatly appreciated with [color=490068]The Corrupted[/color]. Perhaps you can find what you're looking for while helping us?</text>
     <text id="second1">You seem troubled Zargoroth, what's wrong?</text>
-    <text id="second2">Come on Peredur, you know he hates that tech, stop going out of your way to annoy him, he's under a lot of pressure.</text>
+    <text id="second2">Come on Peredur, you know he hates that name, stop going out of your way to annoy him, he's under a lot of pressure.</text>
     <text id="second3">You need to practice empathy Peredur. It's something a lot of people here lack, and I'm sick of it.</text>
     <text id="post_purifier1">Thinking about this... I don't see how that would be too much of an issue. I think everyone on the island can agree that [color=490068]The Corrupted[/color] are detrimental to a normal state of living.</text>
     <text id="post_purifier2">Admitedly, it would be difficult to unite different groups of different beliefs and ideals, but come now, we are all human! I believe we can push our differences aside and unite to remove [color=490068]The Corrupted[/color] threat once and for all!</text>
@@ -437,5 +459,15 @@
   </section>
   <section id="world">
     <text id="thirallan_zargoroth">Zargoroth's Safe Haven</text>
+    <text id="thirallan_undying_peninsula">Undying Peninsula</text>
+    <text id="thirallan_beast_forest">Beast Forest</text>
+    <text id="thirallan_mountains">The Mountain Range</text>
+    <text id="thirallan_holy_hills">Holy Hills</text>
+    <text id="thirallan_rotting_forest">Rotting Forest</text>
+    <text id="thirallan_fang_plains">Fang Plains</text>
+    <text id="thirallan_gold_diggers_haven">Gold Digger's Haven</text>
+    <text id="thirallan_gold_excavation">Gold Excavation</text>
+    <text id="thirallan_phoenix_plateau">Phoenix Plateau</text>
+    <text id="thirallan_desert">Thirallan Desert</text>
   </section>
 </lang>

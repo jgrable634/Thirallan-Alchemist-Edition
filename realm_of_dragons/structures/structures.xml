@@ -20,7 +20,7 @@
 		<operate><return with="ellipse" /></operate>
 	</structure>
 	<structure id="ROD.ret" tile="leave_door" name="enter">
-		<operate><section with="ellipse"><action>var loc = getGlobal('location'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
+		<operate><section with="ellipse"><action>var loc = getGlobal('RODLocation'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
 	</structure>
 	<structure id="realm_of_dragons_fromOrbit_entrance" tile="leave_door" name="enter">
 		<operate><!--action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" /--><dialogue text="This section of this mod is incomplete, and isn't ready for the competition's standards." /></operate>

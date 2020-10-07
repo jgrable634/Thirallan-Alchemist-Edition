@@ -98,7 +98,7 @@
     <onLoad><section if="getFlag('iterol_recruited') && area.getObject('iterol_cathedral') == null" ><object id="iterol_cathedral" x="6" y="-21" /></section><action if="!area.isLit(1, -1)">for(y in -31...-1) for(x in 0...21) area.setLit(x, y);</action></onLoad>
   </area>
 
-  <area id="thirallan_rotting_forest" background="thirallan_rotting_forest" width="150" height="100" looping="true" name="common.thirallan_rotting_forest" planet="thirallan_alchemist">
+  <area id="thirallan_rotting_forest" background="thirallan_rotting_forest" width="150" height="100" looping="true" corrupted="true" planet="thirallan_alchemist">
     <tiles id="blood_dirt" start="0" end="0.5" />
     <tiles id="obsidian" start="0.5" end="1" />
     <tiles id="blood_grass" y="0" />

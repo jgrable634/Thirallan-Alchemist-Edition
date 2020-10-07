@@ -21,7 +21,7 @@
     <dig id="d_sand_bedrock_unmineable" cost="999" />
 
     <!-- AREA DEFINITION -->
-    <area id="thirallan_desert" background="thirallan_desert" width="97" height="164" looping="true" name="common.thirallan_desert" planet="thirallan_alchemist">
+    <area id="thirallan_desert" background="thirallan_desert" width="97" height="164" looping="true" corrupted="true" planet="thirallan_alchemist">
         <tiles id="d_sand" start="0" end="0.3"/>
         <tiles id="d_sand_stone" start="0.3" end="0.45" />
         <tiles id="d_sand_rock" start="0.45" end="0.6" />

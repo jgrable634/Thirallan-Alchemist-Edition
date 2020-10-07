@@ -2,6 +2,26 @@
 <mod>
     <name>Thirallan: Alchemist Edition</name>
     <description>This is a mash up mod, it mashes the following mods into a whole new experience: Thirallan, Deathbourne, The Realm of Dragons, Robot Rebellion, and a whole new project!</description>
+    <steamDesc>
+      This mod is a kind of collection of my other mods, except they have all been redone to be much better mods. All into one star system. Are you ready to experience what these mods should've been like from the start?
+
+      There are a few things to note currently:
+
+      1. Speak to CaptAln after meeting him, or speak to Alchemist after making the Dragon Ship to unlock the system.
+
+      2. The mods that have been redone in this mod are as follows:
+
+      Thirallan, The Realm of Dragons, Deathbourne, Robot Rebellion, and a completely new project.
+
+      3. This mod is currently incomplete, the following things are either nonexistent or inaccessible at this current time:
+
+      Realm of Dragons, Some of Thirallan, Deathbourne, and the new project.
+
+      4. There is a placeholder sprite: the Farmer Scene Sprite is a placeholder for the character: Pyrrhos.
+
+      5. This mod has been created for the KOZ Modding Competition.
+    </steamDesc>
+    <tag>KOZModdingColosseum</tag>
     <author>Alchemist</author>
     <version>1.0.2</version>
     <requires>Full Version</requires>
@@ -11,6 +31,19 @@
     <loadAfter>Spirits Plus</loadAfter>
     <loadAfter>Robot Rebellion</loadAfter>
     <init>
+      <action>
+        function _Thirallan_Format(id){ // Credit to Etrotta
+          // return id;
+          var final = "";
+          var result; //defines with a null value
+          var name = getText("world>"+id); //searchs for the vanilla name
+          if (name != null) {
+            result = name.getValue(); //if there is a name for it, use it
+          }
+          final += " " + result ; //adds the a space + the word to the phrase
+          return final.substring(1); //removes the first thing bc it is just a space, like literally " "
+        }
+      </action>
       <include id="the_corruption/mod.xml" child="init" />
       <include id="thirallan/mod.xml" child="init" />
       <include id="deathbourne/mod.xml" child="init" />

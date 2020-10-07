@@ -12,7 +12,7 @@
     <tiles id="snow" y="-15" />
   </area>
 
-  <area id="thirallan_mountains" background="thirallan_mountains" width="80" height="150" looping="true" name="common.thirallan_mountains" planet="thirallan_alchemist">
+  <area id="thirallan_mountains" background="thirallan_mountains" width="80" height="150" looping="true" corrupted="true" planet="thirallan_alchemist">
     <tiles id="stone" start="0" end="0.34" />
     <tiles id="dirt" start="0.34" end="0.67" />
     <tiles id="stone" start="0.67" end="1" />

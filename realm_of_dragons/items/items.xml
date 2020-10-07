@@ -23,7 +23,7 @@
 	<item id="dragon_teleporter" type="spellbook" weight="1" cost="200" icon="spellbook.ico" animation="magic_book.ico">
 		<action id="use" name="travel">
 			<section if="getFlag('ROD_reset')">
-				<action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action>
+				<action>setGlobal("RODLocation", [area.id, player.tile_x, player.tile_y]);</action>
 				<action>player.renderer.useItem(this)</action>
 				<wait seconds="0.5" modal="false" />
 				<hitEffect object="player" tile="alchemist" animation="alchemist.teleport" runPaused="true" />

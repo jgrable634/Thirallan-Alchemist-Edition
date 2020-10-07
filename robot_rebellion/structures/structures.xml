@@ -37,7 +37,7 @@
 		<over><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.opening", false)</action></over>
 		<out><action if="area.getObject('RB_boss') == null && area.getObject('RB_smallBoss') == null && this.renderer != null">this.renderer.playAnimation("crashed_ship.door.closing", false)</action></out>
 	</structure>
-	<structure id="RB.bridge.exit" layer="npc" action="structure.tooltip.enter" width="16" height="32">
+	<structure id="RB.bridge.exit" layer="npc" name="enter" width="16" height="32">
 		<operate><teleport area="RB_old_ship_boss" x="8.5" y="9" with="ellipse" /></operate>
 	</structure>
 	<object id="RB.bridge.nav" width="16" height="16" layer="npc" action="structure.tooltip.operate">

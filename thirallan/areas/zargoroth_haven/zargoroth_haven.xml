@@ -3,7 +3,7 @@
 
   <include id="parallax/parallax.xml" />
 
-  <area id="thirallan_zargoroth" background="thirallan_zargoroth" width="150" height="100" name="world.thirallan_zargoroth" planet="thirallan_alchemist">
+  <area id="thirallan_zargoroth" background="thirallan_zargoroth" width="150" height="100" planet="thirallan_alchemist">
     <shore x="-1" top="sand_top" bottom="sand" trans1="dirt_sand2" trans2="dirt_sand1" flip="true" dock="dock_empty" height="96" />
     <shore x="150" top="sand_top" bottom="sand" dock="dock_empty_flip" trans1="dirt_sand1" trans2="dirt_sand2" />
     <tiles id="dirt" start="0" end="0.5" />
@@ -37,6 +37,7 @@
     <spawner id="floating_blood" time="100" count="2" fromX="0" toX="150" fromY="-1" toY="-3" enabled="getFlag('blood_moon')" ground="false" />
     <init><runAreaLoad /></init>
     <onLoad>
+      <run procedure="corruption_check" />
       <section if="!getFlag('blood_moon')">
         <music id="magic2" seconds="1" />
         <weather type="fog" alpha="1" color="1F2A1F" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" />
@@ -69,7 +70,7 @@
     <object id="jacominus" x="10" y="3" />
   </area>
 
-  <area id="thirallan_zargoroth.mines" width="50" height="100">
+  <area id="thirallan_zargoroth.mines" width="50" height="100" corrupted="true" planet="thirallan_alchemist">
     <structure id="thirallan_zargoroth.mines.ret" x="1" y="15" />
     <structure id="undead_shrine" x="40" y="75" />
     <action>

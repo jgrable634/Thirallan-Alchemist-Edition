@@ -21,6 +21,7 @@
 	<enemy id="undead_shrineDefender" extends="undead" />
 
 	<enemy id="jacominus" tile="jacominus" defense="1" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10">
+		<lootSet><loot id="jacominus_katana" /></lootSet>
 		<attack type="melee" damage="7">
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>

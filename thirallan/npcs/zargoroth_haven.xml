@@ -44,7 +44,8 @@
 
     <procedure id="zargoroth.proving_worth">
       <section if="player.hasQuest('proving_worth')">
-        <dialogue section="zargoroth" id="proving_worth4" speaker='this' />
+        <dialogue section="zargoroth" id="proving_worth4a" speaker='this' />
+        <dialogue section="zargoroth" id="proving_worth4b" speaker='this' />
         <item id="steel_pickaxe" />
       </section>
       <section if="!player.hasQuest('proving_worth')">
@@ -76,7 +77,9 @@
           <section if="!player.hasQuest('proving_worth') && !getFlag('proving_worth_denied')">
             <dialogue section="player" id="zargoroth_proving_worth1" speaker='player' />
             <dialogue section="zargoroth" id="proving_worth2" speaker='this' />
-            <dialogue section="zargoroth" id="proving_worth3" speaker='this' />
+            <dialogue section="zargoroth" id="proving_worth3a" speaker='this' />
+            <dialogue section="zargoroth" id="proving_worth3b" speaker='this' />
+            <dialogue section="zargoroth" id="proving_worth3c" speaker='this' />
             <quest id="proving_worth" />
             <set id="this" value="this" />
             <run procedure="zargoroth.proving_worth" />
@@ -107,12 +110,7 @@
               <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
             </section>
             <section>
-              <dialogue section="zargoroth" id="undead_rumors4" speaker='this' />
-              <dialogue section="player" id="undead_rumors1" speaker='player' />
-              <dialogue section="zargoroth" id="undead_rumors5" speaker='this' />
-              <item id="thirallan_map" count="1" modal="true" />
-              <quest id="blood_moon" ask="false" />
-              <complete quest="undead_rumors" />
+              <scene id="thirallan_alchemist" show="map_explanation" with="fade" />
             </section>
           </choose>
           <section if="getFlag('merchants_recruited') && getFlag('andreas_recruited') && !player.questComplete('rebuild_monastery')">

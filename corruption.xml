@@ -31,6 +31,22 @@
         return corruptedItem;
       }
     }
+    function checkCorrupted(player){
+      corruptedItem = null;
+      for(s in player.equipment.slots){
+        if(s.get() != null){
+          i = s.get().info;
+          if(isCorruptible(i.xml)){
+            return true;
+          }
+        }
+      }
+      cItems = [];
+      for(i in player.inventory.items) if(isCorruptible(i.item.xml)) cItems.push(i.item);
+      if(cItems.length > 0){
+        return true;
+      }
+    }
   </action>
 
   <object id="corrupted.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">

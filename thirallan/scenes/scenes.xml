@@ -106,7 +106,7 @@
 		<tilesheet id="purifiers_bg.png" width="256" height="144" />
 		<tilesheet id="purifiers_full_bg.png" width="256" height="144" />
 		<tilesheet id="thirallan_travel_bg.png" width="256" height="144" />
-		<tilesheet id="thirallan_map.png" width="108" height="128" />
+		<tilesheet id="thirallan_map.png" width="128" height="128" />
 		<tile id="guard_chief" sheet="guard_chief.png" x="0" y="0" />
 		<tile id="shopkeeper" sheet="shopkeeper.png" x="0" y="0" />
 		<tile id="mage" sheet="mage.png" x="0" y="0" />
@@ -185,7 +185,7 @@
 		<layer id="purifiers_bg" tile="purifiers_bg" animation="purifiers_bg.third" />
 		<layer id="purifiers_full_bg" tile="purifiers_full_bg" animation="purifiers_full_bg.full" />
 		<layer id="thirallan_travel_bg" tile="thirallan_travel_bg" />
-		<layer id="thirallan_map" tile="thirallan_map" animation="thirallan_map.none" y="17" />
+		<layer id="thirallan_map" tile="thirallan_map" animation="thirallan_map.none" y="17" x="128" />
 		<show id="thirallan_first">
 			<layer id="bg" />
 			<layer id="guard_chief" />
@@ -674,6 +674,9 @@
 						</choice>
 					</menu>
 				</choice>
+				<choice id="map_explanation" if="player.hasQuest('undead_shrines')">
+					<scene id="thirallan_alchemist" show="map_explanation" />
+				</choice>
 				<choice id="gold_diggers_haven_about" if="player.areas.exists('thirallan_gold_diggers_haven')">
 					<dialogue section="zargoroth_info" id="gold_diggers_haven1" speaker='guard_chief' />
 					<play object="thirallan_map" animation="thirallan_map.thirallan_gold_excavation" loop="true" />
@@ -683,6 +686,61 @@
 					<dialogue section="zargoroth_info" id="gold_diggers_haven2" speaker='guard_chief' />
 				</choice>
 			</menu>
+		</show>
+		<show id="map_explanation">
+			<layer id="thirallan_bg" />
+			<layer id="guard_chief" />
+			<layer id="thirallan_map" />
+			<action>thirallan_map.alpha = 0;</action>
+			<wait seconds="1" />
+			<section if="!player.hasQuest('undead_shrines')">
+				<dialogue section="zargoroth" id="undead_rumors4" speaker='this' />
+				<dialogue section="player" id="undead_rumors1" speaker='player' />
+				<dialogue section="zargoroth" id="undead_rumors5" speaker='this' />
+				<item id="thirallan_map" count="1" modal="true" />
+				<quest id="blood_moon" ask="false" />
+				<complete quest="undead_rumors" />
+				<dialogue section="zargoroth_info" id="map_explanation" speaker='guard_chief' />
+			</section>
+			<lerp object="thirallan_map" alpha="1" seconds="0.5" />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_zargoroth" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation1" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_undying_peninsula" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation2" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_beast_forest" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation3" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_mountains" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation4" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_rotting_forest" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation5" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_holy_hills" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation6" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_fang_plains" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation7" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_gold_excavation" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation8" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_gold_diggers_haven" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation9" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_phoenix_plateau" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation10" speaker='guard_chief' />
+			<play object="thirallan_map" animation="thirallan_map.thirallan_desert" loop="true" />
+			<wait seconds="0.5" />
+			<dialogue section="zargoroth_info" id="map_explanation11" speaker='guard_chief' />
+			<dialogue section="zargoroth_info" id="map_explanation12" speaker='guard_chief' />
+			<section if="!player.hasQuest('undead_shrines')">
+				<dialogue section="zargoroth" id="undead_rumors6" speaker='guard_chief' />
+			</section>
+			<wait seconds="1" />
 		</show>
 		<show id="post_purifier1">
 			<layer id="bg" />

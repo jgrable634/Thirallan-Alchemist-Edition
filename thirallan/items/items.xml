@@ -6,10 +6,18 @@
   <item id="thirallan_map" icon="thirallan_map.ico" type="tool" corruptible="false">
     <action id="use">
       <choose>
-        <scene id="thirallan_alchemist" show="thirallan_move" with="fade" if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist'"/>
-        <dialogue section="player" id="peredur_no_travel" speaker='player' if="!player.hasSeenItem('peredur') && !player.isEquipped('peredur')" />
-        <dialogue section="player" id="blood_moon_no_travel" speaker='player' if="getFlag('blood_moon')"/>
-        <dialogue section="player" id="no_travel" speaker='player' />
+        <section if="area.id == 'thirallan_map'" with="fade">
+          <action>var loc = getGlobal('ThirallanLocation'); player.teleport(loc[0], loc[1], loc[2]);</action>
+        </section>
+        <choose>
+          <section if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist'">
+            <action>setGlobal("ThirallanLocation", [area.id, player.tile_x, player.tile_y]);</action>
+            <teleport area="thirallan_map" x="5" y="5" with="fade" />
+          </section>
+          <dialogue section="player" id="peredur_no_travel" speaker='player' if="!player.hasSeenItem('peredur') && !player.isEquipped('peredur')" />
+          <dialogue section="player" id="blood_moon_no_travel" speaker='player' if="getFlag('blood_moon')"/>
+          <dialogue section="player" id="no_travel" speaker='player' />
+        </choose>
       </choose>
     </action>
   </item>
@@ -145,6 +153,7 @@
 
   <tile id="lost_artifact.ico" sheet="icos.png" x="1" y="1" />
   <item id="lost_artifact" icon="lost_artifact.ico" type="resource" weight="3" />
+  <item id="jacominus_katana" icon="lost_artifact.ico" type="tool" canStore="false" />
 
   <tile id="corruption_book" equals="spellbook" />
 	<animation id="equipment.corruption_book.idle" x="0" count="1" color="00000" colorScale="1.4" />

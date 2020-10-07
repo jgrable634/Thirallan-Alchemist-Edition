@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
   <include id="maze.xml" />
-  <area id="purifier_void" width="25" height="1" background="black">
+  <area id="purifier_void" width="25" height="1" background="black" planet="thirallan_alchemist" corrupted="true">
     <tiles id="blackstone" start="0" end="1" />
     <object id="campaign_purifier_head" x="12" y="-5" />
     <object id="campaign_purifier_hand_l" x="10" y="-3" />

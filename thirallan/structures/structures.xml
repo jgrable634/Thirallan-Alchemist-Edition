@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <structures>
+  <structure id="thirallan_map" image="{mod:thirallan:_alchemist_edition}/thirallan/scenes/thirallan_map.png" width="128" height="128" behind="true" remove="false" allowSpawn="true" />
+
+  <structure id="thirallan_map_entrance" layer="npc" name="enter" width="16" height="16" type="door">
+    <operate>
+      <menu section="common">
+        <dialogue eval="'map.travel_confirm{Area:'+_Thirallan_Format(this.area_id)+'}'" />
+        <choice id="yes" />
+        <choice id="no"><stop/></choice>
+      </menu>
+    </operate>
+  </structure>
+
   <tilesheet id="undead_shrine.png" width="32" height="32" />
   <tile id="undead_shrine" sheet="undead_shrine.png" x="0" y="0" />
   <tile id="undead_shrine_destroyed" sheet="undead_shrine.png" x="1" y="4" />

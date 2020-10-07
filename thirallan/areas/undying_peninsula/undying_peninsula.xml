@@ -3,7 +3,7 @@
 
   <include id="parallax/parallax.xml" />
 
-  <area id="thirallan_undying_peninsula" background="thirallan_undying_peninsula" width="60" height="100" looping="true" name="common.thirallan_undying_peninsula" planet="thirallan_alchemist">
+  <area id="thirallan_undying_peninsula" background="thirallan_undying_peninsula" width="60" height="100" looping="true" corrupted="true" planet="thirallan_alchemist">
     <tiles id="dirt" start="0" end="0.5" />
     <tiles id="stone" start="0.6" end="1" />
     <tiles id="grass" y="0" />

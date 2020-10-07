@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
 
+  <!--corruption_check-->
+  <procedure id="corruption_check">
+    <section if="area.planet.id == 'thirallan_alchemist'">
+      <section if="Area.getXML(area.id).xml.get('corrupted') == 'true'">
+        <action>
+          if(checkCorrupted(player)){
+            player.showWarning(getText('warning.corruptedArea'));
+          }
+        </action>
+        <invokeLater seconds="2">
+          <action>
+            var dx = randInt(-20,20);
+            var dy = randInt(-20,20);
+            var o = getObject("corrupted.orb").create(player.tile_x+(dx*Tile.SIZE), player.tile_y+(dy*Tile.SIZE));
+  				  area.addObject(o);
+          </action>
+        </invokeLater>
+      </section>
+      <invokeLater seconds="2">
+        <run procedure="corruption_check" />
+      </invokeLater>
+    </section>
+  </procedure>
+
+
   <!-- All Primary Areas -->
   <include id="zargoroth_haven/zargoroth_haven.xml" />
   <include id="undying_peninsula/undying_peninsula.xml" />
@@ -15,7 +40,7 @@
   <include id="phoenix_plateau/phoenix_plateau.xml" />
   <include id="purifier/purifier.xml" />
 
-  <!-- Misc. Area -->
+  <!-- Misc. Areas -->
   <area id="purifier_get_fucked" width="75" height="1" planet="thirallan_alchemist">
     <tiles id="blackstone" y="0" />
     <object id="purifier_get_fucked" x="15" y="-3" />
@@ -23,6 +48,41 @@
     <onLoad><music id="purified_encounter" seconds="1" /><dialogue section="common" id="early_escape" if="getFlag('purifier_get_fucked')" /></onLoad>
   </area>
 
+  <area id="thirallan_map" width="9" height="9" shouldLight="false">
+    <tiles id="empty" start="0" end="1" />
+    <action>for(x in 0...10) for(y in 0...10) mine(x,y);</action>
+    <set id="ar" value="[[1,5],[1,6],[1,7],[1,1],[1,2],[2,4],[2,6],[4,5],[4,2],[7,5],[6,3],[5,8],[5,5]]" />
+    <set id="exits" value="[]" /><set id="i" value="0" />
+    <structure id="thirallan_map" x="0" y="8" />
+    <action>
+
+      exits.push({area: "thirallan_zargoroth", x:50, y:-1});
+      exits.push({area: "thirallan_undying_peninsula", x:50, y:-1});
+      exits.push({area: "thirallan_undying_peninsula", x:50, y:-1});
+      exits.push({area: "thirallan_beast_forest", x:50, y:-1});
+      exits.push({area: "thirallan_beast_forest", x:50, y:-1});
+      exits.push({area: "thirallan_mountains", x:50, y:-1});
+      exits.push({area: "thirallan_holy_hills", x:50, y:-1});
+      exits.push({area: "thirallan_rotting_forest", x:50, y:-1});
+      exits.push({area: "thirallan_fang_plains", x:50, y:-1});
+      exits.push({area: "thirallan_gold_diggers_haven", x:50, y:-1});
+      exits.push({area: "thirallan_gold_excavation", x:50, y:-1});
+      exits.push({area: "thirallan_phoenix_plateau", x:50, y:-1});
+      exits.push({area: "thirallan_desert", x:50, y:-1});
+
+      for(i in 0...exits.length){
+        var s = buildStructure("thirallan_map_entrance",ar[i][0],ar[i][1]);
+        var exit = exits[i]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
+      }
+
+
+      for(x in -1...10){setTile(x,0,"empty"); setTile(x,9,"empty");}
+      for(y in -1...10){setTile(-1,y,"empty"); setTile(8,y,"empty");}
+
+    </action>
+    <init><runAreaLoad/></init>
+    <onLoad><dialogue text="Use your Map of Thirallan item to return your original location." /></onLoad>
+  </area>
 
   <!-- Planet & System -->
 
