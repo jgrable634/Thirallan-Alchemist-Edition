@@ -1,31 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <areas>
-
-  <!--corruption_check-->
-  <procedure id="corruption_check">
-    <section if="area.planet.id == 'thirallan_alchemist'">
-      <section if="Area.getXML(area.id).xml.get('corrupted') == 'true'">
-        <action>
-          if(checkCorrupted(player)){
-            player.showWarning(getText('warning.corruptedArea'));
-          }
-        </action>
-        <invokeLater seconds="2">
-          <action>
-            var dx = randInt(-20,20);
-            var dy = randInt(-20,20);
-            var o = getObject("corrupted.orb").create(player.tile_x+(dx*Tile.SIZE), player.tile_y+(dy*Tile.SIZE));
-  				  area.addObject(o);
-          </action>
-        </invokeLater>
-      </section>
-      <invokeLater seconds="2">
-        <run procedure="corruption_check" />
-      </invokeLater>
-    </section>
-  </procedure>
-
-
   <!-- All Primary Areas -->
   <include id="zargoroth_haven/zargoroth_haven.xml" />
   <include id="undying_peninsula/undying_peninsula.xml" />

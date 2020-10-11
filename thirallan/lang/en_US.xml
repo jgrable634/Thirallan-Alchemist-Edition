@@ -58,7 +58,7 @@
     <text id="strangle_break_left">Press [key=left]!</text>
     <text id="strangle_break_right">Press [key=right]!</text>
     <text id="strangle_break_down">Press [key=down]!</text>
-    <text id="corruptedArea">You can feel the corruption eating at your equipment here!</text>
+    <text id="corrupted_area">You can feel the corruption eating away at you here!</text>
   </section>
 
   <section id="structure.tooltip">
