@@ -1,14 +1,54 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mod>
-    <init>
-      <!--include id="music/music.xml" />
-      <include id="tiles/tiles.xml" /-->
-      <include id="lang/en_US.xml" includeRoot="true" />
-      <include id="items/items.xml" />
-      <include id="enemies/enemies.xml" />
-      <!--include id="npcs/npcs.xml" /-->
-      <include id="structures/structures.xml" />
-      <include id="areas/planet.xml" />
-      <!--include id="scenes/scenes.xml" /-->
-    </init>
+  <init>
+    <include id="en_US.xml" includeRoot="true" />
+    <include id="deathbourne_scene.xml" includeRoot="true" />
+
+    <item id="deathbourne" extends="steel_sword" damage="20">
+      <action id="equip" /><action id="use" name="npc.talk" ><scene id="deathbourne" show="talk" with="fade" /></action>
+      <action id="feed" alt="feed_all" sfx="eat" />
+      <food id="rat" value="5" />
+      <food id="chicken" value="10" />
+      <food id="pig" value="15" />
+      <food id="cow" value="20" />
+    </item>
+    <item id="deathbourne.asleep" extends="steel_sword" damage="10">
+      <action id="inspect"><dialogue section="deathbourne" id="sleeping" /></action>
+      <!-- Awaken and play scene when it kills something -->
+    </item>
+
+    <scene id="deathbourne">
+      <tile id="deathbourne" sheet="deathbourne_scene.png" />
+      <animation id="deathbourne.idle" x="0" count="1" />
+      <animation id="deathbourne.sleep" x="1" count="1" />
+      <animation id="deathbourne.awaken" x="1" count="8" />
+      <animation id="deathbourne.talk" x="9" count="6" />
+      <layer id="deathbourne" tile="deathbourne" animation="deathbourne.idle" talk="deathbourne.talk" />
+      <show id="awaken">
+        <layer id="deathbourne" />
+        <play object="deathbourne" animation="deathbourne.sleep" loop="true" />
+        <wait seconds="1" />
+        <play object="deathbourne" animation="deathbourne.awaken"/>
+        <wait seconds="1" />
+        <dialogue section="deathbourne" id="intro1" speaker="deathbourne"/>
+        <dialogue section="deathbourne" id="intro2" speaker="deathbourne"/>
+        <dialogue section="deathbourne" id="intro3" speaker="deathbourne"/>
+        <menu section="common" showCoins="true">
+          <dialogue section="deathbourne" id="pact1" speaker="deathbourne"/>
+          <choice id="yes">
+            <dialogue section="deathbourne" id="pact2.2" speaker="deathbourne"/>
+            <action>player.stats.get("health").permaBuff(-10);</action>
+            <show tooltip="popup" text="warning.lose_max_health{value:10}" x="0.5" y="0.5"/>
+          </choice>
+          <choice id="no">
+            <dialogue section="deathbourne" id="pact2.1" speaker="deathbourne"/>
+          </choice>
+        </menu>
+      </show>
+      <show id="talk">
+        <layer id="deathbourne" />
+        <wait seconds="1" />
+      </show>
+    </scene>
+  </init>
 </mod>

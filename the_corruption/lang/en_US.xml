@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <lang id="en_US">
-  <section id="world">
-
+  <section id="item.names">
+    <text id="uncorrupt_book">Book of Cleansing</text>
+    <text id="corrupted_item">Corrupted Item</text>
+  </section>
+  <section id="item.descriptions">
+    <text id="uncorrupt_book">Cleanses corrupted items</text>
+    <text id="corrupted_item">The Corruption has rendered this item unusable.</text>
+  </section>
+  <section id="actions">
+    <text id="purify">Purify Item</text>
+  </section>
+  <section id="warning">
+    <text id="item_corrupted">{item} has been corrupted!</text>
+  </section>
+  <section id="common">
+    <text id="uncorrupt_structure">Cleansing Shrine</text>
   </section>
 </lang>

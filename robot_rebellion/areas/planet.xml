@@ -6,46 +6,34 @@
 		<object id="RB_old_ship.marker" x="20.8125" y="4.625" />
 		<object id="RB_old_ship_notice" x="10" y="22" />
 	</area>
+	<action>
+		function canHeatDamage(player) {
+			if(player.vehicle != null) return player.vehicle != 'Spaceship' || player.vehicle.getXml().get('underground') != false;
+			else {
+				var resistItems = 0;
+				for(s in player.equipment.slots) if(s.get() != null && s.get().info.xml.get('resistLava') == 'true') resistItems++;
+				return resistItems &lt; 2;
+			}
+		}
+	</action>
+
 	<procedure id="heat_damage">
-		<choose>
-			<section if="Area.getXML(area.id).xml.get('allowHeatDamage') == 'true' && player.vehicle == null">
-				<action>
-					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-						player.loseHealth(5,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
-						player.damageNotification(5,false,player);
-						trace("PlayerSection");
-					}
-				</action>
-				<action>
-					if(area.isWater(player.tile_x,player.tile_y)){
-						player.loseHealth(20,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
-						player.damageNotification(20,false,player);
-					}
-				</action>
-				<invokeLater seconds="0.25">
-						<run procedure="heat_damage" />
-				</invokeLater>
-			</section>
-			<section if="Area.getXML(area.id).xml.get('allowHeatDamage') == 'true'">
-				<action>
-					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-						player.vehicle.loseHealth(5,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
-						player.vehicle.damageNotification(5,false,player);
-						trace("VehicleSection");
-					}
-				</action>
-				<action>
-					if(area.isWater(player.vehicle.tile_x,player.vehicle.tile_y)){
-						player.vehicle.loseHealth(20,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
-						player.vehicle.damageNotification(20,false,player);
-					}
-				</action>
-				<invokeLater seconds="0.25">
-						<run procedure="heat_damage" />
-				</invokeLater>
-			</section>
-		</choose>
-	</procedure>
+  	<section if="Area.getXML(area.id).xml.get('allowHeatDamage') == 'true'">
+    	<action>
+      var playerObject = player.vehicle == null ? player : player.vehicle;
+			if(area.isWater(playerObject.tile_x,playerObject.tile_y)) {
+				playerObject.loseHealth(20,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
+				playerObject.damageNotification(20,false,player);
+			}
+      if(canHeatDamage(player)) {
+				playerObject.loseHealth(5,FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER);
+				playerObject.damageNotification(5,false,player);
+      }
+    	</action>
+    <invokeLater seconds="0.25"><run procedure="heat_damage" /></invokeLater>
+  </section>
+</procedure>
+
 	<area id="robot_start" width="256" height="96" background="stars.dwarf" planet="robot_rebellion" looping="true" water="RB_lava" water_anim="RB_lava" allowHeatDamage="true">
 		<tiles id="sci1.grass.scorched" y="0" />
 		<tiles id="scorched.dirt" start="0" end="0.5" />
@@ -115,15 +103,8 @@
 				<action>setFlag('RB_ship_marked',true);</action>
 				<locate id="RB_old_ship.marker" />
 			</section>
-			<section>
-				<action>
-					area.renderer.addChildAt(area.renderer.getChildAt(1), 6);
-					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-						player.showWarning(getText('warning.heat_protection'));
-					}
-				</action>
-				<run procedure="heat_damage" />
-			</section>
+			<show tooltip="popup" text="warning.heat_damage" x="0.5" y="0.5" color="ff0000" />
+			<run procedure="heat_damage" if="canHeatDamage(player)"/>
 			<section if="player.isEquipped('water_pump')">
 				<dialogue text='Nice try... You are not vacuuming up my precious lava. Lemme unequip that [item="water_pump"] for you.' />
 				<action>player.equipment.unequip("back",player,true);</action>
@@ -175,14 +156,8 @@
 		<light x="7" y="5" size="3" /><light x="7" y="6" size="3" />
 		<init><runAreaLoad/></init>
 		<onLoad>
-			<section>
-				<action>
-					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-						player.showWarning(getText('warning.heat_protection'));
-					}
-				</action>
-				<run procedure="heat_damage" />
-			</section>
+			<show tooltip="popup" text="warning.heat_damage" x="0.5" y="0.5" color="ff0000" />
+			<run procedure="heat_damage" if="canHeatDamage(player)"/>
 		</onLoad>
 	</area>
 	<procedure id="RB_old_ship_opening">
@@ -251,15 +226,8 @@
 				<dialogue text='Nice try... You are not vacuuming up my precious lava. Lemme unequip that [item="water_pump"] for you.' />
 				<action>player.equipment.unequip("back",player,true);</action>
 			</section>
-			<section>
-				<action>
-					area.renderer.addChildAt(area.renderer.getChildAt(1), 6);
-					if(!(player.isEquipped("draemordion_helm") && player.isEquipped("draemordion_armor"))){
-						player.showWarning(getText('warning.heat_protection'));
-					}
-				</action>
-				<run procedure="heat_damage" />
-			</section>
+			<show tooltip="popup" text="warning.heat_damage" x="0.5" y="0.5" color="ff0000" />
+			<run procedure="heat_damage" if="canHeatDamage(player)"/>
 		</onLoad>
 	</area>
 
@@ -378,19 +346,14 @@
 					<dialogue section="player" id="RB_old_ship_detect" speaker='player' />
 					<quest id="RB_old_ship" ask="false" />
 				</section>
-				<section>
-					<action>setFlag('on_RB_planet',true);</action>
-					<run procedure="heat_damage" />
-				</section>
 				<section if="!player.hasSeenItem('draemordion_helm')">
 					<dialogue text="Because this equipment that is needed to enter this planet isn't available any other way in this update, have the armor now." />
 					<item id="draemordion_helm" count="1" />
 					<item id="draemordion_armor" count="1" />
 				</section>
+				<show tooltip="popup" text="warning.heat_damage" x="0.5" y="0.5" color="ff0000"/>
+				<run procedure="heat_damage" if="canHeatDamage(player)"/>
 			</onLoad>
-			<onLeave>
-				<action>setFlag('on_RB_planet',false);</action>
-			</onLeave>
 		</orbit>
 	</planet>
 </areas>

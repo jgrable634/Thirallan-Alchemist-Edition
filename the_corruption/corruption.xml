@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<airom>
+  <!-- Corrupted placeholder item, needs a custom icon -->
+  <item id="corrupted_item" icon="alien_heart.ico" type="equipment" weight="5" corruptible="false"/>
+  <action>
+    //Checks if an item is corruptible when passed that item's xml
+    function isCorruptible(xml){
+      return (xml.get('corruptible') == null || xml.get('corruptible') == true) && (xml.get('type') == 'tool' || xml.get('type') == 'equipment' || xml.get('type') == 'animal') && (Std.parseInt(xml.get('weight')) >= 1) && (xml.get('slot') != 'back');
+    }
+    //Checks if the player has any gear that makes them immune to corruption
+    function corruptResist(player){
+      for(s in player.equipment.slots) if(s.get() != null && s.get().info.xml.get('corruptResist') == 'true') return true;
+      return false;
+    }
+    //Gives the player a corrupted placeholder item and returns the corrupted item to be passed into the popup
+    function nameCorrupted(player,i){
+      name = 'p' + i.id + '&Corrupted ' + i.getName().get();
+      player.addItems(getItem('corrupted_item'),1,null,name);
+      return '[item=' + i.id + ']';
+    }
+    //Corrupts one of the player's items at random, giving priority to equipment
+    function corruptItem(player){
+      corruptedItem = null;
+      if(corruptResist(player)) return;
+      for(s in player.equipment.slots){
+        if(s.get() != null && isCorruptible(s.get().info.xml)){
+          s.set(null);
+          return nameCorrupted(player,i);
+        }
+      }
+      cItems = [];
+      for(i in player.inventory.items) if(isCorruptible(i.item.xml)) cItems.push(i.item);
+      if(cItems.length > 0){
+        cItem = cItems[Std.random(cItems.length)];
+        player.addItem(cItem.id,-1);
+        return nameCorrupted(player,cItem);
+      }
+    }
+    //Unused function, will leave here for now in case it is needed. I think it checks to see if there are any items which can be corrupted in the player's inventory?
+    function checkCorrupted(player){
+      corruptedItem = null;
+      for(s in player.equipment.slots){
+        if(s.get() != null){
+          i = s.get().info;
+          if(isCorruptible(i.xml)){
+            return true;
+          }
+        }
+      }
+      cItems = [];
+      for(i in player.inventory.items) if(isCorruptible(i.item.xml)) cItems.push(i.item);
+      return cItems.length > 0;
+    }
+
+    var time = 10;
+    corruption_debuffs = [
+      {eat:function(player){player.stats.get("regen_stamina").tempBuff(-10, time);}},
+      {eat:function(player){player.stats.get("mine").tempBuff(-1, time);}},
+      {eat:function(player){player.stats.get("regen_health").tempBuff(-5, time);}},
+      {eat:function(player){player.stats.get("regen_power").tempBuff(-20, time);}},
+      {eat:function(player){player.stats.get("endurance").tempBuff(10, time);}},
+      {eat:function(player){player.stats.get("attack").tempBuff(3, time);}},
+      {eat:function(player){player.stats.get("endurance").tempBuff(-10, 60);}},
+      {eat:function(player){player.stats.get("sight").tempBuff(-1, time);}},
+      {eat:function(player){player.stats.get("evasion").tempBuff(-5, time);}},
+      {eat:function(player){player.stats.get("speed").tempBuff(-1, time);}},
+      {eat:function(player){player.stats.get("weight").tempBuff(-50, time);}},
+      {eat:function(player){player.stats.get("defense").tempBuff(-1, time);}},
+    ];
+  </action>
+
+  <object id="corrupted.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">
+    <addedToArea><action>Movement.seek(this, player, 10);</action></addedToArea>
+    <over>
+      <sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
+      <show tooltip="popup" text="warning.item_corrupted{item:[global=corruptedItem]}" x="0.5" y="0.4" if="corruptedItem != null"/>
+      <remove object="this" />
+    </over>
+  </object>
+  <object id="corrupted_area.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">
+    <addedToArea><action>Movement.seek(this, player, 10);</action></addedToArea>
+    <over>
+      <set id="p" value="random()" />
+      <choose>
+        <section if="p > 0.6">
+          <sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
+          <show tooltip="popup" text="warning.item_corrupted{item:[global=corruptedItem]}" x="0.5" y="0.4" if="corruptedItem != null"/>
+          <remove object="this" />
+        </section>
+        <action if="p > 0.4">player.loseHealth(25);</action>
+        <action if="p > 0.2">player.loseStamina(100);</action>
+        <action>corruption_debuffs[randInt(corruption_debuffs.length)].eat(player);</action>
+      </choose>
+    </over>
+  </object>
+
+  <object id="corrupted.corpse" tile="spirit.corpse" animation="spirit.corpse" removeOnComplete="true" layer="enemy" save="false">
+    <onComplete><object id="corrupted.orb" x="this.xPos/Tile.SIZE" y="this.yTile/Tile.SIZE"/></onComplete>
+  </object>
+  <procedure id="corrupted.death"><section if="killer != null">
+    <object id="corrupted.corpse" x="this.xPos/Tile.SIZE-0.5" y="this.yTile/Tile.SIZE+0.5"/>
+  </section></procedure>
+
+
+  <procedure id="area_corruption">
+    <section if="area.id == current_area && Area.getXML(area.id).xml.get('corrupted') == 'true' && !corruptResist(player)">
+      <object id="corrupted_area.orb" x="player.tile_x + randInt(-20,20)*Tile.SIZE" y="player.tile_y + randInt(-20,20)*Tile.SIZE" />
+      <invokeLater seconds="5"><run procedure="area_corruption" /></invokeLater>
+    </section>
+  </procedure>
+  <!-- Add to area, along with corrupted="true", to make an area run the corruption procedure
+  <section if="!corruptResist(player) && !getFlag('corrupted_one_defeat')">
+    <set id="current_area" value="area.id" />
+    <show tooltip="popup" text="warning.corrupted_area" x="0.5" y="0.4"/>
+    <run procedure="area_corruption" /><stop />
+  </section>
+
+  To make an item resistant to corruption, add isCorruptible="false"
+  To make an item give the player immunity to corruption's affects, add corruptResist="true"
+   -->
+</airom>

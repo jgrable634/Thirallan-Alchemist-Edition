@@ -5,7 +5,7 @@
 		<text id="operate">Operate</text>
 	</section>
 	<section id="warning">
-		<text id="heat_protection">WARNING: The heat is too intense with current equipment! Evacuate the area!</text>
+		<text id="heat_damage">WARNING: Intense heat in this area! Improper equipment will result in unfortunate cooking!</text>
 	</section>
 	<section id="common">
 		<text id="robot_factory_access">Robot Factory</text>
@@ -25,7 +25,7 @@
 		<text id="RB_old_ship">A Strange Signal</text>
 	</section>
 	<section id="quest.description">
-		<text id="RB_old_ship">I should check out that weird signal my [item=com_device] is picking up.</text>
+		<text id="RB_old_ship">I should check out that signal my [item=com_device] is picking up.</text>
 	</section>
 
 	<section id="structure">

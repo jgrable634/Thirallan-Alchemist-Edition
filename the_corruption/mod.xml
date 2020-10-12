@@ -2,6 +2,7 @@
 <mod>
     <init>
         <!--include id="music/music.xml" /-->
+        <include id="corruption.xml" />
         <include id="tiles/tiles.xml" />
 		    <include id="lang/en_US.xml" includeRoot="true" />
 		    <include id="items/items.xml" />
