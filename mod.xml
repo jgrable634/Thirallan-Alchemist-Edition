@@ -44,14 +44,13 @@
           return final.substring(1); //removes the first thing bc it is just a space, like literally " "
         }
       </action>
-      <include id="the_corruption/mod.xml" child="init" />
       <include id="thirallan/mod.xml" child="init" />
-      <include id="deathbourne/mod.xml" child="init" />
+      <include id="the_corruption/mod.xml" child="init" />
+      <!-- <include id="deathbourne/mod.xml" child="init" /> -->
       <include id="realm_of_dragons/mod.xml" child="init" />
       <include id="robot_rebellion/mod.xml" child="init" />
       <include id="en_US.xml" includeRoot="true" />
       <include id="entry.xml" />
-      <include id="corruption.xml" />
       <include id="arena/arena.xml" />
 
       <section if="getMod('thirallan') != null && getMod('thirallan').isEnabled()">

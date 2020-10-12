@@ -48,4 +48,16 @@
 		</action>
 	</item>
 
+  <animation id="uncorrupt_structure.idle" x="0" count="4" />
+  <structure id="uncorrupt_structure" image="alien_debris1.png" width="32" height="32" type="crafting" name="enter">
+    <listItem icon="alien_heart.ico" title="actions.purify" fail="'warning.ingredients'">
+      <tooltip type="requires" requires="quests.requires">
+        <requirement icon="wood.ico" title="item.names.wood" count="player.getItemCountStorehouse('wood')" of="5" />
+      </tooltip>
+      <window type="items" title="common.hotkey" filter="function(i){return i.id == 'corrupted_item';}">
+        <item id="wood" count="-5" storehouse="true" />
+        <action>var valueInfo = getItem(Item.getParameter(name, "p")); player.addItems(valueInfo,1,valueInfo.getDurability(),null); player.addItems(item, -1, value, name);</action>
+      </window>
+    </listItem>
+  </structure>
 </structures>

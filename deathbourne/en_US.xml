@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lang id="en_US">
+  <section id="item.names">
+    <text id="deathbourne">Deathbourne</text>
+    <text id="deathbourne.asleep">Ancient Blade</text>
+  </section>
+  <section id="deathbourne">
+    <text id="sleeping">The blade seems to yearn for blood.</text>
+    <text id="intro1">Greetings, mortal. I sense you have many questions.</text>
+    <text id="intro2"> You are wondering where this place is. You are wondering what, or who I am. Let us say that this is in your head, and I am an ally.</text>
+    <text id="intro3">I can offer you great power. In exchange for this power, I ask one thing: a pact of secrecy.</text>
+    <text id="pact1">Will you sign this pact of blood between us?</text>
+    <text id="pact2.1">Very well. I see that you are not yet ready for the power I can offer you. If you ever change your mind, you may speak to me again.</text>
+    <text id="pact2.2">The pact is sealed. See? That wasn't so bad. You have made the right choice. Soon, our power will know no bounds!</text>
+    <text id="history1">The blade you now carry... It is an ancient and evil blade. It was forged by ____, child of the shadow of death herself. It has a terrible history.</text>
+    <text id="history2">I do not know where or how you have found it, but you must return it at once. There is a reason that even the vilest creatures of the dark fear this blade.</text>
+    <text id="history3">It was forged for the darkest purpose: to kill. To say that it has the power to kill is an understatement to a degree you cannot begin to comprehend.</text>
+    <text id="history4">I think you already know what that blade was created to kill. As you may know, it is no normal blade. It... is aware. It appears to be slumbering, and for this we are lucky. If the blade were to awake...</text>
+  </section>
+  <section id="warning">
+    <text id="lose_max_health">[tile=health] [color=770000]Max Health[/color] -{value}</text>
+  </section>
+</lang>

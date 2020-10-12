@@ -55,15 +55,14 @@
 		<animation id="equipment.draemordion_armor.walk" x="55" count="10" />
 		<animation id="equipment.draemordion_armor.hit" x="49" count="6" />
 		<animation id="equipment.draemordion_armor.death" x="0" count="41" />
-		<item id="draemordion_armor" type="equipment" slot="armor" cost="6000" weight="10" action="equip" defense="8" color="830807" icon="draemordion_armor.ico" animation="item4" />
+		<item id="draemordion_armor" type="equipment" slot="armor" cost="6000" weight="10" action="equip" defense="8" color="830807" icon="draemordion_armor.ico" animation="item4" resistLava="true" />
 
 		<tile id="draemordion_helm" x="269" sheet="{mod:full_version}/items/adv/sheet.png" />
 		<animation id="equipment.draemordion_helm.idle" count="8" offsetX="-1" />
 		<animation id="equipment.draemordion_helm.hit" x="8" count="6" offsetX="2" offsetY="2" />
 		<animation id="draemordion_helm.acquire" x="0" count="12" color="14bb22" />
 		<animation id="draemordion_helm.identify" x="12" count="5" color="14bb22" />
-		<item id="draemordion_helm" type="equipment" slot="head" oxygen="100" action="equip" cost="1750" defense="1" weight="1" color="FF0100" icon="draemordion_helm.ico" animation="item8" hair="false">
+		<item id="draemordion_helm" type="equipment" slot="head" oxygen="100" action="equip" cost="1750" defense="1" weight="1" color="FF0100" icon="draemordion_helm.ico" animation="item8" hair="false" resistLava="true">
 			<light tile="light.strong" color="B00100" flicker="true" /><identify tile="cyborg.identify" acquire="draemordion_helm.acquire" animation="draemordion_helm.identify" color="B00100" />
 		</item>
-
 </items>
