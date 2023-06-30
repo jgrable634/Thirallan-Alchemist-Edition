@@ -17,7 +17,7 @@
 		}
 	</action>
 
-	<procedure id="heat_damage">
+<procedure id="heat_damage">
   	<section if="Area.getXML(area.id).xml.get('allowHeatDamage') == 'true'">
     	<action>
       var playerObject = player.vehicle == null ? player : player.vehicle;
@@ -97,7 +97,7 @@
 			</action>
 		</init>
 		<onLoad>
-			<music id="orbit" seconds="1" />
+			<music id="robot_rebellion" seconds="1" />
 			<section if="player.getKillCount('RB_boss') == 0 && player.hasQuest('RB_old_ship') && !getFlag('RB_ship_marked')">
 				<dialogue section="player" id="RB_old_ship_detect_near" speaker='player' />
 				<action>setFlag('RB_ship_marked',true);</action>
@@ -116,7 +116,7 @@
 					<wait seconds="0.5" />
 					<object id="RB.explosion" x="138.125" y="77.0625" />
 					<structure id="RB_old_ship.crack2" x="138.125" y="77.0625">
-						<teleport area="RB_old_ship.cave2" x="14" y="43" allowReturn="true" with="ellipse" />
+						<teleport area="RB_old_ship.cave2" x="18" y="32" allowReturn="true" with="ellipse" />
 					</structure>
 					<sound id="explosion" />
 					<action>for(x in 138...142) for(y in 74...78) mine(x,y);</action>
@@ -138,7 +138,10 @@
 		<structure id="RB_old_ship.bridge.entrance" x="8" y="9.1" />
 		<object id="RB_boss" x="8" y="9" facing="right" />
 		<init><runAreaLoad/></init>
-		<onLoad><section if="area.getObject('RB_boss') != null"><run procedure="RB_boss_start" /></section></onLoad>
+		<onLoad>
+			<section if="area.getObject('RB_boss') != null"><run procedure="RB_boss_start" /></section>
+			<music id="RB_ship_interior" seconds="1" />
+		</onLoad>
 	</area>
 	<area id="RB.bridge" x="-8" y="-8" width="32" height="25" allowHeatDamage="true">
 		<tiles id="obsidian" start="0" end="1" />
@@ -148,7 +151,7 @@
 			mine(6, 3); for(x in 6...11) mine(x, 4); for(x in 8...11) mine(x, 5); for(x in 8...10) mine(x, 6);
 		</action>
 		<structure id="science1.bridge" x="0" y="8" />
-		<structure id="RB.bridge.exit" x="7" y="6" />
+		<structure id="RB.bridge.exit" x="8" y="6" />
 		<object id="RB.bridge.nav" x="5" y="4" />
 		<object id="RB.bridge.nav.broken" x="6" y="2" />
 		<object id="RB.bridge.nav.broken" x="11" y="4" />
@@ -156,6 +159,7 @@
 		<light x="7" y="5" size="3" /><light x="7" y="6" size="3" />
 		<init><runAreaLoad/></init>
 		<onLoad>
+			<music id="RB_ship_interior" seconds="1" />
 			<show tooltip="popup" text="warning.heat_damage" x="0.5" y="0.5" color="ff0000" />
 			<run procedure="heat_damage" if="canHeatDamage(player)"/>
 		</onLoad>
@@ -168,7 +172,7 @@
 			<wait seconds="0.5" />
 			<action>for(x in 138...143) for(y in 73...78) mine(x,y);</action>
 			<object id="RB.explosion" x="138.125" y="77.0625" />
-			<structure id="RB_old_ship.crack2" x="138.125" y="77.0625" />0
+			<structure id="RB_old_ship.crack2" x="138.125" y="77.0625" />
 			<sound id="explosion" />
 			<wait seconds="2">
 				<operate object="area.getObject('RB.explosion')" />
@@ -217,7 +221,7 @@
 		<light x="0" y="32" size="64" />
 		<init><runAreaLoad /></init>
 		<onLoad>
-			<music id="orbit" seconds="1" />
+			<music id="RB_ship_interior" seconds="1" />
 			<section if="area.getObject('abyssal_one_starter') != null">
 				<lerp object="area.getObject('abyssal_one_starter')" alpha="0" seconds="0.25" />
 				<facing object="area.getObject('abyssal_one_starter')" dir="right" />
@@ -231,110 +235,132 @@
 		</onLoad>
 	</area>
 
-	<area id="RB_old_ship.cave2" width="74" height="64" powered="this.getObject('RB_power_cores') != null">
-		<tiles id="ship" start="0" end="1" />
-		<action>for(x in 12...31){mine(x, 28); mine(x, 41);} for(y in 16...41) mine(30, y);</action>
-		<action>for(y in 42...45) for(x in 12...16) mine(x, y); for(y in 16...41) mine(12, y); for(y in 14...16) for(x in 12...66) mine(x, y); setTile('62', '14', 'ship'); for(x in 2...12){mine(x, 28); mine(x, 41);} for(x in 30...37){mine(x, 28); mine(x, 41);}</action>
-		<structure id="RB_old_ship.crack2.ret" x="12" y="44"><teleport area="robot_start" x="138.125" y="77.0625" with="ellipse" /></structure>
-		<light x="14" y="43" size="4" />
-		<set id="ar" value="[15,19,23,37,31,35,39,43,47,51,55,59]" /><action>shuffle(ar);</action>
-		<structure id="medivat1" x="ar[0]" y="15" />
-		<structure id="medivat2" x="ar[1]" y="15" />
-		<structure id="medivat3" x="ar[2]" y="15" />
-		<structure id="medivat4" x="ar[3]" y="15" />
-		<structure id="medivat.full1" x="ar[4]" y="15" />
-		<structure id="medivat.full2" x="ar[5]" y="15" />
-		<structure id="medivat.full3" x="ar[6]" y="15" />
-		<structure id="medivat.full4" x="ar[7]" y="15" />
-		<structure id="medivat1" x="ar[8]" y="15" />
-		<structure id="medivat2" x="ar[9]" y="15" />
-		<structure id="medivat3" x="ar[10]" y="15" />
-		<structure id="medivat4" x="ar[11]" y="15" />
-		<structure id="sci1.light.off" x="ar[0]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[1]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[2]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[3]-1" y="15" />
-		<structure id="sci1.light" x="ar[4]-1" y="15" />
-		<structure id="sci1.light" x="ar[5]-1" y="15" />
-		<structure id="sci1.light" x="ar[6]-1" y="15" />
-		<structure id="sci1.light" x="ar[7]-1" y="15" />
-		<structure id="sci1.light.off" x="ar[8]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[9]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[10]-1" y="15" />
-		<structure id="sci1.light.broken" x="ar[11]-1" y="15" />
-		<appendArea id="RB_ship_projection" offsetX="-28" offsetY="36" />
-		<appendArea id="RB_ship_power" offsetX="37" offsetY="23" />
-		<appendArea id="RB_ship_storage" offsetX="-28" offsetY="23" />
-		<appendArea id="RB_ship_destroyed" offsetX="37" offsetY="40" />
-		<object id="RB_room_door" x="31" y="41" />
-		<object id="ship.doorh" x="31" y="28" />
-		<object id="RB_room_door" x="11" y="41" />
-		<object id="RB_room_door" x="11" y="28" />
-		<object id="RB_ship_robot_permission" x="62" y="15" />
-		<structure id="RB_robots_door" x="64" y="15">
-			<teleport area="RB_ship_robots" x="10" y="15" />
-		</structure>
-		<objects id="whip_bot" startX="13" endX="60" startY="14" endY="14" minDist="5" maxDist="7" />
-		<spawner id="whip_bot" time="750" count="4" fromX="13" toX="60" fromY="14" toY="14" />
-		<objects id="whip_bot" startX="38" endX="95" startY="45" endY="65" minDist="5" maxDist="7" />
+	<area id="RB_old_ship.cave2" height="1" water="RB_lava" water_anim="RB_lava" allowHeatDamage="true">
+		<tiles from="ship_interior.png" x="0" y="-1">
+			<!--Main walls and floors--><tile id="ship" color="000000" /><tile id="ship" color="655e5e" layer="back" />
+			<!--Room Doors--><tile id="ship" color="A50808" layer="back">area.addObject(ObjectInfo.make("RB_room_door", x*Tile.SIZE, y*Tile.SIZE))</tile>
+			<!--Robot Factory Doors--><tile id="ship" color="7400ff" layer="back">area.addObject(ObjectInfo.make("RB_ship_robot_permission", x*Tile.SIZE, y*Tile.SIZE))</tile>
+			<!--Entrance--><tile id="ship" color="c02de3" layer="back">getStructure("RB_old_ship.crack2.ret").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+			<!--Power Cores--><tile id="ship" color="f2b95e" layer="back">area.addObject(ObjectInfo.make("RB_power_cores.broken", x*Tile.SIZE, y*Tile.SIZE))</tile>
+			<!--Robot Factory Entrance--><tile id="ship" color="2444bd" layer="back">getStructure("RB_robots_door").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+			<!--Screwdriver--><tile id="ship" color="35006b" layer="back">area.addObject(ObjectInfo.make("RB_screwdriver", x*Tile.SIZE, y*Tile.SIZE))</tile>
+			<!--Vents--><tile id="ship" color="8e16f4" layer="back">getStructure("RB_vent").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+		</tiles>
+		<light x="18" y="32" size="4" />
+		<action>
+			var v = area.getStructureInTile(35, 35);
+			v.area_id = "RB_vents"; v.x = 24*Tile.SIZE; v.y = 24*Tile.SIZE;
+		</action>
+		<action>
+			// Room Content Shuffle
+			// Format is {{structure_id, offsetX, structure?}, {structure_id, offsetX, offsetY}, etc.}
+			var bigRooms = [
+				{id : "bunker_factory", offsetX : 2, structure : true}, 
+				{id : "lockdown_trap", offsetX : 0, structure : false}
+			];
+			var bigRoomCoords = [{x : 21, y : 25}, {x : 21, y : 20}];
+
+			var smallRooms = [
+				{id : "bunker_depot", offsetX : 1, structure : true}, 
+				{id : "bunker", offsetX : 1, structure : true}, 
+				{id : "lava_trap", offsetX : 0, structure : false}, 
+				{id : "holo_projector", offsetX : 0, structure : false},
+				{id : "robot_log1", offsetX : 2, structure : true},
+				{id : "robot_log2", offsetX : 2, structure : true},
+				{id : "molten_cyborg", offsetX : 2, structure : false}
+				// {id : "", offsetX : 0, structure : false}
+			];
+			var smallRoomCoords = [
+				{x : 10, y : 30}, {x : 10, y : 25}, 
+				{x : 10, y : 20}, {x : 10, y : 15}, 
+				{x : 37, y : 30}, {x : 37, y : 25}, 
+				{x : 37, y : 20}, {x : 37, y : 15}
+			];
+
+			// Big Room Shuffling
+			for(i in bigRoomCoords){
+				shuffle(bigRooms);
+
+				var room = bigRooms.pop(0);
+
+				if(room != null){
+					if(room.structure == true){
+							getStructure(room.id).build(null, area, (i.x+room.offsetX)*Tile.SIZE, i.y*Tile.SIZE);
+					} else{
+							area.addObject(ObjectInfo.make(room.id, (i.x+room.offsetX)*Tile.SIZE, i.y*Tile.SIZE));
+					}
+				}
+					
+				
+			}
+			// Small Room Shuffling
+			for(i in smallRoomCoords){
+				shuffle(smallRooms);
+
+				var room = smallRooms.pop(0);
+				
+				if(room != null){
+					if(room.structure == true){
+							getStructure(room.id).build(null, area, (i.x+room.offsetX)*Tile.SIZE, i.y*Tile.SIZE);
+					} else{
+							area.addObject(ObjectInfo.make(room.id, (i.x+room.offsetX)*Tile.SIZE, i.y*Tile.SIZE));
+					}
+				}
+			}
+
+		</action>
+		<spawner id="whip_bot" time="3000" count="8" fromX="10" toX="41" fromY="11" toY="31" />
+		<init>
+			<runAreaLoad/>
+			<action>area.spawner.spawnAll('whip_bot');</action>
+		</init>
+		<onLoad>
+			<section if="area.getObject('lava_target') != null">
+				<run procedure="lava_target" />
+			</section>
+			<music id="RB_ship_interior" seconds="1" />
+		</onLoad>
+	</area>
+	<area id="RB_vents">
+		<teleport area="RB_old_ship.cave2" x="18" y="32" />
+        <action>setBack(24, 24, "ship");</action>
+		<structure id="RB_vent_power" x="24" y="24"><teleport area="RB_old_ship.cave2" x="35" y="35" /></structure>
+		<set id="exits" value="[]" /><set id="structures" value="[]" /><set id="i" value="0" />
+		<action>
+			for(o in getLocalPlayer().areas.get('RB_old_ship.cave2').getStructuresById('RB_vent')){
+				if(o.tile_x == 35 && o.tile_y == 35) continue;
+				else{
+					exits.push({area:"RB_old_ship.cave2", x:o.tile_x, y:o.tile_y});
+				}	
+			}
+		</action>
+		<place x="1" y="1" width="47" height="47" count="exits.length" pad="5" accept="Math.abs(x-24) > 5 || Math.abs(y-24) > 5">
+			setBack(x, y, "ship"); var s = buildStructure("RB_vent", x, y);
+			var mainRoomVent = getLocalPlayer().areas.get('RB_old_ship.cave2').getStructureInTile(exits[i].x, exits[i].y);
+			mainRoomVent.area_id = "RB_vents"; mainRoomVent.x = x*Tile.SIZE; mainRoomVent.y = y*Tile.SIZE;
+			var exit = exits[i++]; s.area_id = exit.area; s.x = exit.x*Tile.SIZE; s.y = exit.y*Tile.SIZE;
+		</place>
+		<spawner id="RB_smallBoss" time="3000" count="12" fromX="1" toX="48" fromY="1" toY="48" />
+		<maze floor="ship" wall="ship" width="48" height="48" /><light x="24" y="24" size="3" />
+		<init><runAreaLoad /><action>area.spawner.spawnAll('RB_smallBoss');</action></init>
 	</area>
 	<procedure id="unlock_RB_doors">
-		<remove object="area.getObject('RB_room_door')" />
-		<remove object="area.getObject('RB_room_door')" />
-		<remove object="area.getObject('RB_room_door')" />
-		<action>setTile(31,41,null); setTile(11,41,null); setTile(11,28,null);</action>
-		<object id="ship.doorh" x="31" y="41" />
-		<object id="ship.doorh" x="11" y="41" />
-		<object id="ship.doorh" x="11" y="28" />
+		<action>
+			for(o in area.getObjectsById("RB_room_door")){
+				setTile(o.tile_x, o.tile_y, null);
+				area.addObject(ObjectInfo.make("ship.doorh", o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE));
+				area.removeObject(o);
+			}
+    	</action>
 	</procedure>
 
-	<area id="RB_ship_projection" width="30" height="10">
-		<tiles id="ship" start="0" end="1" />
-		<action>
-			for(x in 10...19) for(y in 1...9) mine(x,y);
-			for(x in 19...31) mine(x,5);
-		</action>
-		<object id="holo_projector" x="15" y="5" />
-	</area>
-	<area id="RB_ship_power" width="30" height="10">
-		<tiles id="ship" start="0" end="1" />
-		<action>
-			for(x in 10...19) for(y in 1...10) mine(x,y);
-			for(x in 0...10) mine(x,5);
-			for(y in 3...8) setTile(18,y,"empty");
-		</action>
-		<object id="RB_power_cores.broken" x="18" y="7" />
-	</area>
-	<area id="RB_ship_storage" width="30" height="10">
-		<tiles id="ship" start="0" end="1" />
-		<action>
-			for(x in 14...19) for(y in 2...7) mine(x,y);
-			for(x in 19...31) mine(x,5);
-		</action>
-		<structure id="bunker_depot" x="14" y="6">
-			this.inventory.addItems(Item.get("titanium"), 20);
-			this.inventory.addItems(Item.get("exotic_matter"), 2);
-			this.inventory.addItems(Item.get("ship_parts"),2);
-			this.inventory.addItems(Item.get("sulfur"),20);
-			this.inventory.addItems(Item.get("steel_bar"),30);
-			this.inventory.addItems(Item.get("coal"),20);
-			this.inventory.addItems(Item.get("silicon"),20);
-		</structure>
-	</area>
-	<area id="RB_ship_destroyed" width="60" height="30">
-		<tiles id="ship" start="0" end="1" />
-		<action>for(x in 10...51) for(y in 1...26) mine(x,y); for(x in 0...11) mine(x,1);</action>
-		<structure id="bunker_factory.destroyed" x="11" y="25" />
-		<structure id="bunker.destroyed" x="21" y="25" />
-		<structure id="bunker_kitchen.destroyed" x="25" y="25" />
-		<structure id="bunker_factory.destroyed" x="30" y="25" />
-		<structure id="bunker_farm.destroyed" x="40" y="25" />
-		<structure id="hydroponics.destroyed" x="40" y="15" />
-		<structure id="hydroponics.destroyed" x="42" y="15" />
-		<structure id="hydroponics.destroyed" x="44" y="15" />
-		<structure id="hydroponics.destroyed" x="46" y="15" />
-		<structure id="hydroponics.destroyed" x="48" y="15" />
-	</area>
+	<procedure id="gimme_stuff">
+		<item id="titanium" count="15" />
+		<item id="ship_parts" count="2" />
+		<item id="exotic_matter" count="5" />
+	</procedure>
+
+	
 	<planet id="robot_rebellion" height="42">
 		<orbit id="robot_rebellion.orbit" width="406" height="64" background="stars.dwarf.orbit" name="system.planet.robot">
 			<area id="robot_start" x="0" />

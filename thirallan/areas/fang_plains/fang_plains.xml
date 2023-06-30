@@ -25,7 +25,7 @@
     <structure id="undead_shrine.placeholder" x="25" y="-1" />
     <init><runAreaLoad /></init>
     <onLoad>
-      <music id="magic2" seconds="1" />
+      <music id="bandit_territory" seconds="1" />
       <weather type="fog" alpha="1" color="1F2A1F" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" />
     </onLoad>
   </area>

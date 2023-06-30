@@ -51,6 +51,8 @@
     <appendArea id="thirallan_gold_excavation.center" offsetX="20" />
     <appendArea id="thirallan_gold_excavation.sides" offsetX="120" />
     <spawner id="gold_golem" time="100" count="3" fromX="0" toX="150" fromY="50" toY="150" />
+    <init><runAreaLoad/></init>
+    <onLoad><music id="bandit_territory" seconds="1" /></onLoad>
   </area>
 
 </areas>

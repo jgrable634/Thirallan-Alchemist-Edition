@@ -133,8 +133,11 @@
 	<structure id="RB_old_ship_crack1" tile="crashed_ship.crack1" name="enter">
 		<operate><dialogue section="ship" id="lava" speaker='player' /></operate>
 	</structure>
-	<structure id="RB_old_ship.crack2.ret" tile="crashed_ship.crack2" name="enter" type="door">
-		<operate></operate>
+	<structure id="RB.bridge.exit" layer="npc" name="enter" width="16" height="32">
+		<operate><teleport area="RB_old_ship_boss" x="8.5" y="9" with="ellipse" /></operate>
+	</structure>
+	<structure id="RB_old_ship.crack2.ret" tile="crashed_ship.crack2" name="enter">
+		<operate><teleport area="robot_start" x="138.125" y="77.0625" with="ellipse" /></operate>
 	</structure>
 	<structure id="RB_old_ship.crack2" tile="crashed_ship.crack2" name="enter" type="door" />
 	<object id="RB_room_door" tile="ship.doorh" action="enter" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true" overlapNPC="true" colorScale="1.5">
@@ -158,11 +161,135 @@
 			</section>
 		</operate>
 	</object>
-	<structure id="RB_robots_door" image="robots_door.png" width="32" height="32" name="enter" type="door" />
+	<structure id="RB_robots_door" image="robots_door.png" width="32" height="32" name="enter">
+		<operate><teleport area="RB_ship_robots" x="10" y="15" with="ellipse" /></operate>
+	</structure>
 	<object id="RB_old_ship.decoy" width="64" height="64" />
 	<object id="RB.explosion" tile="science.explosion.med" animation="science.explosion.med" removeOnComplete="true" layer="top" save="false" fps="10" width="64" height="64">
 		<light tile="light.large" color="ffff00" />
 	</object>
+	<quest id="placeholder_power_cores_repair">
+		<item id="titanium" count="15" />
+		<item id="ship_parts" count="2" />
+		<item id="exotic_matter" count="5" />
+	</quest>
+	<tilesheet id="power_cores.png" width="16" height="80" />
+	<tile id="power_cores" sheet="power_cores.png" x="0" y="0" />
+	<tile id="power_cores.broken" sheet="power_cores.png" x="4" y="0" />
+	<object id="RB_power_cores.broken" tile="power_cores.broken" action="repair">
+		<operate>
+			<window type="build" title="structure.repair_power_cores" requirementsXml="getQuest('placeholder_power_cores_repair').xml" includeStorehouse="true" build="actions.repair">
+				<remove object='this' />
+				<object id="RB_power_cores" x="this.tile_x" y="this.tile_y" />
+				<run procedure="unlock_RB_doors" />
+				<object id="RB.explosion" x="this.tile_x-1" y="this.tile_y-5" layer="npc" />
+				<action>mine(this.tile_x-4, this.tile_y-5); mine(this.tile_x-3, this.tile_y-5); mine(this.tile_x-2, this.tile_y-5); setTile(this.tile_x-6, this.tile_y-2, 'ship');</action>
+				<damage object="player" damage="10" knockback="64" attacker="area.getObject('RB_power_cores')" />
+				<sound id="explosion" />
+				<object id="lava_target" x="this.tile_x-3" y="this.tile_y-5" />
+				<invokeLater seconds="1">
+					<dialogue text="Warning, sudden power restoration caused instabilty in some damaged ship systems, shielding power cores from damage" />
+					<action>for(y in this.tile_x-5...this.tile_x) setTile(this.tile_x-1, y, 'ship');</action>
+				</invokeLater>
+			</window>
+		</operate>
+	</object>
+	<object id="RB_power_cores" tile="power_cores" animation="item4" />
+
+	<structure id="moltanium_forge" width="128" height="112" image="moltanium_forge.png" type="crafting" title="actions.craft">
+		<recipe type="robot_factory" />
+		<over><action>this.loopAnimation("golem_factory.active")</action></over>
+		<out><action>this.loopAnimation("golem_factory.idle")</action></out>
+		<operate>
+			<section if="area.id == 'RB_ship_robots' && !player.hasSeenItem('moltanium_forge_blueprint')">
+				<dialogue section="ship" id="moltanium_forge" />
+				<item id="moltanium_forge_blueprint" count="1" modal="false" />
+				<invokeLater seconds="0.5">
+					<run procedure="RB_ship_robots_lava" />
+				</invokeLater>
+			</section>
+		</operate>
+	</structure>
+
+	<tile id="RB_vent" sheet="vent.png" x="0" y="0" />
+	<structure id="RB_vent" width="16" height="16" image="vent.png" name="enter" type="door" allowReturn="false">
+        <operate>
+			<section if="!player.hasItem('RB_screwdriver')">
+				<dialogue text="I can't open the vent, I need something to loosen the screws holding it in place." />
+				<stop/>
+			</section>
+		</operate>
+	</structure>
+	<structure id="RB_vent_power" extends="RB_vent">
+		<operate>
+			<section>
+				<dialogue text="What reason would I have to just hop back in the lava?" />
+				<stop/>
+			</section>
+		</operate>
+	</structure>
+
+
+	<!--Ship Interior Rooms-->
+	<object id="lockdown_trap" width="160" height="64">
+		<over>
+			<remove object="this" />
+			<action>
+				setTile(this.tile_x-1, this.tile_y, "empty"); setTile(this.tile_x+10, this.tile_y, "empty");
+			</action>
+			<dialogue text="SECURITY BREACH DETECTED, LOCKDOWN INITIATED" />
+			<object id="large_drone" x="this.tile_x+2" y="this.tile_y-2" />
+			<object id="large_drone" x="this.tile_x+4" y="this.tile_y-2" />
+			<object id="large_drone" x="this.tile_x+6" y="this.tile_y-2" />
+			<object id="large_drone" x="this.tile_x+8" y="this.tile_y-2" />
+			<invokeLater seconds="15">
+				<dialogue text="Lockdown deactivated, alarm was wrongly activated" />
+				<action>
+					setTile(this.tile_x-1, this.tile_y, null); setTile(this.tile_x+10, this.tile_y, null);
+				</action>
+			</invokeLater>
+		</over>
+	</object>
+
+	<procedure id="lava_target">
+		<choose>
+			<section if="area.getObject('lava_target') != null && !area.isWater(area.getObject('lava_target').tile_x, area.getObject('lava_target').tile_y)">
+				<action>
+					if(area.getObject('lava_target') != null){
+						area.setWater(area.getObject('lava_target').tile_x, area.getObject('lava_target').tile_y);
+						area.setWater(area.getObject('lava_target').tile_x-1, area.getObject('lava_target').tile_y);
+						area.setWater(area.getObject('lava_target').tile_x+1, area.getObject('lava_target').tile_y);
+					}
+				</action>
+				<invokeLater seconds="0.75"><run procedure="lava_target" /></invokeLater>
+			</section>
+			<section if="area.getObject('lava_target') != null && area.isWater(area.getObject('lava_target').tile_x, area.getObject('lava_target').tile_y)">
+				<remove object="area.getObject('lava_target')" />
+			</section>
+		</choose>
+	</procedure>
+	<object id="lava_target" tile="RB_lava">
+		<addedToArea>
+			<action>
+				if(area.getTileString(this.tile_x-3,this.tile_y+2) == 'ship'){
+					setTile(this.tile_x+3, this.tile_y+2, 'empty');
+				} else{
+					setTile(this.tile_x-3, this.tile_y+2, 'empty');
+				}
+			</action>
+			<run procedure="lava_target" />
+		</addedToArea>
+	</object>
+
+	<object id="lava_trap" width="80" height="64">
+		<over>
+			<remove object="this" />
+			<object id="RB.explosion" x="this.tile_x" y="this.tile_y" layer="npc" />
+			<sound id="explosion" />
+			<object id="lava_target" x="this.tile_x+2" y="this.tile_y-2" />
+		</over>
+	</object>
+
 	<tilesheet id="holo_projector.png" width="10" height="21" />
 	<tile id="holo_projector" sheet="holo_projector.png" x="0" y="0" />
 	<animation id="holo_projector.idle" x="0" count="1" />
@@ -185,37 +312,17 @@
 			</section>
 		</operate>
 	</npc>
-	<quest id="placeholder_power_cores_repair">
-		<item id="titanium" count="15" />
-		<item id="ship_parts" count="2" />
-		<item id="exotic_matter" count="5" />
-	</quest>
-	<tilesheet id="power_cores.png" width="16" height="80" />
-	<tile id="power_cores" sheet="power_cores.png" x="0" y="0" />
-	<tile id="power_cores.broken" sheet="power_cores.png" x="4" y="0" />
-	<object id="RB_power_cores.broken" tile="power_cores.broken" action="repair">
-		<operate>
-			<window type="build" title="structure.repair_power_cores" requirementsXml="getQuest('placeholder_power_cores_repair').xml" includeStorehouse="true" build="actions.repair">
-				<remove object='this' />
-				<object id="RB_power_cores" x="this.tile_x" y="this.tile_y" />
-				<run procedure="unlock_RB_doors" />
-			</window>
-		</operate>
-	</object>
-	<object id="RB_power_cores" tile="power_cores" animation="item4" />
 
-	<structure id="moltanium_forge" width="128" height="112" image="moltanium_forge.png" type="crafting" title="actions.craft">
-		<recipe type="robot_factory" />
-		<over><action>this.loopAnimation("golem_factory.active")</action></over>
-		<out><action>this.loopAnimation("golem_factory.idle")</action></out>
+	<structure id="robot_log1" width="11" height="12" image="medicom.png" name="read">
 		<operate>
-			<section if="area.id == 'RB_ship_robots' && !player.hasSeenItem('moltanium_forge_blueprint')">
-				<dialogue section="ship" id="moltanium_forge" />
-				<item id="moltanium_forge_blueprint" count="1" modal="false" />
-				<invokeLater seconds="0.5">
-					<run procedure="RB_ship_robots_lava" />
-				</invokeLater>
-			</section>
+			<dialogue text="December 25th - The captain must be joking! Even less tests on the bots? They start to get worse and he suggests we STOP trying to improve them and test to make sure nothing bad happens???" />
 		</operate>
 	</structure>
+
+	<structure id="robot_log2" width="11" height="12" image="medicom.png" name="read">
+		<operate>
+			<dialogue text="March 23rd - Somebody is really trying to piss me off, they keep changing the coding of the bots to do things they aren't supposed to, no one wants to own up, what happened then, did they suddenly gain fucking sentience???" />
+		</operate>
+	</structure>
+
 </structures>

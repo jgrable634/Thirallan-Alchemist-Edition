@@ -19,7 +19,7 @@
     <ore id="lava" start="0.7" end="0.8" percent="1" tile="stone" />
     <structure id="undead_shrine.undying_peninsula" x="25" y="-1" />
     <init><runAreaLoad/></init>
-    <onLoad><music id="magic2" seconds="1" /></onLoad>
+    <onLoad><music id="breezing_seas" seconds="1" /></onLoad>
   </area>
 
 </areas>

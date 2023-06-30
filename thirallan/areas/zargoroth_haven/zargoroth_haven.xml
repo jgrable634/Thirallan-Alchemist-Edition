@@ -39,7 +39,7 @@
     <onLoad>
       <run procedure="corruption_check" />
       <section if="!getFlag('blood_moon')">
-        <music id="magic2" seconds="1" />
+        <music id="zargoroth_haven" seconds="1" />
         <weather type="fog" alpha="1" color="1F2A1F" x="-50" y="0" width="250" height="25" dx="0.3" dy="0.3" />
       </section>
       <section if="getFlag('blood_moon')">
@@ -70,7 +70,14 @@
     <object id="jacominus" x="10" y="3" />
   </area>
 
-  <area id="thirallan_zargoroth.mines" width="50" height="100" corrupted="true" planet="thirallan_alchemist">
+  <!--action>
+    function disperse_cave_in(x, y){
+      var randTile = randInt(1,5);
+      setTile(x, y, "fragmented_stone"+randTile);
+    }
+  </action-->
+
+  <!--area id="thirallan_zargoroth.mines" width="50" height="100" corrupted="true" planet="thirallan_alchemist">
     <structure id="thirallan_zargoroth.mines.ret" x="1" y="15" />
     <structure id="undead_shrine" x="40" y="75" />
     <action>
@@ -89,6 +96,57 @@
       for(x in 1...3) for(y in 14...16) mine(x,y);
     </action>
     <objects id="undead_shrineDefender" count="7" fromX="30" toX="49" fromY="80" toY="99" />
+  </area-->
+
+  <area id="thirallan_zargoroth.mines" height="1" corrupted="true" planet="thirallan_alchemist">
+    <tiles from="haven_mines.png" x="0" y="-1">
+          <!--Stone & Blackstone--><tile id="stone" color="655e5e" /><tile id="blackstone" color="000000" />
+          <!--Mine Path--><tile id="stone" color="eeeeee" layer="back" />
+          <!--Cave-ins--><tile id="fragmented_stone" color="7d7373">setBack(x, y, "stone")</tile>
+          <!--Ruins Walls--><tile id="monastery_stone" color="f9bf4d" />
+          <!--Ruins Floors--><tile id="monastery_stone" color="005fdf" layer="back" />
+          <!--Cave-ins in Ruins--><tile id="fragmented_stone" color="6d6565">setBack(x, y, "monastery_stone")</tile>
+          <!--Torches in Mine--><tile id="stone" color="ffde00" layer="back">area.addObject(ObjectInfo.make("wall_torch", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Torches in Ruins--><tile id="monastery_stone" color="443c00" layer="back">area.addObject(ObjectInfo.make("wall_torch", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Falling Stones in Mine--><tile id="stone" color="4d0101" layer="back">area.addObject(ObjectInfo.make("falling_stones", (x*Tile.SIZE)-1, (y*Tile.SIZE)+2))</tile>
+          <!--Falling Stones in Ruins--><tile id="monastery_stone" color="6b0101" layer="back">area.addObject(ObjectInfo.make("falling_stones", (x*Tile.SIZE)-2, (y*Tile.SIZE)+2))</tile>
+          <!--Peredur Desk--><tile id="monastery_stone" color="fdce82" layer="back">area.addObject(ObjectInfo.make("peredur_desk", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Note 1--><tile id="monastery_stone" color="e79999" layer="back">area.addObject(ObjectInfo.make("mines_note1", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Note 2--><tile id="monastery_stone" color="fddaa0" layer="back">area.addObject(ObjectInfo.make("mines_note2", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Ruins Entrance--><tile id="monastery_stone" color="ae2c2c" layer="back">getStructure("haven_mines_ruins_entrance").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+          <!--Mines Exit--><tile id="stone" color="00edff" layer="back">getStructure("thirallan_zargoroth.mines.ret").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+    </tiles>
+		<light x="5" y="5" size="4" />
+    <structure id="undead_cage" x="6" y="44" ><addAnimal id="undead" /></structure>
+    <structure id="undead_cage" x="9" y="44" ><addAnimal id="undead" /></structure>
+    <init>
+      <runAreaLoad/>
+    </init>
+    <onLoad>
+      <music id="haven_mines" seconds="1" />
+    </onLoad>
+  </area>
+
+  <area id="haven_ruins" height="1" corrupted="true" planet="thirallan_alchemist">
+    <tiles from="haven_ruins.png" x="0" y="-1">
+          <!--Ruins Walls--><tile id="monastery_stone" color="f9bf4d" />
+          <!--Ruins Floors--><tile id="monastery_stone" color="005fdf" layer="back" />
+          <!--Boss Gates--><tile id="monastery_stone" color="00edff" layer="back">getStructure("boss_gate_open").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+          <!--Blue Torches--><tile id="monastery_stone" color="ae2c2c" layer="back">area.addObject(ObjectInfo.make("blue_wall_torch", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Cacoon Opener--><tile id="monastery_stone" color="443c00" layer="back">area.addObject(ObjectInfo.make("cacoon_opener", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Jacominus--><tile id="monastery_stone" color="35006b" layer="back">area.addObject(ObjectInfo.make("jacominus_cacoon", x*Tile.SIZE, y*Tile.SIZE))</tile>
+          <!--Ruins Exit--><tile id="monastery_stone" color="4d0101" layer="back">getStructure("haven_mines_ruins_entrance.ret").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+          <!--Fallen Angel--><tile id="monastery_stone" color="eeeeee" layer="back">getStructure("undead_shrine").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+    </tiles>
+		<light x="5" y="5" size="4" />
+    <structure id="undead_cage" x="6" y="44" ><addAnimal id="undead" /></structure>
+    <structure id="undead_cage" x="9" y="44" ><addAnimal id="undead" /></structure>
+    <init>
+      <runAreaLoad/>
+    </init>
+    <onLoad>
+      <music id="haven_mines" seconds="1" />
+    </onLoad>
   </area>
 
 

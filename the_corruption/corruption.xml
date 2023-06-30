@@ -24,6 +24,7 @@
       if(corruptResist(player)) return;
       for(s in player.equipment.slots){
         if(s.get() != null && isCorruptible(s.get().info.xml)){
+          i = s.get();
           s.set(null);
           return nameCorrupted(player,i);
         }

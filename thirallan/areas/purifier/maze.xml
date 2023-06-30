@@ -52,6 +52,9 @@
         this.inventory.addItems(Item.get("helium_pack"), 1);
       </object>
     </init>
+    <onLoad>
+      <music id="purifier_maze" seconds="1" />
+    </onLoad>
   </area>
   <area id="purifiers_teaser" width="11" height="40" powered="true" canFly="false">
     <tiles id="blackstone" start="0" end="1" />

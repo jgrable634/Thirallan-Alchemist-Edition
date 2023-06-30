@@ -75,7 +75,7 @@
   <animation id="thirallan.ground" x="0" count="1" color="0b461f" />
 
   <planet id="thirallan_alchemist" height="80">
-		<orbit id="thirallan_alchemist.orbit" width="512" height="64" background="thirallan.stars" distress="!player.questComplete('locate_purifier')">
+		<orbit id="thirallan_alchemist.orbit" width="512" height="64" background="thirallan.stars" distress="!player.questComplete('undead_shrines')">
       <area id="thirallan_zargoroth" x="0" />
 			<init><runAreaLoad /></init>
 			<onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>

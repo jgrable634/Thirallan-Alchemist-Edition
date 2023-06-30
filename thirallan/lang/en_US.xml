@@ -85,6 +85,8 @@
     <text id="exotic_warhammer">Exotic Warhammer</text>
     <text id="purifiers_entryItem">Strange Insignia</text>
     <text id="jacominus_katana">Katana Fragment</text>
+    <text id="mines_note1">Strange Note</text>
+    <text id="mines_note2">Strange Note</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
@@ -93,6 +95,8 @@
     <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
     <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
     <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
+    <text id="mines_note1">Placeholder text: Strange Mines Note 1</text>
+    <text id="mines_note2">Placeholder text: Strange Mines Note 2</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>
@@ -117,7 +121,7 @@
     <text id="proving_worth3b">It infests stuff within your backpack, but never infests your entire backpack. So don't worry about replacing that.</text>
     <text id="proving_worth3c">In some places, it takes just the nearby environment to corrupt your gear! So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
     <text id="proving_worth4a">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. We haven't been able to get a workshop and smelter set up due to [color=490068]The Corrupted[/color]'s increased harassment of the town.</text>
-    <text id="proving_worth4b">Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Here's a [item=steel_pickaxe] in case yours got corrupted.</text>
+    <text id="proving_worth4b">Anyway, you'll need at least [color=770000]8[/color] [item=malumite_bar]s. Here's a spare [item=malumite_pickaxe] in case yours got corrupted.</text>
     <text id="proving_worth5">That's fine, I understand, but if you change your mind, come talk to me again.</text>
     <text id="proving_worth6">Ah you're back, are you ready?</text>
     <text id="proving_worth7">I need you to collect [item=malumite_ore] for corruption resistant gear. You need at least [color=770000]11[/color] [item=malumite_bar]s.</text>
@@ -141,7 +145,7 @@
     <text id="post_purifier6">That seems quite ambitious. I guess it's better than attempting to exterminate all the [color=490068]Corrupted[/color] ourselves. But where to begin...</text>
     <text id="faction_war_island1">Ok so if we are really going to try this... You're gonna need some knowledge of the factions we need to deal with.</text>
     <text id="faction_war_island2">So there are the Church Survivors in the Rotting Forest, my scouts suggest they are still huddled up in the rubble that is the Monastery there. It'll probably be difficult gaining their trust.</text>
-    <text id="faction_war_island3">Next is that Cult Peredur used to be in. It's been so long Peredur doesn't remember where their base is... He vaguely remembers that their entrance was incased Elevated Stone? My best guess would be the Mountain Range nearby...</text>
+    <text id="faction_war_island3">Next is that Cult Peredur used to be in. It's been so long Peredur doesn't remember where their base is... He vaguely remembers that their entrance was incased in Elevated Stone? My best guess would be the Mountain Range nearby...</text>
     <text id="faction_war_island4">Honestly I'd just say fight the Bandits. They've done enough to hurt us and all innocent islanders. However, if you see fit, you can attempt to negotiate with them. I have more information on the Bandit Groups themselves if you are interested.</text>
   </section>
   <section id="zargoroth_info">
@@ -183,7 +187,7 @@
     <text id="map_explanation1">Here is where we are, Zargoroth's Safe Haven, come back here when you want to rest.</text>
     <text id="map_explanation2">South of us is the Undying Peninsula, seems fitting for a place being ravaged by Corrupted. The Beast Bandit group claims they own the place. That's where one of the shrines are.</text>
     <text id="map_explanation3">Ah, right, north of us is Beast Forest. This is where the Beast Bandit group's encampment resides. I advise you avoid the area for now, they are quite tough.</text>
-    <text id="map_explanation4">Directly northeast of us is the mountain range, strange how these are the only mountains on the whole island, but with everything else going on, I hardly question it.</text>
+    <text id="map_explanation4">Directly northeast of us is the mountain range, although for some reason, the place gives me the creeps, I feel like something just isn't right there, probably shouldn't go there. No reason to anyway.</text>
     <text id="map_explanation5">East of us is the Rotting Forest. This is where the Monastery resides, what used to be a huge bustling town before this whole island went to hell. That's where one of the shrines are.</text>
     <text id="map_explanation6">On the contrary, southeast of us are what's called the Holy Hills. Back when this island was peaceful, it's where priests would worship their god, from my understanding.</text>
     <text id="map_explanation7">On the northern side, there is the Fang Plains. Where another of the bandit groups, the Fangs, reside in their encampment. Another of the reported shrines reside here.</text>
@@ -246,7 +250,7 @@
     <text id="rumors2">Ple.. [pause=5] Please look for him in the mines. Then I'll gui.. [pause=5] I'll guide you to what you seek.</text>
     <text id="rumors3">Please fi.. [pause=5] find Jacominus, I fear th.. [pause=5]the worst has happened.</text>
     <text id="rumors4">He... WHAT!? He's been dead all this time!?!? AAHHHHHH</text>
-    <text id="rumors5">Sor.. [pause=5] Sorry about that. I.. [pause=5] I am scared of them... I can't.. [pause=5]I'll take you to the shrine... But do.. [pause=5]don't expect me to do anything else..[pause=5] Sorry...</text>
+    <text id="rumors5">Sor.. [pause=5] Sorry about that. I.. [pause=5] I am scared of them... I can't.. [pause=5]There is too many undead in the mines, just find the ruins... [pause=5]at the deepe.. deepest point in the mines.. [pause=5] Sorry...</text>
     <text id="rumors6">Sorry, bu.. [pause=5]but please leave me alone...</text>
     <text id="andreas_invite1">Yo.. [pause=5] You really mean it?</text>
     <text id="andreas_invite2">I... Ok! I.. [pause=5] I'll prepare for de.. [pause=5] departure. I'll ask [object=zargoroth_npc] for a... [pause=5] an escort.</text>
@@ -268,10 +272,7 @@
     <text id="zargoroth_proving_worth1">I'm ready to help with whatever you need.</text>
     <text id="andreas_second1">I'm sorry, but I found Jacominus as one of [color=490068]The Corrupted[/color], I had to kill him. I'm sorry for your loss.</text>
     <text id="andreas_second2">I mean, I understand he was a friend... But why did he get scared and run away?</text>
-    <text id="no_shrine1">I should kill the undead before I touch this thing... Plus aren't I supposed to be looking for Jacominus?</text>
-    <text id="no_shrine2">Aren't I supposed to be looking for Jacominus?</text>
-    <text id="no_shrine3">I should kill the undead before I touch this thing...</text>
-    <text id="undead_rumors1">Yes... [object=andreas] lead me to a shrine of sorts, a statue of an angel. After defeating the undead there, the angel statue became alive, the thing had purple and black wings, I managed to take it down.</text>
+    <text id="undead_rumors1">Yeah, [object=andreas] lead me to a shrine of sorts, a statue of an angel. After defeating the undead there, the angel statue became alive, the thing had purple and black wings, I managed to take it down.</text>
     <text id="no_travel">It would probaby be pretty difficult to get to the *planet* of Thirallan using this map...</text>
     <text id="peredur_no_travel">I should probably do as [object=peredur] asks before I leave...</text>
     <text id="blood_moon_no_travel">I can't just leave during a [color=770000]Blood Moon[/color]!</text>
@@ -283,7 +284,7 @@
     <text id="andreas_invite">Ask [object=andreas] to join the [color=770000]Monastery[/color]?</text>
     <text id="andreas_invite1">Hey Andreas? How would you like to go to a place where you never have to see... those things ever again?</text>
     <text id="andreas_invite2">Yeah, it's in the [color=770000]Rotting Forest[/color]. Once you get there, you can never have to worry about them ever again!</text>
-    <text id="purifier_exit">Uh... Well that's on the list of things I never want to see again. I should probably go inform [object=zargoroth_npc] of my recent activities.</text>
+    <text id="purifier_exit">Uh... Well that's on the list of things I never want to see again. I should probably go inform [object=zargoroth_npc] of my recent advancements.</text>
     <text id="post_purifier1">I might sound insane, but hear me out. I got the attention of a dark god that calls himself The Purifier. Apparently these shrines belonged to him, and had me go through a maze of sorts.</text>
     <text id="post_purifier2">After finally finding my way through the maze, I came face to face with the "God" himself. It was a difficult battle, but I came out on top. He cast a strange illusion as he vanished, which is too strange to explain.</text>
   </section>
@@ -305,7 +306,7 @@
     <text id="rebuild4">Next, we need some people adept at the art of the trade. You know, [color=770000]Merchants[/color]. If we want to rebuild this town, we are gonna need some merchants. Perhaps some fresh ones, ones that are being taught it as we speak.</text>
     <text id="rebuild5">Finally, I want someone who has some knowledge in [color=770000]Science[/color]. Someone who is always interested in research. I want them to be so into it, they only care about getting their research done.</text>
     <text id="rebuild6">That's it for now, get those people, and I may consider you amongst our ranks. Now go! Before I change my mind!</text>
-    <text id="rebuild7">Then what are you doing here? If you do not wish to help us, then you have no business here... Begone.</text>
+    <text id="rebuild7">Then what are you doing here? If you do not wish to help us, then you have no business here. Begone.</text>
     <text id="rebuild8">Well? If you're talking to me again, that means you've changed your mind? Will you help us find workers?</text>
     <text id="rebuild9">What is it? Do you need me to tell you the specifics of who I want again?</text>
     <text id="rebuild10">Then why are you talking to me and not finding those workers?</text>

@@ -9,8 +9,8 @@
 		<frame x="3" length="3" />
 	</animation>
 	<animation id="whip_bot.walk" x="4" count="3" />
-	<animation id="whip_bot.attack" x="7" count="6" />
-	<enemy id="whip_bot" tile="whip_bot" health="25" defense="6" speed="1.5" damage="15" range="30" type="surface" passEnemies="true" friendlyFire="false">
+	<animation id="whip_bot.attack" x="7" count="6" length="2" />
+	<enemy id="whip_bot" tile="whip_bot" health="25" defense="6" speed="1.5" damage="15" range="30" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
 		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
 		<loot id="robot_wheel" p="5" />
@@ -49,7 +49,7 @@
 	<tile id="moltanium_tank" sheet="robot_miniTank.png" x="0" y="0" />
 	<animation id="moltanium_tank.idle" x="0" count="1" />
 	<animation id="moltanium_tank.walk" x="0" count="3" />
-	<animation id="moltanium_tank.attack" x="3" count="3" />
+	<animation id="moltanium_tank.attack" x="3" count="3" length="2" />
 	<enemy id="small_tank" tile="moltanium_tank" health="25" defense="5" speed="2" range="10" type="surface" passEnemies="true" friendlyFire="false">
 		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
@@ -86,7 +86,7 @@
 	<tile id="RB_smallBoss" sheet="RB_boss_small.png" x="0" y="0" />
 	<animation id="RB_smallBoss.idle" x="0" count="2" />
 	<animation id="RB_smallBoss.walk" equals="RB_smallBoss.idle" />
-	<animation id="RB_smallBoss.attack" x="2" count="4" />
+	<animation id="RB_smallBoss.attack" x="2" count="4" length="2" />
 	<animation id="RB_smallBoss.omni" x="6" count="3" />
 	<enemy id="RB_boss" tile="RB_boss" health="50" defense="12" range="20" speed="1.5" type="surface" vertical="true" passEnemies="true" friendlyFire="false" underwater="true">
 		<light tile="light.large" color="059800" />
@@ -105,6 +105,9 @@
 	<enemy id="RB_smallBoss" extends="RB_boss" tile="RB_smallBoss" health="15" speed="2.5">
 		<onDeath><stop/></onDeath>
 	</enemy>
+
+	<enemy id="molten_cyborg" tile="moltanium_tank" health="1" defense="1" />
+
 
 	<tile id="flame_tile" sheet="flame_tile.png" x="0" y="0" />
 	<object id="flame_wall" tile="flame_tile" animation="item5">
@@ -246,7 +249,7 @@
 					}
 					evalXml(enemystring);
 			</action>
-			<music id="purification1" seconds="1" />
+			<music id="robo_peril" seconds="1" />
 			<remove object="area.getObject('abyssal_one_starter')" />
 		</over>
 	</object>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
   <!--include id="spears/spears.xml" /-->
+  <include id="navMap.xml" />
   <tilesheet id="icos.png" width="16" height="10" />
   <tile id="thirallan_map.ico" sheet="icos.png" x="1" y="0" />
   <item id="thirallan_map" icon="thirallan_map.ico" type="tool" corruptible="false">
@@ -46,6 +47,7 @@
   <tile id="steel_warhammer.ico" sheet="warhammer.png" x="1" y="1" offsetY="-12" />
   <tile id="exotic_warhammer.ico" sheet="warhammer.png" x="0" y="4" offsetY="-12" />
 
+  <tile id="malumite_lantern.ico" sheet="{core}/items/items.png" x="245" />
   <tile id="malumite_pickaxe" sheet="{core}/items/weps.png" x="163" />
 	<tile id="malumite_sword" sheet="{core}/items/weps.png" x="111" />
   <tile id="steel_warhammer" sheet="warhammer.png" x="0" y="0" />
@@ -116,10 +118,18 @@
   <item id="malumite_sword" type="equipment" slot="weapon" cost="165" weight="6" attack="5" stamina="2" durability="500" corruptible="false" icon="steel_sword.ico" color="490068" action="equip" knockback="5" repair="malumite_bar" movement_walk="walk_rswing" arms="equipment.arms" sounds="sword" />
   <item id="malumite_armor" type="equipment" slot="armor" cost="330" durability="500" weight="12" defense="2" corruptible="false" icon="steel_armor.ico" color="490068" action="equip" repair="malumite_bar" />
   <item id="malumite_shield" type="equipment" slot="shield" use="block" cost="165" weight="6" defense="1" durability="700" corruptible="false" icon="kite_shield.ico" animation="malumite_shield" action="equip" movement_walk="walk_lswing" repair="malumite_bar" />
-  <item id="malumite_helm" type="tool" cost="150" slot="head" block="false" action="equip" weight="1" icon="malumite_helm" corruptible="false" hair="false">
-    <light tile="light.headlamp" offsetX="-61" />
-  </item>
+  <item id="malumite_helm" type="tool" cost="150" slot="head" block="false" action="equip" weight="1" icon="malumite_helm" corruptible="false" hair="false" />
 
+	<item id="malumite_lantern" extends="lantern" corruptible="false" />
+  <tile id="malumite_lantern" sheet="{core}/items/lantern.png" />
+	<animation id="equipment.malumite_lantern.idle" count="5" offsetX="2" offsetY="4" color="490068" />
+	<animation id="equipment.malumite_lantern.off" count="1" x="5" offsetX="2" offsetY="4" color="490068" />
+	<animation id="malumite_lantern.on" x="1" count="1" offsetY="2" color="490068" />
+	<animation id="malumite_lantern.off" x="0" count="1" offsetY="2" color="490068" />
+
+  <recipe id="craft_malumite_lantern" creates="malumite_lantern" type="workshop" value="0" available="player.hasQuest('proving_worth')">
+		<item id="malumite_bar" count="2" /><item id="quartz" count="1" />
+	</recipe>
   <recipe id="craft_malumite_pickaxe" creates="malumite_pickaxe" type="workshop" available="player.hasQuest('proving_worth')">
 		<item id="malumite_bar" count="3" />
 	</recipe>
@@ -179,5 +189,15 @@
 
   <tile id="purifiers_entryItem.ico" sheet="icos.png" x="1" y="2" />
   <item id="purifiers_entryItem" type="tool" corruptible="false" icon="purifiers_entryItem.ico" canStore="false" />
+
+  <tile id="thirallan_note.ico" sheet="icos.png" x="1" y="3" />
+  <item id="thirallan_note" type="tool" corruptible="false" icon="thirallan_note.ico" />
+  <item id="mines_note1" extends="thirallan_note" />
+  <item id="mines_note2" extends="thirallan_note" />
+
+  <item id="undead" type="animal" slot="familiar" icon="undead" corruptible="false" canStore="false">
+    <action id="equip" /><action id="rename" />
+  </item>
+
 
 </items>

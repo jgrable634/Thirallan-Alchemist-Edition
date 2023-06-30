@@ -27,6 +27,7 @@
             area.removeObject(area.getObject('bandit_heavy')); area.removeObject(area.getObject('bandit_combo'));
           }
         </action>
+        <runAreaLoad/>
       </invokeLater>
     </onDeath>
   </enemy>

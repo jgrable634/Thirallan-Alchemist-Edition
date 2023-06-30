@@ -24,7 +24,7 @@
     <spawner id="undead" time="100" count="3" fromX="0" toX="150" fromY="-1" toY="-1" />
     <init><runAreaLoad /></init>
     <onLoad>
-      <music id="magic2" seconds="1" />
+      <music id="breezing_seas" seconds="1" />
     </onLoad>
   </area>
 

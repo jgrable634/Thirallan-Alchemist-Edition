@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mod>
-    <init>
-        <!--include id="music/music.xml" /-->
+    <init>  
+        <!--All art redone/done by Thaumtaf-->
+        <include id="music/music.xml" />
         <include id="tiles/tiles.xml" />
 		    <include id="lang/en_US.xml" includeRoot="true" />
 		    <include id="items/items.xml" />

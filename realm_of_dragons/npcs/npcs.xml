@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <npcs>
+	<quest id="distressDragons">
+	</quest>
 	<quest id="ROD_welcome" exp="5000" giver="dragon_king">
 		<flag id="path1" name="quests.welcomeFlag1" tile="young_dragon.ico" />
 		<flag id="path2" name="quests.welcomeFlag2" tile="ROD_guard.ico" />
@@ -34,7 +36,9 @@
 				<choose>
 					<section if="!player.hasQuest('ROD_welcome')">
 						<dialogue section="dragon_realm" id="king1" speaker='this' />
+						<dialogue section="dragon_realm" id="distressDragons1" speaker="player" />
 						<dialogue section="dragon_realm" id="king2" speaker='this' />
+						<complete quest="distressDragons" />
 						<quest id="ROD_welcome" />
 					</section>
 					<section if="player.hasQuest('ROD_welcome') && !player.canCompleteQuest('ROD_welcome')">

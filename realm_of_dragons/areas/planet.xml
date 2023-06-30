@@ -9,9 +9,9 @@
     </layer>
     <layer type="back" />
   </parallax>
-  
+
   <planet id="ROD_planet">
-    <orbit id="realm_of_dragons_entrance.orbit" width="100" height="80" background="stars.ROD.orbit">
+    <orbit id="ROD_planet.orbit" width="100" height="80" background="stars.ROD.orbit" distress="player.hasQuest('distressDragons') && !player.questComplete('distressDragons')">
       <appendArea id="realm_of_dragons_entrance" offsetX="30" offsetY="50" />
       <init><runAreaLoad/></init>
       <onLoad><music id="heights" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>

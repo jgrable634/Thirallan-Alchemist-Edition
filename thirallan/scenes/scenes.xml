@@ -694,9 +694,9 @@
 			<action>thirallan_map.alpha = 0;</action>
 			<wait seconds="1" />
 			<section if="!player.hasQuest('undead_shrines')">
-				<dialogue section="zargoroth" id="undead_rumors4" speaker='this' />
+				<dialogue section="zargoroth" id="undead_rumors4" speaker='guard_chief' />
 				<dialogue section="player" id="undead_rumors1" speaker='player' />
-				<dialogue section="zargoroth" id="undead_rumors5" speaker='this' />
+				<dialogue section="zargoroth" id="undead_rumors5" speaker='guard_chief' />
 				<item id="thirallan_map" count="1" modal="true" />
 				<quest id="blood_moon" ask="false" />
 				<complete quest="undead_rumors" />

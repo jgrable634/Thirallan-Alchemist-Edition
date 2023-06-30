@@ -19,15 +19,24 @@
   <structure id="undead_shrine" tile="undead_shrine" animation="undead_shrine" name="undead_shrine">
     <operate>
       <choose>
-        <section if="area.getObject('undead') == null && player.questComplete('find_jacominus')">
+        <section if="player.questComplete('find_jacominus')">
           <wait seconds="0.5" />
+          <section if="area.id == 'haven_ruins'">
+					  <action>
+              for(o in area.getStructuresById('boss_gate_open')){
+                getStructure("boss_gate").build(null, area, o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE);
+                area.removeStructure(o);
+              }
+            </action>
+				  </section>
           <play object="this" animation="awaken" modal="true" />
-          <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+          <choose>
+            <section if="area.id == 'thirallan_maze'"><object id="fallen_angel_noBGM" x="this.tile_x" y="this.tile_y" /></section>
+            <object id="fallen_angel" x="this.tile_x" y="this.tile_y" />
+          </choose>
           <structure id="undead_shrine_destroyed" x="this.tile_x" y="this.tile_y" />
         </section>
-        <dialogue section="player" id="no_shrine1" speaker='player' if="area.getObject('undead_shrineDefender') != null && !player.questComplete('find_jacominus')" />
-        <dialogue section="player" id="no_shrine2" speaker='player' if="area.getObject('undead_shrineDefender') == null && !player.questComplete('find_jacominus')" />
-        <dialogue section="player" id="no_shrine3" speaker='player' if="area.getObject('undead_shrineDefender') != null && player.questComplete('find_jacominus')" />
+        <dialogue text="You feel a chill down your spine making eye contact with the statue, chilling air emenates from the strange statue, but nothing more is noticed." />
       </choose>
     </operate>
   </structure>
@@ -105,6 +114,7 @@
         <object id="domenic_object" x="10" y="-1" facing="right" />
         <objects id="bandit_heavy" fromX="6" toX="10" count="2" y="-1" facing="right" />
         <objects id="bandit_combo" fromX="6" toX="10" count="2" y="-1" facing="right" />
+        <music id="bandit_territory" seconds="1" />
         <dialogue section="domenic" id="undying_peninsula1" speaker="area.getObject('domenic_object')" />
         <pan toObject="area.getObject('domenic_object')" seconds="1" />
         <wait seconds="1" />
@@ -113,6 +123,7 @@
         <remove object="area.getObject('domenic_object')" />
         <object id="domenic_prePurifier" x="10" y="-1" facing="right" />
         <action>setFlag('domenic_encounter',true);</action>
+        <music id="bandit_ambush" seconds="1" />
       </section>
       <section if="getFlag('domenic_encounter') && area.getObject('domenic_prePurifier') == null">
         <wait seconds="0.5" />
@@ -164,13 +175,23 @@
       <choose>
         <dialogue section="common" id="thirallan_mines_no" speaker='player' if="!player.hasQuest('find_jacominus')" />
         <dialogue section="common" id="hut_stuff" speaker='player' if="!getFlag('TAE_second')" />
-        <teleport area="thirallan_zargoroth.mines" x="1" y="15" with="ellipse" />
+        <teleport area="thirallan_zargoroth.mines" x="5" y="5" with="ellipse" />
       </choose>
     </operate>
   </structure>
   <structure id="thirallan_zargoroth.mines.ret" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
     <operate>
       <teleport area="thirallan_zargoroth" x="90" y="-1" with="ellipse" />
+    </operate>
+  </structure>
+  <structure id="haven_mines_ruins_entrance" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
+    <operate>
+      <teleport area="haven_ruins" x="2" y="14" allowReturn="true" with="ellipse" />
+    </operate>
+  </structure>
+  <structure id="haven_mines_ruins_entrance.ret" width="32" height="32" image="{core}/structures/cave.png" name="enter" animation="door">
+    <operate>
+      <return with="ellipse" />
     </operate>
   </structure>
   <structure id="hut" extends="hut">
@@ -430,5 +451,78 @@
 
   <animation id="maze_portal.idle" x="0" count="13" />
   <structure id="maze_portal" image="maze_portal.png" width="32" height="32" type="door" name="enter" />
+
+
+
+  <tile id="wall_torch" sheet="haven_mines/wall_torch.png" />
+  <animation id="wall_torch" x="0" count="5" />
+  <object id="wall_torch" tile="wall_torch" animation="wall_torch">
+    <light tile="light.large" color="fae1b5" flicker="true" />
+  </object>
+
+  <tile id="blue_wall_torch" sheet="haven_mines/blue_wall_torch.png" />
+  <object id="blue_wall_torch" tile="blue_wall_torch" animation="wall_torch">
+    <light tile="light.large" color="b5bffa" flicker="true" />
+    <removedFromArea>
+      <object id="dead_wall_torch" x="this.tile_x" y="this.tile_y" />
+    </removedFromArea>
+  </object>
+  
+  <tile id="dead_wall_torch" sheet="haven_mines/blue_wall_torch.png" x="1" y="2" />
+  <object id="dead_wall_torch" tile="dead_wall_torch">
+    <removedFromArea>
+      <object id="blue_wall_torch" x="this.tile_x" y="this.tile_y" />
+    </removedFromArea>
+  </object>
+
+  <tilesheet id="haven_mines/falling_stones.png" width="48" height="48" />
+  <tile id="falling_stones" sheet="haven_mines/falling_stones.png" />
+  <animation id="falling_stones" x="0" count="8" />
+  <object id="falling_stones" tile="falling_stones" animation="falling_stones" />
+
+  <tile id="peredur_desk" sheet="haven_mines/peredur_desk.png" />
+  <object id="peredur_desk" tile="peredur_desk" name="read">
+    <tooltip section="structure.tooltip" id="read" />
+    <operate>
+      <dialogue text="Placeholder: Peredur's Journal" />
+    </operate>
+  </object>
+
+
+  <animal id="undead" tile="undead" />
+  <tilesheet id="haven_mines/undead_cage.png" width="20" height="26" />
+  <tile id="undead_cage" sheet="haven_mines/undead_cage.png" x="0" y="0" />
+  <structure id="undead_cage" tile="undead_cage" animals="1" type="pen">
+		<sprite>
+			<animal i="0" offsetX="7" offsetY="21" />
+			<tile x="0" y="0" />
+		</sprite>
+		<animal id="undead" />
+	</structure>
+
+  <tilesheet id="haven_mines/boss_gate.png" width="16" height="48" />
+  <tile id="boss_gate_open" sheet="haven_mines/boss_gate.png" x="0" y="0" />
+  <animation id="boss_gate_open.close" x="0" count="6" />
+  <tile id="boss_gate" sheet="haven_mines/boss_gate.png" x="1" y="1" />
+  <structure id="boss_gate_open" tile="boss_gate_open">
+    <removedFromArea>
+      <play object="this" animation="close" />
+      <structure id="boss_gate" x="this.tile_x" y="this.tile_y" />
+    </removedFromArea>
+  </structure>
+
+  <structure id="boss_gate" tile="boss_gate">
+    <addedToArea>
+      <action>
+        for(y in this.tile_y-2...this.tile_y+1) setTile(this.tile_x, y, "empty");
+      </action>
+    </addedToArea>
+    <removedFromArea>
+      <action>
+        for(y in this.tile_y-2...this.tile_y+1) setTile(this.tile_x, y, null);
+      </action>
+      <structure id="boss_gate_open" x="this.tile_x" y="this.tile_y" />
+    </removedFromArea>
+  </structure>
 
 </structures>

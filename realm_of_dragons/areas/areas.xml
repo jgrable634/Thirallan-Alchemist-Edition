@@ -44,4 +44,8 @@
 		<structure id="ROD_elders.ret" x="1" y="13" />
 		<init><runAreaLoad/><action>for (x in 1...29) for (y in 1...14) mine(x, y);</action></init>
 	</area>
+	<procedure id="distressDragons">
+		<dialogue section="player" id="distressDragons1" speaker="player" />
+		<quest id="distressDragons" ask="false" />
+	</procedure>
 </areas>

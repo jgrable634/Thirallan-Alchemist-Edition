@@ -2,16 +2,24 @@
 <enemies>
 	<tile id="undead" sheet="art/undead/undead.png" x="0" y="0" />
 	<tile id="jacominus" sheet="art/undead/jacominus.png" x="0" y="0" />
-	<animation id="jacominus.idle" x="0" count="2" />
-	<animation id="jacominus.walk" x="2" count="3" />
+	<tilesheet id="art/undead/jacominus_transform.png" width="20" height="16" />
+	<tile id="jacominus_transform" sheet="art/undead/jacominus_transform.png" x="0" y="0" />
+	<tile id="jacominus2" sheet="art/undead/jacominus2.png" x="0" y="0" />
+	<animation id="jacominus.idle" x="0" count="3" />
+	<animation id="jacominus.walk" x="3" count="3" />
 	<animation id="jacominus.pre_attack" x="6" count="2" />
-	<animation id="jacominus.attack" x="9" count="4" />
+	<animation id="jacominus.attack" x="10" count="3" />
+	<animation id="jacominus_transform.transform" x="0" count="19" />
+	<animation id="jacominus2.idle" equals="jacominus.idle" />
+	<animation id="jacominus2.walk" equals="jacominus.walk" />
+	<animation id="jacominus2.attack" x="6" count="5" />
+	<animation id="jacominus2.slam" x="11" count="4" length="2" />
 	<animation id="undead.idle" x="0" count="4" />
 	<animation id="undead.walk" x="4" count="4" />
 	<animation id="undead.pre_attack" x="8" count="4" />
 	<animation id="undead.attack" x="12" count="2" />
 
-	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" capture="4" underground="true" type="surface" fps="10" vertical="true">
+	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" capture="4" underground="true" type="surface" fps="10" vertical="true" death_sfx="leech_death">
 		<attack type="melee" damage="5" animation="attack">
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>
@@ -20,13 +28,92 @@
 
 	<enemy id="undead_shrineDefender" extends="undead" />
 
-	<enemy id="jacominus" tile="jacominus" defense="1" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10">
-		<lootSet><loot id="jacominus_katana" /></lootSet>
-		<attack type="melee" damage="7">
+	<object id="cacoon_opener" width="112" height="112">
+		<over>
+			<remove object="this" />
+			<action>
+				for(o in area.getStructuresById('boss_gate_open')){
+					getStructure("boss_gate").build(null, area, o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE);
+					area.removeStructure(o);
+				}
+			</action>
+			<play object="area.getObject('jacominus_cacoon')" animation="jacominus_cacoon.open" />
+			<sound id="minotaur_death" />
+			<object id="jacominus" x="area.getObject('jacominus_cacoon').tile_x" y="area.getObject('jacominus_cacoon').tile_y" />
+			<remove object="area.getObject('jacominus_cacoon')" />
+		</over>
+	</object>
+
+	<tile id="jacominus_cacoon" sheet="art/undead/jacominus_cacoon.png" x="0" y="0" />
+	<animation id="jacominus_cacoon.cacoon" x="0" count="10" />
+	<animation id="jacominus_cacoon.open" x="10" count="4" />
+	<object id="jacominus_cacoon" tile="jacominus_cacoon" animation="jacominus_cacoon.cacoon">
+		<light tile="light.small" color="8e16f4" />
+	</object>
+
+	<enemy id="jacominus" tile="jacominus" defense="1" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
+		<light tile="light.small" color="8e16f4" />
+		<attack type="melee" damage="7" knockback="5" >
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>
-		<defeatedBy><run procedure="corrupted.death" /></defeatedBy>
+		<onDeath>
+			<lerp object="this" alpha="0" />
+			<run procedure="jacominus_transform" />
+		</onDeath>
+		<hitWall><action>this.flip(); this.run();</action><stop /></hitWall>
 	</enemy>
+
+	<object id="jacominus_transform" tile="jacominus_transform" fps="8"><light tile="light.small" color="8e16f4" /></object>
+
+	<enemy id="jacominus2" tile="jacominus2" defense="2" speed="3" range="30" health="20" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
+		<light tile="light.small" color="8e16f4" />
+		<lootSet><loot id="jacominus_katana" /></lootSet>
+		<attack type="melee" damage="3" cooldown="10" hits="2">
+			<cont animation="slam" damage="12" knockback="8" />
+		</attack>
+		<onDeath>
+			<action>
+				for(o in area.getStructuresById('boss_gate')){
+					getStructure("boss_gate_open").build(null, area, o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE);
+					area.removeStructure(o);
+				}
+				for(o in area.getObjectsById('dead_wall_torch')){
+					area.addObject(ObjectInfo.make("blue_wall_torch", o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE));
+					area.removeObject(o);
+				}
+			</action>
+			<music id="haven_mines" seconds="1" />
+		</onDeath>
+		<hitWall><action>this.flip(); this.run();</action><stop /></hitWall>
+	</enemy>
+
+	<procedure id="jacominus_transform">
+		<section with="fade">
+			<move object="player" x="17" y="14" />
+			<object id="jacominus_transform" x="21" y="14" />
+			<remove object="area.getObject('jacominus')" />
+			<object id="jacominus2" x="21" y="14" facing="left" />
+			<action>area.getObject('jacominus2').alpha = 0;</action>
+			<wait seconds="0.5">
+				<operate object="area.getObject('jacominus')" />
+			</wait>
+		</section>
+		<music id="jacominus" />
+		<pan toObject="jacominus_transform" seconds="1" />
+		<action>
+			for(o in area.getObjectsById('blue_wall_torch')){
+				area.addObject(ObjectInfo.make("dead_wall_torch", o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE));
+				area.removeObject(o);
+			}
+		</action>
+		<play object="area.getObject('jacominus_transform')" animation="jacominus_transform.transform" modal="true" />
+		<wait seconds="0.5">
+			<operate object="area.getObject('jacominus_transform')" />
+		</wait>
+		<action>area.getObject('jacominus2').alpha = 1;</action>
+		<remove object="area.getObject('jacominus_transform')" />
+	</procedure>
+
 
 	<tilesheet id="art/purifier/fallen_angel.png" width="32" height="32" />
 	<tile id="fallen_angel" sheet="art/purifier/fallen_angel.png" x="0" y="0" />
@@ -40,9 +127,9 @@
 	<animation id="fallen_angel.combo3" x="31" count="4" />
 	<animation id="fallen_angel.omni" x="32" count="3" />
 
-	<enemy id="fallen_angel" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true" bgm="purification1">
+	<enemy id="fallen_angel_noBGM" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true">
 		<light tile="light.large" color="5C0000" />
-		<inRange range="10">
+		<inRange range="7">
 			<attack type="melee" cooldown="100">
 				<pre>
 					<section>
@@ -51,8 +138,13 @@
 						<set id="oldX" value="this.tile_x" />
 						<set id="oldY" value="this.tile_y" />
 						<set id="facing" value="this.getFacing()" />
+						<section if="facing == -1 && player.tile_x > this.tile_x && player.tile_x < this.tile_x+10 && player.tile_y <= this.tile_y && player.tile_y >= this.tile_y-1">
+							<damage object="player" attacker="this" damage="20" />
+						</section>
+						<section if="facing == 1 && player.tile_x < this.tile_x && player.tile_x > this.tile_x-10 && player.tile_y <= this.tile_y && player.tile_y >= this.tile_y-1">
+							<damage object="player" attacker="this" damage="20" />
+						</section>
 			 			<lerp object="this" deltaX="facing*(-160)/Tile.SIZE" seconds="0.25" modal="false" />
-						<damage object="player" attacker="this" damage="20" />
 						<move object="this" x="oldX+(facing*(-160)/Tile.SIZE)" y="oldY" />
 					</section>
 				</pre>
@@ -65,14 +157,27 @@
 			<post><attack type="omni" damage="10" range="1" knockback="20" animation="omni" /><play object="this" animation="idle" /></post>
 		</attack>
 		<onDeath>
-			<section if="player.getKillCount('fallen_angel') >= 5 && player.areas.get('thirallan_holy_hills').getStructureById('maze_portal') == null">
-				<dialogue text='I hope you wanted to get MY attention by ridding this island of my shrines. Because you are getting it! Come to those so called "Holy Hills" on your map, and come find me. You better be ready to fight a God.' />
-				<structure id="maze_portal" x="3" y="-1" area="thirallan_holy_hills">
-					<teleport area="thirallan_maze" x="65" y="61" with="ellipse" />
-				</structure>
-			</section>
+			<choose>
+				<section if="area.id == 'haven_ruins'">
+					<action>
+						for(o in area.getStructuresById('boss_gate')){
+							getStructure("boss_gate_open").build(null, area, o.tile_x*Tile.SIZE, o.tile_y*Tile.SIZE);
+							area.removeStructure(o);
+						}
+					</action>
+				</section>
+				<section if="player.getKillCount('fallen_angel') >= 5 && player.areas.get('thirallan_holy_hills').getStructureById('maze_portal') == null">
+					<dialogue text='I hope you wanted to get MY attention by ridding this island of my shrines. Because you are getting it! Come to those so called "Holy Hills" on your map, and come find me. You better be ready to fight a God.' />
+					<structure id="maze_portal" x="3" y="-1" area="thirallan_holy_hills">
+						<teleport area="thirallan_maze" x="65" y="61" with="ellipse" />
+					</structure>
+				</section>
+			</choose>
 		</onDeath>
+		<hitWall><action>this.flip(); this.run();</action><stop /></hitWall>
 	</enemy>
+
+	<enemy id="fallen_angel" extends="fallen_angel_noBGM" bgm="purification1" />
 
 	<tilesheet id="art/purifier/soul_blast.png" width="8" height="8" />
 	<tile id="soul_blast" sheet="art/purifier/soul_blast.png" x="0" y="0" />
@@ -272,7 +377,7 @@
 	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10" bgm="purification2">
 			<light tile="light.large" color="5C0000" />
 			<onHit><move object="this" x="12" y="-5" /></onHit>
-			<onDeath><section><complete quest="undead_shrines" /><run procedure="hand_movementEnd" /><remove object="area.getObject('campaign_purifier_hand_l')" /><remove object="area.getObject('campaign_purifier_hand_r')" /><run procedure="purifier_death" /></section></onDeath>
+			<onDeath><section><run procedure="hand_movementEnd" /><remove object="area.getObject('campaign_purifier_hand_l')" /><remove object="area.getObject('campaign_purifier_hand_r')" /><run procedure="purifier_death" /></section></onDeath>
 	  </enemy>
 	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l" action="struggle">
 			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>

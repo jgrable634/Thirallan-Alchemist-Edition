@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <tiles>
-  <tile id="fuck_off_stone" sheet="{core}/tiles/tiles.png" x="2" />
   <tile id="blood_grass" sheet="tiles.png" x="0" />
   <tile id="blood_dirt" sheet="tiles.png" x="1" />
   <tile id="monastery_stone" sheet="tiles.png" x="2" />
   <tile id="malumite_ore" sheet="tiles.png" x="3" />
+  <tile id="fragmented_stone">
+    <tile sheet="tiles.png" x="12" p="1" />
+    <tile sheet="tiles.png" x="13" p="1" />
+    <tile sheet="tiles.png" x="14" p="1" />
+    <tile sheet="tiles.png" x="15" p="1" />
+  </tile>
+  <dig id="fragmented_stone" cost="1" />
   <dig id="blood_grass" cost="0" />
   <dig id="blood_dirt" cost="0" />
 </tiles>

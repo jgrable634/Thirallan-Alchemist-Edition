@@ -46,7 +46,7 @@
       <section if="player.hasQuest('proving_worth')">
         <dialogue section="zargoroth" id="proving_worth4a" speaker='this' />
         <dialogue section="zargoroth" id="proving_worth4b" speaker='this' />
-        <item id="steel_pickaxe" />
+        <item id="malumite_pickaxe" />
       </section>
       <section if="!player.hasQuest('proving_worth')">
         <dialogue section="zargoroth" id="proving_worth5" speaker='this' />
@@ -116,18 +116,14 @@
           <section if="getFlag('merchants_recruited') && getFlag('andreas_recruited') && !player.questComplete('rebuild_monastery')">
             <dialogue section="zargoroth" id="recruiting" speaker='this' />
           </section>
-          <section if="player.questComplete('undead_shrines') && area.getObject('peredur') == null">
+          <section if="player.canCompleteQuest('undead_shrines') && area.getObject('peredur') == null">
             <quest/>
             <action if="player.isEquipped('peredur')">player.equipment.unequip('familiar',player,true);</action>
             <item id="peredur" count="-1" hidden="true" />
             <object id="peredur" x="50" y="-1" />
+            <complete quest="undead_shrines" />
             <scene id="thirallan_alchemist" show="post_purifier1" with="fade" />
-            <menu section="common">
-              <dialogue text="This is the end of this mod for the current update. Would you like to save?" />
-          		<choice id="yes"><save fakeDismount="true" /></choice>
-          		<choice id="no" />
-          	</menu>
-          	<credits /><title with="fade" />
+            <run procedure="distressDragons" />
           </section>
           <!--section if="!player.hasQuest('thirallan_faction_war1') && player.questComplete('undead_shrines')">
             <dialogue section="zargoroth" id="faction_war_island1" speaker='this' />
@@ -305,8 +301,6 @@
             <section if="player.questComplete('find_jacominus') && !getFlag('to_mines')">
               <quest/>
               <dialogue section="andreas" id="rumors5" speaker='this' />
-              <action>setFlag('to_mines',true);</action>
-              <teleport area="thirallan_zargoroth.mines" x="30" y="75" with="ellipse" />
             </section>
             <dialogue section="andreas" id="rumors6" speaker='this' />
           </choose>

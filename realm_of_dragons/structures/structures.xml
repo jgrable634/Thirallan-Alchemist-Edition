@@ -23,14 +23,21 @@
 		<operate><section with="ellipse"><action>var loc = getGlobal('RODLocation'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
 	</structure>
 	<structure id="realm_of_dragons_fromOrbit_entrance" tile="leave_door" name="enter">
-		<operate><!--action>setGlobal("location", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" /--><dialogue text="This section of this mod is incomplete, and isn't ready for the competition's standards." /></operate>
+		<operate>
+			<choose>
+				<section if="player.hasQuest('distressDragons')">
+					<action>setGlobal("RODLocation", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" />
+				</section>
+				<dialogue text="Some force is preventing you from entering through this gateway." />
+			</choose>
+		</operate>
 	</structure>
 	<animation id="secret_vault.opening" count="4" length="3" />
 	<animation id="secret_vault.closing" count="4" reverse="true" length="3" />
 	<structure id="sealed_vault" image="secret_vault.png" width="64" height="128" />
 	<structure id="secret_vault" extends="sealed_vault" type="storehouse" main="true" animation="secret_vault">
 		<operate>
-			<action if="!getFlag('secret_vault_filled')">this.inventory.addItems(Item.get("dragonblood"), 250); this.inventory.addItems(Item.get("fire_gem"), 40); this.inventory.addItems(Item.get("evo_gem"), 4); this.inventory.addItems(Item.get("cow"), 500); setFlag('secret_vault_filled', true);</action>
+			<action if="!getFlag('secret_vault_filled')">this.inventory.addItems(Item.get("dragonblood"), 50); this.inventory.addItems(Item.get("fire_gem"), 5); this.inventory.addItems(Item.get("evo_gem"), 2); this.inventory.addItems(Item.get("cow"), 10); setFlag('secret_vault_filled', true);</action>
 		</operate>
 		<over><play object="this" animation="secret_vault.opening" /></over>
 		<out><play object="this" animation="secret_vault.closing" /></out>
