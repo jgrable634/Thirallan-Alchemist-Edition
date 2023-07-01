@@ -8,13 +8,24 @@
     <action id="use">
       <choose>
         <section if="area.id == 'thirallan_map'" with="fade">
-          <action>var loc = getGlobal('ThirallanLocation'); player.teleport(loc[0], loc[1], loc[2]);</action>
+          <action>
+            player.teleport(
+              player.getString("ThirallanLocation_area"), 
+              player.getVar("ThirallanLocation_x"), 
+              player.getVar("ThirallanLocation_y")
+            );
+          </action>
         </section>
         <choose>
-          <section if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist'">
-            <action>setGlobal("ThirallanLocation", [area.id, player.tile_x, player.tile_y]);</action>
+          <section if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist' && area.id != 'thirallan_alchemist.orbit'">
+            <action>
+              player.setString("ThirallanLocation_area", area.id);
+              player.setVar("ThirallanLocation_x", player.tile_x);
+              player.setVar("ThirallanLocation_y", player.tile_y);
+            </action>
             <teleport area="thirallan_map" x="5" y="5" with="fade" />
           </section>
+          <dialogue text="Go to the surface of the planet to use the map!" if="area.id == 'thirallan_alchemist.orbit'" />
           <dialogue section="player" id="peredur_no_travel" speaker='player' if="!player.hasSeenItem('peredur') && !player.isEquipped('peredur')" />
           <dialogue section="player" id="blood_moon_no_travel" speaker='player' if="getFlag('blood_moon')"/>
           <dialogue section="player" id="no_travel" speaker='player' />
