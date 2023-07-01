@@ -17,7 +17,7 @@
           </action>
         </section>
         <choose>
-          <section if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist' && area.id != 'thirallan_alchemist.orbit'">
+          <section if="(player.hasSeenItem('peredur') || player.isEquipped('peredur'))&& area.planet.id == 'thirallan_alchemist' && area.id != 'thirallan_alchemist.orbit' && player.vehicle == null">
             <action>
               player.setString("ThirallanLocation_area", area.id);
               player.setVar("ThirallanLocation_x", player.tile_x);
@@ -25,6 +25,7 @@
             </action>
             <teleport area="thirallan_map" x="5" y="5" with="fade" />
           </section>
+          <dialogue text="You cannot use the map while in a vehicle" if="player.vehicle != null" />
           <dialogue text="Go to the surface of the planet to use the map!" if="area.id == 'thirallan_alchemist.orbit'" />
           <dialogue section="player" id="peredur_no_travel" speaker='player' if="!player.hasSeenItem('peredur') && !player.isEquipped('peredur')" />
           <dialogue section="player" id="blood_moon_no_travel" speaker='player' if="getFlag('blood_moon')"/>
