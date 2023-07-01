@@ -21,7 +21,7 @@
     <appendArea id="holy_hills.hill" offsetX="50" offsetY="6" />
     <appendArea id="holy_hills.hill" offsetX="80" offsetY="9" />
     <init><runAreaLoad/></init>
-    <onLoad><music id="magic2" seconds="1" /></onLoad>
+    <onLoad><music id="holy_hills" seconds="1" /></onLoad>
   </area>
 
 </areas>

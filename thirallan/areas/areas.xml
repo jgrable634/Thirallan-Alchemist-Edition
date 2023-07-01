@@ -77,8 +77,22 @@
   <planet id="thirallan_alchemist" height="80">
 		<orbit id="thirallan_alchemist.orbit" width="512" height="64" background="thirallan.stars" distress="!player.questComplete('undead_shrines')">
       <area id="thirallan_zargoroth" x="0" />
+      <area id="thirallan_beast_forest" x="-2" />
+      <area id="thirallan_fang_plains" x="-3" />
+      <area id="thirallan_gold_diggers_haven" x="-4" />
+      <area id="thirallan_gold_excavation" x="-5" />
+      <area id="thirallan_holy_hills" x="-6" />
+      <area id="thirallan_phoenix_plateau" x="-7" />
+      <area id="thirallan_rotting_forest" x="-8" />
+      <area id="thirallan_desert" x="-9" />
+      <area id="thirallan_mountains" x="-10" />
+      <area id="thirallan_undying_peninsula" x="-11" />
 			<init><runAreaLoad /></init>
-			<onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+			<onLoad>
+        <section if="player.tile_x < 0"><move object="player" x="1" y="player.tile_y" /></section>
+        <music id="orbit" seconds="1" />
+        <radar tile="orbit.radar" animation="orbit.radar" padding="2" />
+      </onLoad>
 		</orbit>
 	</planet>
 
