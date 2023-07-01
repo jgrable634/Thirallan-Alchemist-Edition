@@ -10,6 +10,5 @@
 			<tile id="thirallan_sun" animation="sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
 		</layer>
 		<layer p="0.25"><tile sheet="{core}/start/parallax/tiles256.png" x="6" loop="true" offsetX="16" /></layer>
-		<layer p="0.35"><tile sheet="{core}/start/parallax/tiles256.png" x="1" loop="true" dy="8" /></layer>
 	</parallax>
 </parallax>
