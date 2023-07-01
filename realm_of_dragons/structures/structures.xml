@@ -20,13 +20,13 @@
 		<operate><return with="ellipse" /></operate>
 	</structure>
 	<structure id="ROD.ret" tile="leave_door" name="enter">
-		<operate><section with="ellipse"><action>var loc = getGlobal('RODLocation'); player.teleport(loc[0], loc[1], loc[2]);</action></section></operate>
+		<operate><teleport area="ROD_planet.orbit" x="50" y="49" with="fade" /></operate>
 	</structure>
 	<structure id="realm_of_dragons_fromOrbit_entrance" tile="leave_door" name="enter">
 		<operate>
 			<choose>
 				<section if="player.hasQuest('distressDragons')">
-					<action>setGlobal("RODLocation", [area.id, player.tile_x, player.tile_y]);</action><teleport area="dragon_start" x="5" y="-1" with="fade" />
+					<teleport area="dragon_start" x="5" y="-1" with="fade" />
 				</section>
 				<dialogue text="Some force is preventing you from entering through this gateway." />
 			</choose>
