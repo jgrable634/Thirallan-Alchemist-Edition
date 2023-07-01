@@ -11,6 +11,9 @@
   <action>
 
     function _stayStill(o,x,y,s){
+      if(o.area.id != 'purifier_void'){
+        return;
+      }
       if (o.setPosition != null){
       o.setPosition(x,y);
       }
@@ -22,6 +25,7 @@
       }
     }
     function stayStill(o){
+      trace("stayStill is doing things");
       var x = o.xPos;
       var y = o.yTile;
       var s = o.getFacing();
