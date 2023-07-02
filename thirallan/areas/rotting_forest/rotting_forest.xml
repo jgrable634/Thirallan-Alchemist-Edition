@@ -49,7 +49,7 @@
     <structure id="monastery_exit" x="63" y="-1" />
     <init><runAreaLoad/></init>
     <onLoad>
-      <music id="magic2" seconds="1" />
+      <music id="thirallan_heights" seconds="1" />
       <section if="player.hasQuest('rebuild_monastery')">
         <section if="getFlag('merchants_recruited') && area.getStructureById('monastery_weaps_market') == null">
           <structure id="monastery_market" x="113" />
@@ -95,7 +95,7 @@
     <object id="wall_parallax" x="12" y="-21" />
     <structure id="cathedral_sanctuary" x="8" y="-11" />
     <structure id="cathedral_exit" x="9.5" y="-1" />
-    <onLoad><section if="getFlag('iterol_recruited') && area.getObject('iterol_cathedral') == null" ><object id="iterol_cathedral" x="6" y="-21" /></section><action if="!area.isLit(1, -1)">for(y in -31...-1) for(x in 0...21) area.setLit(x, y);</action></onLoad>
+    <onLoad><section if="getFlag('iterol_recruited') && area.getObject('iterol_cathedral') == null" ><object id="iterol_cathedral" x="6" y="-21" /></section><action if="!area.isLit(1, -1)">for(y in -31...-1) for(x in 0...21) area.setLit(x, y);</action><music id="holy_hills" seconds="1" /></onLoad>
   </area>
 
   <area id="thirallan_rotting_forest" background="thirallan_rotting_forest" width="150" height="100" looping="true" corrupted="true" planet="thirallan_alchemist">
