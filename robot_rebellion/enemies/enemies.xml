@@ -102,7 +102,7 @@
 			<object id="RB_smallBoss" x="this.tile_x" y="this.tile_y-1" if="area.hasTile(this.tile_x,this.tile_y-1,'front') == false"/>
 		</onDeath>
 	</enemy>
-	<enemy id="RB_smallBoss" extends="RB_boss" tile="RB_smallBoss" health="15" speed="2.5">
+	<enemy id="RB_smallBoss" extends="RB_boss" tile="RB_smallBoss" health="15" speed="2.5" defense="8">
 		<onDeath><stop/></onDeath>
 	</enemy>
 
