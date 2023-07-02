@@ -231,7 +231,7 @@
       </choose>
     </operate>
   </structure>
-  <structure id="guild_door.exit" width="32" height="32" image="guild_door.png" name="enter" />
+  <structure id="guild_door.exit" width="32" height="32" image="guild_door.png" name="enter" type="door" />
   <structure id="guild_library" tile="spirit_door" animation="spirit_door" type="crafting">
     <recipe type="guild_magic" />
   </structure>
@@ -484,7 +484,14 @@
   <object id="peredur_desk" tile="peredur_desk" name="read">
     <tooltip section="structure.tooltip" id="read" />
     <operate>
-      <dialogue text="Placeholder: Peredur's Journal" />
+      <section>
+        <dialogue section="peredur" text="peredur_desk1" />
+        <dialogue section="peredur" text="peredur_desk2" />
+        <dialogue section="peredur" text="peredur_desk3" />
+        <dialogue section="peredur" text="peredur_desk4" />
+        <dialogue section="peredur" text="peredur_desk5" />
+        <dialogue section="peredur" text="peredur_desk6" />
+      </section>
     </operate>
   </object>
 

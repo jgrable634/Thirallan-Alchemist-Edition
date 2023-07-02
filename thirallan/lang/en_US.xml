@@ -95,8 +95,8 @@
     <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
     <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
     <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
-    <text id="mines_note1">Placeholder text: Strange Mines Note 1</text>
-    <text id="mines_note2">Placeholder text: Strange Mines Note 2</text>
+    <text id="mines_note1">We're noticing strange energy in this stone, it was barely detectable from the surface, but here its far more noticeable. Will note signs of Dark Cult.</text>
+    <text id="mines_note2">The cult must know we are here, cave ins are rampant now, the stones almost seem to be shifting. I'm worried workers will get trapped in our checkpoints. We shoud be safe enough though.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>
@@ -232,6 +232,13 @@
     <text id="rotting_forestShrine2">Wait... Something's wrong. I feel like...</text>
     <text id="rotting_forestShrine3">Umazz!?</text>
     <text id="rotting_forestShrine4">What was he... Forget it. It's none of your business, don't bother asking.</text>
+
+    <text id="peredur_desk1">Entry one, who knows what date: The Mage Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
+    <text id="peredur_desk2">Now I sit here in some ruins under a town that would likely shun someone like me, contemplating what to do with my life, how to restart, how to at least attempt to redeem myself.</text>
+    <text id="peredur_desk3">I think I have to start looking into how to stop the Dark God. How to combat his corruption. I need prove to myself that I can do great things. I'll start tomorrow.</text>
+    <text id="peredur_desk4">Entry two, Day Ten: I managed to capture some corrupted while avoiding detection, I should understand corruption well given my ability to cast it, but I really don't know how it works.</text>
+    <text id="peredur_desk5">Its not some physical element I can detect, all it seems to change is the blood of the corrupted, from a typical red blood to a bright purple. How would I stop it from converting? Is there a way to prevent it?</text>
+    <text id="peredur_desk6">I think it may be worth trying to communicate with the villagers on the surface, if it gets bad I can leave, it shouldn't hurt to try right?</text>
 
     <text id="post_purifier1">The Purifier was the reason this planet became plagued with [color=490068]The Corrupted[/color].</text>
     <text id="post_purifier2">I am a former member of the cult that worshipped it.</text>
