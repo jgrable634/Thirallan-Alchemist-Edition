@@ -20,6 +20,9 @@
     </action>
   </item>
 
+  <item id="map" extends="map" corruptible="false" />
+  <item id="coin_purse" extends="coin_purse" corruptible="false" />
+
   <item id="science_spear" type="equipment" slot="weapon" cost="200" weight="5" melee_range="1" icon="science_spear.ico" attack="5" stamina="5" breakable="false">
     <action id="equip" />
   </item>
