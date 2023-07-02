@@ -110,6 +110,7 @@
               <scene id="thirallan_alchemist" show="zargoroth_info" with="fade" />
             </section>
             <section>
+              <quest />
               <scene id="thirallan_alchemist" show="map_explanation" with="fade" />
             </section>
           </choose>
@@ -145,11 +146,11 @@
 
     <procedure id="pyrrhos.restock">
       <action>
-        this.inventory.addItems(getItem("iron_sword"), 5); this.inventory.addItems(getItem("map"), 1);
+        this.inventory.addItems(getItem("malumite_sword"), 5); this.inventory.addItems(getItem("map"), 1);
         this.inventory.addItems(getItem("coal"), 15); this.inventory.addItems(getItem("gold"), 5);
-        this.inventory.addItems(getItem("diamond"), 3); this.inventory.addItems(getItem("iron_armor"), 3); this.inventory.addItems(getItem("iron_bar"), 2);
-        this.inventory.addItems(getItem("iron"), 10); this.inventory.addItems(getItem("titanium"), 5); this.inventory.addItems(getItem("net"), 10);
-        this.inventory.addItems(getItem("rusty_axe"), 3);
+        this.inventory.addItems(getItem("diamond"), 3); this.inventory.addItems(getItem("malumite_armor"), 3); this.inventory.addItems(getItem("malumite_ore"), 10);
+        this.inventory.addItems(getItem("malumite_pickaxe"), 3); this.inventory.addItems(getItem("malumite_bar"), 5); this.inventory.addItems(getItem("net"), 10);
+        this.inventory.addItems(getItem("malumite_helm"), 3); this.inventory.addItems(getItem('malumite_shield'), 3);
       </action>
     </procedure>
 
@@ -222,6 +223,7 @@
       <operate>
         <dialogue section="peredur" id="stranger" speaker='this' if="!player.questComplete('undead_rumors')" />
         <section if="player.hasQuest('blood_moon') && !player.questComplete('blood_moon') && !getFlag('blood_moon')">
+          <quest/>
           <dialogue section="peredur" id="speak" speaker='this' />
           <scene id="thirallan_alchemist" show="blood_moon" with="fade" />
         </section>
@@ -285,7 +287,7 @@
             <section if="!player.questComplete('find_jacominus') && !player.canCompleteQuest('find_jacominus')">
               <dialogue section="andreas" id="rumors3" speaker='this' />
             </section>
-            <section if="!player.questComplete('find_jacominus') && player.canCompleteQuest('find_jacominus')">
+            <section if="!player.questComplete('find_jacominus') && !getFlag('andreas_ran')">
               <dialogue section="player" id="andreas_second1" speaker='player' />
               <dialogue section="andreas" id="rumors4" speaker='this' />
               <facing object="this" dir="left" />
@@ -295,12 +297,13 @@
               <wait seconds="1">
                 <operate object="this" />
               </wait>
+              <action>setFlag('andreas_ran', true);</action>
               <dialogue section="player" id="andreas_second2" speaker='player' />
-              <complete quest="find_jacominus" />
-            </section>
-            <section if="player.questComplete('find_jacominus') && !getFlag('to_mines')">
               <quest/>
+            </section>
+            <section if="!player.questComplete('find_jacominus')">
               <dialogue section="andreas" id="rumors5" speaker='this' />
+              <complete quest="find_jacominus" />
             </section>
             <dialogue section="andreas" id="rumors6" speaker='this' />
           </choose>
