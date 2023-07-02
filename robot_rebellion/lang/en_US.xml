@@ -51,13 +51,14 @@
 		<text id="robot_whip">Moltanium Whip</text>
 		<text id="moltanium_ore">Moltanium Ore</text>
 		<text id="moltanium">Moltanium</text>
-		<text id="RB_keycard">Captain's Keycard</text>
+		<text id="RB_keycard">Broken Keycard</text>
 		<text id="moltanium_forge_blueprint">Moltanium Forge Blueprint</text>
 		<text id="RB_screwdriver">Screwdriver</text>
 	</section>
 
 	<section id="item.descriptions">
 		<text id="moltanium_ore">Born from the melting of titanium in the forming of Unoiks 187c, this material has hardened on the outside, but still holds magma within.</text>
+		<text id="RB_keycard">Keycard that presumably used to be the Captain's but was damaged beyond repair. Rendering the robot factory doors useless.</text>
 	</section>
 
 	<section id="player">
