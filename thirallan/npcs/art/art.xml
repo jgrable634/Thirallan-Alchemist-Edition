@@ -3,12 +3,13 @@
 
   <!--Zargoroth's Safe Haven-->
   <tilesheet id="zargoroth_haven/peredur.prototype.png" width="17" height="16" />
+  <tilesheet id="zargoroth_haven/pyrrhos.png" width="20" height="16" />
   <tile id="guard_chief" sheet="zargoroth_haven/zargoroth.prototype.png" x="0" y="0" />
   <animation id="guard_chief.idle" x="0" count="1" />
   <animation id="guard_chief.talk" x="0" count="9" length="2" />
   <animation id="guard_chief.attack" x="17" count="4" length="2" />
   <animation id="guard_chief.walk" x="9" count="9" />
-  <tile id="shopkeeper" sheet="zargoroth_haven/pyrrhos.prototype.png" x="0" y="0" />
+  <tile id="shopkeeper" sheet="zargoroth_haven/pyrrhos.png" x="0" y="0" />
   <animation id="shopkeeper.idle" x="8" count="1" />
   <animation id="shopkeeper.talk" x="0" count="8" />
   <animation id="shopkeeper.walk" x="9" count="10" />
