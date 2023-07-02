@@ -9,7 +9,7 @@
 
       1. Speak to CaptAln after meeting him, or speak to Alchemist after making the Dragon Ship to unlock the system.
 
-      2. The mods that have been redone in this mod are as follows:
+      2. The mods that will eventually be redone in this mod are as follows:
 
       Thirallan, The Realm of Dragons, Deathbourne, Robot Rebellion, and a completely new project.
 
@@ -23,7 +23,7 @@
     </steamDesc>
     <tag>KOZModdingColosseum</tag>
     <author>Alchemist</author>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <requires>Full Version</requires>
     <loadAfter>Thirallan</loadAfter>
     <loadAfter>Deathbourne</loadAfter>
