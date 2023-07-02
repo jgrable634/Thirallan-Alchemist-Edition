@@ -125,7 +125,6 @@
 	<animation id="fallen_angel.combo1" x="23" count="4" />
 	<animation id="fallen_angel.combo2" x="27" count="4" />
 	<animation id="fallen_angel.combo3" x="31" count="4" />
-	<animation id="fallen_angel.omni" x="32" count="3" />
 
 	<enemy id="fallen_angel_noBGM" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true">
 		<light tile="light.large" color="5C0000" />
@@ -153,8 +152,8 @@
 		<attack type="melee" damage="9" animation="combo1" hits="3">
 			<pre><play object='this' animation="combo_pre" /></pre>
 			<cont animation="combo2" damage="9" />
-			<cont animation="combo3" damage="15" />
-			<post><attack type="omni" damage="10" range="1" knockback="20" animation="omni" /><play object="this" animation="idle" /></post>
+			<cont animation="combo3" damage="12" knockback="20" />
+			<post><play object="this" animation="idle" /></post>
 		</attack>
 		<onDeath>
 			<choose>
