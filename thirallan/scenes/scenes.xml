@@ -578,12 +578,14 @@
 			<lerp object="fire" alpha="0" seconds="1" modal="false" />
 			<lerp object="mage" alpha="0" seconds="1" modal="false" />
 			<wait seconds="1.5" />
+			<music id="" />
 			<dialogue section="player" id="blood_moon3" speaker='player' />
 			<wait seconds="0.5" />
 			<lerp object="bg" alpha="1" seconds="1" modal="false" />
 			<lerp object="fire" alpha="1" seconds="1" modal="false" />
 			<lerp object="floating_blood" alpha="1" seconds="1" modal="false" />
 			<wait seconds="0.5" />
+			<music id="purified_encounter" seconds="1" />
 			<dialogue section="player" id="blood_moon4" speaker='player' />
 			<run procedure="blood_moon" />
 			<runAreaLoad/>
