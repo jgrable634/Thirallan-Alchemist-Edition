@@ -766,6 +766,10 @@
 			<dialogue section="pyrrhos" id="post_purifier1" speaker='shopkeeper' />
 			<dialogue section="pyrrhos" id="post_purifier2" speaker='shopkeeper' />
 			<wait seconds="1" />
+			<dialogue text="Since this is essentially the end of the corruption part of the mod for the current update, have a spellbook to purify your corrupted items" />
+			<item id="uncorrupt_book" count="1" />
+			<dialogue text="Thanks for playing" />
+			<wait seconds="1" />
 		</show>
 	</scene>
 </scenes>
