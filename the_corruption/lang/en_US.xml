@@ -13,6 +13,7 @@
   </section>
   <section id="warning">
     <text id="item_corrupted">{item} has been corrupted!</text>
+    <text id="item_purified">{item} has been purified!</text>
   </section>
   <section id="common">
     <text id="uncorrupt_structure">Cleansing Shrine</text>

@@ -15,4 +15,4 @@ Realm of Dragons, Some of Thirallan, Deathbourne, and the new project.
 
 4. There is a placeholder sprite: the Farmer Scene Sprite is a placeholder for the character: Pyrrhos.
 
-5. This mod has been created for the KOZ Modding Competition.
+5. This mod was originally created for the KOZ Modding Competition.

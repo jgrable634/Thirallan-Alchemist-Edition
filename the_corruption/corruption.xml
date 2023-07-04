@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <airom>
   <!-- Corrupted placeholder item, needs a custom icon -->
-  <item id="corrupted_item" icon="alien_heart.ico" type="equipment" weight="5" corruptible="false"/>
+  <item id="corrupted_item" icon="alien_heart.ico" animation="item6" type="equipment" weight="5" corruptible="false"/>
   <action>
     //Checks if an item is corruptible when passed that item's xml
     function isCorruptible(xml){
+      // type of tool, equipment, or animal, isn't a backpack, and has weight
       return (xml.get('corruptible') == null || xml.get('corruptible') == true) && (xml.get('type') == 'tool' || xml.get('type') == 'equipment' || xml.get('type') == 'animal') && (Std.parseInt(xml.get('weight')) >= 1) && (xml.get('slot') != 'back');
     }
     //Checks if the player has any gear that makes them immune to corruption
@@ -24,7 +25,7 @@
       if(corruptResist(player)) return;
       for(s in player.equipment.slots){
         if(s.get() != null && isCorruptible(s.get().info.xml)){
-          i = s.get();
+          i = s.get().getInfo();
           s.set(null);
           return nameCorrupted(player,i);
         }
@@ -70,7 +71,7 @@
     ];
   </action>
 
-  <object id="corrupted.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">
+  <object id="corrupted.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true" color="bf40bf">
     <addedToArea><action>Movement.seek(this, player, 10);</action></addedToArea>
     <over>
       <sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
@@ -78,7 +79,7 @@
       <remove object="this" />
     </over>
   </object>
-  <object id="corrupted_area.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true">
+  <object id="corrupted_area.orb" tile="spirit.corpse" animation="spirit.orb" layer="enemy" save="false" overlapVehicle="true" color="bf40bf">
     <addedToArea><action>Movement.seek(this, player, 10);</action></addedToArea>
     <over>
       <set id="p" value="random()" />
@@ -95,7 +96,7 @@
     </over>
   </object>
 
-  <object id="corrupted.corpse" tile="spirit.corpse" animation="spirit.corpse" removeOnComplete="true" layer="enemy" save="false">
+  <object id="corrupted.corpse" tile="spirit.corpse" animation="spirit.corpse" removeOnComplete="true" layer="enemy" save="false" color="bf40bf">
     <onComplete><object id="corrupted.orb" x="this.xPos/Tile.SIZE" y="this.yTile/Tile.SIZE"/></onComplete>
   </object>
   <procedure id="corrupted.death"><section if="killer != null">
@@ -116,7 +117,7 @@
     <run procedure="area_corruption" /><stop />
   </section>
 
-  To make an item resistant to corruption, add isCorruptible="false"
+  To make an item resistant to corruption, add corruptible="false"
   To make an item give the player immunity to corruption's affects, add corruptResist="true"
    -->
 </airom>

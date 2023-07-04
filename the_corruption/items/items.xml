@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
   <tile id="uncorrupt_book" equals="spellbook" />
-  <item id="uncorrupt_book" type="spellbook" behindPlayer="false" equip_anim="equipment.magic_book" cost="6000" stamina="200" weight="2" icon="spellbook.ico"  animation="magic_book.ico" use_stamina="true" staminaStat="spellcast" underwater="true" canModify="false" isCorruptible="false">
+  <item id="uncorrupt_book" type="spellbook" behindPlayer="false" equip_anim="equipment.magic_book" cost="6000" stamina="200" weight="2" icon="spellbook.ico"  animation="magic_book.ico" use_stamina="true" staminaStat="spellcast" underwater="true" canModify="false" corruptible="false">
     <use slot="shield" /><action id="use" name="cast">
       <stop if="player.renderer.equipComplete != null" />
       <section if="player.vehicle != null"><dialogue section="warning" id="no_use_vehicle" /><stop /></section>
