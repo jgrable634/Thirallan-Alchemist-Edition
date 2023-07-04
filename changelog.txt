@@ -1,3 +1,6 @@
 since v1.1.0
 - fix corruption procedure for equipped items
 - book of cleansing can no longer be corrupted
+- Draemordian Armor can no longer be corrupted
+- Book of cleansing is given to the player at the end of Thirallan Part One (can still get it if they already saw the cutscene, just talk to Zargoroth again)
+- Removed an unnecessary png
