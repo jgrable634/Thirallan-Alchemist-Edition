@@ -33,7 +33,7 @@
     </steamDesc>
     <tag>KOZModdingColosseum</tag>
     <author>Alchemist</author>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <requires>Full Version</requires>
     <loadAfter>Thirallan</loadAfter>
     <loadAfter>Deathbourne</loadAfter>
