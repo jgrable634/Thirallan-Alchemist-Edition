@@ -126,6 +126,10 @@
             <scene id="thirallan_alchemist" show="post_purifier1" with="fade" />
             <run procedure="distressDragons" />
           </section>
+          <section if="player.questComplete('undead_shrines') && !player.hasSeenItem('uncorrupt_book')">
+            <quest/>
+            <scene id="thirallan_alchemist" show="post_purifier1" with="fade" />
+          </section>
           <!--section if="!player.hasQuest('thirallan_faction_war1') && player.questComplete('undead_shrines')">
             <dialogue section="zargoroth" id="faction_war_island1" speaker='this' />
             <dialogue section="zargoroth" id="faction_war_island2" speaker='this' />
