@@ -34,8 +34,19 @@
   </familiar>
 
   <tile id="peredur.ico" sheet="icos.png" x="0" y="0" />
-  <item id="peredur" type="animal" slot="familiar" icon="peredur.ico" corruptible="false" canStore="false">
-    <action id="equip" /><action id="rename" />
+  <item id="peredur" type="animal" icon="peredur.ico" corruptible="false" canStore="false">
+    <action id="use" name="actions.summon" enabled="!player.isEquipped('peredur_familiar')">
+      <action>getLocalPlayer().equipment.forceEquip("familiar",player,getItem("peredur_familiar").asItem());</action>
+    </action>
+    <action id="use" name="actions.dismiss" enabled="player.isEquipped('peredur_familiar')">
+      <action>getLocalPlayer().equipment.forceEquip("familiar", player)</action>
+    </action>
+    <action id="use" name="npc.talk">
+      <scene id="thirallan_alchemist" show="peredur_info" with="fade" />
+    </action>
+  </item>
+  <item id="peredur_familiar" type="animal" slot="familiar" icon="peredur.ico" unequip="false" corruptible="false" canStore="false">
+    <action id="use" name="common.remove" closeWindow="false"><action>player.equipment.forceEquip(this.xml.get("slot"), player)</action></action>
     <familiar id="peredur" tile="mage" animation="mage" />
   </item>
 

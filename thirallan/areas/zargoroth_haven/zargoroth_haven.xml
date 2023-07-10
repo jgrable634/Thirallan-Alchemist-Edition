@@ -22,7 +22,11 @@
     <objects id="tree" y="-1" startX="0" endX="50" minDist="6" maxDist="6" array="left" />
     <objects id="tree" y="-1" startX="100" endX="150" minDist="6" maxDist="6" array="right" />
     <structure id="hut" x="60" y="-1" />
-    <structure id="storehouse" x="70" y="-1" />
+    <structure id="storehouse" x="70" y="-1">
+      this.inventory.addItems('iron_bar', 5);
+      this.inventory.addItems('wood', 5);
+      this.inventory.addItems('coal', 15);
+    </structure>
     <structure id="kitchen2" x="80" y="-1" />
     <structure id="thirallan_zargoroth.mines" x="90" y="-1" />
     <object id="peredur" x="25" y="-1" />

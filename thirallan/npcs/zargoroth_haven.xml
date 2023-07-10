@@ -217,6 +217,14 @@
       <awaken><action>this.inventory.clear();</action><run procedure="pyrrhos.restock" /></awaken>
     </npc>
 
+
+    <procedure id="peredur.current_objective">
+      <choose>
+        <dialogue section="peredur" id="shrines" speaker='mage' if="!player.questComplete('undead_shrines')" />
+        <dialogue section="peredur" id="placeholder_scene" speaker='mage' if="!player.hasQuest('thirallan_faction_war1')"/>
+      </choose>
+    </procedure>
+
     <npc id="mage" talk_sfx="talking2" />
     <npc id="peredur" tile="mage" action="talk" talk_sfx="talking2" night="true" animation="mage">
       <idle class="hunt" maxWeight="30">
@@ -236,7 +244,8 @@
             <dialogue section="peredur" id="departure" speaker='this' />
             <choice id="yes">
               <dialogue section="peredur" id="departure2" speaker='this' />
-              <action>player.equipment.forceEquip("familiar",player,getItem("peredur").asItem());</action>
+              <action>player.equipment.forceEquip("familiar",player,getItem("peredur_familiar").asItem());</action>
+              <item id="peredur" count="1" />
               <remove object='this' />
               <quest id="undead_shrines" ask="false" />
             </choice>
@@ -244,6 +253,9 @@
               <dialogue section="peredur" id="departure3" speaker='this' />
             </choice>
           </menu>
+        </section>
+        <section if="player.questComplete('undead_shrines')">
+          <scene id="thirallan_alchemist" show="peredur_info_stage2" with="fade" />
         </section>
       </operate>
     </npc>

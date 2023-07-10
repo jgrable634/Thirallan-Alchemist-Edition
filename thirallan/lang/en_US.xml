@@ -18,7 +18,7 @@
 
   <section id="common">
     <text id="beast_forest">Forest of Beasts</text>
-    <text id="zargoroth">Zargoroth's Safe Haven</text>
+    <text id="zargoroth_map">Zargoroth's Safe Haven</text>
     <text id="undying_peninsula">Undying Peninsula</text>
     <text id="mountains">Thirallan Mountain Range</text>
     <text id="rotting_forest">Rotting Forest</text>
@@ -51,6 +51,9 @@
     <text id="fangs">About [color=770000]The Fangs[/color]</text>
     <text id="phoenixes">About [color=770000]The Phoenixes[/color]</text>
     <text id="gold_diggers_haven_about">About [color=770000]Gold Digger's Haven[/color]</text>
+    <text id="research">Ask about his research</text>
+    <text id="zargoroth">Ask about [color=770000]Zargoroth[/color]</text>
+    <text id="umazz">Ask about [color=770000]"Umazz"?[/color]</text>
   </section>
 
   <section id="warning">
@@ -69,7 +72,8 @@
 
   <section id="item.names">
     <text id="thirallan_map">Map of Thirallan</text>
-    <text id="peredur">Peredur</text>
+    <text id="peredur">Peredur Summoner</text>
+    <text id="peredur_familiar">Peredur</text>
     <text id="init_rite">Rite of Initiation</text>
     <text id="lost_artifact">Lost Artifact</text>
     <text id="corruption_book">Book of Corruption</text>
@@ -101,6 +105,7 @@
   <section id="actions">
     <text id="artifact">Scavenge</text>
     <text id="struggle">Struggle</text>
+    <text id="dismiss">Dismiss</text>
   </section>
 
   <section id="zargoroth">
@@ -120,14 +125,14 @@
     <text id="proving_worth3a">They have a power known as [color=490068]Corruption[/color]. It can infest your equipment, rendering them useless, I'm sure you've had it happen to at least one piece of your equipment. There is something strange about it though...</text>
     <text id="proving_worth3b">It infests stuff within your backpack, but never infests your entire backpack. So don't worry about replacing that.</text>
     <text id="proving_worth3c">In some places, it takes just the nearby environment to corrupt your gear! So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
-    <text id="proving_worth4a">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. We haven't been able to get a workshop and smelter set up due to [color=490068]The Corrupted[/color]'s increased harassment of the town.</text>
-    <text id="proving_worth4b">Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Here's a spare [item=malumite_pickaxe] in case yours got corrupted.</text>
+    <text id="proving_worth4a">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. Our workshop and smelter were destroyed due to [color=490068]The Corrupted[/color]'s increased harassment of the town.</text>
+    <text id="proving_worth4b">Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Also the materials for a new workshop and smelter are in the storehouse. Here's a spare [item=malumite_pickaxe] in case yours got corrupted.</text>
     <text id="proving_worth5">That's fine, I understand, but if you change your mind, come talk to me again.</text>
     <text id="proving_worth6">Ah you're back, are you ready?</text>
     <text id="proving_worth7">I need you to collect [item=malumite_ore] for corruption resistant gear. You need at least [color=770000]11[/color] [item=malumite_bar]s.</text>
     <text id="proving_worth8">So, now you are prepared for my request. Speak with me again when you are ready.</text>
-    <text id="undead_rumors1">So... There have been rumors that the increase in [color=490068]The Corrupted[/color]'s numbers lately have been no coincidence, the latest lead was found by [object=andreas] in the mines.</text>
-    <text id="undead_rumors2">I'd appreciate it if you investigated it... Be wary, I'm unsure of exactly what he found.</text>
+    <text id="undead_rumors1">There have been rumors that the increase in [color=490068]The Corrupted[/color]'s numbers lately have been no coincidence, the latest lead was found by [object=andreas] in the mines.</text>
+    <text id="undead_rumors2">I'd appreciate it if you investigated it. Be wary, I'm unsure of exactly what he found.</text>
     <text id="undead_rumors3">I need you to get [object=andreas] to show you what he found in the [color=770000]Mines[/color], so we can put this rumor to rest.</text>
     <text id="undead_rumors4">Ah, do you have something of worth to tell? The look on your face says you do.</text>
     <text id="undead_rumors5">You... what? Well that's troubling. A few scouts have reported similar looking structures, I think it's time I give you a [item=thirallan_map].</text>
@@ -136,6 +141,7 @@
     <text id="peredur_blood_moon">I need you to do as [object=peredur] asks before you leave.</text>
     <text id="explore_thirallan">Please, explore Thirallan, figure out the secrets behind these [color=770000]Shrines[/color].</text>
     <text id="recruiting">Forgive me, but is there a reason you value the people at the [color=770000]Monastery[/color] enough to take my people? What have they done for you that I haven't? I don't get it.</text>
+    <text id="placeholder_scene">In a future update, I'll have something more for you.</text>
 
     <text id="post_purifier1">You're back! Surprising the corrupted haven't seem to put a dent in you! So what did you find out about the shrines?</text>
     <text id="post_purifier2">You... What? That has got to be the strangest thing I've ever heard... Regardless, what did killing this... "Purifier" do?</text>
@@ -232,6 +238,8 @@
     <text id="rotting_forestShrine2">Wait... Something's wrong. I feel like...</text>
     <text id="rotting_forestShrine3">Umazz!?</text>
     <text id="rotting_forestShrine4">What was he... Forget it. It's none of your business, don't bother asking.</text>
+    <text id="shrines">You haven't seriously forgotten right? We have to find the remaining shrines across the island. They should be in the Rotting Forest, Undying Peninsula, Fang Plains, Gold Digger's Haven, and Pheonix Plateau.</text>
+    <text id="placeholder_scene">In a future update I'll have more for you to do.</text>
 
     <text id="peredur_desk1">Entry one, who knows what date: The Mage Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
     <text id="peredur_desk2">Now I sit here in some ruins under a town that would likely shun someone like me, contemplating what to do with my life, how to restart, how to at least attempt to redeem myself.</text>
@@ -244,6 +252,24 @@
     <text id="post_purifier2">I am a former member of the cult that worshipped it.</text>
     <text id="post_purifier3">Yes, why overcomplicate it?</text>
     <text id="post_purifier4">Simple, we unite the remaining people of this island to assist in the restoring of the island.</text>
+  </section>
+  <section id="peredur_info">
+    <text id="selection">What is it? I don't have much time.</text>
+    <text id="peredur1">Huh, wasn't expecting that. Well all you need to know is that I'm trying to uncover secrets about the corruption, and ways to stop it from causing further havoc on the planet.</text>
+    <text id="zargoroth1">Hmph, I suppose I shouldn't speak poorly of him since he did welcome me into the town. That being said he tends to treat me like I'm his kid or something, its outrageous!</text>
+    <text id="zargoroth2">I don't understand why he views me like he does, sometimes I really do just want to put him in his place. He has no idea of a tenth of what I'm capable of!</text>
+    <text id="zargoroth3">But no matter. Its quite unproductive to try to understand others thoughts, I must dedicate more to my research.</text>
+    <text id="pyrrhos1">He's alright, although I fail to understand his motives for being ultimately passive. He sells weapons, but uses none of them, its strange to say the least.</text>
+    <text id="pyrrhos2">I suppose he's more useful to people like you that have need of what he has and has coin, but I have neither of those, and I don't need them.</text>
+    <text id="andreas1">I almost feel bad for him. Unfortunately for me my view is skewed because I've been through worse than him. Not to discount his story, its traumatic.</text>
+    <text id="andreas2">I would know. I saved him. It was when [color=490068]The Corrupted[/color] threat really started to escalate.</text>
+    <text id="andreas3">They hadn't found malumite yet, so one of them bursted and it melted his armor like butter. Almost burned through his stomach too, but I killed the remaining corrupted and got him to safety.</text>
+    <text id="monastery1">Heh, hope you don't plan to negotiate with those fanatics. They should've just restarted after the war, but instead those four still cling onto lost hope.</text>
+    <text id="monastery2">Not to mention, they also stick to themselves, not letting anyone else in, its a fools errand trying to interact with them, they don't really care about you.</text>
+    <text id="umazz1">Look, he... He is an old friend, one I do not regard as such any longer. Him and his guild have done terrible things to this island, something I won't soon forget</text>
+    <text id="umazz2">I work as hard as I can to right the wrongs they have made, to fight back against them, and make this island habitable again.</text>
+    <text id="research1">If you must know, it is difficult because I haven't seen the process of a corrupted being created just yet. I can't figure out yet if there is some actual substance in the corrupted blood or if its magical by nature.</text>
+    <text id="research2">Unfortunately any method of monitoring a corrupted transformation currently involves inhumane methods, and I won't stoop to that level.</text>
   </section>
   <section id="tomkin">
     <text id="stranger">Oh... Hello. Don't recognize you, if you are new around here, I advise you work with [object=zargoroth_npc] before you do anything else.</text>

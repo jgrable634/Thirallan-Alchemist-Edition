@@ -439,7 +439,7 @@
 					<play object="thirallan_map" animation="thirallan_map.thirallan_beast_forest" loop="true" />
 					<window type="prompt" xalign="1" message="map.travel_beast_forest" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_beast_forest" x="75" y="-1" with="ellipse" /></invokeLater></window>
 				</choice>
-				<choice id="zargoroth">
+				<choice id="zargoroth_map">
 					<play object="thirallan_map" animation="thirallan_map.thirallan_zargoroth" loop="true" />
 					<window type="prompt" xalign="1" message="map.travel_zargoroth" on="yes"><invokeLater seconds="0.25"><teleport area="thirallan_zargoroth" x="75" y="-1" with="ellipse" /></invokeLater></window>
 				</choice>
@@ -537,8 +537,9 @@
 			<dialogue section="zargoroth" id="second1" speaker='guard_chief' />
 			<dialogue section="pyrrhos" id="second1" speaker='shopkeeper' />
 			<dialogue section="zargoroth" id="second2" speaker='guard_chief' />
-			<action>mage.alpha = 1;</action>
-			<!--play object="mage" animation="mage.teleport" modal="true" /-->
+			<lerp object="mage" alpha="1" seconds="0.25" />
+			<!--action>mage.alpha = 1;</action>
+			<play object="mage" animation="mage.teleport" modal="true" /-->
 			<dialogue section="peredur" id="second1" speaker='mage' />
 			<dialogue section="zargoroth" id="second1" speaker='guard_chief' />
 			<lerp object="guard_chief" alpha="0" seconds="0.25" />
@@ -686,6 +687,56 @@
 					<wait />
 					<lerp object="thirallan_map" alpha="0" seconds="0.25" />
 					<dialogue section="zargoroth_info" id="gold_diggers_haven2" speaker='guard_chief' />
+				</choice>
+			</menu>
+		</show>
+		<show id="peredur_info">
+			<layer id="thirallan_travel_bg" />
+			<layer id="thirallan_bg" if="area.id == 'thirallan_zargoroth'"/>
+			<layer id="mage" />
+			<section if="!player.isEquipped('peredur_familiar')">
+				<action>mage.alpha = 0;</action>
+				<wait seconds="1" />
+				<lerp object="mage" alpha="1" seconds="0.25" />
+				<!--action>mage.alpha = 1;</action>
+				<play object="mage" animation="mage.teleport" modal="true" /-->
+			</section>
+			<wait seconds="1" />
+			<menu section="common" width="110" cols="2" closeable="true">
+				<dialogue section="peredur_info" id="selection" speaker='mage' />
+				<choice id="current_objective">
+					<run procedure="peredur.current_objective" />
+				</choice>
+				<choice id="himself">
+					<dialogue section="peredur_info" id="peredur1" speaker='mage' />
+				</choice>
+				<choice id="research">
+					<section if="!player.questComplete('undead_shrines')">
+						<dialogue section="peredur_info" id="research1" speaker='mage' />
+						<dialogue section="peredur_info" id="research2" speaker='mage' />
+					</section>
+				</choice>
+				<choice id="zargoroth">
+					<dialogue section="peredur_info" id="zargoroth1" speaker='mage' />
+					<dialogue section="peredur_info" id="zargoroth2" speaker='mage' />
+					<dialogue section="peredur_info" id="zargoroth3" speaker='mage' />
+				</choice>
+				<choice id="pyrrhos">
+					<dialogue section="peredur_info" id="pyrrhos1" speaker='mage' />
+					<dialogue section="peredur_info" id="pyrrhos2" speaker='mage' />
+				</choice>
+				<choice id="andreas">
+					<dialogue section="peredur_info" id="andreas1" speaker='mage' />
+					<dialogue section="peredur_info" id="andreas2" speaker='mage' />
+					<dialogue section="peredur_info" id="andreas3" speaker='mage' />
+				</choice>
+				<choice id="monastery">
+					<dialogue section="peredur_info" id="monastery1" speaker='mage' />
+					<dialogue section="peredur_info" id="monastery2" speaker='mage' />
+				</choice>
+				<choice id="umazz">
+					<dialogue section="peredur_info" id="umazz1" speaker='mage' />
+					<dialogue section="peredur_info" id="umazz2" speaker='mage' />
 				</choice>
 			</menu>
 		</show>
