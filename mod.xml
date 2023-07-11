@@ -62,6 +62,7 @@
       <include id="en_US.xml" includeRoot="true" />
       <include id="entry.xml" />
       <include id="arena/arena.xml" />
+      <include id="journal.xml" />
 
       <section if="getMod('thirallan') != null && getMod('thirallan').isEnabled()">
         <system id="thirallan" x="-50" />
