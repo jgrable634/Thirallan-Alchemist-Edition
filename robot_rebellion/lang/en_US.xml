@@ -36,6 +36,7 @@
 	<section id="structure.tooltip">
 		<text id="moltanium_forge">Craft</text>
 		<text id="RB_room_door">Enter</text>
+		<text id="holo_projector">Activate</text>
 	</section>
 
 	<section id="item.names">

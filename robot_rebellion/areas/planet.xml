@@ -264,7 +264,7 @@
 				{id : "bunker_depot", offsetX : 1, structure : true}, 
 				{id : "bunker", offsetX : 1, structure : true}, 
 				{id : "lava_trap", offsetX : 0, structure : false}, 
-				{id : "holo_projector", offsetX : 0, structure : false},
+				{id : "holo_projector", offsetX : 1.5, structure : true},
 				{id : "robot_log1", offsetX : 2, structure : true},
 				{id : "robot_log2", offsetX : 2, structure : true},
 				{id : "molten_cyborg", offsetX : 2, structure : false}
@@ -310,6 +310,7 @@
 
 		</action>
 		<spawner id="whip_bot" time="3000" count="8" fromX="10" toX="41" fromY="11" toY="31" />
+		<object id="holo_projector_dummy" x="0" y="0" />
 		<init>
 			<runAreaLoad/>
 			<action>area.spawner.spawnAll('whip_bot');</action>

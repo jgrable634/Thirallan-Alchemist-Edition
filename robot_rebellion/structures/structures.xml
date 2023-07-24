@@ -190,10 +190,10 @@
 	</object>
 	<object id="RB_power_cores" tile="power_cores" animation="item4" />
 
-	<structure id="moltanium_forge" width="128" height="112" image="moltanium_forge.png" type="crafting" title="actions.craft">
+
+	<animation id="moltanium_forge.idle" x="0" count="4" />
+	<structure id="moltanium_forge" width="100" height="100" image="molt_forge.png" animation="item4" type="crafting" title="actions.craft">
 		<recipe type="robot_factory" />
-		<over><action>this.loopAnimation("golem_factory.active")</action></over>
-		<out><action>this.loopAnimation("golem_factory.idle")</action></out>
 		<operate>
 			<section if="area.id == 'RB_ship_robots' && !player.hasSeenItem('moltanium_forge_blueprint')">
 				<dialogue section="ship" id="moltanium_forge" />
@@ -203,6 +203,9 @@
 				</invokeLater>
 			</section>
 		</operate>
+		<over><action>this.loopAnimation("moltanium_forge.idle")</action></over>
+		<out><action>this.loopAnimation("moltanium_forge.idle")</action></out>
+		<addedToArea><action>this.loopAnimation("moltanium_forge.idle")</action></addedToArea>
 	</structure>
 
 	<tile id="RB_vent" sheet="vent.png" x="0" y="0" />
@@ -284,13 +287,8 @@
 		</over>
 	</object>
 
-	<tilesheet id="holo_projector.png" width="10" height="21" />
-	<tile id="holo_projector" sheet="holo_projector.png" x="0" y="0" />
-	<animation id="holo_projector.idle" x="0" count="1" />
-	<animation id="holo_projector.talk" x="0" count="1" />
-	<animation id="holo_projector.form" x="1" count="15" length="2" />
-	<animation id="holo_projector.idleForm" x="15" count="1" />
-	<npc id="holo_projector" tile="holo_projector" action="talk" talk_sfx="talking3">
+
+	<npc id="holo_projector_dummy" talk_sfx="talking3">
 		<operate>
 			<section>
 				<dialogue section="projector" id="captain1" speaker='this' />
@@ -307,6 +305,29 @@
 		</operate>
 	</npc>
 
+	<animation id="holo_projector.idle" x="0" count="1" />
+	<animation id="holo_projector.talk" x="8" count="3" length="2" />
+	<animation id="holo_projector.form" x="0" count="8" />
+	<animation id="holo_projector.idleForm" x="8" count="3" length="2" />
+	<structure id="holo_projector" width="24" height="48" image="holograph_projector.png" name="activate">
+		<operate>
+			<set id="holo" value="area.getObject('holo_projector_dummy')" />
+			<dialogue section="projector" id="captain1" speaker='holo' />
+			<dialogue section="projector" id="captain2" speaker='holo' />
+			<play object='this' animation="holo_projector.form" modal="true" />
+			<play object='this' animation="holo_projector.idleForm" loop="true" />
+			<wait seconds="1">
+				<operate object="this" />
+			</wait>
+			<dialogue section="projector" id="captain3" />
+			<dialogue section="projector" id="captain4" />
+			<dialogue section="projector" id="captain5" />
+			<dialogue section="projector" id="captain6" speaker='holo' />
+			<play object='this' animation="holo_projector.idle" loop="true" />
+			<action>setFlag('captainRecording',true);</action>
+		</operate>
+	</structure>
+
 	<structure id="robot_log1" width="11" height="12" image="medicom.png" name="read">
 		<operate>
 			<dialogue text="December 25th - The captain must be joking! Even less tests on the bots? They start to get worse and he suggests we STOP trying to improve them and test to make sure nothing bad happens???" />
@@ -315,7 +336,7 @@
 
 	<structure id="robot_log2" width="11" height="12" image="medicom.png" name="read">
 		<operate>
-			<dialogue text="March 23rd - Somebody is really trying to piss me off, they keep changing the coding of the bots to do things they aren't supposed to, no one wants to own up, what happened then, did they suddenly gain fucking sentience???" />
+			<dialogue text="March 23rd - Somebody is really trying to piss me off, they keep changing the coding of the bots to do things they aren't supposed to, no one wants to own up, what happened then, did they suddenly gain sentience???" />
 		</operate>
 	</structure>
 
