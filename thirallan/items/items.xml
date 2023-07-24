@@ -2,6 +2,7 @@
 <items>
   <!--include id="spears/spears.xml" /-->
   <include id="navMap.xml" />
+  <include id="journal.xml" />
   <tilesheet id="icos.png" width="16" height="10" />
   <tile id="thirallan_map.ico" sheet="icos.png" x="1" />
 

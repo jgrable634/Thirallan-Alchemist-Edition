@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<data>
+    <data type="journal_collection">
+		this.id = this.xml.get('id');
+		this.journals = function() {
+			if(this._journals == null) {
+				this._journals = [];
+				for(journal in this.xml.elementsNamed('journal')) {
+					this._journals.push({id: journal.get('id'), icon: getData('journal', journal.get('id')).icon});
+				}
+			}
+            return this._journals;
+		}
+    </data>
+
+    <data type="journal">
+        this.id = this.xml.get('id');
+        this.length = this.xml.get('length');
+        this.icon = this.xml.get('icon');
+        this.getPage = function(pageNumber) {
+            if(pageNumber >= this.length) return null;
+            if(this._pages == null) {
+                this._pages = [];
+                var i = 1;
+                for(page in this.xml.elementsNamed('page')) {
+                    var pageIndex = Std.parseInt(page.get('index'));
+                    // insert default pages for missing pages in the tag
+                    while(pageIndex > i) {
+                        this._pages.push({index: i, found: 'getFlag("this.id' + '_journal_' + pageIndex + '")'});
+                        i++;
+                    }
+                    // insert page with custom found condition at this index
+                    this._pages.push({index: pageIndex, found: page.get('found')});
+                    i++;
+                }
+            }
+            return this._pages[pageNumber - 1];
+        }
+    </data>
+
+    <journal_collection id="thirallan">
+        <journal id="peredur" />
+    </journal_collection>
+
+    <journal id="peredur" length="2" icon="mage">
+        <page index="1" found="player.questComplete('blood_moon')" />
+        <page index="2" found="getFlag('pyrrhos_met')" />
+    </journal>
+
+    <window id="journals_overview" type="xml" closeButton="true" closeable="true" width="100" height="128">
+        <text section="journal" id="select" x="50" y="4" center="true" />
+        <list x="2" y="16" cols="1" rows="9">
+            <renderer width="96" height="16">
+                <tile id="item.icon" x="0" y="0"/>
+                <text text="item.text" x="20" y="0" align="left"/>
+                <onSelect>
+                    <action>
+					    window.close();
+                    </action>
+                    <set id="journalId" value="item.text" />
+                    <set id="pageNumber" value="1" />
+                    <run procedure="journal_view" />
+                </onSelect>
+            </renderer>
+            <init>
+                for(journal in getData('journal_collection', 'thirallan').journals()){
+                    addItem({text: journal.id, icon: journal.icon});
+                }
+            </init>
+        </list>
+    </window>
+
+    <procedure id="journal_view">
+        <action>
+            // variables needed: journal id, page number
+            var window = '&lt;window type="xml" closeButton="true" closeable="true" width="100" height="128"&gt;';
+            window += '&lt;text text="' + journalId + '\'s Journal" x="50" y="4" center="true" /&gt;';
+            window += '&lt;formattedText ';
+            trace(getText(journalId + '&gt;journal_' + pageNumber));
+            if(eval(getData('journal', journalId).getPage(pageNumber).found)) {
+                window += 'text="' + getText(journalId + '&gt;journal_' + pageNumber).get() + '"';
+            } else {
+                window += 'section="journal" id="not_found"';
+            }
+            window += ' x="2" y="16" width="96" /&gt;';
+
+            window += '&lt;/window&gt;';
+            evalXml(window);
+        </action>
+    </procedure>
+    
+    <lang id="en_US">
+        <section id="journal">
+            <text id="select">Select a journal</text>
+            <text id="not_found">You haven't found this page yet</text>
+        </section>
+        <section id="peredur">
+            <text id="journal_1">Hello this is a journal filled with interesting text. yes. very.</text>
+            <text id="journal_2">Hi</text>
+        </section>
+    </lang>
+</data>
