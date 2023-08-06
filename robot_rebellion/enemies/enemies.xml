@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <enemies>
-	<tilesheet id="whip_bot2.png" width="40" height="32" />
-	<tile id="whip_bot" sheet="whip_bot2.png" x="0" y="0" />
-	<animation id="whip_bot.idle">
-		<frame x="0" />
-		<frame x="1" />
-		<frame x="2" />
-		<frame x="3" length="3" />
+	<tilesheet id="whip_bot.png" width="32" height="40" />
+	<tile id="whip_bot" sheet="whip_bot.png" x="0" y="0" />
+	<animation id="whip_bot.whipIdle" x="0" offsetX="1">
+		<frame x="0" offsetX="1" />
+		<frame x="1" offsetY="1" offsetX="1" />
+		<frame x="2" offsetX="1" />
+		<frame x="0" offsetY="-1" offsetX="1" />
+		<frame x="1" offsetY="-2" offsetX="1" />
+		<frame x="2" offsetY="-1" offsetX="1" />
 	</animation>
-	<animation id="whip_bot.walk" x="4" count="3" />
-	<animation id="whip_bot.attack" x="7" count="6" length="2" />
+	<animation id="whip_bot.whipAttack" x="2" count="6" offsetX="1" />
+	<animation id="whip_bot.idle" x="0" count="6">
+		<append tile="robot_whip" offsetX="-0.5" animation="whip_bot.whipIdle" />
+	</animation>
+	<animation id="whip_bot.walk" equals="whip_bot.idle" />
+	<animation id="whip_bot.attack" x="7" count="6">
+		<append tile="robot_whip" offsetX="-0.5" animation="whip_bot.whipAttack" />
+	</animation>
 	<enemy id="whip_bot" tile="whip_bot" health="25" defense="6" speed="1.5" damage="15" range="30" type="surface" vertical="true" passEnemies="true" friendlyFire="false">
 		<loot id="moltanium_ore" p="16" />
 		<loot id="robot_core" p="10" />
@@ -45,10 +53,10 @@
 				<projectile tile="laser_bolt" animation="laser_bolt" speed="3" range="20" />
 		</attack>
 	</enemy>
-	<tilesheet id="robot_miniTank.png" width="32" height="20" />
-	<tile id="moltanium_tank" sheet="robot_miniTank.png" x="0" y="0" />
+	<tilesheet id="minitank.png" width="39" height="17" />
+	<tile id="moltanium_tank" sheet="minitank.png" x="0" y="0" />
 	<animation id="moltanium_tank.idle" x="0" count="1" />
-	<animation id="moltanium_tank.walk" x="0" count="3" />
+	<animation id="moltanium_tank.walk" x="0" count="3" length="3" />
 	<animation id="moltanium_tank.attack" x="3" count="3" length="2" />
 	<enemy id="small_tank" tile="moltanium_tank" health="25" defense="5" speed="2" range="10" type="surface" passEnemies="true" friendlyFire="false">
 		<loot id="moltanium_ore" p="16" />

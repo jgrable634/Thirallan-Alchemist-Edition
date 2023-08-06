@@ -4,6 +4,7 @@
 	<tilesheet id="item_tiles.png" width="16" height="10" />
 	<tilesheet id="robo_swords.png" width="32" height="24" />
 	<tilesheet id="molt_whip.png" width="52" height="24" />
+
 	<tile id="robot_sword.ico" sheet="item_tiles.png" x="0" y="0" />
 	<tile id="robot_sword" sheet="robo_swords.png" x="0" y="0" />
 	<animation id="equipment.robot_sword.idle" count="4" x="0" offsetX="-6" offsetY="-5" />
@@ -23,18 +24,18 @@
 	<animation id="equipment.robot_whip" count="5" x="3" offsetX="-15" offsetY="-5" />
 	<tile id="robot_leg.ico" sheet="item_tiles.png" x="3" y="0" />
 	<tile id="whip_bot.ico" sheet="item_tiles.png" x="3" y="1" />
-	<tile id="large_drone.ico" sheet="item_tiles.png" x="1" y="2" />
-	<tile id="small_tank.ico" sheet="item_tiles.png" x="2" y="2" />
-	<tile id="robot_core.ico" sheet="item_tiles.png" x="1" y="3" />
-	<tile id="robot_wheel.ico" sheet="item_tiles.png" x="3" y="4" />
-	<tile id="robot_thruster.ico" sheet="item_tiles.png" x="1" y="5" />
-	<tile id="moltanium_ore.ico" sheet="item_tiles.png" x="2" y="5" />
-	<tile id="moltanium.ico" sheet="item_tiles.png" x="3" y="5" />
-	<tile id="RB_keycard.ico" sheet="item_tiles.png" x="0" y="6" />
-	<tile id="screwdriver.ico" sheet="item_tiles.png" x="1" y="6" />
+	<tile id="large_drone.ico" sheet="item_tiles.png" x="0" y="2" />
+	<tile id="small_tank.ico" sheet="item_tiles.png" x="1" y="2" />
+	<tile id="robot_core.ico" sheet="item_tiles.png" x="2" y="2" />
+	<tile id="robot_wheel.ico" sheet="item_tiles.png" x="0" y="4" />
+	<tile id="robot_thruster.ico" sheet="item_tiles.png" x="1" y="4" />
+	<tile id="moltanium_ore.ico" sheet="item_tiles.png" x="2" y="4" />
+	<tile id="moltanium.ico" sheet="item_tiles.png" x="3" y="4" />
+	<tile id="RB_keycard.ico" sheet="item_tiles.png" x="0" y="5" />
+	<tile id="screwdriver.ico" sheet="item_tiles.png" x="1" y="5" />
 
 	<!--items-->
-	<item id="robot_sword" type="equipment" slot="weapon" cost="1000" weight="10" attack="12" critical="true" stamina="10" durability="1000" range="1.5" icon="robot_sword.ico" repair="titanium">
+	<item id="robot_sword" type="equipment" slot="weapon" cost="1000" weight="10" attack="12" critical="true" stamina="10" durability="1000" range="1.5" icon="robot_sword.ico" repair="moltanium">
 		<action id="equip" name="equip" />
 	</item>
 	<item id="abyssal_blade" type="equipment" slot="weapon" cost="1000" weight="10" attack="21" critical="true" stamina="50" durability="1000" range="1.5" icon="abyssal_blade.ico" repair="exotic_matter">
@@ -42,7 +43,7 @@
 	</item>
 	<item id="RB_screwdriver" type="tool" icon="screwdriver.ico"/>
 	<item id="robot_blaster" type="resource" cost="1000" weight="3" animation="robot_blaster" icon="robot_blaster.ico" />
-	<item id="robot_whip" type="equipment" slot="weapon" cost="1000" weight="8" attack="12" stamina="15" durability="1000" range="3" icon="robot_whip.ico" repair="titanium">
+	<item id="robot_whip" type="equipment" slot="weapon" cost="1000" weight="8" attack="12" stamina="15" durability="1000" range="3" icon="robot_whip.ico" repair="moltanium">
 		<action id="equip" name="equip" />
 	</item>
 	<item id="robot_core" type="resource" cost="750" weight="5" animation="item6" icon="robot_core.ico" />
