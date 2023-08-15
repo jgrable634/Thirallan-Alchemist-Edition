@@ -91,6 +91,7 @@
     <text id="jacominus_katana">Katana Fragment</text>
     <text id="mines_note1">Strange Note</text>
     <text id="mines_note2">Strange Note</text>
+    <text id="mines_note3">Strange Note</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
@@ -101,6 +102,7 @@
     <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
     <text id="mines_note1">We're noticing strange energy in this stone, it was barely detectable from the surface, but here its far more noticeable. Will note signs of Dark Cult.</text>
     <text id="mines_note2">The cult must know we are here, cave ins are rampant now, the stones almost seem to be shifting. I'm worried workers will get trapped in our checkpoints. We shoud be safe enough though.</text>
+    <text id="mines_note3">In one of the ruins down here, we found likely evidence of the cult. There is this statue depicting an angel. How strange that the cult would make this, why? It gives off a strange energy so it has to be them.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>

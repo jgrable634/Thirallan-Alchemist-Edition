@@ -532,4 +532,7 @@
     </removedFromArea>
   </structure>
 
+  <!--Test for future areas-->
+  <object id="fake_monastery_wall" tile="monastery_stone" layer="top" />
+
 </structures>

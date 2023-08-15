@@ -64,44 +64,6 @@
     </onLoad>
   </area>
 
-  <area id="jacominus_rest" width="20" height="30">
-    <tiles id="fuck_off_stone" start="0" end="1" />
-    <action>
-      for(x in 1...20) for(y in 19...30) mine(x,y);
-      for(x in 1...20) for(y in 1...13) mine(x,y);
-      for(y in 13...20) mine(10,y);
-    </action>
-    <object id="jacominus" x="10" y="3" />
-  </area>
-
-  <!--action>
-    function disperse_cave_in(x, y){
-      var randTile = randInt(1,5);
-      setTile(x, y, "fragmented_stone"+randTile);
-    }
-  </action-->
-
-  <!--area id="thirallan_zargoroth.mines" width="50" height="100" corrupted="true" planet="thirallan_alchemist">
-    <structure id="thirallan_zargoroth.mines.ret" x="1" y="15" />
-    <structure id="undead_shrine" x="40" y="75" />
-    <action>
-      setBack(1, 27, "stone"); setBack(2, 27, "stone"); setBack(1, 28, "stone"); setBack(2, 28, "stone");
-      dy = random()>0.5?1:30; for(y in 0...10) for(x in 30...40) setBack(x, y+dy, "stone");
-    </action>
-    <maze floor="stone" wall="blackstone" width="30" height="99" />
-    <appendArea id="jacominus_rest" offsetX="30" offsetY="30" />
-    <action>
-      for(x in 30...49) for(y in 1...99){setTile(x,y,"stone"); setBack(x,y,"stone"); mine(x,y);}
-      for(x in 30...49){setTile(x,0,"blackstone"); setTile(x,99,"blackstone");} for(y in 0...100) setTile(49,y,"blackstone");
-      for(x in 31...48) for(y in 19...30) mine(x,y);
-      for(x in 31...48) for(y in 1...13) mine(x,y);
-      for(y in 13...20) mine(40,y);
-      for(y in 1...98) mine(29,y);
-      for(x in 1...3) for(y in 14...16) mine(x,y);
-    </action>
-    <objects id="undead_shrineDefender" count="7" fromX="30" toX="49" fromY="80" toY="99" />
-  </area-->
-
   <area id="thirallan_zargoroth.mines" height="1" corrupted="true" planet="thirallan_alchemist">
     <tiles from="haven_mines.png" x="0" y="-1">
           <!--Stone & Blackstone--><tile id="stone" color="655e5e" /><tile id="blackstone" color="000000" />
@@ -149,6 +111,17 @@
       <runAreaLoad/>
     </init>
     <onLoad>
+      <section if="!getFlag('hidden_passge.haven_ruins')">
+        <action>
+        mine(5, 20);
+        for(x in 6...14){
+          mine(x, 20);
+          area.addObject(ObjectInfo.make("fake_monastery_wall", x*Tile.SIZE, 20*Tile.SIZE));
+        }
+        setFlag('hidden_passage.haven_ruins', true);
+        </action>
+        <object id="mines_note3" x="5" y="20" />
+      </section>
       <music id="haven_mines" seconds="1" />
     </onLoad>
   </area>

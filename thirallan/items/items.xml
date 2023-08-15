@@ -207,6 +207,7 @@
   <item id="thirallan_note" type="tool" corruptible="false" icon="thirallan_note.ico" />
   <item id="mines_note1" extends="thirallan_note" />
   <item id="mines_note2" extends="thirallan_note" />
+  <item id="mines_note3" extends="thirallan_note" />
 
   <item id="undead" type="animal" slot="familiar" icon="undead" corruptible="false" canStore="false">
     <action id="equip" /><action id="rename" />
