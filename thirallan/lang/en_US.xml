@@ -54,6 +54,7 @@
     <text id="research">Ask about his research</text>
     <text id="zargoroth">Ask about [color=770000]Zargoroth[/color]</text>
     <text id="umazz">Ask about [color=770000]"Umazz"?[/color]</text>
+    <text id="found_note">You have a new journal entry in the {value} section! Check your journal to read it!</text>
   </section>
 
   <section id="warning">
@@ -89,25 +90,22 @@
     <text id="exotic_warhammer">Exotic Warhammer</text>
     <text id="purifiers_entryItem">Strange Insignia</text>
     <text id="jacominus_katana">Katana Fragment</text>
-    <text id="mines_note1">Strange Note</text>
-    <text id="mines_note2">Strange Note</text>
-    <text id="mines_note3">Strange Note</text>
+    <text id="thirallan_journal">Unoiks 187 Journal</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
     <text id="init_rite">Bring this to [object=asim].</text>
     <text id="lost_artifact">Bring this to [object=umazz].</text>
-    <text id="corruption_book">The recruit level spell of the Mage Guild.</text>
+    <text id="corruption_book">The recruit level spell of the Purifier's Guild.</text>
     <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
     <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
-    <text id="mines_note1">We're noticing strange energy in this stone, it was barely detectable from the surface, but here its far more noticeable. Will note signs of Dark Cult.</text>
-    <text id="mines_note2">The cult must know we are here, cave ins are rampant now, the stones almost seem to be shifting. I'm worried workers will get trapped in our checkpoints. We shoud be safe enough though.</text>
-    <text id="mines_note3">In one of the ruins down here, we found likely evidence of the cult. There is this statue depicting an angel. How strange that the cult would make this, why? It gives off a strange energy so it has to be them.</text>
+    <text id="thirallan_journal">A journal to store all notes and important information acquired in the star system.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>
     <text id="struggle">Struggle</text>
     <text id="dismiss">Dismiss</text>
+    <text id="pickup">Pick up</text>
   </section>
 
   <section id="zargoroth">
@@ -243,7 +241,7 @@
     <text id="shrines">You haven't seriously forgotten right? We have to find the remaining shrines across the island. They should be in the Rotting Forest, Undying Peninsula, Fang Plains, Gold Digger's Haven, and Pheonix Plateau.</text>
     <text id="placeholder_scene">In a future update I'll have more for you to do.</text>
 
-    <text id="peredur_desk1">Entry one, who knows what date: The Mage Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
+    <text id="peredur_desk1">Entry one, who knows what date: The Purifier's Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
     <text id="peredur_desk2">Now I sit here in some ruins under a town that would likely shun someone like me, contemplating what to do with my life, how to restart, how to at least attempt to redeem myself.</text>
     <text id="peredur_desk3">I think I have to start looking into how to stop the Dark God. How to combat his corruption. I need prove to myself that I can do great things. I'll start tomorrow.</text>
     <text id="peredur_desk4">Entry two, Day Ten: I managed to capture some corrupted while avoiding detection, I should understand corruption well given my ability to cast it, but I really don't know how it works.</text>
@@ -366,7 +364,7 @@
     <text id="door4">You[pause=20] are not[pause=20] worthy...</text>
   </section>
   <section id="asim">
-    <text id="greetings1">So... Another human comes to the Mage Guild, for whatever reason.</text>
+    <text id="greetings1">So... Another human comes to the Purifier's Guild, for whatever reason.</text>
     <text id="greetings2">There would be no other reason to come here than to join our ranks. So if you want to find yourself in our ranks, first, I have a request of you.</text>
     <text id="guild_init1">Well? Go get the [item=init_rite].</text>
     <text id="guild_init2">Great, Human, you have officially joined our ranks. If you wish to rise to a higher rank, you must complete more tasks, talk to me, [object=umazz], or [object=zhak_vik] for more tasks.</text>
@@ -458,7 +456,7 @@
 
     <text id="rebuild_monastery">Recruiter Mcstabby</text>
 
-    <text id="guild_init">The Mage Guild</text>
+    <text id="guild_init">The Purifier's Guild</text>
     <text id="lost_artifact">Lost Artifact</text>
 
     <text id="exotic_warhammer">Exotic Warhammer</text>

@@ -38,6 +38,7 @@
           <dialogue section="iterol" id="introduce2" speaker='player' />
           <dialogue section="iterol" id="introduce3" speaker='this' />
           <action>setFlag('iterol_introduced',true);</action>
+          <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
         </section>
         <run procedure="iterol.invite" if="player.hasQuest('rebuild_monastery') && !getFlag('iterol_recruited')" />
         <dialogue section="iterol" id="introduce4" speaker='this' if="area.id == 'thirallan_gold_diggers_haven'" />

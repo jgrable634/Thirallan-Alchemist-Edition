@@ -13,7 +13,7 @@
 				this._journals = [];
 				for(journal in this.xml.elementsNamed('journal')) {
                     var journalData = getData('journal', journal.get('id'));
-					this._journals.push({id: journal.get('id'), icon: journalData.icon, found: journalData.found});
+					this._journals.push({id: journal.get('id'), icon: journalData.icon, found: journalData.xml.get('found')});
 				}
 			}
             return this._journals;
@@ -48,32 +48,61 @@
 
     <journal_collection id="thirallan">
         <journal id="peredur" />
+        <journal id="thirallan_misc" />
+        <journal id="thirallan_characters" />
     </journal_collection>
 
     <journal id="peredur" length="2" icon="mage">
         <page index="1" found="player.questComplete('blood_moon')" />
         <page index="2" found="getFlag('pyrrhos_met')" />
     </journal>
+    <journal id="thirallan_misc" length="3" icon="thirallan_note.ico" found="getFlag('journal_thirallan_misc_found')">
+        <page index="1" found="getFlag('thirallan_misc1')" />
+        <page index="2" found="getFlag('thirallan_misc2')" />
+        <page index="3" found="getFlag('thirallan_misc3')" />
+    </journal>
+    <journal id="thirallan_characters" length="16" icon="guard_chief" found="player.hasQuest('proving_worth')">
+        <page index="1" found="player.hasQuest('proving_worth')" /><!--Zargoroth-->
+        <page index="2" found="getFlag('pyrrhos_met')" /><!--Pyrrhos-->
+        <page index="3" found="getFlag('tomkin_know')" /><!--Tomkin-->
+        <page index="4" found="player.hasQuest('find_jacominus')" /><!--Andreas-->
+        <page index="5" found="player.questComplete('find_jacominus')" /><!--Jacominus-->
+        <page index="6" found="player.hasQuest('blood_moon')" /><!--Peredur-->
+        <page index="7" found="player.hasQuest('rebuild_monastery')" /><!--Gilbert-->
+        <page index="8" found="player.hasQuest('rebuild_monastery')" /><!--Hadvarr-->
+        <page index="9" found="player.hasQuest('rebuild_monastery')" /><!--Ligart-->
+        <page index="10" found="player.hasQuest('rebuild_monastery')" /><!--Azriel-->
+        <page index="11" found="player.hasQuest('guild_init')" /><!--Asim-->
+        <page index="12" found="player.hasQuest('lost_artifact')" /><!--Umazz-->
+        <page index="13" found="player.hasQuest('guild_init')" /><!--Oviar-->
+        <page index="14" found="player.questComplete('guild_init')" /><!--Zhak'vik-->
+        <page index="15" found="player.questComplete('guild_init')" /><!--Mundatorem-->
+        <page index="16" found="getFlag('iterol_introduced)" /><!--Iterol-->
+        <page index="17" found="player.questComplete('undead_shrines')" /><!--Purifier-->
+    </journal>
 
-    <window id="journals_overview" type="xml" closeButton="true" closeable="true" width="100" height="128">
-        <text section="journal" id="select" x="50" y="4" center="true" />
+    <window id="journals_overview" type="xml" closeButton="true" closeable="true" width="120" height="128">
+        <text section="journal" id="select" x="60" y="4" center="true" />
         <list x="2" y="16" cols="1" rows="9">
-            <renderer width="96" height="16">
+            <renderer width="116" height="16">
                 <tile id="item.icon" x="0" y="0"/>
                 <text text="item.text" x="20" y="0" align="left"/>
                 <onSelect>
                     <action>
 					    window.close();
                     </action>
-                    <set id="journalId" value="item.text" />
+                    <set id="journalId" value="item.id" />
                     <set id="pageNumber" value="1" />
+                    <set id="journalName" value="item.text" />
                     <run procedure="journal_view" />
                 </onSelect>
             </renderer>
             <init>
                 for(journal in getData('journal_collection', 'thirallan').journals()){
-                    if(eval(journal.found)) {
-                        addItem({text: journal.id, icon: journal.icon});
+                    var tempFound = ifNull(getData('journal', journal.id).xml.get('found'), "getFlag('journal_" + this.id + "_found')");
+                    if(eval(tempFound)) {
+                        trace(journal.id+" is unlocked");
+                        addItem({id: journal.id, icon: journal.icon, text: getText('journal&gt;'+journal.id).get()});
                     }
                 }
             </init>
@@ -84,7 +113,9 @@
         <action>
             // variables needed: journal id, page number
             var window = '&lt;window type="xml" closeButton="true" closeable="true" width="100" height="128"&gt;';
-            window += '&lt;text text="' + journalId + '\'s Journal" x="50" y="4" center="true" /&gt;';
+            if(journalId == 'thirallan_characters' || journalId == 'thirallan_misc'){
+                window += '&lt;text text="' + journalName + '" x="50" y="4" center="true" /&gt;';
+            } else window += '&lt;text text="' + journalName + '\'s Journal" x="50" y="4" center="true" /&gt;';
             window += '&lt;formattedText ';
             if(eval(getData('journal', journalId).getPage(pageNumber).found)) {
                 window += 'text="' + getText(journalId + '&gt;journal_' + pageNumber).get() + '"';
@@ -98,14 +129,65 @@
         </action>
     </procedure>
     
+    <item id="thirallan_journal" type="tool" canStore="false">
+        <action id="use">
+            <window id="journals_overview" />
+        </action>
+    </item>
+
     <lang id="en_US">
         <section id="journal">
             <text id="select">Select a journal</text>
             <text id="not_found">You haven't found this page yet</text>
+            <text id="peredur">Peredur's Journal</text>
+            <text id="thirallan_characters">Thirallan Inhabitants</text>
+            <text id="thirallan_misc">Misc. Thirallan Notes</text>
         </section>
         <section id="peredur">
             <text id="journal_1">Hello this is a journal filled with interesting text. yes. very.</text>
             <text id="journal_2">Hi</text>
         </section>
+        <section id="thirallan_misc">
+            <text id="journal_1">We're noticing strange energy in this stone, it was barely detectable from the surface, but here its far more noticeable. Will note signs of Dark Cult.</text>
+            <text id="journal_2">The cult must know we are here, cave ins are rampant now, the stones almost seem to be shifting. I'm worried workers will get trapped in our checkpoints. We shoud be safe enough though.</text>
+            <text id="journal_3">In one of the ruins down here, we found likely evidence of the cult. There is this statue depicting an angel. How strange that the cult would make this, why? It gives off a strange energy so it has to be them.</text>
+        </section>
+        <section id="thirallan_characters">
+            <text id="journal_1">[tile=guard_chief] [color=770000]Zargoroth[/color]: Leader of Zargoroth's Safe Haven, he alongside [color=770000]Pyrrhos[/color] founded the town they live in.</text>
+            <text id="journal_2">[tile=shopkeeper] [color=770000]Pyrrhos[/color]: Co-founder of Zargoroth's Safe Haven, specifically noted to be a pacifist, only engaging in the trades.</text>
+            <text id="journal_3">[tile=andreas] [color=770000]Andreas[/color]: A former knight that was reduced to mining only after a severe traumatic encounter with the [color=490068]The Corrupted[/color].</text>
+            <text id="journal_4">[tile=tomkin] [color=770000]Tomkin[/color]: Younger brother of Zargoroth. Noted to be very timid. [color=770000]Zargoroth[/color] cares very deeply for him and wants to help him excel.</text>
+            <text id="journal_5">[tile=jacominus2] [color=770000]Jacominus[/color]: Close friend of Andreas. Unfortunately was corrupted deep in the mines. I had no choice but to but him to rest.</text>
+            <text id="journal_6">[tile=mage] [color=770000]Peredur[/color]: A secluded Mage that lurks around Zargoroth's Safe Haven. Incredibly interested in his research, and seems to stop at nothing to pursue it. Perhaps the fruits of his labor can come to fruition one day?</text>
+            <text id="journal_7">[tile=gilbert] [color=770000]Gilbert[/color]: Leader of the Church Survivors, him and few others reside in the broken down Monastery, attempting to restore Thirallan to it's former glory.</text>
+            <text id="journal_8">[tile=hadvarr] [color=770000]Hadvarr[/color]: Co-leader of the Church Survivors, very skilled archer that used to be in high ranking at the Monastery before everything was destroyed. Very loyal to Gilbert.</text>
+            <text id="journal_9">[tile=ligart] [color=770000]???[/color]: Why does no one else acknowledge this guy? Am I just going insane or is he really there? If so then who is he?</text>
+            <text id="journal_10">[tile=azriel] [color=770000]Azriel[/color]: The last known remaining priest still in Thirallan. Still holds true in his faith and yearns to be the next leader of the Monastery if/when everything goes back to normal.</text>
+            <text id="journal_11">[tile=asim] [color=770000]Asim[/color]: Leader of the Purifier's Guild. Has faith that the Purifier will protect them as long as they continue to worship him.</text>
+            <text id="journal_12">[tile=umazz] [color=770000]Umazz[/color]: Archivist of the Purifier's Guild, has extensive knowledge of the island's past. His dedication to finding lost artifacts of the past is admirable.</text>
+            <text id="journal_13">[tile=oviar] [color=770000]Oviar[/color]: Recruit in the Purifier's Guild. He seems to mostly act as a gatekeeper to Asim. Unsure how powerful he actually is compared to the rest of them.</text>
+            <text id="journal_14">[tile=zhak_vik] [color=770000]Zhak'vik[/color]: A necromancher in the Purifier's Guild, apparently has the ability to conjure Corrupted from nothing. He aspires to succeed the Purifier itself.</text>
+            <text id="journal_15">[tile=iterol] [color=770000]Iterol[/color]: Something of a scientist, which seems to be a rarity in this place. He seems to believe that the Corruption is some kind of air-borne illness. I'm doubtful.</text>
+            <text id="journal_16">[tile=campaign_purifier_head] [color=770000]The Purifier[/color]: Also known as the Dark God. This being seems to be the direct source of the Corrupted that plagues this planet. Although something makes me doubt he is the one REALLY pulling the strings... It felt too easy.</text>
+        </section>
     </lang>
+
+        <onLoad>
+            <section>
+                <action if="!getLocalPlayer().hasItem('thirallan_journal') && !getLocalPlayer().areas.get('thirallan_zargoroth') != null">getLocalPlayer().addItem('thirallan_journal', 1);</action>
+                <action if="getLocalPlayer().hasItem('mines_note1') || getLocalPlayer().hasItem('mines_note2')">
+                    setFlag('journal_thirallan_misc_found', true);
+                    if(getLocalPlayer().hasItem('mines_note1')){
+                        getLocalPlayer().addItem('mines_note1', -1);
+                        setFlag('thirallan_misc1', true);
+                    }
+                    if(getLocalPlayer().hasItem('mines_note2')){
+                        getLocalPlayer().addItem('mines_note2', -1);
+                        setFlag('thirallan_misc2', true);
+                    }
+                    evalXml('&lt;show tooltip="popup" text="common.found_note{value:'+'Misc. Thirallan Notes'+'}" x="0.5" y="0.0625" hold="200" /&gt;')
+                </action>
+            </section>
+        </onLoad>
+
 </data>

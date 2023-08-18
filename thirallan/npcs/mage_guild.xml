@@ -14,6 +14,7 @@
         <dialogue section="asim" id="greetings1" speaker='this' />
         <dialogue section="asim" id="greetings2" speaker='this' />
         <quest id="guild_init" />
+        <section if="player.hasQuest('guild_init')"><show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" /></section>
       </section>
       <choose if="!player.questComplete('guild_init')">
         <section if="!player.canCompleteQuest('guild_init')">
@@ -23,6 +24,7 @@
           <dialogue section="asim" id="guild_init2" speaker='this' />
           <dialogue section="asim" id="guild_init3" speaker='this' />
           <complete quest="guild_init" />
+          <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
         </section>
       </choose>
     </operate>

@@ -47,6 +47,7 @@
         <dialogue section="zargoroth" id="proving_worth4a" speaker='this' />
         <dialogue section="zargoroth" id="proving_worth4b" speaker='this' />
         <item id="malumite_pickaxe" />
+        <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
       </section>
       <section if="!player.hasQuest('proving_worth')">
         <dialogue section="zargoroth" id="proving_worth5" speaker='this' />
@@ -181,6 +182,7 @@
             <quest/>
             <dialogue section="pyrrhos" id="first_interaction1" speaker='this' />
             <action>setFlag('pyrrhos_met', true);</action>
+            <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
             <window type="store" inventory="this.inventory" price="1">
               <buy type="equipment" />
               <buy type="resource" />
@@ -298,6 +300,7 @@
             <dialogue section="andreas" id="rumors1" speaker='this' />
             <dialogue section="andreas" id="rumors2" speaker='this' />
             <quest id="find_jacominus" ask="false" />
+            <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
           </section>
           <choose if="player.hasQuest('find_jacominus') && !player.questComplete('undead_rumors')">
             <section if="!player.questComplete('find_jacominus') && !player.canCompleteQuest('find_jacominus')">
@@ -320,6 +323,7 @@
             <section if="!player.questComplete('find_jacominus')">
               <dialogue section="andreas" id="rumors5" speaker='this' />
               <complete quest="find_jacominus" />
+              <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
             </section>
             <dialogue section="andreas" id="rumors6" speaker='this' />
           </choose>

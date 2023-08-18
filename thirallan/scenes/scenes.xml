@@ -636,9 +636,11 @@
 					<dialogue section="zargoroth_info" id="andreas3" speaker='guard_chief' />
 				</choice>
 				<choice id="tomkin" if="!player.questComplete('blood_moon')">
+					<action>setFlag('tomking_know', true);</action>
 					<dialogue section="zargoroth_info" id="tomkin1" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="tomkin2" speaker='guard_chief' />
 					<dialogue section="zargoroth_info" id="tomkin3" speaker='guard_chief' />
+					<show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
 				</choice>
 				<choice id="monastery" if="player.questComplete('blood_moon')">
 					<dialogue section="zargoroth_info" id="monastery1" speaker='guard_chief' />
@@ -752,6 +754,7 @@
 				<dialogue section="zargoroth" id="undead_rumors5" speaker='guard_chief' />
 				<item id="thirallan_map" count="1" modal="true" />
 				<quest id="blood_moon" ask="false" />
+				<show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
 				<complete quest="undead_rumors" />
 				<dialogue section="zargoroth_info" id="map_explanation" speaker='guard_chief' />
 			</section>

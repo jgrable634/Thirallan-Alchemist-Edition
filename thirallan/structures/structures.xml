@@ -535,4 +535,31 @@
   <!--Test for future areas-->
   <object id="fake_monastery_wall" tile="monastery_stone" layer="top" />
 
+  <object id="thirallan_misc_note" tile="thirallan_note.ico" note_id="0">
+    <tooltip section="actions" id="pickup" />
+    <operate>
+      <action>
+        setFlag("thirallan_misc" + this.damage, true);
+        setFlag('journal_thirallan_misc_found', true);
+      </action>
+      <remove object="this" />
+      <show tooltip="popup" text="common.found_note{value:'Misc. Thirallan Notes'}" x="0.5" y="0.0625" hold="200" />
+    </operate>
+  </object>
+
+  <object id="mines_note1" extends="thirallan_misc_note">
+    <addedToArea>
+      <action>
+        this.info.xml.set("note_id", 1);
+      </action>
+    </addedToArea>
+  </object>
+  <object id="mines_note2" extends="thirallan_misc_note">
+    <addedToArea>
+      <action>
+        this.info.xml.set("note_id", 2);
+      </action>
+    </addedToArea>
+  </object>
+
 </structures>

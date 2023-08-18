@@ -90,6 +90,16 @@
     </init>
     <onLoad>
       <music id="haven_mines" seconds="1" />
+      <section if="area.getObject('mines_note1') != null && area.getObject('mines_note1').info.xml.get('note_id') == 0">
+        <action>
+          area.getObject('mines_note1').info.xml.set('note_id', 1);
+        </action>
+      </section>
+      <section if="area.getObject('mines_note2') != null && area.getObject('mines_note2').info.xml.get('note_id') == 0">
+        <action>
+          area.getObject('mines_note2').info.xml.set('note_id', 2);
+        </action>
+      </section>
     </onLoad>
   </area>
 
@@ -120,7 +130,9 @@
         }
         setFlag('hidden_passage.haven_ruins', true);
         </action>
-        <object id="mines_note3" x="5" y="20" />
+        <object id="thirallan_misc_note" x="5" y="20">
+          this.info.xml.set('note_id', 3);
+        </object>
       </section>
       <music id="haven_mines" seconds="1" />
     </onLoad>

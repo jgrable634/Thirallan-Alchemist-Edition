@@ -35,6 +35,7 @@
               <dialogue section="gilbert" id="rebuild5" speaker='this' />
               <dialogue section="gilbert" id="rebuild6" speaker='this' />
               <quest id="rebuild_monastery" ask="false" />
+              <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
             </choice>
             <choice id="no">
               <dialogue section="gilbert" id="rebuild7" speaker='this' />
