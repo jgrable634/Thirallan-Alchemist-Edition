@@ -484,14 +484,8 @@
   <object id="peredur_desk" tile="peredur_desk" name="read">
     <tooltip section="structure.tooltip" id="read" />
     <operate>
-      <section>
-        <dialogue section="peredur" text="peredur_desk1" />
-        <dialogue section="peredur" text="peredur_desk2" />
-        <dialogue section="peredur" text="peredur_desk3" />
-        <dialogue section="peredur" text="peredur_desk4" />
-        <dialogue section="peredur" text="peredur_desk5" />
-        <dialogue section="peredur" text="peredur_desk6" />
-      </section>
+      <action>setFlag('found_peredur_desk', true);</action>
+      <show tooltip="popup" text="common.found_journal{value:'Peredur's Journal'}" x="0.5" y="0.0625" hold="200" />
     </operate>
   </object>
 
@@ -538,12 +532,13 @@
   <object id="thirallan_misc_note" tile="thirallan_note.ico" note_id="0">
     <tooltip section="actions" id="pickup" />
     <operate>
+      <section if="!getFlag('journal_thirallan_misc_found')"><show tooltip="popup" text="common.found_journal{value:'Misc. Thirallan Notes'}" x="0.5" y="0.0625" hold="200" /></section>
+      <section if="getFlag('journal_thirallan_misc_found')"><show tooltip="popup" text="common.found_note{value:'Misc. Thirallan Notes'}" x="0.5" y="0.0625" hold="200" /></section>
       <action>
-        setFlag("thirallan_misc" + this.damage, true);
+        setFlag("thirallan_misc" + this.info.xml.get('note_id'), true);
         setFlag('journal_thirallan_misc_found', true);
       </action>
       <remove object="this" />
-      <show tooltip="popup" text="common.found_note{value:'Misc. Thirallan Notes'}" x="0.5" y="0.0625" hold="200" />
     </operate>
   </object>
 

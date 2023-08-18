@@ -55,6 +55,9 @@
         <remove object="area.getObject('pyrrhos')" />
         <run procedure="unknown_start" />
       </section>
+      <section if="!player.hasItem('thirallan_journal')">
+        <action>player.addItem('thirallan_journal', 1);</action>
+      </section>
       <section if="!isNight() && player.questComplete('blood_moon')">
         <run procedure="check_blood_moon" />
       </section>

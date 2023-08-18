@@ -47,7 +47,7 @@
         <dialogue section="zargoroth" id="proving_worth4a" speaker='this' />
         <dialogue section="zargoroth" id="proving_worth4b" speaker='this' />
         <item id="malumite_pickaxe" />
-        <show tooltip="popup" text="common.found_note{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
+        <show tooltip="popup" text="common.found_journal{value:'Thirallan Inhabitants'}" x="0.5" y="0.0625" hold="200" />
       </section>
       <section if="!player.hasQuest('proving_worth')">
         <dialogue section="zargoroth" id="proving_worth5" speaker='this' />

@@ -22,7 +22,7 @@
 
     <data type="journal">
         this.id = this.xml.get('id');
-        this.length = this.xml.get('length');
+        this.length = Std.parseInt(this.xml.get('length'));
         this.icon = this.xml.get('icon');
         this.found = ifNull(this.xml.get('found'), "getFlag('journal_" + this.id + "_found')");
         this.getPage = function(pageNumber) {
@@ -52,9 +52,13 @@
         <journal id="thirallan_characters" />
     </journal_collection>
 
-    <journal id="peredur" length="2" icon="mage">
-        <page index="1" found="player.questComplete('blood_moon')" />
-        <page index="2" found="getFlag('pyrrhos_met')" />
+    <journal id="peredur" length="6" icon="mage" found="getFlag('found_peredur_desk')">
+        <page index="1" found="getFlag('found_peredur_desk')" />
+        <page index="2" found="getFlag('found_peredur_desk')" />
+        <page index="3" found="getFlag('found_peredur_desk')" />
+        <page index="4" found="getFlag('found_peredur_desk')" />
+        <page index="5" found="getFlag('found_peredur_desk')" />
+        <page index="6" found="getFlag('found_peredur_desk')" />
     </journal>
     <journal id="thirallan_misc" length="3" icon="thirallan_note.ico" found="getFlag('journal_thirallan_misc_found')">
         <page index="1" found="getFlag('thirallan_misc1')" />
@@ -77,7 +81,7 @@
         <page index="13" found="player.hasQuest('guild_init')" /><!--Oviar-->
         <page index="14" found="player.questComplete('guild_init')" /><!--Zhak'vik-->
         <page index="15" found="player.questComplete('guild_init')" /><!--Mundatorem-->
-        <page index="16" found="getFlag('iterol_introduced)" /><!--Iterol-->
+        <page index="16" found="getFlag('iterol_introduced')" /><!--Iterol-->
         <page index="17" found="player.questComplete('undead_shrines')" /><!--Purifier-->
     </journal>
 
@@ -112,23 +116,59 @@
     <procedure id="journal_view">
         <action>
             // variables needed: journal id, page number
-            var window = '&lt;window type="xml" closeButton="true" closeable="true" width="100" height="128"&gt;';
-            if(journalId == 'thirallan_characters' || journalId == 'thirallan_misc'){
-                window += '&lt;text text="' + journalName + '" x="50" y="4" center="true" /&gt;';
-            } else window += '&lt;text text="' + journalName + '\'s Journal" x="50" y="4" center="true" /&gt;';
+            var window = '&lt;window type="xml" closeButton="true" closeable="true" width="120" height="128"&gt;';
+            if(journalId == 'thirallan_misc'){
+                window += '&lt;text text="' + getText(journalId+'&gt;name_'+pageNumber).get() + '" x="60" y="4" center="true" /&gt;';
+            } else window += '&lt;text text="' + journalName + '" x="60" y="4" center="true" /&gt;';
             window += '&lt;formattedText ';
             if(eval(getData('journal', journalId).getPage(pageNumber).found)) {
                 window += 'text="' + getText(journalId + '&gt;journal_' + pageNumber).get() + '"';
             } else {
                 window += 'section="journal" id="not_found"';
             }
-            window += ' x="2" y="16" width="96" /&gt;';
+            window += ' x="2" y="16" width="116" /&gt;';
 
+            window += '&lt;button x="15" y="112" width="18" height="12"&gt;
+                &lt;text x="1" y="1" align="left" text="Exit"/&gt;
+                    &lt;onSelect&gt;
+                        &lt;action&gt;
+                            window.close();
+                        &lt;/action&gt;
+                        &lt;window id="journals_overview" /&gt;
+                    &lt;/onSelect&gt;
+                &lt;/button&gt;';
+
+            if(pageNumber &gt; 1){
+                window += '&lt;button x="40" y="112" width="30" height="12"&gt;
+                &lt;text x="1" y="1" align="left" text="Prev."/&gt;
+                    &lt;onSelect&gt;
+                        &lt;action&gt;
+                            window.close();
+                        &lt;/action&gt;
+                        &lt;set id="pageNumber" value="pageNumber-1" /&gt;
+                        &lt;run procedure="journal_view" /&gt;
+                    &lt;/onSelect&gt;
+                &lt;/button&gt;';
+            }
+            if(Std.parseInt(getData('journal', journalId).length) &gt; pageNumber){
+                window += '&lt;button x="75" y="112" width="30" height="12"&gt;
+                &lt;text x="1" y="1" align="left" text="Next"/&gt;
+                    &lt;onSelect&gt;
+                        &lt;action&gt;
+                            window.close();
+                        &lt;/action&gt;
+                        &lt;set id="pageNumber" value="pageNumber+1" /&gt;
+                        &lt;run procedure="journal_view" /&gt;
+                    &lt;/onSelect&gt;
+                &lt;/button&gt;';
+            }
             window += '&lt;/window&gt;';
             evalXml(window);
         </action>
     </procedure>
     
+    
+
     <item id="thirallan_journal" type="tool" canStore="false">
         <action id="use">
             <window id="journals_overview" />
@@ -144,31 +184,38 @@
             <text id="thirallan_misc">Misc. Thirallan Notes</text>
         </section>
         <section id="peredur">
-            <text id="journal_1">Hello this is a journal filled with interesting text. yes. very.</text>
-            <text id="journal_2">Hi</text>
+            <text id="journal_1">Entry one, who knows what date: The Purifier's Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
+            <text id="journal_2">Now I sit here in some ruins under a town that would likely shun someone like me, contemplating what to do with my life, how to restart, how to at least attempt to redeem myself.</text>
+            <text id="journal_3">I think I have to start looking into how to stop the Dark God. How to combat his corruption. I need prove to myself that I can do great things. I'll start tomorrow.</text>
+            <text id="journal_4">Entry two, Day Ten: I managed to capture some corrupted while avoiding detection, I should understand corruption well given my ability to cast it, but I really don't know how it works.</text>
+            <text id="journal_5">Its not some physical element I can detect, all it seems to change is the blood of the corrupted, from a typical red blood to a bright purple. How would I stop it from converting? Is there a way to prevent it?</text>
+            <text id="journal_6">I think it may be worth trying to communicate with the villagers on the surface, if it gets bad I can leave, it shouldn't hurt to try right?</text>
         </section>
         <section id="thirallan_misc">
+            <text id="name_1">Mines Note 1</text>
+            <text id="name_2">Mines Note 2</text>
+            <text id="name_3">Mines Note 3</text>
             <text id="journal_1">We're noticing strange energy in this stone, it was barely detectable from the surface, but here its far more noticeable. Will note signs of Dark Cult.</text>
             <text id="journal_2">The cult must know we are here, cave ins are rampant now, the stones almost seem to be shifting. I'm worried workers will get trapped in our checkpoints. We shoud be safe enough though.</text>
             <text id="journal_3">In one of the ruins down here, we found likely evidence of the cult. There is this statue depicting an angel. How strange that the cult would make this, why? It gives off a strange energy so it has to be them.</text>
         </section>
         <section id="thirallan_characters">
-            <text id="journal_1">[tile=guard_chief] [color=770000]Zargoroth[/color]: Leader of Zargoroth's Safe Haven, he alongside [color=770000]Pyrrhos[/color] founded the town they live in.</text>
-            <text id="journal_2">[tile=shopkeeper] [color=770000]Pyrrhos[/color]: Co-founder of Zargoroth's Safe Haven, specifically noted to be a pacifist, only engaging in the trades.</text>
-            <text id="journal_3">[tile=andreas] [color=770000]Andreas[/color]: A former knight that was reduced to mining only after a severe traumatic encounter with the [color=490068]The Corrupted[/color].</text>
-            <text id="journal_4">[tile=tomkin] [color=770000]Tomkin[/color]: Younger brother of Zargoroth. Noted to be very timid. [color=770000]Zargoroth[/color] cares very deeply for him and wants to help him excel.</text>
+            <text id="journal_1">[object=zargoroth_npc]: Leader of Zargoroth's Safe Haven, he alongside [color=770000]Pyrrhos[/color] founded the town they live in.</text>
+            <text id="journal_2">[object=pyrrhos]: Co-founder of Zargoroth's Safe Haven, specifically noted to be a pacifist, only engaging in the trades.</text>
+            <text id="journal_3">[object=tomkin]: Younger brother of Zargoroth. Noted to be very timid. [color=770000]Zargoroth[/color] cares very deeply for him and wants to help him excel.</text>
+            <text id="journal_4">[object=andreas]: A former knight that was reduced to mining only after a severe traumatic encounter with the [color=490068]The Corrupted[/color].</text>
             <text id="journal_5">[tile=jacominus2] [color=770000]Jacominus[/color]: Close friend of Andreas. Unfortunately was corrupted deep in the mines. I had no choice but to but him to rest.</text>
-            <text id="journal_6">[tile=mage] [color=770000]Peredur[/color]: A secluded Mage that lurks around Zargoroth's Safe Haven. Incredibly interested in his research, and seems to stop at nothing to pursue it. Perhaps the fruits of his labor can come to fruition one day?</text>
-            <text id="journal_7">[tile=gilbert] [color=770000]Gilbert[/color]: Leader of the Church Survivors, him and few others reside in the broken down Monastery, attempting to restore Thirallan to it's former glory.</text>
-            <text id="journal_8">[tile=hadvarr] [color=770000]Hadvarr[/color]: Co-leader of the Church Survivors, very skilled archer that used to be in high ranking at the Monastery before everything was destroyed. Very loyal to Gilbert.</text>
-            <text id="journal_9">[tile=ligart] [color=770000]???[/color]: Why does no one else acknowledge this guy? Am I just going insane or is he really there? If so then who is he?</text>
-            <text id="journal_10">[tile=azriel] [color=770000]Azriel[/color]: The last known remaining priest still in Thirallan. Still holds true in his faith and yearns to be the next leader of the Monastery if/when everything goes back to normal.</text>
-            <text id="journal_11">[tile=asim] [color=770000]Asim[/color]: Leader of the Purifier's Guild. Has faith that the Purifier will protect them as long as they continue to worship him.</text>
-            <text id="journal_12">[tile=umazz] [color=770000]Umazz[/color]: Archivist of the Purifier's Guild, has extensive knowledge of the island's past. His dedication to finding lost artifacts of the past is admirable.</text>
-            <text id="journal_13">[tile=oviar] [color=770000]Oviar[/color]: Recruit in the Purifier's Guild. He seems to mostly act as a gatekeeper to Asim. Unsure how powerful he actually is compared to the rest of them.</text>
-            <text id="journal_14">[tile=zhak_vik] [color=770000]Zhak'vik[/color]: A necromancher in the Purifier's Guild, apparently has the ability to conjure Corrupted from nothing. He aspires to succeed the Purifier itself.</text>
-            <text id="journal_15">[tile=iterol] [color=770000]Iterol[/color]: Something of a scientist, which seems to be a rarity in this place. He seems to believe that the Corruption is some kind of air-borne illness. I'm doubtful.</text>
-            <text id="journal_16">[tile=campaign_purifier_head] [color=770000]The Purifier[/color]: Also known as the Dark God. This being seems to be the direct source of the Corrupted that plagues this planet. Although something makes me doubt he is the one REALLY pulling the strings... It felt too easy.</text>
+            <text id="journal_6">[object=peredur]: A secluded Mage that lurks around Zargoroth's Safe Haven. Incredibly interested in his research, and seems to stop at nothing to pursue it.</text>
+            <text id="journal_7">[object=gilbert_template]: Leader of the Church Survivors, him and few others reside in the broken down Monastery, attempting to restore Thirallan to it's former glory.</text>
+            <text id="journal_8">[object=hadvarr_template]: Co-leader of the Church Survivors, very skilled archer that used to be in high ranking at the Monastery before everything was destroyed. Very loyal.</text>
+            <text id="journal_9">[object=ligart]: Why does no one else acknowledge this guy? Am I just going insane or is he really there? If so then who is he?</text>
+            <text id="journal_10">[object=azriel]: The last known remaining priest still in Thirallan. Still holds true in his faith and yearns to be the next leader of the Monastery.</text>
+            <text id="journal_11">[object=asim]: Leader of the Purifier's Guild. Has faith that the Purifier will protect them as long as they continue to worship him.</text>
+            <text id="journal_12">[object=umazz]: Archivist of the Purifier's Guild, has extensive knowledge of the island's past. His dedication to finding lost artifacts of the past is admirable.</text>
+            <text id="journal_13">[object=oviar]: Recruit in the Purifier's Guild. He seems to mostly act as a gatekeeper to Asim. Unsure how powerful he actually is compared to the rest of them.</text>
+            <text id="journal_14">[object=zhak_vik]: A necromancher in the Purifier's Guild, apparently has the ability to conjure Corrupted from nothing. He aspires to succeed the Purifier itself.</text>
+            <text id="journal_15">[object=iterol]: Something of a scientist, which seems to be a rarity in this place. He seems to believe that the Corruption is some kind of air-borne illness.</text>
+            <text id="journal_16">[tile=campaign_purifier_head] [color=770000]The Purifier[/color]: Also known as the Dark God. This being seems to be the direct source of the Corrupted that plagues this planet. </text>
         </section>
     </lang>
 
@@ -185,7 +232,7 @@
                         getLocalPlayer().addItem('mines_note2', -1);
                         setFlag('thirallan_misc2', true);
                     }
-                    evalXml('&lt;show tooltip="popup" text="common.found_note{value:'+'Misc. Thirallan Notes'+'}" x="0.5" y="0.0625" hold="200" /&gt;')
+                    evalXml('&lt;show tooltip="popup" text="common.found_journal{value:'+'Misc. Thirallan Notes'+'}" x="0.5" y="0.0625" hold="200" /&gt;');
                 </action>
             </section>
         </onLoad>

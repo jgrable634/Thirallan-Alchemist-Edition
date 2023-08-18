@@ -55,6 +55,7 @@
     <text id="zargoroth">Ask about [color=770000]Zargoroth[/color]</text>
     <text id="umazz">Ask about [color=770000]"Umazz"?[/color]</text>
     <text id="found_note">You have a new journal entry in the {value} section! Check your journal to read it!</text>
+    <text id="found_journal">You've unlocked the {value} journal category! Check your journal to read it!</text>
   </section>
 
   <section id="warning">
@@ -240,13 +241,6 @@
     <text id="rotting_forestShrine4">What was he... Forget it. It's none of your business, don't bother asking.</text>
     <text id="shrines">You haven't seriously forgotten right? We have to find the remaining shrines across the island. They should be in the Rotting Forest, Undying Peninsula, Fang Plains, Gold Digger's Haven, and Pheonix Plateau.</text>
     <text id="placeholder_scene">In a future update I'll have more for you to do.</text>
-
-    <text id="peredur_desk1">Entry one, who knows what date: The Purifier's Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
-    <text id="peredur_desk2">Now I sit here in some ruins under a town that would likely shun someone like me, contemplating what to do with my life, how to restart, how to at least attempt to redeem myself.</text>
-    <text id="peredur_desk3">I think I have to start looking into how to stop the Dark God. How to combat his corruption. I need prove to myself that I can do great things. I'll start tomorrow.</text>
-    <text id="peredur_desk4">Entry two, Day Ten: I managed to capture some corrupted while avoiding detection, I should understand corruption well given my ability to cast it, but I really don't know how it works.</text>
-    <text id="peredur_desk5">Its not some physical element I can detect, all it seems to change is the blood of the corrupted, from a typical red blood to a bright purple. How would I stop it from converting? Is there a way to prevent it?</text>
-    <text id="peredur_desk6">I think it may be worth trying to communicate with the villagers on the surface, if it gets bad I can leave, it shouldn't hurt to try right?</text>
 
     <text id="post_purifier1">The Purifier was the reason this planet became plagued with [color=490068]The Corrupted[/color].</text>
     <text id="post_purifier2">I am a former member of the cult that worshipped it.</text>
@@ -435,7 +429,7 @@
 
     <text id="gilbert_template">Gilbert</text>
     <text id="hadvarr_template">Hadvarr</text>
-    <text id="ligart">Ligart</text>
+    <text id="ligart">???</text>
     <text id="azriel">Azriel</text>
 
     <text id="asim">Asim</text>
