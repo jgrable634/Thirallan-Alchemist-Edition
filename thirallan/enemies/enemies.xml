@@ -251,10 +251,14 @@
 
     </enemy>
 
-		<tilesheet id="art/purifier/purifier_campaign.png" width="32" height="32" />
-	  <tile id="campaign_purifier_head" sheet="art/purifier/purifier_campaign.png" x="0" y="0" />
-	  <tile id="campaign_purifier_hand_l" sheet="art/purifier/purifier_campaign.png" x="1" y="0" />
-	  <tile id="campaign_purifier_hand_r" sheet="art/purifier/purifier_campaign.png" x="0" y="1" />
+	<tilesheet id="art/purifier/purifier_head.png" width="28" height="37" />
+	<tilesheet id="art/purifier/purifier_hands.png" width="15" height="13" />
+	  <tile id="campaign_purifier_head" sheet="art/purifier/purifier_head.png" x="0" y="0" />
+	  <tile id="campaign_purifier_head_journal" sheet="art/purifier/purifier_head.png" x="1" y="0" />
+	  <tile id="campaign_purifier_hand_l" sheet="art/purifier/purifier_hands.png" x="0" y="0" />
+	  <tile id="campaign_purifier_hand_r" sheet="art/purifier/purifier_hands.png" x="0" y="1" />
+	  <animation id="purifier.hand.idle" x="0" count="1" />
+	  <animation id="purifier.hand.hold" x="1" count="1" />
 		<include id="fake_fishing.xml" />
 
 		<procedure id="purifier_portal">
@@ -348,7 +352,8 @@
 	  <procedure id="purifier_strangle.lHand">
 			<section>
 				  <move object="area.getObject('campaign_purifier_hand_l')" x="10" y="-3" />
-				  <move object="player" x="11" y="-4" />
+				  <play object="area.getObject('campaign_purifier_hand_l')" animation="purifier.hand.hold" loop="true" />
+				  <move object="player" x="10" y="-3" />
 					<action>
 					//trace("Begin");
 					beginMinigame(getGlobal,setGlobal);
@@ -358,7 +363,8 @@
 		<procedure id="purifier_strangle.rHand">
 			<section>
 					<move object="area.getObject('campaign_purifier_hand_r')" x="14" y="-3" />
-					<move object="player" x="15" y="-4" />
+					<move object="player" x="14" y="-3" />
+					<play object="area.getObject('campaign_purifier_hand_r')" animation="purifier.hand.hold" loop="true" />
 					<action>
 						//trace("Begin");
 						beginMinigame(getGlobal,setGlobal);
@@ -378,7 +384,7 @@
 			<onHit><move object="this" x="12" y="-5" /></onHit>
 			<onDeath><section><run procedure="hand_movementEnd" /><remove object="area.getObject('campaign_purifier_hand_l')" /><remove object="area.getObject('campaign_purifier_hand_r')" /><run procedure="purifier_death" /></section></onDeath>
 	  </enemy>
-	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l" action="struggle">
+	  <object id="campaign_purifier_hand_l" tile="campaign_purifier_hand_l" action="struggle" layer="top">
 			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>
 			<operate>
 				<action>
@@ -406,7 +412,7 @@
 				}
 			</onFrame>
 	  </object>
-	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r" action="struggle">
+	  <object id="campaign_purifier_hand_r" tile="campaign_purifier_hand_r" action="struggle" layer="top">
 			<addedToArea><action>handTicks = 0; tickedScore = 0;</action></addedToArea>
 			<operate>
 				<action>

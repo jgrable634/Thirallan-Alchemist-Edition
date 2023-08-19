@@ -67,7 +67,7 @@
     </onLoad>
   </area>
 
-  <area id="thirallan_cathedral" width="22" height="1" shouldLight="false" external="thirallan_monastery" planet="thirallan_alchemist">
+  <area id="thirallan_cathedral" width="22" height="1" shouldLight="false" canFly="false" external="thirallan_monastery" planet="thirallan_alchemist">
     <tiles id="monastery_stone" y="0" />
     <action>
       for(y in -30...0){setTile(0,y,"monastery_stone"); setTile(21,y,"monastery_stone");}

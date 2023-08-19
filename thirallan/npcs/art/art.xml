@@ -21,9 +21,9 @@
   <tile id="tomkin" sheet="zargoroth_haven/tomkin.png" x="0" y="0" />
   <tile id="tomkin.ghost" sheet="zargoroth_haven/tomkin.png" x="2" y="4" />
   <tile id="andreas" sheet="zargoroth_haven/andreas.png" x="0" y="0" />
-  <animation id="andreas.idle" x="0" count="1" />
-  <animation id="andreas.talk" x="0" count="9" />
-  <animation id="andreas.walk" x="9" count="9" />
+  <animation id="andreas.idle" x="10" count="7" />
+  <animation id="andreas.talk" x="0" count="10" />
+  <animation id="andreas.walk" x="17" count="8" />
 
   <!--Church Survivors-->
 
@@ -51,7 +51,7 @@
   <tile id="pyrrhos_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="1" />
   <tile id="iterol_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="2" />
 
-  <!--Mage Guild-->
+  <!--Purifier's Guild-->
   <tilesheet id="mage_guild/asim.png" width="17" height="16" />
   <tilesheet id="mage_guild/umazz.png" width="17" height="16" />
   <tilesheet id="mage_guild/oviar.png" width="17" height="16" />

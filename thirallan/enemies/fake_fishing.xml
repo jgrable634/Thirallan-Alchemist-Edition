@@ -58,6 +58,7 @@
         // SUCCESS
         var score = getGlobal("score");
         setGlobal("score",score+1);
+        trace(getGlobal("score"));
         if (score >= 2){
           finishGame(getGlobal,setGlobal);
         }
@@ -73,13 +74,15 @@
       return getGlobal("key");
     }
     function finishGame(?getGlobal,?setGlobal){
+      var area = getLocalPlayer().area;
+      area.getObject('campaign_purifier_hand_l').renderer.playAnimation('purifier.hand.idle', true);
+      area.getObject('campaign_purifier_hand_r').renderer.playAnimation('purifier.hand.idle', true);
       getLocalPlayer().movement.destroy();
       runProcedure("movementToNull");
       removePress(getGlobal("fuckingFunction"));
       for (global in ["key","score"]){
         setGlobal(global,null);
       }
-      var area = getLocalPlayer().area;
       if (area.getObject(area.getObject("placeholder_strangle")) != null){
         area.removeObject(area.getObject("placeholder_strangle"));
       }

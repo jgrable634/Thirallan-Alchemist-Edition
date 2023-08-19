@@ -403,11 +403,11 @@
   </structure>
 
   <tilesheet id="maze_door.png" width="32" height="32" />
-  <tilesheet id="purifier_maze_end.png" width="32" height="32" />
+  <tilesheet id="purifier_maze_end.png" width="32" height="37" />
   <tile id="purifier_maze_end" sheet="purifier_maze_end.png" x="0" y="0" />
   <animation id="purifier_maze_end.idle" count="1" x="0" />
-  <animation id="purifier_maze_end.purifier" count="15" x="0" />
-  <animation id="purifier_maze_end.done" count="15" x="0" reverse="true" />
+  <animation id="purifier_maze_end.purifier" count="4" x="1" length="3" />
+  <!--animation id="purifier_maze_end.done" count="4" x="1" reverse="true" /-->
   <tile id="maze_door" sheet="maze_door.png" x="0" y="0" />
   <animation id="maze_door.opening" count="5" />
   <animation id="maze_door.closing" count="5" reverse="true" />
@@ -428,8 +428,6 @@
           <dialogue text="But are you ready to face your worst nightmare?" />
           <menu type="common">
             <choice id="Yes">
-              <lerp object="player" alpha="0" seconds="0.25" />
-              <play object="this" animation="purifier_maze_end.done" modal="true" />
               <wait seconds="0.5" />
               <teleport area="purifier_void" x="15" y="-1" with="fade" />
             </choice>
@@ -484,8 +482,13 @@
   <object id="peredur_desk" tile="peredur_desk" name="read">
     <tooltip section="structure.tooltip" id="read" />
     <operate>
-      <action>setFlag('found_peredur_desk', true);</action>
-      <show tooltip="popup" text="common.found_journal{value:'Peredur's Journal'}" x="0.5" y="0.0625" hold="200" />
+      <choose>
+        <section if="!getFlag('found_peredur_desk')">
+          <action>setFlag('found_peredur_desk', true);</action>
+          <show tooltip="popup" text="common.found_journal{value:'Peredur's Journal'}" x="0.5" y="0.0625" hold="200" />
+        </section>
+        <dialogue text="I already recorded the contents from the book" />
+      </choose>
     </operate>
   </object>
 
