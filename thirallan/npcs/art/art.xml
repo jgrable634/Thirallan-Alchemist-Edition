@@ -34,9 +34,9 @@
   <animation id="gilbert.walk" x="9" count="10" />
   <animation id="gilbert.attack" x="19" count="9" />
   <tile id="azriel" sheet="church_survivors/azriel.png" x="0" y="0" />
-  <animation id="azriel.idle" x="8" count="1" />
-  <animation id="azriel.talk" x="0" count="8" />
-  <animation id="azriel.walk" x="9" count="10" />
+  <animation id="azriel.idle" x="11" count="5" />
+  <animation id="azriel.talk" x="0" count="11" />
+  <animation id="azriel.walk" x="16" count="10" />
   <tile id="hadvarr" sheet="church_survivors/hadvarr.png" x="0" y="0" />
   <animation id="hadvarr.idle" x="8" count="1" />
   <animation id="hadvarr.talk" x="0" count="8" />
