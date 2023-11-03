@@ -126,9 +126,12 @@
 	<animation id="fallen_angel.combo2" x="27" count="4" />
 	<animation id="fallen_angel.combo3" x="31" count="4" />
 
+	<object id="fallen_angel_charge" tile="magic_orb" animation="magic_orb.impact" removeOnComplete="true" save="false" width="16" height="16"/>
+
 	<enemy id="fallen_angel_noBGM" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true">
 		<light tile="light.large" color="5C0000" />
-		<inRange range="7">
+		<over><section if="getFlag('angel.charging')"><damage object="getLocalPlayer()" damage="20" knockback="100" attacker="this" /></section></over>
+		<inRange range="5">
 			<attack type="melee" cooldown="100">
 				<pre>
 					<section>
@@ -137,14 +140,30 @@
 						<set id="oldX" value="this.tile_x" />
 						<set id="oldY" value="this.tile_y" />
 						<set id="facing" value="this.getFacing()" />
-						<section if="facing == -1 && player.tile_x > this.tile_x && player.tile_x < this.tile_x+10 && player.tile_y <= this.tile_y && player.tile_y >= this.tile_y-1">
+						<action>
+							setFlag('angel.charging', true);
+							var offset = -8;
+							if(!area.isEmptyTile(facing*(offset)+this.tile_x, this.tile_y)){
+								offset = -7;
+							}
+							o = ObjectInfo.make("fallen_angel_charge", (facing*(offset)+this.tile_x)*Tile.SIZE, this.tile_y*Tile.SIZE);
+							
+							trace("fallen_angel_charge is going to "+(facing*(offset)+this.tile_x)*Tile.SIZE+" x, and "+this.tile_y*Tile.SIZE);
+							area.addObject(o);
+							Movement.seek(this,o,5,false,0,0,10);
+						</action>
+						<invokeLater seconds="0.25">
+							<action>this.movement.destroy(); setFlag('angel.charging', false);</action>
+							<remove object="area.getObject('fallen_angel_charge')" /> 
+						</invokeLater>
+						<!--section if="facing == -1 && player.tile_x > this.tile_x && player.tile_x < this.tile_x+10 && player.tile_y <= this.tile_y && player.tile_y >= this.tile_y-1">
 							<damage object="player" attacker="this" damage="20" />
 						</section>
 						<section if="facing == 1 && player.tile_x < this.tile_x && player.tile_x > this.tile_x-10 && player.tile_y <= this.tile_y && player.tile_y >= this.tile_y-1">
 							<damage object="player" attacker="this" damage="20" />
 						</section>
 			 			<lerp object="this" deltaX="facing*(-160)/Tile.SIZE" seconds="0.25" modal="false" />
-						<move object="this" x="oldX+(facing*(-160)/Tile.SIZE)" y="oldY" />
+						<move object="this" x="oldX+(facing*(-160)/Tile.SIZE)" y="oldY" /-->
 					</section>
 				</pre>
 			</attack>
@@ -193,8 +212,8 @@
 	<animation id="mess_of_souls.stab" x="19" count="4" />
 	<animation id="mess_of_souls.slash" x="23" count="4" />
 
-			<enemy id="mess_of_souls" tile="mess_of_souls" range="8" health="40" defense="1" type="surface" fps="10" speed="2" bgm="purification1" underground="true" vertical="true">
-				<tile id="mess_of_souls" name="shield" animation="hidden" fps="10" y="0" />
+	<enemy id="mess_of_souls" tile="mess_of_souls" range="8" health="40" defense="1" type="surface" fps="10" speed="2" bgm="purification1" underground="true" vertical="true">
+		<tile id="mess_of_souls" name="shield" animation="hidden" fps="10" y="0" />
 
         <attack type="projectile" damage="15" range="20" animation="blast" cooldown="300">
           <pre><play object="this" animation="charge_up" /></pre>
