@@ -236,10 +236,15 @@
     <recipe type="guild_magic" />
   </structure>
 
-  <structure id="monastery_cathedral" image="monastery_cathedral.png" width="256" height="512" name="enter">
+  <structure id="monastery_cathedral" image="monastery_cathedral.png" width="256" height="512" behind="true" remove="false" />
+  <animation id="cathedral_entrance.open" count="3" x="0" length="2" />
+  <animation id="cathedral_entrance.close" count="3" x="0" length="2" reverse="true" />
+  <structure id="cathedral_entrance" image="cathedral_entrance.png" width="48" height="40" name="enter">
     <operate>
       <teleport area="thirallan_cathedral" x="10" y="-1" with="ellipse" />
     </operate>
+    <over><action>this.renderer.playAnimation("cathedral_entrance.open", false)</action></over>
+    <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
   </structure>
   <structure id="monastery_entrance" image="monastery_wall.png" width="512" height="512" name="enter">
     <operate>
@@ -380,8 +385,10 @@
     </operate>
   </structure>
 
-  <structure id="cathedral_exit" width="48" height="40" image="cathedral_exit.png" name="enter">
+  <structure id="cathedral_exit" width="48" height="40" image="cathedral_entrance.png" name="enter">
     <operate><teleport area="thirallan_monastery" x="87" y="-1" with="ellipse" /></operate>
+    <over><action>this.renderer.playAnimation("cathedral_entrance.open", false)</action></over>
+    <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
   </structure>
 
   <structure id="encampment_door" width="128" height="128" image="encampment.png" name="enter">

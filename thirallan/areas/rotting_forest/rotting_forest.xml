@@ -46,6 +46,7 @@
     <appendArea id="monastery_outside" offsetX="0" />
     <appendArea id="monastery_outside" offsetX="126" />
     <structure id="monastery_cathedral" x="80" y="-1" />
+    <structure id="cathedral_entrance" x="86" y="-1" />
     <structure id="monastery_exit" x="63" y="-1" />
     <init><runAreaLoad/></init>
     <onLoad>
@@ -63,6 +64,9 @@
           <action>for(x in 100...106) for(y in 1...7) mine(x,y); for(x in 106...108) for(y in 1...3) mine(x,y);</action>
           <structure id="storehouse" x="100" y="6" />
         </section>
+      </section>
+      <section if="area.getStructureById('cathedral_entrance') == null">
+        <structure id="cathedral_entrance" x="86" y="-1" />
       </section>
     </onLoad>
   </area>
