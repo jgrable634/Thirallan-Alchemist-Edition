@@ -123,7 +123,12 @@
     <structure id="undead_shrine.thirallan_rotting_forest" x="125" y="-1" />
     <structure id="monastery_entrance" x="59" y="-1" />
     <init><runAreaLoad/></init>
-    <onLoad><music id="thirallan_heights" seconds="1" /></onLoad>
+    <onLoad>
+      <music id="thirallan_heights" seconds="1" />
+      <section if="area.getStructureById('monastery_entrance_door') == null">
+        <structure id="monastery_entrance_door" x="72.90625" y="-1" />
+      </section>
+    </onLoad>
   </area>
 
 
