@@ -241,7 +241,7 @@
   <animation id="cathedral_entrance.close" count="3" x="0" length="2" reverse="true" />
   <structure id="cathedral_entrance" image="cathedral_entrance.png" width="48" height="40" name="enter">
     <operate>
-      <teleport area="thirallan_cathedral" x="10" y="-1" with="ellipse" />
+      <teleport area="thirallan_cathedral_new" x="3.5" y="-1" with="ellipse" />
     </operate>
     <over><action>this.renderer.playAnimation("cathedral_entrance.open", false)</action></over>
     <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
@@ -252,14 +252,32 @@
   <animation id="monastery_entrance_door.close" count="5" x="0" length="2" reverse="true" />
   <structure id="monastery_entrance_door" image="monastery_entrance_door.png" width="70" height="100" name="enter">
     <operate>
-      <teleport area="thirallan_monastery" x="66" y="-1" with="ellipse" />
+      <teleport area="thirallan_monastery" x="70" y="-1" with="ellipse" />
     </operate>
     <over><action>this.renderer.playAnimation("monastery_entrance_door.open", false)</action></over>
     <out><action>this.renderer.playAnimation("monastery_entrance_door.close", false)</action></out>
   </structure>
-  <structure id="monastery_exit" image="monastery_exit.png" width="128" height="90" name="enter">
+  <structure id="monastery_exit" image="monastery_entrance_door.png" width="70" height="100" name="enter">
     <operate>
       <teleport area="thirallan_rotting_forest" x="74" y="-1" with="ellipse" />
+    </operate>
+    <over><action>this.renderer.playAnimation("monastery_entrance_door.open", false)</action></over>
+    <out><action>this.renderer.playAnimation("monastery_entrance_door.close", false)</action></out>
+  </structure>
+
+  <structure id="monastery_bell" image="monastery_bell.png" width="64" height="77" name="enter">
+    <operate>
+      <menu section="common">
+          <dialogue section="player" id="monastery_bell" speaker="player" />
+          <choice id="yes">
+          <section if="!isNight()">
+            <teleport area="monastery_gilbert" x="10" y="14" with="ellipse" />
+            <stop/>
+          </section>
+          <dialogue section="player" id="monastery_bell2" speaker="player" />
+          </choice>
+          <choice id="no" />
+        </menu>
     </operate>
   </structure>
 
@@ -397,6 +415,81 @@
     <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
   </structure>
 
+  <tilesheet id="cathedral_pew.png" width="21" height="22" />
+  <tile id="cathedral_pew" sheet="cathedral_pew.png" x="0" y="0" />
+  <object id="cathedral_pew_bg" tile="cathedral_pew" />
+  <object id="cathedral_pew_fg" extends="cathedral_pew_bg" layer="top" />
+
+  <animation id="altar.idle" x="0" count="1" />
+  <animation id="altar.night.idle" x="1" count="12" />
+  <animation id="altar.night.stare" x="13" count="1" />
+  <structure id="cathedral_altar" image="cathedral_altar.png" width="96" height="32" nightAnimation="altar.night" behind="true" remove="false" name="talk">
+    <operate>
+      <dialogue text="Please, have a seat, you shouldn't be on the altar." />
+    </operate>
+  </structure>
+
+  <structure id="cathedral_window" image="cathedral_window.png" width="80" height="112" />
+  <structure id="cathedral_bg" image="cathedral_bg.png" width="448" height="256" behind="true" remove="false" />
+  <structure id="cathedral_ladder" image="cathedral_ladder.png" width="16" height="160" remove="false" />
+  <structure id="cathedral_exit_ladder" extends="cathedral_ladder" type="door" name="enter" />
+
+  <animation id="cathedral_door.open" count="4" x="0" length="2" />
+  <animation id="cathedral_door.close" count="4" x="0" length="2" reverse="true" />
+  <structure id="cathedral_door" image="cathedral_room_door.png" width="32" height="32" type="door" name="enter">
+    <operate>
+      <dialogue text="The door is locked..." speaker="player" />
+      <stop/>
+    </operate>
+    <!--over><action>this.renderer.playAnimation("cathedral_door.open", false);</action></over>
+    <out><action>this.renderer.playAnimation("cathedral_door.close", false);</action></out-->
+  </structure>
+  <structure id="altar_cathedral_door" image="altar_room_door.png" animation="cathedral_door" width="32" height="34" name="enter">
+    <operate>
+      <choose>
+        <section if="isNight()">
+          <dialogue text="Please don't touch that door, friend. Only Gilbert is allowed in there." />
+        </section>
+        <section if="!player.hasItem('cathedral_dungeon_key')">
+          <dialogue text="The door is locked..." speaker="player" />
+        </section>
+        <menu section="common">
+          <dialogue text="I'll have to be careful in here, if they come into the cathedral while I'm in here, I won't be able to leave this way. Should I even go in here?" speaker="player" />
+          <choice id="yes"><teleport area="cathedral_dungeon" x="10" y="10" with="ellipse" /></choice>
+          <choice id="no" />
+        </menu>
+      </choose>
+    </operate>
+    <over><action>if(isNight()) area.getStructureById('cathedral_altar').renderer.playAnimation("altar.night.stare");</action></over>
+    <out><action>if(isNight()) area.getStructureById('cathedral_altar').loopAnimation("altar.night.idle");</action></out>
+  </structure>
+
+  <tilesheet id="cathedral_furniture.png" width="16" height="15" />
+  <tile id="cathedral_table" sheet="cathedral_furniture.png" x="0" y="0" />
+  <tile id="cathedral_desk" sheet="cathedral_furniture.png" x="1" y="0" />
+  <tile id="cathedral_chair" sheet="cathedral_furniture.png" x="0" y="1" />
+  <tile id="cathedral_dresser" sheet="cathedral_furniture.png" x="1" y="1" />
+  <tile id="cathedral_display" sheet="cathedral_furniture.png" x="0" y="2" />
+  <object id="cathedral_table" tile="cathedral_table" />
+  <object id="cathedral_desk" tile="cathedral_desk" />
+  <object id="cathedral_chair" tile="cathedral_chair" />
+  <object id="cathedral_dresser" tile="cathedral_dresser">
+    <tooltip section="actions" id="open" />
+    <operate>
+      <menu section="common">
+        <dialogue section="player" id="gilbert_dresser" speaker="player" />
+        <choice id="yes">
+          <dialogue section="player" id="gilbert_dresser2" speaker="player" />
+          <item id="cathedral_dungeon_key" count="1" />
+        </choice>
+        <choice id="no" />
+      </menu>
+    </operate>
+  </object>
+  <object id="cathedral_display" tile="cathedral_display" />
+
+
+
   <structure id="encampment_door" width="128" height="128" image="encampment.png" name="enter">
     <operate>
       <!--choose>
@@ -492,7 +585,7 @@
   <object id="falling_stones" tile="falling_stones" animation="falling_stones" />
 
   <tile id="peredur_desk" sheet="haven_mines/peredur_desk.png" />
-  <object id="peredur_desk" tile="peredur_desk" name="read">
+  <object id="peredur_desk" tile="peredur_desk">
     <tooltip section="structure.tooltip" id="read" />
     <operate>
       <choose>

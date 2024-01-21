@@ -10,6 +10,7 @@
     <tile sheet="tiles.png" x="14" p="1" />
     <tile sheet="tiles.png" x="15" p="1" />
   </tile>
+  <tile id="wooden_ladder" sheets="tiles.png" x="16" />
   <dig id="fragmented_stone" cost="1" />
   <dig id="blood_grass" cost="0" />
   <dig id="blood_dirt" cost="0" />

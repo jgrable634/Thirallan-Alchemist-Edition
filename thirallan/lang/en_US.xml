@@ -56,6 +56,10 @@
     <text id="umazz">Ask about [color=770000]"Umazz"?[/color]</text>
     <text id="found_note">You have a new journal entry in the {value} section! Check your journal to read it!</text>
     <text id="found_journal">You've unlocked the {value} journal category! Check your journal to read it!</text>
+    <text id="hadvarr">Ask about [color=770000]Hadvarr[/color]</text>
+    <text id="azriel">Ask about [color=770000]Azriel[/color]</text>
+    <text id="ligart">Ask about [color=770000]Ligart[/color]</text>
+    <text id="guild">Ask about [color=770000]The Guild[/color]</text>
   </section>
 
   <section id="warning">
@@ -92,6 +96,7 @@
     <text id="purifiers_entryItem">Strange Insignia</text>
     <text id="jacominus_katana">Katana Fragment</text>
     <text id="thirallan_journal">Unoiks 187 Journal</text>
+    <text id="cathedral_dungeon_key">Cathedral Dungeon Key</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
@@ -314,6 +319,10 @@
     <text id="purifier_exit">Uh... Well that's on the list of things I never want to see again. I should probably go inform [object=zargoroth_npc] of my recent advancements.</text>
     <text id="post_purifier1">I might sound insane, but hear me out. I got the attention of a dark god that calls himself The Purifier. Apparently these shrines belonged to him, and had me go through a maze of sorts.</text>
     <text id="post_purifier2">After finally finding my way through the maze, I came face to face with the "God" himself. It was a difficult battle, but I came out on top. He cast a strange illusion as he vanished, which is too strange to explain.</text>
+    <text id="monastery_bell">There's a trapdoor in the bell chamber of the Cathedral, should I enter?</text>
+    <text id="monastery_bell2">I hear someone under this trapdoor, perhaps its someone's room? I think everyone is in the Cathedral only [color=770000]at night.[/color]</text>
+    <text id="gilbert_dresser">Should I rummage through this dresser and see what I can find?</text>
+    <text id="gilbert_dresser2">Hmm, apart from a bunch of clothes, there is a gold key, there's a skull engraved on it, strange.</text>
   </section>
   <section id="purifier">
     <text id="blood_moon">Go mad under the [color=770000]Blood Moon[/color], as every other traveler has...</text>
@@ -339,6 +348,10 @@
     <text id="rebuild10">Then why are you talking to me and not finding those workers?</text>
     <text id="rebuild11">Well, you pulled through! Impressive! With someone like you, we'll have many more successes in the future!</text>
     <text id="rebuild12">As a token of my esteem, I can teach you how to create a [color=770000]Warhammer[/color]. It has more range than a simple sword! It's not much, but I hope it can be helpful.</text>
+  </section>
+  <section id="gilbert_info">
+    <text id="selection">What do you want? I've got a lotta business to attend to!</text>
+    <text id="gilbert1">Not much to say, I'm the last remaining general of what used to be this prospering monastery. Fighting to rebuild the monastery back to its former glory is my absolute priority.</text>
   </section>
   <section id="hadvarr">
     <text id="notOne">Hmph, we really need a guard out there... Anyway, if you are interested in joining us, speak to [object=gilbert_template]... Otherwise, begone, we are not accepting tourists.</text>

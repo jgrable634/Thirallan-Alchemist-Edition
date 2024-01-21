@@ -88,7 +88,7 @@
       </section>
     </operate>
   </npc>
-  <npc id="gilbert_cathedral" extends="gilbert_template" sleepDay="true" night="true"><idle class="wander" fromX="0" toX="20" /></npc>
+  <npc id="gilbert_cathedral" extends="gilbert_template" sleepDay="true" night="true"><idle class="wander" fromX="0" toX="25" /></npc>
   <npc id="hadvarr_cathedral" extends="hadvarr_template" sleepDay="true" night="true"><idle class="wander" fromX="0" toX="20" /></npc>
   <npc id="gilbert_monastery" extends="gilbert_template"><idle class="wander" fromX="50" toX="126" /></npc>
   <npc id="hadvarr_monastery" extends="hadvarr_template"><idle class="wander" fromX="50" toX="126" /></npc>

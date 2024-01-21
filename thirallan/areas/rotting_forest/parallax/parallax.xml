@@ -11,14 +11,14 @@
 			<tile id="thirallan_sun" animation="sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
 		</layer>
 		<layer p="0.6" py="0.3">
-			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="500" loop="false" />
-			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="728" loop="false" />
-			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="956" loop="false" />
-			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="1006" loop="false" />
+			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="505" loop="false" />
+			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="733" loop="false" />
+			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="961" loop="false" />
+			<tile sheet="monastery_wall_parallax.png" x="0" y="0" offsetX="1011" loop="false" />
 		</layer>
 		<layer p="0.75">
-			<tile sheet="{mod:full_version}/magic/structures/burned.3" x="0" y="0" offsetX="740" loop="false" />
-			<tile sheet="{mod:full_version}/magic/structures/burned.3" x="0" y="1" offsetX="1180" loop="false" />
+			<tile sheet="{mod:full_version}/magic/structures/burned.3" x="0" y="0" offsetX="745" loop="false" />
+			<tile sheet="{mod:full_version}/magic/structures/burned.3" x="0" y="1" offsetX="1185" loop="false" />
 		</layer>
 	</parallax>
 	<parallax id="thirallan_rotting_forest" mapBG="8b0000" mapBGHeight="30">
