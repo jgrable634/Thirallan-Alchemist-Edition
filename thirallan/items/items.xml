@@ -216,5 +216,7 @@
   <tile id="cathedral_key.ico" sheet="icos.png" x="0" y="4" />
   <item id="cathedral_dungeon_key" type="tool" icon="cathedral_key.ico" corruptible="false" canStore="false" />
 
+  <item id="monastery_dungeon_key" type="tool" icon="cathedral_key.ico" corruptible="false" canStore="false" />
+
 
 </items>

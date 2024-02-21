@@ -97,6 +97,7 @@
     <text id="jacominus_katana">Katana Fragment</text>
     <text id="thirallan_journal">Unoiks 187 Journal</text>
     <text id="cathedral_dungeon_key">Cathedral Dungeon Key</text>
+    <text id="monastery_dungeon_key">Monastery Cell Key</text>
   </section>
   <section id="item.descriptions">
     <text id="thirallan_map">Allows travel between the many areas of Thirallan.</text>
@@ -106,6 +107,7 @@
     <text id="purifiers_entryItem">To join the mysterious clan within the Purifier's maze, I need to have this insignia.</text>
     <text id="jacominus_katana">A strange fragment of a katana, it appears to have the name "Jacominus" engraved on it.</text>
     <text id="thirallan_journal">A journal to store all notes and important information acquired in the star system.</text>
+    <text id="monastery_dungeon_key">This must be the key to the cells in the Monastery's dungeon.</text>
   </section>
   <section id="actions">
     <text id="artifact">Scavenge</text>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <structures>
+  <include id="monastery/monastery_structures.xml" />
+
   <structure id="thirallan_map" image="{mod:thirallan:_alchemist_edition}/thirallan/scenes/thirallan_map.png" width="128" height="128" behind="true" remove="false" allowSpawn="true" />
 
   <structure id="thirallan_map_entrance" layer="npc" name="enter" width="16" height="16" type="door">
@@ -236,143 +238,6 @@
     <recipe type="guild_magic" />
   </structure>
 
-  <structure id="monastery_cathedral" image="monastery_cathedral.png" width="256" height="512" behind="true" remove="false" />
-  <animation id="cathedral_entrance.open" count="3" x="0" length="2" />
-  <animation id="cathedral_entrance.close" count="3" x="0" length="2" reverse="true" />
-  <structure id="cathedral_entrance" image="cathedral_entrance.png" width="48" height="40" name="enter">
-    <operate>
-      <teleport area="thirallan_cathedral_new" x="3.5" y="-1" with="ellipse" />
-    </operate>
-    <over><action>this.renderer.playAnimation("cathedral_entrance.open", false)</action></over>
-    <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
-  </structure>
-  <structure id="monastery_entrance" image="monastery_wall.png" width="528" height="310" behind="true" remove="false" />
-
-  <animation id="monastery_entrance_door.open" count="5" x="0" length="2" />
-  <animation id="monastery_entrance_door.close" count="5" x="0" length="2" reverse="true" />
-  <structure id="monastery_entrance_door" image="monastery_entrance_door.png" width="70" height="100" name="enter">
-    <operate>
-      <teleport area="thirallan_monastery" x="70" y="-1" with="ellipse" />
-    </operate>
-    <over><action>this.renderer.playAnimation("monastery_entrance_door.open", false)</action></over>
-    <out><action>this.renderer.playAnimation("monastery_entrance_door.close", false)</action></out>
-  </structure>
-  <structure id="monastery_exit" image="monastery_entrance_door.png" width="70" height="100" name="enter">
-    <operate>
-      <teleport area="thirallan_rotting_forest" x="74" y="-1" with="ellipse" />
-    </operate>
-    <over><action>this.renderer.playAnimation("monastery_entrance_door.open", false)</action></over>
-    <out><action>this.renderer.playAnimation("monastery_entrance_door.close", false)</action></out>
-  </structure>
-
-  <structure id="monastery_bell" image="monastery_bell.png" width="64" height="77" name="enter">
-    <operate>
-      <menu section="common">
-          <dialogue section="player" id="monastery_bell" speaker="player" />
-          <choice id="yes">
-          <section if="!isNight()">
-            <teleport area="monastery_gilbert" x="10" y="14" with="ellipse" />
-            <stop/>
-          </section>
-          <dialogue section="player" id="monastery_bell2" speaker="player" />
-          </choice>
-          <choice id="no" />
-        </menu>
-    </operate>
-  </structure>
-
-  <tilesheet id="cathedral_wall_parallax.png" width="144" height="160" />
-  <tile id="wall_parallax" sheet="cathedral_wall_parallax.png" x="0" />
-
-  <object id="wall_parallax" tile="wall_parallax" layer="back" />
-
-  <tilesheet id="blood_tree.png" width="100" height="75" />
-  <tile id="blood_tree" sheet="blood_tree.png" x="0" y="0" />
-  <animation id="blood_tree.hit" x="0" count="8" />
-  <animation id="blood_tree.grow" x="8" count="4" />
-  <tree id="blood_tree" health="5" loot="wood" min="3" max="5" collect="2" grown="3" speed="0.002" tile="blood_tree" generateO2="0.125">
-		<loot id="tree_seed" p="4" />
-		<loot id="eggs" p="1" />
-		<loot id="fruit" p="16" />
-	</tree>
-	<structure id="monastery_weaps_market" tile="weaps_market" type="market" animation="market" restock="5000" show_offers="!isNight()" nightAnimation="market.night">
-		<item id="mega_backpack" min="1" max="1" />
-		<item id="ultra_backpack" min="1" max="1" />
-		<item id="net" min="5" max="10" />
-		<item id="torch" min="5" max="10" />
-		<item id="trap" min="5" max="10" />
-		<item id="arrow" min="20" max="40" />
-		<item id="fence" min="5" max="10" />
-		<select count="6">
-			<item id="bow" min="1" max="1" />
-			<item id="malumite_pickaxe" min="1" max="1" />
-			<item id="malumite_sword" min="1" max="1" />
-			<item id="steel_axe" min="1" max="1" />
-			<item id="steel_hammer" min="1" max="1"/>
-			<item id="malumite_armor" min="1" max="1" />
-			<item id="malumite_shield" min="1" max="1" />
-		</select>
-		<buy type="equipment" /><buy type="tool" /><buy type="object" />
-		<over><action>this.loopAnimation("talk")</action></over>
-		<out><action>this.loopAnimation("idle")</action></out>
-		<operate><run procedure="market" /></operate>
-	</structure>
-	<structure id="monastery_mineral_market" tile="mineral_market" type="market" animation="market" restock="5000" show_offers="!isNight()" nightAnimation="market.night">
-		<item id="wood" min="10" max="30" />
-		<item id="coal" min="10" max="20" />
-		<item id="malumite_ore" min="5" max="20" />
-		<item id="cloth" min="10" max="20" />
-		<select count="3">
-			<item id="quartz" min="5" max="5" />
-			<item id="gold" min="5" max="5" />
-			<item id="diamond" min="5" max="5" />
-			<item id="iron_bar" min="5" max="5" />
-			<item id="steel_bar" min="5" max="5" />
-		</select>
-		<buy type="resource" />
-		<over><action>this.loopAnimation("talk")</action></over>
-		<out><action>this.loopAnimation("idle")</action></out>
-		<operate><run procedure="market" /></operate>
-	</structure>
-	<compound id="monastery_market">
-		<structure id="monastery_mineral_market" x="0" />
-		<structure id="monastery_weaps_market" x="3" />
-	</compound>
-
-  <object id="monastery.mines_entrance_decoy" width="16" height="16" />
-  <object id="monastery.mines_exit_decoy" width="16" height="16" />
-
-  <structure id="monastery.mines_entrance" width="32" height="32" image="{core}/structures/cave.png" name="enter">
-    <addedToArea>
-      <object id="monastery.mines_entrance_decoy" x="this.tile_x+0.5" y="this.tile_y" />
-    </addedToArea>
-    <operate>
-      <section>
-        <lerp object="player" alpha="0" seconds="0.25" />
-        <wait seconds="1" />
-        <pan toObject="area.getObject('monastery.mines_exit_decoy')" seconds="1" />
-        <wait seconds="0.5" />
-        <move object="player" x="106.5" y="2" />
-        <lerp object="player" alpha="1" seconds="0.25" />
-      </section>
-    </operate>
-  </structure>
-  <structure id="monastery.mines_exit" width="32" height="32" image="{core}/structures/cave.png" name="enter">
-    <addedToArea>
-      <object id="monastery.mines_exit_decoy" x="this.tile_x+0.5" y="this.tile_y" />
-    </addedToArea>
-    <operate>
-      <section>
-        <lerp object="player" alpha="0" seconds="0.25" />
-        <wait seconds="1" />
-        <pan toObject="area.getObject('monastery.mines_entrance_decoy')" seconds="1" />
-        <wait seconds="0.5" />
-        <move object="player" x="106.5" y="-1" />
-        <lerp object="player" alpha="1" seconds="0.25" />
-      </section>
-    </operate>
-  </structure>
-
   <tilesheet id="mess_of_souls_summon.png" width="32" height="128" />
   <tile id="MOS_summon" sheet="mess_of_souls_summon.png" x="0" y="0" />
   <animation id="MOS_summon.summon" length="2" x="0" count="43" />
@@ -395,98 +260,7 @@
     </over>
   </object>
 
-  <animation id="cathedral_sanctuary.idle" x="0" count="5" length="1.5" />
-  <animation id="cathedral_sanctuary.night.idle" x="5" count="5" length="1.5" />
-
-  <structure id="cathedral_sanctuary" width="88" height="64" image="cathedral_sanctuary.png" sleep="true" nightAnimation="cathedral_sanctuary.night" name="rest">
-    <operate>
-      <section if="isNight()">
-        <save sleep="true" />
-      </section>
-      <section if="!isNight()">
-        <dialogue section="azriel" id="no_service" speaker='player' />
-      </section>
-    </operate>
-  </structure>
-
-  <structure id="cathedral_exit" width="48" height="40" image="cathedral_entrance.png" name="enter">
-    <operate><teleport area="thirallan_monastery" x="87" y="-1" with="ellipse" /></operate>
-    <over><action>this.renderer.playAnimation("cathedral_entrance.open", false)</action></over>
-    <out><action>this.renderer.playAnimation("cathedral_entrance.close", false)</action></out>
-  </structure>
-
-  <tilesheet id="cathedral_pew.png" width="21" height="22" />
-  <tile id="cathedral_pew" sheet="cathedral_pew.png" x="0" y="0" />
-  <object id="cathedral_pew_bg" tile="cathedral_pew" />
-  <object id="cathedral_pew_fg" extends="cathedral_pew_bg" layer="top" />
-
-  <animation id="altar.idle" x="0" count="1" />
-  <animation id="altar.night.idle" x="1" count="12" />
-  <animation id="altar.night.stare" x="13" count="1" />
-  <structure id="cathedral_altar" image="cathedral_altar.png" width="96" height="32" nightAnimation="altar.night" behind="true" remove="false" name="talk">
-    <operate>
-      <dialogue text="Please, have a seat, you shouldn't be on the altar." />
-    </operate>
-  </structure>
-
-  <structure id="cathedral_window" image="cathedral_window.png" width="80" height="112" />
-  <structure id="cathedral_bg" image="cathedral_bg.png" width="448" height="256" behind="true" remove="false" />
-  <structure id="cathedral_ladder" image="cathedral_ladder.png" width="16" height="160" remove="false" />
-  <structure id="cathedral_exit_ladder" extends="cathedral_ladder" type="door" name="enter" />
-
-  <animation id="cathedral_door.open" count="4" x="0" length="2" />
-  <animation id="cathedral_door.close" count="4" x="0" length="2" reverse="true" />
-  <structure id="cathedral_door" image="cathedral_room_door.png" width="32" height="32" type="door" name="enter">
-    <operate>
-      <dialogue text="The door is locked..." speaker="player" />
-      <stop/>
-    </operate>
-    <!--over><action>this.renderer.playAnimation("cathedral_door.open", false);</action></over>
-    <out><action>this.renderer.playAnimation("cathedral_door.close", false);</action></out-->
-  </structure>
-  <structure id="altar_cathedral_door" image="altar_room_door.png" animation="cathedral_door" width="32" height="34" name="enter">
-    <operate>
-      <choose>
-        <section if="isNight()">
-          <dialogue text="Please don't touch that door, friend. Only Gilbert is allowed in there." />
-        </section>
-        <section if="!player.hasItem('cathedral_dungeon_key')">
-          <dialogue text="The door is locked..." speaker="player" />
-        </section>
-        <menu section="common">
-          <dialogue text="I'll have to be careful in here, if they come into the cathedral while I'm in here, I won't be able to leave this way. Should I even go in here?" speaker="player" />
-          <choice id="yes"><teleport area="cathedral_dungeon" x="10" y="10" with="ellipse" /></choice>
-          <choice id="no" />
-        </menu>
-      </choose>
-    </operate>
-    <over><action>if(isNight()) area.getStructureById('cathedral_altar').renderer.playAnimation("altar.night.stare");</action></over>
-    <out><action>if(isNight()) area.getStructureById('cathedral_altar').loopAnimation("altar.night.idle");</action></out>
-  </structure>
-
-  <tilesheet id="cathedral_furniture.png" width="16" height="15" />
-  <tile id="cathedral_table" sheet="cathedral_furniture.png" x="0" y="0" />
-  <tile id="cathedral_desk" sheet="cathedral_furniture.png" x="1" y="0" />
-  <tile id="cathedral_chair" sheet="cathedral_furniture.png" x="0" y="1" />
-  <tile id="cathedral_dresser" sheet="cathedral_furniture.png" x="1" y="1" />
-  <tile id="cathedral_display" sheet="cathedral_furniture.png" x="0" y="2" />
-  <object id="cathedral_table" tile="cathedral_table" />
-  <object id="cathedral_desk" tile="cathedral_desk" />
-  <object id="cathedral_chair" tile="cathedral_chair" />
-  <object id="cathedral_dresser" tile="cathedral_dresser">
-    <tooltip section="actions" id="open" />
-    <operate>
-      <menu section="common">
-        <dialogue section="player" id="gilbert_dresser" speaker="player" />
-        <choice id="yes">
-          <dialogue section="player" id="gilbert_dresser2" speaker="player" />
-          <item id="cathedral_dungeon_key" count="1" />
-        </choice>
-        <choice id="no" />
-      </menu>
-    </operate>
-  </object>
-  <object id="cathedral_display" tile="cathedral_display" />
+  
 
 
 
@@ -635,7 +409,6 @@
     </removedFromArea>
   </structure>
 
-  <!--Test for future areas-->
   <object id="fake_monastery_wall" tile="monastery_stone" layer="top" />
 
   <object id="thirallan_misc_note" tile="thirallan_note.ico" note_id="0">
@@ -665,5 +438,13 @@
       </action>
     </addedToArea>
   </object>
+
+  <tile id="alch_cobweb" sheet="cobweb.png" x="0" y="0" />
+  <tile id="alch_cobweb_flip" sheet="cobweb.png" x="0" y="1" />
+
+  <object id="alch_cobweb" tile="alch_cobweb" />
+  <object id="alch_cobweb_flip" tile="alch_cobweb_flip" />
+
+  <item id="thirallan_chest" extends="chest" />
 
 </structures>

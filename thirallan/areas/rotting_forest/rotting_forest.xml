@@ -183,6 +183,43 @@
     <object id="cathedral_dresser" x="19" y="14" />
   </area>
 
+  <area id="monastery_dungeon" height="1" corrupted="true" planet="thirallan_alchemist" canFly="false">
+      <tiles from="monastery_dungeon.png" x="0" y="-1">
+            <!--Stone & Dungeon Brick--><tile id="stone" color="655e5e" /><tile id="monastery_dungeon_brick" color="434741" />
+            <!--Empty Air in Dungeon--><tile id="stone" color="0a0fba">setTile(x, y, null)</tile>
+            <!--Dungeon Brick Back--><tile id="monastery_dungeon_brick_back" color="252725" layer="back" />
+            <!--Dungeon BG--><tile id="monastery_dungeon_brick_back" color="b6eeec">getStructure("dungeon_bg").build(null, area, x*Tile.SIZE, y*Tile.SIZE); setTile(x,y, null);</tile>
+            <!--Cobwebs--><tile id="monastery_dungeon_brick_back" color="eeeeee">area.addObject(ObjectInfo.make((!area.isEmptyTile(x-1, y)?("alch_cobweb"):("alch_cobweb_flip")), x*Tile.SIZE, y*Tile.SIZE)); setTile(x,y, null);</tile>
+            <!--Closed Bars--><tile id="monastery_dungeon_brick_back" color="000000">area.addObject(ObjectInfo.make("dungeon_bars_closed", x*Tile.SIZE, y*Tile.SIZE)); setTile(x,y, null);</tile>
+            <!--Open Bars--><tile id="monastery_dungeon_brick_back" color="6500c5" layer="back">area.addObject(ObjectInfo.make("dungeon_bars_open", x*Tile.SIZE, y*Tile.SIZE))</tile>
+            <!--Corrupted Bars--><tile id="monastery_dungeon_brick_back" color="35006b">area.addObject(ObjectInfo.make("dungeon_bars_trap", x*Tile.SIZE, y*Tile.SIZE)); setTile(x,y, null);</tile>
+            <!--Key--><tile id="monastery_dungeon_brick_back" color="ffde00">area.addObject(ObjectInfo.make("monastery_dungeon_key", x*Tile.SIZE, y*Tile.SIZE)); setTile(x,y, null);</tile>
+            <!--Torches--><tile id="monastery_dungeon_brick_back" color="665308">area.addObject(ObjectInfo.make("wall_torch", x*Tile.SIZE, y*Tile.SIZE)); setTile(x,y, null);</tile>
+            <!--Dungeon Exit--><tile id="monastery_dungeon_brick_back" color="80520b">getStructure("monastery_dungeon_exit").build(null, area, x*Tile.SIZE, y*Tile.SIZE); setTile(x,y, null);</tile>
+            <!--Paul's Cell--><tile id="monastery_dungeon_brick_back" color="644009">getStructure("monastery_dungeon_paul").build(null, area, x*Tile.SIZE, y*Tile.SIZE); setTile(x,y, null);</tile>
+            <!--Misc. Cell--><tile id="monastery_dungeon_brick_back" color="563708">getStructure("monastery_dungeon_misc").build(null, area, x*Tile.SIZE, y*Tile.SIZE); setTile(x,y, null);</tile>
+            <!--Ladders--><tile id="wooden_ladder" color="6d6d6d" layer="back" />
+            <!--Fake Wall--><tile id="monastery_dungeon_brick_back" color="5b5f56" layer="back">area.addObject(ObjectInfo.make("fake_dungeon_wall", x*Tile.SIZE, y*Tile.SIZE))</tile>
+      </tiles>
+
+      <tiles id="blackstone" y="0" />
+      <tiles id="blackstone" y="27" />
+      <tiles id="blackstone" x="0" />
+      <tiles id="blackstone" x="50" />
+
+      <structure id="cathedral_half_ladder" x="15" y="17" />
+      <structure id="cathedral_half_ladder" x="22" y="19" />
+      <structure id="cathedral_half_ladder" x="31" y="19" />
+      <light x="11" y="17" size="30" />
+      <init>
+        <runAreaLoad/>
+      </init>
+      <onLoad>
+        <music id="church_dungeon" seconds="1" />
+      </onLoad>
+    </area>
+
+
   <area id="thirallan_rotting_forest" background="thirallan_rotting_forest" width="150" height="100" looping="true" corrupted="true" planet="thirallan_alchemist">
     <tiles id="blood_dirt" start="0" end="0.5" />
     <tiles id="obsidian" start="0.5" end="1" />
