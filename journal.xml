@@ -50,6 +50,7 @@
         <journal id="peredur" />
         <journal id="thirallan_misc" />
         <journal id="thirallan_characters" />
+        <journal id="thirallan_happenings" />
     </journal_collection>
 
     <journal id="peredur" length="6" icon="mage" found="getFlag('found_peredur_desk')">
@@ -76,13 +77,18 @@
         <page index="8" found="player.hasQuest('rebuild_monastery')" /><!--Hadvarr-->
         <page index="9" found="player.hasQuest('rebuild_monastery')" /><!--Ligart-->
         <page index="10" found="player.hasQuest('rebuild_monastery')" /><!--Azriel-->
-        <page index="11" found="player.hasQuest('guild_init')" /><!--Asim-->
-        <page index="12" found="player.hasQuest('lost_artifact')" /><!--Umazz-->
-        <page index="13" found="player.hasQuest('guild_init')" /><!--Oviar-->
-        <page index="14" found="player.questComplete('guild_init')" /><!--Zhak'vik-->
-        <page index="15" found="player.questComplete('guild_init')" /><!--Mundatorem-->
-        <page index="16" found="getFlag('iterol_introduced')" /><!--Iterol-->
-        <page index="17" found="player.questComplete('undead_shrines')" /><!--Purifier-->
+        <page index="11" found="getFlag('met_paul')" /><!--Paul-->
+        <page index="12" found="player.hasQuest('guild_init')" /><!--Asim-->
+        <page index="13" found="player.hasQuest('lost_artifact')" /><!--Umazz-->
+        <page index="14" found="player.hasQuest('guild_init')" /><!--Oviar-->
+        <page index="15" found="player.questComplete('guild_init')" /><!--Zhak'vik-->
+        <page index="16" found="player.questComplete('guild_init')" /><!--Mundatorem-->
+        <page index="17" found="getFlag('iterol_introduced')" /><!--Iterol-->
+        <page index="18" found="player.questComplete('undead_shrines')" /><!--Purifier-->
+    </journal>
+
+    <journal id="thirallan_happenings" length="1" icon="" found="getFlag('journal_thirallan_happenings_found')">
+        <page index="1" found="getFlag('busted_lock_convo')" /><!--Hint for Cathedral Dungeon Key-->
     </journal>
 
     <window id="journals_overview" type="xml" closeButton="true" closeable="true" width="120" height="128">
@@ -182,6 +188,7 @@
             <text id="peredur">Peredur's Journal</text>
             <text id="thirallan_characters">Thirallan Inhabitants</text>
             <text id="thirallan_misc">Misc. Thirallan Notes</text>
+            <text id="thirallan_happenings">Thirallan Events</text>
         </section>
         <section id="peredur">
             <text id="journal_1">Entry one, who knows what date: The Purifier's Guild is wrong. They don't realize it but the Dark God will forsake them once they finish his will. They don't understand they are bringing about their own demise.</text>
@@ -204,19 +211,23 @@
             <text id="journal_2">[object=pyrrhos]: Co-founder of Zargoroth's Safe Haven, specifically noted to be a pacifist, only engaging in the trades.</text>
             <text id="journal_3">[object=tomkin]: Younger brother of Zargoroth. Noted to be very timid. [color=770000]Zargoroth[/color] cares very deeply for him and wants to help him excel.</text>
             <text id="journal_4">[object=andreas]: A former knight that was reduced to mining only after a severe traumatic encounter with the [color=490068]The Corrupted[/color].</text>
-            <text id="journal_5">[tile=jacominus2] [color=770000]Jacominus[/color]: Close friend of Andreas. Unfortunately was corrupted deep in the mines. I had no choice but to but him to rest.</text>
+            <text id="journal_5">[tile=jacominus2] [color=770000]Jacominus[/color]: Close friend of Andreas. Unfortunately was corrupted deep in the mines. I had no choice but to put him to rest.</text>
             <text id="journal_6">[object=peredur]: A secluded Mage that lurks around Zargoroth's Safe Haven. Incredibly interested in his research, and seems to stop at nothing to pursue it.</text>
             <text id="journal_7">[object=gilbert_template]: Leader of the Church Survivors, him and few others reside in the broken down Monastery, attempting to restore Thirallan to it's former glory.</text>
             <text id="journal_8">[object=hadvarr_template]: Co-leader of the Church Survivors, very skilled archer that used to be in high ranking at the Monastery before everything was destroyed. Very loyal.</text>
             <text id="journal_9">[object=ligart]: Why does no one else acknowledge this guy? Am I just going insane or is he really there? If so then who is he?</text>
             <text id="journal_10">[object=azriel]: The last known remaining priest still in Thirallan. Still holds true in his faith and yearns to be the next leader of the Monastery.</text>
-            <text id="journal_11">[object=asim]: Leader of the Purifier's Guild. Has faith that the Purifier will protect them as long as they continue to worship him.</text>
-            <text id="journal_12">[object=umazz]: Archivist of the Purifier's Guild, has extensive knowledge of the island's past. His dedication to finding lost artifacts of the past is admirable.</text>
-            <text id="journal_13">[object=oviar]: Recruit in the Purifier's Guild. He seems to mostly act as a gatekeeper to Asim. Unsure how powerful he actually is compared to the rest of them.</text>
-            <text id="journal_14">[object=zhak_vik]: A necromancher in the Purifier's Guild, apparently has the ability to conjure Corrupted from nothing. He aspires to succeed the Purifier itself.</text>
-            <text id="journal_15">[object=mundatorem]: What is this guy? I get a sinking feeling everytime I look at it. It's eyes stare straight into my soul. Probably for the better if I didn't interact with it</text>
-            <text id="journal_16">[object=iterol]: Something of a scientist, which seems to be a rarity in this place. He seems to believe that the Corruption is some kind of air-borne illness.</text>
-            <text id="journal_17">[tile=campaign_purifier_head_journal] [color=770000]The Purifier[/color]: Also known as the Dark God. This being seems to be the direct source of the Corrupted that plagues this planet. </text>
+            <text id="journal_11">[object=paul]: The only alive prisoner held by the Church Survivors, the only reason he's still alive is because Azriel was feeding him in secret. He's surprisingly content with life even while being blind in this place.</text>
+            <text id="journal_12">[object=asim]: Leader of the Purifier's Guild. Has faith that the Purifier will protect them as long as they continue to worship him.</text>
+            <text id="journal_13">[object=umazz]: Archivist of the Purifier's Guild, has extensive knowledge of the island's past. His dedication to finding lost artifacts of the past is admirable.</text>
+            <text id="journal_14">[object=oviar]: Recruit in the Purifier's Guild. He seems to mostly act as a gatekeeper to Asim. Unsure how powerful he actually is compared to the rest of them.</text>
+            <text id="journal_15">[object=zhak_vik]: A necromancher in the Purifier's Guild, apparently has the ability to conjure Corrupted from nothing. He aspires to succeed the Purifier itself.</text>
+            <text id="journal_16">[object=mundatorem]: What is this guy? I get a sinking feeling everytime I look at it. It's eyes stare straight into my soul. Probably for the better if I didn't interact with it</text>
+            <text id="journal_17">[object=iterol]: Something of a scientist, which seems to be a rarity in this place. He seems to believe that the Corruption is some kind of air-borne illness.</text>
+            <text id="journal_18">[tile=campaign_purifier_head_journal] [color=770000]The Purifier[/color]: Also known as the Dark God. This being seems to be the direct source of the Corrupted that plagues this planet. </text>
+        </section>
+        <section id="thirallan_happenings">
+            <text id="journal_1">I overheard [object=gilbert_template] talking to someone else about a broken trapdoor. He said it was at the top of the cathedral, where the bell is. Maybe I should check that.</text>
         </section>
     </lang>
 

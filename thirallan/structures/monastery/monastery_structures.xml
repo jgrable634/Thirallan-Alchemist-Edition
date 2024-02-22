@@ -18,7 +18,36 @@
     <animation id="monastery_entrance_door.close" count="5" x="0" length="2" reverse="true" />
     <structure id="monastery_entrance_door" image="monastery_entrance_door.png" width="70" height="100" name="enter">
         <operate>
-            <teleport area="thirallan_monastery" x="70" y="-1" with="ellipse" />
+            <choose>
+                <section if="getLocalPlayer().questComplete('rebuild_monastery') && !getFlag('busted_lock_convo')">
+                    <object id="gilbert_monastery" x="78" y="-1" />
+                    <object id="hadvarr_monastery" x="70" y="-1" />
+                    <action>
+                        area.getObject('gilbert_monastery').alpha = 0;
+                        area.getObject('hadvarr_monastery').alpha = 0;
+                    </action>
+                    <dialogue text="You overhear a conversation from within the monastery" />
+
+                    <dialogue section="hadvarr" id="busted_lock" speaker="area.getObject('hadvarr_monastery')" />
+                    <action>area.getObject('hadvarr_monastery').alpha = 0;</action>
+                    <dialogue section="gilbert" id="busted_lock" speaker="area.getObject('gilbert_monastery')" />
+                    <action>area.getObject('gilbert_monastery').alpha = 0;</action>
+                    <dialogue section="gilbert" id="busted_lock2" speaker="area.getObject('gilbert_monastery')" />
+                    <action>area.getObject('gilbert_monastery').alpha = 0;</action>
+                    <dialogue section="hadvarr" id="busted_lock2" speaker="area.getObject('hadvarr_monastery')" />
+                    <action>area.getObject('hadvarr_monastery').alpha = 0;</action>
+                    
+                    <remove object="area.getObject('gilbert_monastery')" />
+                    <remove object="area.getObject('hadvarr_monastery')" />
+                    <action>setFlag('busted_lock_convo', true);</action>
+                    <section if="!getFlag('journal_thirallan_happenings_found')"><show tooltip="popup" text="common.found_journal{value:'Thirallan Events'}" x="0.5" y="0.0625" hold="200" /></section>
+                    <section if="getFlag('journal_thirallan_happenings_found')"><show tooltip="popup" text="common.found_note{value:'Thirallan Events'}" x="0.5" y="0.0625" hold="200" /></section>
+                    <action>
+                        setFlag('journal_thirallan_happenings_found', true);
+                    </action>
+                </section>
+                <teleport area="thirallan_monastery" x="70" y="-1" with="ellipse" />
+            </choose>
         </operate>
         <over><action>this.renderer.playAnimation("monastery_entrance_door.open", false)</action></over>
         <out><action>this.renderer.playAnimation("monastery_entrance_door.close", false)</action></out>
@@ -262,6 +291,7 @@
             <!--action>
                 getLocalPlayer().area.getObject('thirallan_chest').inventory.addAll(getLocalPlayer().inventory);
             </action-->
+            
 
         </section>
         
@@ -270,6 +300,7 @@
     <object id="dungeon_bars_cor_open" tile="dungeon_bars_cor_open" />
 
     <structure id="dungeon_bg" image="dungeon_bg.png" width="464" height="112" behind="true" remove="false" />
+    <structure id="dungeon_cell_bg" image="dungeon_cell_bg.png" width="96" height="48" behind="true" remove="false" />
 
     <object id="monastery_dungeon_key" tile="monastery_dungeon_key">
         <tooltip section="actions" id="collect" />
@@ -297,7 +328,26 @@
 
     <structure id="monastery_dungeon_paul" image="monastery_dungeon_door.png" width="32" height="32" name="enter">
         <operate>
-            <dialogue text="Placeholder Paul text" />
+            <choose>
+                <section if="!player.hasItem('monastery_dungeon_key')">
+                    <choose>
+                        <section if="!getFlag('met_paul')">
+                            <object id="paul_chained" x="30" y="15" />
+                            <action>area.getObject('paul_chained').alpha = 0;</action>
+                            <dialogue section="paul" id="intro1" speaker="area.getObject('paul_chained')" />
+                            <action>area.getObject('paul_chained').alpha = 0;</action>
+                            <dialogue section="paul" id="intro2" speaker="area.getObject('paul_chained')" />
+                            <action>area.getObject('paul_chained').alpha = 0;</action>
+                            <dialogue section="paul" id="intro3" speaker="area.getObject('paul_chained')" />
+                            <action>area.getObject('paul_chained').alpha = 0;</action>
+                            <remove object="area.getObject('paul_chained')" />
+                            <action>setFlag('met_paul', true);</action>
+                        </section>
+                        <dialogue text="The prisoner isn't responding anymore."  />
+                    </choose>
+                </section>
+                <teleport area="paul_cell" x="6" y="5" allowReturn="true" with="ellipse" />
+            </choose>
         </operate>
         <!--over><action>this.renderer.playAnimation("monastery_dungeon_door.open", false);</action></over>
         <out><action>this.renderer.playAnimation("monastery_dungeon_door.close", false);</action></out-->
@@ -305,12 +355,35 @@
 
     <structure id="monastery_dungeon_misc" image="monastery_dungeon_door.png" width="32" height="32" name="enter">
         <operate>
-            <dialogue text="Placeholder text" />
+            <choose>
+                <dialogue text="The door is locked..." speaker='player' if="!player.hasItem('monastery_dungeon_key')" />
+                <teleport area="misc_cell" x="6" y="5" allowReturn="true" with="ellipse" />
+            </choose>
         </operate>
         <!--over><action>this.renderer.playAnimation("monastery_dungeon_door.open", false);</action></over>
         <out><action>this.renderer.playAnimation("monastery_dungeon_door.close", false);</action></out-->
     </structure>
+    <structure id="monastery_dungeon_cell.ret" image="monastery_dungeon_door.png" width="32" height="32" name="enter">
+        <operate>
+            <return with="ellipse" facing="left" />
+        </operate>
+    </structure>
 
     <object id="fake_dungeon_wall" tile="monastery_dungeon_brick" layer="top" />
+
+    <!--procedure id="place_decoy_backpack">
+        <action>
+            evalXml('&lt;object id="decoy_backpack" tile="'+getLocalPlayer().equipment.get("back").get().info.getTile().id+'">&lt;tooltip section="actions" id="collect" />&lt;operate>&lt;run procedure="recover_backpack" />&lt;/operate>&lt;/object>');
+            getLocalPlayer().area.addObject(ObjectInfo.make("decoy_backpack", 26*Tile.SIZE, 22*Tile.SIZE));
+        </action>
+        <set id="backpack_tile" value="getLocalPlayer().equipment.get('back').get().info.getTile().id" />
+        <object id="decoy_backpack" tile="backpack_tile">
+            <tooltip section="actions" id="collect" />
+            <operate>
+                <run procedure="recover_backpack" />
+            </operate>
+        </object>
+        <object id="decoy_backpack" x="26" y="22" />
+    </procedure-->
 
 </structures>

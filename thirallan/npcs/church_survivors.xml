@@ -126,4 +126,143 @@
 			</projectile>
 		</attack>
 	</enemy-->
+
+  <procedure id="paul.npc">
+    <choose>
+      <section if="this.area.id == 'paul_cell' && this.info.id == 'chained_paul'">
+        <menu section="common">
+          <dialogue section="paul" id="free1" speaker='this' />
+          <choice id="yes">
+            <dialogue section="paul" id="free2" speaker='this' />
+            <object id="paul" x="this.tile_x" y="this.tile_y" />
+            <remove object="this" />
+            <action>setFlag('dungeon_conflict', true);</action>
+          </choice>
+          <choice id="no" />
+        </menu>
+      </section>
+      <dialogue section="paul" id="free2" speaker='this' if="this.area.id == 'paul_cell'" />
+    </choose>
+  </procedure>
+
+  <npc id="paul_template" action="talk" talk_sfx="talking2">
+    <operate>
+      <section>
+        <set id="this" value="this" />
+        <run procedure="paul.npc" />
+      </section>
+    </operate>
+  </npc>
+  <npc id="chained_paul" extends="paul_template" tile="chained_paul" />
+  <npc id="paul" extends="paul_template" tile="paul" />
+  <npc id="armored_paul" extends="paul_template" tile="armored_paul" />
+
+  <!--
+    Player pos: (27, 14)
+    Paul pos: (29, 14)
+    Gilbert pos: (25, 14)
+    Azriel init pos: (17, 16)
+    Azriel mid pos: (20, 16)
+    Azriel new pos: (22, 14)
+    Iterol init pos: (17, 16)
+    Iterol new pos: (20, 16)
+  -->
+  <procedure id="dungeon_conflict">
+    <object id="paul" x="29" y="14" />
+    <object id="gilbert_monastery" x="25" y="14" facing="right"/>
+    <object id="azriel" x="17" y="16" facing="right" />
+    <object id="iterol_cathedral" x="16" y="16" facing="right" />
+
+
+    <dialogue section="gilbert" id="dungeon_conflict1" speaker="gilbert_monastery" />
+    <dialogue section="paul" id="dungeon_conflict1" speaker="paul" />
+    <dialogue section="gilbert" id="dungeon_conflict2" speaker="gilbert_monastery" />
+
+    <lerp object="azriel" deltaX="3" seconds="0.5" />
+    <move object="azriel" x="20" y="16" />
+    <facing object="gilbert_monastery" dir="left" />
+    <wait seconds="0.5">
+      <operate object="azriel" />
+      <operate object="gilbert_monastery" />
+    </wait>
+
+    <dialogue section="azriel" id="dungeon_conflict1" speaker="azriel" />
+    <dialogue section="gilbert" id="dungeon_conflict3" speaker="gilbert_monastery" />
+
+    <lerp object="azriel" deltaX="2" seconds="0.5" />
+    <move object="azriel" x="22" y="16" />
+    <wait seconds="0.5">
+      <operate object="azriel" />
+    </wait>
+    <lerp object="azriel" deltaY="-2" seconds="0.5" />
+    <move object="azriel" x="22" y="14" />
+    <wait seconds="0.5">
+      <operate object="azriel" />
+    </wait>
+    
+    <dialogue section="azriel" id="dungeon_conflict2" speaker="azriel" />
+    <dialogue section="azriel" id="dungeon_conflict3" speaker="azriel" />
+
+    <lerp object="iterol_cathedral" deltaX="4" seconds="0.5" />
+    <move object="iterol_cathedral" x="20" y="16" />
+    <wait seconds="0.5">
+      <operate object="iterol_cathedral" />
+    </wait>
+
+    <dialogue section="iterol" id="dungeon_conflict1" speaker="iterol_cathedral" />
+    <dialogue section="iterol" id="dungeon_conflict2" speaker="iterol_cathedral" />
+    <dialogue section="iterol" id="dungeon_conflict3" speaker="iterol_cathedral" />
+
+    <menu section="common">
+      <dialogue section="paul" id="dungeon_conflict2" speaker="paul" />
+      <choice id="dungeon_conflict_gilbert">
+        <dialogue section="iterol" id="dungeon_conflict4" speaker="iterol_cathedral" />
+        <dialogue section="azriel" id="dungeon_conflict4" speaker="azriel" />
+        <facing object="gilbert_monastery" dir="right" />
+        <wait seconds="0.25">
+          <operate object="gilbert_monastery" />
+        </wait>
+        <dialogue section="gilbert" id="dungeon_conflict4" speaker="gilbert_monastery" />
+        <section with="fade">
+          <remove object="gilbert_monastery" />
+          <remove object="azriel" />
+          <remove object="paul" />
+          <remove object="iterol_cathedral" />
+          <wait seconds="0.25">
+            <operate object="gilbert_monastery" />
+            <operate object="azriel" />
+            <operate object="paul" />
+            <operate object="iterol_cathedral" />
+          </wait>
+          <scene id="thirallan_alchemist" show="paul_death" />
+          <action>setFlag('paul_killed', true);</action>
+        </section>
+      </choice>
+      <choice id="dungeon_conflict_iterol">
+        <dialogue section="azriel" id="dungeon_conflict5" speaker="azriel" />
+        <dialogue section="gilbert" id="dungeon_conflict5" speaker="gilbert_monastery" />
+        <dialogue section="iterol" id="dungeon_conflict5" speaker="iterol_cathedral" />
+        <section with="fade">
+          <remove object="gilbert_monastery" />
+          <remove object="azriel" />
+          <remove object="paul" />
+          <remove object="iterol_cathedral" />
+          <action>setFlag('paul_experiment', true);</action>
+        </section>
+      </choice>
+      <choice id="dungeon_conflict_azriel">
+        <dialogue section="gilbert" id="dungeon_conflict6" speaker="gilbert_monastery" />
+        <dialogue section="iterol" id="dungeon_conflict6" speaker="iterol_cathedral" />
+        <dialogue section="azriel" id="dungeon_conflict6" speaker="azriel" />
+        <section with="fade">
+          <remove object="gilbert_monastery" />
+          <remove object="azriel" />
+          <remove object="paul" />
+          <remove object="iterol_cathedral" />
+          <action>setFlag('paul_freed', true);</action>
+        </section>
+      </choice>
+    </menu>
+  </procedure>
+
 </npcs>

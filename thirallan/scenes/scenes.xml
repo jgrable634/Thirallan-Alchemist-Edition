@@ -867,5 +867,23 @@
 				</choice>
 			</menu>
 		</show>
+		<show id="paul_death">
+			<music id="" />
+			<dialogue section="paul" id="death" speaker="area.getObject('paul')" />
+			<sound id="attack" />
+			<wait seconds="0.5" />
+			<sound id="attack" />
+			<wait seconds="0.5" />
+			<sound id="attack" />
+			<wait seconds="0.5" />
+			<sound id="attack" />
+			<wait seconds="0.5" />
+			<sound id="attack" />
+			<wait seconds="0.5" />
+			<dialogue section="gilbert" id="dungeon_conflict4b" speaker="area.getObject('paul')" />
+			<wait seconds="0.5" />
+			<sound id="bandit_ranged_death" />
+			<music id="church_dungeon" seconds="2" />
+		</show>
 	</scene>
 </scenes>

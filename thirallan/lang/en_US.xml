@@ -60,6 +60,9 @@
     <text id="azriel">Ask about [color=770000]Azriel[/color]</text>
     <text id="ligart">Ask about [color=770000]Ligart[/color]</text>
     <text id="guild">Ask about [color=770000]The Guild[/color]</text>
+    <text id="dungeon_conflict_gilbert">Side with [color=770000]Gilbert[/color]</text>
+    <text id="dungeon_conflict_azriel">Side with [color=770000]Azriel[/color]</text>
+    <text id="dungeon_conflict_iterol">Side with [color=770000]Iterol[/color]</text>
   </section>
 
   <section id="warning">
@@ -350,6 +353,15 @@
     <text id="rebuild10">Then why are you talking to me and not finding those workers?</text>
     <text id="rebuild11">Well, you pulled through! Impressive! With someone like you, we'll have many more successes in the future!</text>
     <text id="rebuild12">As a token of my esteem, I can teach you how to create a [color=770000]Warhammer[/color]. It has more range than a simple sword! It's not much, but I hope it can be helpful.</text>
+    <text id="busted_lock">Yeah! I thought we still had salvaged locks from the destroyed buildings but of course we don't! I'll have to find some metal and forge the damned lock myself!</text>
+    <text id="busted_lock2">At least I can still open it and [color=770000]and access the Bell at the top of the Cathedral[/color]. Just can't lock it.</text>
+    <text id="dungeon_conflict1">What the hell is going on in here!? You better have a good explanation for what you're doing in here.</text>
+    <text id="dungeon_conflict2">AND WHY ARE YOU FREEING MY PRISONER??? For that matter how are you still alive [color=770000]Paul[/color]?</text>
+    <text id="dungeon_conflict3">So not only are you letting one of the corruption wielding SCUM live for longer, but you are using our limited rations to do that? I oughta just kill the both of you right here.</text>
+    <text id="dungeon_conflict4">Glad you've made the right choice, a good cult member is a dead one! Now if you'll excuse me.</text>
+    <text id="dungeon_conflict4b">RAAAAAH DIE PURIFIER SCUM!</text>
+    <text id="dungeon_conflict5">So help me Aldir if this ends up biting me back later you wil all feel my wrath.</text>
+    <text id="dungeon_conflict6">Grrrrr... Fine, you can lead him out, but I better not see his vile face in my Monastery ever again.</text>
   </section>
   <section id="gilbert_info">
     <text id="selection">What do you want? I've got a lotta business to attend to!</text>
@@ -357,6 +369,8 @@
   </section>
   <section id="hadvarr">
     <text id="notOne">Hmph, we really need a guard out there... Anyway, if you are interested in joining us, speak to [object=gilbert_template]... Otherwise, begone, we are not accepting tourists.</text>
+    <text id="busted_lock">Say Gilbert, is the lock in that trapdoor still busted?</text>
+    <text id="busted_lock2">I guess it could be worse, I can take a look at it later and see if I can't fix it. Dunno how anyone would get up there to it anyways, don't stress about it.</text>
   </section>
   <section id="ligart">
     <text id="placeholder">...</text>
@@ -364,11 +378,29 @@
   <section id="azriel">
     <text id="notOne">Greetings! Blessing of our god upon you!</text>
     <text id="no_service">[object=azriel] only preaches at night. Should wait until then before entering.</text>
+    <text id="dungeon_conflict1">Me, that's how. I've been feeding him from our rations.</text>
+    <text id="dungeon_conflict2">And who will be the next Archpriest then huh? You've grown too bitter Gilbert.</text>
+    <text id="dungeon_conflict3">Let [color=770000]Paul[/color] go Gilbert, for Aldir's sake, the man is blind and succumbing to the corruption as we speak, is that not enough for you??</text>
+    <text id="dungeon_conflict4">I was worried you'd make that choice. Do what you will, but I won't forget this.</text>
+    <text id="dungeon_conflict5">Not exactly what I had in mind, but I suppose if it ends up curing him then I guess it's fine.</text>
+    <text id="dungeon_conflict6">Thank you friend, I knew you'd make the right choice. Come now [color=770000]Paul[/color] I think it's time you leave this place.</text>
+  </section>
+  <section id="paul">
+    <text id="intro1">... [pause=20]Hello? Who's there? Azriel?</text>
+    <text id="intro2">Who are you? If it was Gilbert he'd be screaming by now. Are you here to free me!?</text>
+    <text id="intro3">Please I beg of you, if you have the key to this cell, let me out. I'm done with being Gilbert's neglected pet.</text>
+
+    <text id="free1">You've done it? Great! Undo my chains, please. I have knowledge of the [color=770000]Purifier's Guild[/color] I can provide.</text>
+    <text id="free2">Thank you so much, I'll follow you out. After we are out I will impart my knowledge unto you.</text>
+
+    <text id="dungeon_conflict1">There's Gilbert...</text>
+    <text id="dungeon_conflict2">Please stranger, you've helped me this much, help me be free after all these years!</text>
+    <text id="death">No, please! Don't do it...</text>
   </section>
 
   <section id="guild">
-    <text id="door1">Speak[pause=20] the Lord's [pause=20] name.</text>
-    <text id="door2">Speak the Lord's name.</text>
+    <text id="door1">Speak[pause=20] the Lord's [pause=20] will.</text>
+    <text id="door2">Speak the Lord's will.</text>
     <text id="door3">Welcome[pause=20] brother.</text>
     <text id="door4">You[pause=20] are not[pause=20] worthy...</text>
   </section>
@@ -414,6 +446,14 @@
     <text id="invite_iterol3">Trust me, the long term reward will be better than the short term risk of travel.</text>
     <text id="invite_iterol4">Hmph. You better be right about this.</text>
     <text id="monastery">Hmph. Not the most conventional workplace, but this will do for now.</text>
+
+    <text id="dungeon_conflict1">Uh, if I may...</text>
+    <text id="dungeon_conflict2">An alive specimen with corruption growing on it would be quite beneficial for reasearch into the disease.</text>
+    <text id="dungeon_conflict3">And lets be honest, with the corruption on him, it's likely he won't survive anyways, I'd like to at least try to help him with his affliction.</text>
+
+    <text id="dungeon_conflict4">Why would you choose to destroy such a useful specimen? You disappoint me.</text>
+    <text id="dungeon_conflict5">Excellent, I'm glad you made the right choice. Now, [color=770000]Paul[/color] is it? Come with me please.</text>
+    <text id="dungeon_conflict6">He won't die in peace you know, the corruption will see to that. How disappointing.</text>
   </section>
 
 
@@ -446,6 +486,7 @@
     <text id="hadvarr_template">Hadvarr</text>
     <text id="ligart">???</text>
     <text id="azriel">Azriel</text>
+    <text id="paul">Paul</text>
 
     <text id="asim">Asim</text>
     <text id="umazz">Umazz</text>

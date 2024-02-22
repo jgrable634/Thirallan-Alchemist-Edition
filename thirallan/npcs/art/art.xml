@@ -47,6 +47,18 @@
   <animation id="ligart.talk" x="0" count="8" />
   <animation id="ligart.walk" x="9" count="8" />
   <animation id="ligart.attack" x="9" count="14" />
+  <tile id="chained_paul" sheet="church_survivors/paul.png" x="0" y="0" />
+  <animation id="chained_paul.idle" x="0" count="1" />
+  <animation id="chained_paul.talk" x="0" count="5" />
+  <tile id="paul" sheet="church_survivors/paul.png" x="0" y="1" />
+  <animation id="paul.idle" x="0" count="1" />
+  <animation id="paul.talk" x="0" count="5" />
+  <animation id="paul.walk" x="5" count="4" />
+  <tile id="armored_paul" sheet="church_survivors/paul.png" x="4" y="2" />
+  <animation id="armored_paul.idle" equals="paul.idle" />
+  <animation id="armored_paul.talk" equals="paul.talk" />
+  <animation id="armored_paul.walk" equals="paul.walk" />
+
   <tile id="andreas_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="0" />
   <tile id="pyrrhos_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="1" />
   <tile id="iterol_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="2" />

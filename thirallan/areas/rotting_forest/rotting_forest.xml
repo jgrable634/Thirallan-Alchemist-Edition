@@ -183,6 +183,25 @@
     <object id="cathedral_dresser" x="19" y="14" />
   </area>
 
+  <area id="paul_cell" width="12" height="9" canFly="false">
+    <tiles id="monastery_dungeon_brick" start="0" end="1" />
+    <action>for(x in 3...9) for(y in 3...6) setTile(x,y,null);</action>
+    <structure id="dungeon_cell_bg" x="3" y="5" /> 
+    <object id="chained_paul" x="8" y="5" />
+    <object id="wall_torch" x="4" y="4" />
+    <object id="wall_torch" x="7" y="4" />
+    <structure id="monastery_dungeon_cell.ret" x="5" y="5" />
+  </area>
+
+  <area id="misc_cell" width="12" height="9" canFly="false">
+    <tiles id="monastery_dungeon_brick" start="0" end="1" />
+    <action>for(x in 3...9) for(y in 3...6) setTile(x,y,null);</action>
+    <structure id="dungeon_cell_bg" x="3" y="5" /> 
+    <object id="wall_torch" x="4" y="4" />
+    <object id="wall_torch" x="7" y="4" />
+    <structure id="monastery_dungeon_cell.ret" x="5" y="5" />
+  </area>
+
   <area id="monastery_dungeon" height="1" corrupted="true" planet="thirallan_alchemist" canFly="false">
       <tiles from="monastery_dungeon.png" x="0" y="-1">
             <!--Stone & Dungeon Brick--><tile id="stone" color="655e5e" /><tile id="monastery_dungeon_brick" color="434741" />
@@ -216,6 +235,9 @@
       </init>
       <onLoad>
         <music id="church_dungeon" seconds="1" />
+        <section if="getFlag('dungeon_conflict')">
+          <run procedure="dungeon_conflict" />
+        </section>
       </onLoad>
     </area>
 
