@@ -259,10 +259,10 @@
 	            getParallaxLayer("thirallan_moon").getChildAt(0).playAnimation("thirallan_moon.none", true, function(p){p.playAnimation("single", true);});
 						</action>
 						<runAreaLoad/>
-						<section if="!player.questComplete('blood_moon')">
+						<section if="!getFlag('kill_mess_of_souls')">
 							<object id="zargoroth_npc" x="62" y="-1" />
 							<object id="peredur" x="61" y="-1" />
-							<action>setGameTime(6);</action>
+							<action>setGameTime(6); setFlag('kill_mess_of_souls', true);</action>
 							<complete quest="blood_moon" />
 						</section>
 					</section>

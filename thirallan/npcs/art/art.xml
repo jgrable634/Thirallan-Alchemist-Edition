@@ -62,6 +62,7 @@
   <tile id="andreas_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="0" />
   <tile id="pyrrhos_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="1" />
   <tile id="iterol_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="2" />
+  <tile id="paul_hidden" sheet="church_survivors/recruiters_misc.png" x="0" y="3" />
 
   <!--Purifier's Guild-->
   <tilesheet id="mage_guild/asim.png" width="17" height="16" />

@@ -19,7 +19,7 @@
     <structure id="monastery_entrance_door" image="monastery_entrance_door.png" width="70" height="100" name="enter">
         <operate>
             <choose>
-                <section if="getLocalPlayer().questComplete('rebuild_monastery') && !getFlag('busted_lock_convo')">
+                <section if="getLocalPlayer().questComplete('rebuild_monastery') && !player.hasQuest('monastery_dungeon')">
                     <object id="gilbert_monastery" x="78" y="-1" />
                     <object id="hadvarr_monastery" x="70" y="-1" />
                     <action>
@@ -39,12 +39,7 @@
                     
                     <remove object="area.getObject('gilbert_monastery')" />
                     <remove object="area.getObject('hadvarr_monastery')" />
-                    <action>setFlag('busted_lock_convo', true);</action>
-                    <section if="!getFlag('journal_thirallan_happenings_found')"><show tooltip="popup" text="common.found_journal{value:'Thirallan Events'}" x="0.5" y="0.0625" hold="200" /></section>
-                    <section if="getFlag('journal_thirallan_happenings_found')"><show tooltip="popup" text="common.found_note{value:'Thirallan Events'}" x="0.5" y="0.0625" hold="200" /></section>
-                    <action>
-                        setFlag('journal_thirallan_happenings_found', true);
-                    </action>
+                    <quest id="monastery_dungeon" ask="false" />
                 </section>
                 <teleport area="thirallan_monastery" x="70" y="-1" with="ellipse" />
             </choose>

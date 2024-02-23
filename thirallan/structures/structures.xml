@@ -177,6 +177,7 @@
       <choose>
         <dialogue section="common" id="thirallan_mines_no" speaker='player' if="!player.hasQuest('find_jacominus')" />
         <dialogue section="common" id="hut_stuff" speaker='player' if="!getFlag('TAE_second')" />
+        <dialogue text="Some force is preventing me from entering the mines." speaker='player' if="getFlag('blood_moon')" />
         <teleport area="thirallan_zargoroth.mines" x="5" y="5" with="ellipse" />
       </choose>
     </operate>

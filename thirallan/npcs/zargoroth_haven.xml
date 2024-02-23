@@ -21,7 +21,7 @@
       <kill id="jacominus" count="1" name="quests.misc.thirallan_jacominus" hidden="true" />
     </quest>
     <quest id="blood_moon" giver="zargoroth_npc" exp="2000">
-      <kill id="mess_of_souls" count="1" name="quests.misc.thirallan_MOS" hidden="true" />
+      <flag id="kill_mess_of_souls" count="1" name="quests.misc.thirallan_MOS" hidden="true" />
     </quest>
     <quest id="undead_shrines" giver="zargoroth_npc" exp="2000">
       <kill id="fallen_angel" count="6" name="quests.misc.thirallan_shrines" />

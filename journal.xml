@@ -233,7 +233,7 @@
 
         <onLoad>
             <section>
-                <action if="!getLocalPlayer().hasItem('thirallan_journal') && !getLocalPlayer().areas.get('thirallan_zargoroth') != null">getLocalPlayer().addItem('thirallan_journal', 1);</action>
+                <action if="!getLocalPlayer().hasItem('thirallan_journal') && getLocalPlayer().areas.exists('thirallan_zargoroth')">getLocalPlayer().addItem('thirallan_journal', 1);</action>
                 <action if="getLocalPlayer().hasItem('mines_note1') || getLocalPlayer().hasItem('mines_note2')">
                     setFlag('journal_thirallan_misc_found', true);
                     if(getLocalPlayer().hasItem('mines_note1')){

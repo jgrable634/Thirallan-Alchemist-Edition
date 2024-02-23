@@ -362,6 +362,8 @@
     <text id="dungeon_conflict4b">RAAAAAH DIE PURIFIER SCUM!</text>
     <text id="dungeon_conflict5">So help me Aldir if this ends up biting me back later you wil all feel my wrath.</text>
     <text id="dungeon_conflict6">Grrrrr... Fine, you can lead him out, but I better not see his vile face in my Monastery ever again.</text>
+    <text id="paul1">I'm glad you hate those corruption wielding scum as much as I do!</text>
+    <text id="paul2">If I see that damned prisoner again I will kill him, you know that right?</text>
   </section>
   <section id="gilbert_info">
     <text id="selection">What do you want? I've got a lotta business to attend to!</text>
@@ -384,6 +386,9 @@
     <text id="dungeon_conflict4">I was worried you'd make that choice. Do what you will, but I won't forget this.</text>
     <text id="dungeon_conflict5">Not exactly what I had in mind, but I suppose if it ends up curing him then I guess it's fine.</text>
     <text id="dungeon_conflict6">Thank you friend, I knew you'd make the right choice. Come now [color=770000]Paul[/color] I think it's time you leave this place.</text>
+    <text id="paul1">I still can't believe you did that to [color=770000]Paul[/color].</text>
+    <text id="paul2">I hope [color=770000]Paul[/color] is doing alright.</text>
+
   </section>
   <section id="paul">
     <text id="intro1">... [pause=20]Hello? Who's there? Azriel?</text>
@@ -446,6 +451,8 @@
     <text id="invite_iterol3">Trust me, the long term reward will be better than the short term risk of travel.</text>
     <text id="invite_iterol4">Hmph. You better be right about this.</text>
     <text id="monastery">Hmph. Not the most conventional workplace, but this will do for now.</text>
+    <text id="monastery_paul1">To think my research has been set back because you decided he was better off dead.</text>
+    <text id="monastery_paul3">So how's [color=770000]Paul[/color]? Is he dead yet since you didn't let me help? Just checking.</text>
 
     <text id="dungeon_conflict1">Uh, if I may...</text>
     <text id="dungeon_conflict2">An alive specimen with corruption growing on it would be quite beneficial for reasearch into the disease.</text>
@@ -505,6 +512,7 @@
     <text id="undead_shrines">The Six Shrines</text>
 
     <text id="rebuild_monastery">Recruiter Mcstabby</text>
+    <text id="monastery_dungeon">Dungeon Crawler</text>
 
     <text id="guild_init">The Purifier's Guild</text>
     <text id="lost_artifact">Lost Artifact</text>
@@ -524,6 +532,7 @@
     <text id="find_miner">Recruit Miner</text>
     <text id="find_merchants">Recruit Merchants</text>
     <text id="find_scientist">Recruit Scientist</text>
+    <text id="find_paul">Discover Gilbert's secret</text>
   </section>
   <section id="quest.description">
     <text id="proving_worth">wants you to get some [color=490068]Malumite[/color] gear.</text>
@@ -533,6 +542,7 @@
     <text id="undead_shrines">wants you to investigate the reported shrines throughout the island.</text>
 
     <text id="rebuild_monastery">wants you to recruit people for the Monastery.</text>
+    <text id="monastery_dungeon">I should check the broken trapdoor [color=77000]At the bell at the top of the Cathedral[/color].</text>
 
     <text id="guild_init">wants you to retrieve a [item=init_rite] from [color=770000]Umazz[/color]</text>
     <text id="lost_artifact">wants you to retrieve a [item=lost_artifact] from an "old statue".</text>
