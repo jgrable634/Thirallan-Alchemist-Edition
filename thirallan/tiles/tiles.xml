@@ -13,6 +13,7 @@
   <tile id="wooden_ladder" sheets="tiles.png" x="16" />
   <tile id="monastery_dungeon_brick" sheet="tiles.png" x="17" />
   <tile id="monastery_dungeon_brick_back" sheet="tiles.png" x="18" />
+  <tile id="beasts_colosseum_brick" sheet="tiles.png" x="19" />
   <dig id="fragmented_stone" cost="1" />
   <dig id="blood_grass" cost="0" />
   <dig id="blood_dirt" cost="0" />

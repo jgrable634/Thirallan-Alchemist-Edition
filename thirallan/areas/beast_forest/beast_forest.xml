@@ -21,7 +21,8 @@
     <objects id="tree" y="-1" startX="50" endX="100" minDist="3" maxDist="3" array="right" />
     <objects id="undead" fromX="0" toX="150" fromY="-1" toY="-1" count="6" />
     <spawner id="undead" time="100" count="3" fromX="0" toX="150" fromY="-1" toY="-1" enabled="!getFlag('blood_moon')" />
-    <structure id="encampment_door" x="50" y="-1" />
+    <structure id="colosseum_exterior" x="50" y="-1" />
+    <structure id="colosseum_exterior_entrance" x="56.3125" y="-1" />
     <init><runAreaLoad /></init>
     <onLoad>
       <music id="bandit_territory" seconds="1" />
@@ -29,7 +30,14 @@
     </onLoad>
   </area>
 
-  <area id="encampment.beasts" extends="encampment_template">
+  <area id="encampment.beasts" width="50" height="30" looping="true" canFly="false">
+    <tiles id="dirt" start="0" end="1" />
+    <action>for(y in 0...3) for(x in 0...50) setTile(x,y,"beast_colosseum_brick");</action>
+    <action>for(y in -7...-5) for(x in 0...50) setTile(x,y,"beast_colosseum_brick");</action>
+    <tiles id="beast_colosseum_brick" y="-12" />
+    <action>
+      for(x in [0, 8, 16, 24, 32, 40, 48]) for(y in [-1, -8]) getStructure("beast_colosseum_bg").build(null, area, x*Tile.SIZE, y*Tile.SIZE);
+    </action>
   </area>
 
 </areas>

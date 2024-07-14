@@ -185,7 +185,38 @@
 
     <tilesheet id="cathedral_pew.png" width="21" height="22" />
     <tile id="cathedral_pew" sheet="cathedral_pew.png" x="0" y="0" />
-    <object id="cathedral_pew_bg" tile="cathedral_pew" />
+    <object id="cathedral_pew_bg" tile="cathedral_pew">
+        <tooltip section="actions" id="sit" if="isNight()" />
+        <operate>
+            <lerp object="area.getObject('azriel_cathedral')" alpha="1" modal="true" seconds="0.25" />
+            <menu section="common" closeable="true">
+                <dialogue section="azriel" id="preach_question" speaker="area.getObject('azriel_cathedral')" />
+                <choice id="aldir">
+                    <dialogue section="azriel" id="preach1_1" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach1_2" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach1_3" speaker="area.getObject('azriel_cathedral')" />
+                    <action>setFlag('aldir_preach', true)</action>
+                </choice>
+                <choice id="draconic_awakening" if="getFlag('aldir_preach')">
+                    <dialogue section="azriel" id="preach2_1" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach2_2" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach2_3" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach2_4" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach2_5" speaker="area.getObject('azriel_cathedral')" />
+                    <action>setFlag('draconic_preach', true)</action>
+                </choice>
+                <choice id="corruption_war" if="getFlag('aldir_preach')">
+                    <dialogue section="azriel" id="preach3_1" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach3_2" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach3_3" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach3_4" speaker="area.getObject('azriel_cathedral')" />
+                    <dialogue section="azriel" id="preach3_5" speaker="area.getObject('azriel_cathedral')" />
+                    <action>setFlag('corruption_preach', true)</action>
+                </choice>
+            </menu>
+            <lerp object="area.getObject('azriel_cathedral')" alpha="0" />
+        </operate>
+    </object>
     <object id="cathedral_pew_fg" extends="cathedral_pew_bg" layer="top" />
 
     <animation id="altar.idle" x="0" count="1" />
@@ -193,7 +224,7 @@
     <animation id="altar.night.stare" x="13" count="1" />
     <structure id="cathedral_altar" image="cathedral_altar.png" width="96" height="32" nightAnimation="altar.night" behind="true" remove="false" name="talk">
         <operate>
-            <dialogue text="Please, have a seat, you shouldn't be on the altar." />
+            <dialogue section="azriel" id="altar" speaker="area.getObject('azriel_cathedral')" />
         </operate>
     </structure>
 
@@ -217,14 +248,14 @@
         <operate>
             <choose>
                 <section if="isNight()">
-                    <dialogue text="Please don't touch that door, friend. Only Gilbert is allowed in there." />
+                    <dialogue section="azriel" id="dungeon" speaker="area.getObject('azriel_cathedral')" />
                 </section>
                 <section if="!player.hasItem('cathedral_dungeon_key')">
                     <dialogue text="The door is locked..." speaker="player" />
                 </section>
                 <menu section="common">
                     <dialogue text="I'll have to be careful in here, if they come into the cathedral while I'm in here, I won't be able to leave this way. Should I even go in here?" speaker="player" />
-                    <choice id="yes"><teleport area="monastery_dungeon" x="12" y="12" with="ellipse" /></choice>
+                    <choice id="yes"><teleport area="monastery_dungeon" x="12" y="8" with="ellipse" /></choice>
                     <choice id="no" />
                 </menu>
             </choose>

@@ -105,11 +105,24 @@
   <npc id="azriel" tile="azriel" action="talk" talk_sfx="talking5">
     <idle class="wander" fromX="50" toX="126" />
     <operate>
-      <dialogue section="azriel" id="paul1" speaker='this' if="getFlag('paul_killed')" />
-      <dialogue section="azriel" id="paul2" speaker='this' if="getLocalPlayer().questComplete('monastery_dungeon')" />
-      <dialogue section="azriel" id="notOne" speaker='this' />
+      <section>
+        <choose>
+          <dialogue section="azriel" id="paul1" speaker='this' if="getFlag('paul_killed')" />
+          <dialogue section="azriel" id="paul2" speaker='this' if="getLocalPlayer().questComplete('monastery_dungeon')" />
+          <dialogue section="azriel" id="notOne" speaker='this' />
+        </choose>
+        <window type="items" title="common.hotkey" filter="function(i){return i.id == 'corrupted_item';}" closeable="true">
+          <choose>
+            <dialogue section="azriel" id="poor" speaker='this' if="player.getCoins() < 1000" />
+            <section>
+              <action>player.addCoins(-1000); var valueInfo = getItem(Item.getParameter(name, "p")); player.addItems(valueInfo,1,valueInfo.getDurability(),null); player.addItems(item, -1, value, name);</action>
+            </section>
+          </choose>
+        </window>
+      </section>
     </operate>
   </npc>
+  <npc id="azriel_cathedral" tile="azriel" talk_sfx="talking5" />
   <npc id="ligart" tile="ligart" action="talk" night="true" sleepDay="true">
     <idle class="wander" fromX="50" toX="126" />
     <operate>

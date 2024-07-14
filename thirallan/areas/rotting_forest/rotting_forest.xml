@@ -123,6 +123,7 @@
     </action>
     <object id="gilbert_cathedral" x="25" y="-11" />
     <object id="hadvarr_cathedral" x="5" y="-1" />
+    <object id="azriel_cathedral" x="23.45" y="-2" />
     <structure id="cathedral_altar" x="21" y="-1" />
     <structure id="cathedral_bg" x="0" y="-1" />
     <structure id="cathedral_window" x="7" y="-2" />
@@ -155,6 +156,7 @@
       <section if="getFlag('iterol_recruited') && area.getObject('iterol_cathedral') == null" >
         <object id="iterol_cathedral" x="6" y="-11" />
       </section>
+      <action>area.getObject('azriel_cathedral').alpha = 0;</action>
       <action if="!area.isLit(1, -1)">for(y in -31...-1) for(x in 0...21) area.setLit(x, y);</action>
       <music id="holy_hills" seconds="1" />
     </onLoad>
@@ -219,17 +221,19 @@
             <!--Misc. Cell--><tile id="monastery_dungeon_brick_back" color="563708">getStructure("monastery_dungeon_misc").build(null, area, x*Tile.SIZE, y*Tile.SIZE); setTile(x,y, null);</tile>
             <!--Ladders--><tile id="wooden_ladder" color="6d6d6d" layer="back" />
             <!--Fake Wall--><tile id="monastery_dungeon_brick_back" color="5b5f56" layer="back">area.addObject(ObjectInfo.make("fake_dungeon_wall", x*Tile.SIZE, y*Tile.SIZE))</tile>
+            <!--Walkable BG Stone--><tile id="stone" color="454242">mine(x, y)</tile>
+            <!--Corrupted Test--><tile id="stone" color="890ec3">mine(x, y); area.addObject(ObjectInfo.make("corrupted_test", x*Tile.SIZE, y*Tile.SIZE))</tile>
       </tiles>
 
       <tiles id="blackstone" y="0" />
       <tiles id="blackstone" y="27" />
       <tiles id="blackstone" x="0" />
       <tiles id="blackstone" x="50" />
-
-      <structure id="cathedral_half_ladder" x="15" y="17" />
-      <structure id="cathedral_half_ladder" x="22" y="19" />
-      <structure id="cathedral_half_ladder" x="31" y="19" />
-      <light x="11" y="17" size="30" />
+o
+      <structure id="cathedral_half_ladder" x="15" y="13" />
+      <structure id="cathedral_half_ladder" x="22" y="15" />
+      <structure id="cathedral_half_ladder" x="31" y="15" />
+      <light x="11" y="13" size="30" />
       <init>
         <runAreaLoad/>
       </init>

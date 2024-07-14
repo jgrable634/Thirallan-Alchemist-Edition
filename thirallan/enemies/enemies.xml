@@ -19,12 +19,92 @@
 	<animation id="undead.pre_attack" x="8" count="4" />
 	<animation id="undead.attack" x="12" count="2" />
 
-	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" capture="4" underground="true" type="surface" fps="10" vertical="true" death_sfx="leech_death">
-		<attack type="melee" damage="5" animation="attack">
-			<pre><play object="this" animation="pre_attack" /></pre>
+	<action>
+		function is_cleansing_block() {
+			p = getLocalPlayer();
+			if(p.equipment.get('shield').get() != null) {
+				if(p.equipment.get('shield').get().getElement() != null && p.equipment.get('shield').get().getElement().id == 'cleansing') {
+					return true;
+				}
+			}
+			return false;
+		}
+		function adjust_corrupted_damage(attack, original, ?obj) {
+			var p = getLocalPlayer();
+			var ignDef = p.getDefense();
+			trace("Initial Defense: "+ignDef);
+			if(!is_cleansing_block()){
+				if(attack != null){
+					attack.xml.set('ignoreArmor', true);
+					for (i in 1...original.length) {
+						attack.xml.xml.children[(i*2)+1].set('ignoreArmor', true);
+					}
+				}
+				if(p.equipment.get('armor').get() != null && p.equipment.get('armor').get().info.defense > 0 && (p.equipment.get('armor').get().getElement() == null || p.equipment.get('armor').get().getElement().id != 'cleansing')) {
+					trace("No Cleansing Armor Defense");
+					ignDef = ignDef-p.equipment.get('armor').get().info.defense;
+				}
+				if(p.equipment.get('head').get() != null && p.equipment.get('head').get().info.defense > 0 && (p.equipment.get('head').get().getElement() == null || p.equipment.get('head').get().getElement().id != 'cleansing')) {
+					trace("No Cleansing Helmet Defense");
+					ignDef = ignDef-p.equipment.get('head').get().info.defense;
+				}
+				trace("Player does not have cleansing shield, ignoring armor. Subtracting "+ignDef+" from damage to account for cleansing armor");
+				if(attack != null) {
+					attack.damage = original[0]-ignDef;
+					for (i in 1...original.length) {
+						attack.xml.xml.children[(i*2)+1].set('damage', original[i]-ignDef);
+					}
+				} else {
+					if(obj.info.id == 'fallen_angel' || 'fallen_angel_noBGM') {
+						obj.info.xml.second.xml.children[3].children[0].children[1].set('damage', original[0]-ignDef);
+						obj.info.xml.second.xml.children[3].children[0].children[1].set('ignoreArmor', true);
+					}
+				}
+			} else {
+				if(attack != null){
+					attack.xml.set('ignoreArmor', false);
+					for (i in 1...original.length) {
+						attack.xml.xml.children[(i*2)+1].set('ignoreArmor', false);
+					}
+				}
+				if(p.equipment.get('armor').get() != null && p.equipment.get('armor').get().info.defense > 0 && p.equipment.get('armor').get().getElement() != null && p.equipment.get('armor').get().getElement().id == 'cleansing') {
+					trace("Cleansing Armor Defense");
+					ignDef = ignDef-p.equipment.get('armor').get().info.defense;
+				} 
+				if(p.equipment.get('head').get() != null && p.equipment.get('head').get().info.defense > 0 && p.equipment.get('head').get().getElement() != null && p.equipment.get('head').get().getElement().id == 'cleansing') {
+					trace("Cleansing Helmet Defense");
+					ignDef = ignDef-p.equipment.get('head').get().info.defense;
+				}
+				
+				trace("Player does have cleansing shield, allowing armor, but adding "+ignDef+" to attack to account for corruptible armor");
+				if(attack != null){
+
+					attack.damage = original[0]+ignDef;
+					for (i in 1...original.length) {
+						attack.xml.xml.children[(i*2)+1].set('damage', original[i]+ignDef);
+					}
+				} else {
+					if(obj.info.id == 'fallen_angel' || 'fallen_angel_noBGM') {
+						obj.info.xml.second.xml.children[3].children[0].children[1].set('damage', original[0]+ignDef);
+						obj.info.xml.second.xml.children[3].children[0].children[1].set('ignoreArmor', false);
+					}
+				}
+			}
+			return;
+		}
+	</action>
+
+	<enemy id="undead" tile="undead" health="7" speed="1" range="7" trapped="undead" damageElement="cleansing" capture="4" underground="true" type="surface" fps="10" vertical="true" death_sfx="leech_death">
+		<attack type="melee" damage="5" animation="attack" ignoreArmor="false">
+			<pre><play object="this" animation="pre_attack" /><action>adjust_corrupted_damage(this.info.attacks[0], [5])</action></pre>
+			<onBlocked><action>trace("Get blocked nerd"); </action></onBlocked>
 		</attack>
-		<defeatedBy><run procedure="corrupted.death" /></defeatedBy>
+		<onHit><action>trace("Get hit nerd"); </action></onHit>
+		
+		<!--defeatedBy><run procedure="corrupted.death" /></defeatedBy-->
 	</enemy>
+
+	<enemy id="corrupted_test" extends="undead" vertical="false" />
 
 	<enemy id="undead_shrineDefender" extends="undead" />
 
@@ -51,9 +131,10 @@
 		<light tile="light.small" color="8e16f4" />
 	</object>
 
-	<enemy id="jacominus" tile="jacominus" defense="1" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
+	<enemy id="jacominus" tile="jacominus" defense="1" damageElement="cleansing" speed="3" range="20" health="30" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
 		<light tile="light.small" color="8e16f4" />
-		<attack type="melee" damage="7" knockback="5" >
+		<attack type="melee" damage="7" knockback="5" ignoreArmor="true">
+			<action>adjust_corrupted_damage(this.info.attacks[0], [7])</action>
 			<pre><play object="this" animation="pre_attack" /></pre>
 		</attack>
 		<onDeath>
@@ -65,11 +146,12 @@
 
 	<object id="jacominus_transform" tile="jacominus_transform" fps="8"><light tile="light.small" color="8e16f4" /></object>
 
-	<enemy id="jacominus2" tile="jacominus2" defense="2" speed="3" range="30" health="20" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
+	<enemy id="jacominus2" tile="jacominus2" defense="2" damageElement="cleansing" speed="3" range="30" health="20" type="surface" underground="true" vertical="true" fps="10" death_sfx="minotaur_death" bgm="jacominus">
 		<light tile="light.small" color="8e16f4" />
 		<lootSet><loot id="jacominus_katana" /></lootSet>
-		<attack type="melee" damage="3" cooldown="10" hits="2">
-			<cont animation="slam" damage="12" knockback="8" />
+		<attack type="melee" damage="3" cooldown="10" hits="2" ignoreArmor="true">
+			<pre><action>adjust_corrupted_damage(this.info.attacks[0], [3, 12])</action></pre>
+			<cont animation="slam" damage="12" knockback="8" ignoreArmor="true" />
 		</attack>
 		<onDeath>
 			<action>
@@ -128,9 +210,9 @@
 
 	<object id="fallen_angel_charge" tile="magic_orb" animation="magic_orb.impact" removeOnComplete="true" save="false" width="16" height="16"/>
 
-	<enemy id="fallen_angel_noBGM" tile="fallen_angel" health="30" defense="1" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true">
+	<enemy id="fallen_angel_noBGM" tile="fallen_angel" health="30" defense="1" damageElement="cleansing" speed="1.5" range="10" type="surface" underground="true" vertical="true" fps="12" ignoreHit="true">
 		<light tile="light.large" color="5C0000" />
-		<over><section if="getFlag('angel.charging')"><damage object="getLocalPlayer()" damage="20" knockback="100" attacker="this" /></section></over>
+		<over><section if="getFlag('angel.charging')"><action>adjust_corrupted_damage(null, [20], this)</action><damage object="getLocalPlayer()" damage="20" knockback="100" attacker="this" ignoreArmor="false" /></section></over>
 		<inRange range="5">
 			<attack type="melee" cooldown="100">
 				<pre>
@@ -168,10 +250,10 @@
 				</pre>
 			</attack>
 		</inRange>
-		<attack type="melee" damage="9" animation="combo1" hits="3">
-			<pre><play object='this' animation="combo_pre" /></pre>
-			<cont animation="combo2" damage="9" />
-			<cont animation="combo3" damage="12" knockback="20" />
+		<attack type="melee" damage="9" animation="combo1" hits="3" ignoreArmor="true">
+			<pre><play object='this' animation="combo_pre" /><action>adjust_corrupted_damage(this.info.attacks[0], [9, 9, 12])</action></pre>
+			<cont animation="combo2" damage="9" ignoreArmor="true" />
+			<cont animation="combo3" damage="12" knockback="20" ignoreArmor="true" />
 			<post><play object="this" animation="idle" /></post>
 		</attack>
 		<onDeath>
@@ -212,18 +294,13 @@
 	<animation id="mess_of_souls.stab" x="19" count="4" />
 	<animation id="mess_of_souls.slash" x="23" count="4" />
 
-	<enemy id="mess_of_souls" tile="mess_of_souls" range="8" health="40" defense="1" type="surface" fps="10" speed="2" bgm="purification1" underground="true" vertical="true">
+	<enemy id="mess_of_souls" tile="mess_of_souls" range="8" health="40" defense="1" damageElement="cleansing" type="surface" fps="10" speed="2" bgm="purification1" underground="true" vertical="true">
 		<tile id="mess_of_souls" name="shield" animation="hidden" fps="10" y="0" />
 
         <attack type="projectile" damage="15" range="20" animation="blast" cooldown="300">
           <pre><play object="this" animation="charge_up" /></pre>
-          <projectile tile="soul_blast" animation="soul_blast" range="20" speed="2" homing="true">
-						<onHit>
-							<sound id="item" /><set id="corruptedItem" value="corruptItem(player)" global="true" />
-							<section if="corruptedItem != null"><show tooltip="popup" text="warning.item_corrupted{item:[global=corruptedItem]}" x="0.5" y="0.4" /></section>
-						</onHit>
-					</projectile>
-					<post><play object="this" animation="calm_down" /></post>
+          <projectile tile="soul_blast" animation="soul_blast" range="20" speed="2" homing="true" />
+			<post><play object="this" animation="calm_down" /></post>
       	</attack>
 
 				<cooldown seconds="5">
@@ -398,7 +475,7 @@
 				</invokeLater>
 			</section>
 		</procedure>
-	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" health="100" type="surface" flying="true" fps="10" bgm="purification2">
+	  <enemy id="campaign_purifier_head" tile="campaign_purifier_head" defense="1" damageElement="cleansing" health="100" type="surface" flying="true" fps="10" bgm="purification2">
 			<light tile="light.large" color="5C0000" />
 			<onHit><move object="this" x="12" y="-5" /></onHit>
 			<onDeath><section><run procedure="hand_movementEnd" /><remove object="area.getObject('campaign_purifier_hand_l')" /><remove object="area.getObject('campaign_purifier_hand_r')" /><run procedure="purifier_death" /></section></onDeath>

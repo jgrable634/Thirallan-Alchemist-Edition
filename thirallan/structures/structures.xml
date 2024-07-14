@@ -265,7 +265,7 @@
 
 
 
-  <structure id="encampment_door" width="128" height="128" image="encampment.png" name="enter">
+  <structure id="encampment_door" name="enter">
     <operate>
       <!--choose>
         <section if="area.id == 'thirallan_fang_plains'">
@@ -281,6 +281,21 @@
       </choose-->
       <dialogue text="It would be suicide to try and go against the bandits now..." />
     </operate>
+  </structure>
+  <structure id="colosseum_exterior" width="236" height="150" image="bandits/colosseum_exterior.png" behind="true" remove="false" />
+  <animation id="colosseum_exterior_entrance.open" count="4" length="2" />
+  <animation id="colosseum_exterior_entrance.close" count="4" length="2" reverse="true" />
+  <structure id="colosseum_exterior_entrance" width="34" height="41" image="bandits/colosseum_door.png" extends="encampment_door">
+    <over><action>this.renderer.playAnimation("colosseum_exterior_entrance.open", false)</action></over>
+    <out><action>this.renderer.playAnimation("colosseum_exterior_entrance.close", false)</action></out>
+  </structure>
+
+  <structure id="phoenix_encampment_exterior" width="224" height="128" image="bandits/phoenix_encampment.png" behind="true" remove="false" />
+  <animation id="phoenix_encampment_exterior_entrance.open" count="4" length="2" />
+  <animation id="phoenix_encampment_exterior_entrance.close" count="4" length="2" reverse="true" />
+  <structure id="phoenix_encampment_exterior_entrance" width="40" height="32" image="bandits/phoenix_door.png" extends="encampment_door">
+    <over><action>this.renderer.playAnimation("colosseum_exterior_entrance.open", false)</action></over>
+    <out><action>this.renderer.playAnimation("colosseum_exterior_entrance.close", false)</action></out>
   </structure>
 
   <tilesheet id="maze_door.png" width="32" height="32" />

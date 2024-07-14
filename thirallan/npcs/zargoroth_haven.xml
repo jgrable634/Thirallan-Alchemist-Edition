@@ -246,7 +246,10 @@
             <dialogue section="peredur" id="departure" speaker='this' />
             <choice id="yes">
               <dialogue section="peredur" id="departure2" speaker='this' />
-              <action>player.equipment.forceEquip("familiar",player,getItem("peredur_familiar").asItem());</action>
+              <action>
+                if(player.equipment.get('familiar').get() != null) player.equipment.unequip('familiar', player);
+                player.equipment.forceEquip("familiar",player,getItem("peredur_familiar").asItem());
+              </action>
               <item id="peredur" count="1" />
               <remove object='this' />
               <quest id="undead_shrines" ask="false" />

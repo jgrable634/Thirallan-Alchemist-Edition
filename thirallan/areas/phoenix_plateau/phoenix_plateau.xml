@@ -18,7 +18,8 @@
     <objects id="tree" y="-1" startX="75" endX="100" minDist="6" maxDist="6" array="right" />
     <objects id="undead" fromX="0" toX="150" fromY="-1" toY="-1" count="6" />
     <spawner id="undead" time="100" count="3" fromX="0" toX="150" fromY="-1" toY="-1" enabled="!getFlag('blood_moon')" />
-    <structure id="encampment_door" x="50" y="-1" />
+    <structure id="phoenix_encampment_exterior" x="50" y="-1" />
+    <structure id="phoenix_encampment_exterior_entrance" x="55.75" y="-1" />
     <structure id="undead_shrine.placeholder" x="25" y="-1" />
     <init><runAreaLoad /></init>
     <onLoad>

@@ -63,6 +63,10 @@
     <text id="dungeon_conflict_gilbert">Side with [color=770000]Gilbert[/color]</text>
     <text id="dungeon_conflict_azriel">Side with [color=770000]Azriel[/color]</text>
     <text id="dungeon_conflict_iterol">Side with [color=770000]Iterol[/color]</text>
+    <text id="azriel_cleansing">Cleansing</text>
+    <text id="aldir">Who is Aldir?</text>
+    <text id="draconic_awakening">What is The Draconic Awakening</text>
+    <text id="corruption_war">What is The War of Corruption</text>
   </section>
 
   <section id="warning">
@@ -117,6 +121,7 @@
     <text id="struggle">Struggle</text>
     <text id="dismiss">Dismiss</text>
     <text id="pickup">Pick up</text>
+    <text id="sit">Sit</text>
   </section>
 
   <section id="zargoroth">
@@ -133,9 +138,9 @@
 		<text id="second2">Peredur just... He continuously puts himself in danger! He won't listen to my warnings!</text>
     <text id="proving_worth1">Hey! I don't recognize you! Let's chat in the [color=770000]Hut[/color]!</text>
     <text id="proving_worth2">Ha! Like you are! You're new here, I get it. I was there. You see, [color=490068]The Corrupted[/color] aren't just mindless, they have an insane power at their disposal.</text>
-    <text id="proving_worth3a">They have a power known as [color=490068]Corruption[/color]. It can infest your equipment, rendering them useless, I'm sure you've had it happen to at least one piece of your equipment. There is something strange about it though...</text>
-    <text id="proving_worth3b">It infests stuff within your backpack, but never infests your entire backpack. So don't worry about replacing that.</text>
-    <text id="proving_worth3c">In some places, it takes just the nearby environment to corrupt your gear! So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
+    <text id="proving_worth3a">They have a power known as [color=490068]Corruption[/color]. It can resist your normal weaponry, rendering them useless, I'm sure you've had it happen against them already. There is something strange about it though...</text>
+    <text id="proving_worth3b">I've heard that it can even infest stuff within your backpack, but never infests your entire backpack. But I've never seen it happen, so I wouldn't worry about that.</text>
+    <text id="proving_worth3c">However the [color=490068]Corruption[/color] can bypass your normal armor. So, if you want to help, you're gonna need resistant equipment, you up for getting the materials?</text>
     <text id="proving_worth4a">Great, in the deep layers of the ground, in the stone layer, we recently discovered [item=malumite_ore]. Our workshop and smelter were destroyed due to [color=490068]The Corrupted[/color]'s increased harassment of the town.</text>
     <text id="proving_worth4b">Anyway, you'll need at least [color=770000]11[/color] [item=malumite_bar]s. Also the materials for a new workshop and smelter are in the storehouse. Here's a spare [item=malumite_pickaxe] in case yours got corrupted.</text>
     <text id="proving_worth5">That's fine, I understand, but if you change your mind, come talk to me again.</text>
@@ -378,7 +383,7 @@
     <text id="placeholder">...</text>
   </section>
   <section id="azriel">
-    <text id="notOne">Greetings! Blessing of our god upon you!</text>
+    <text id="notOne">Greetings! Blessing of Aldir upon you! If any of your equipment got corrupted, I can cleanse them, but it takes a lot of work.</text>
     <text id="no_service">[object=azriel] only preaches at night. Should wait until then before entering.</text>
     <text id="dungeon_conflict1">Me, that's how. I've been feeding him from our rations.</text>
     <text id="dungeon_conflict2">And who will be the next Archpriest then huh? You've grown too bitter Gilbert.</text>
@@ -386,9 +391,25 @@
     <text id="dungeon_conflict4">I was worried you'd make that choice. Do what you will, but I won't forget this.</text>
     <text id="dungeon_conflict5">Not exactly what I had in mind, but I suppose if it ends up curing him then I guess it's fine.</text>
     <text id="dungeon_conflict6">Thank you friend, I knew you'd make the right choice. Come now [color=770000]Paul[/color] I think it's time you leave this place.</text>
-    <text id="paul1">I still can't believe you did that to [color=770000]Paul[/color].</text>
-    <text id="paul2">I hope [color=770000]Paul[/color] is doing alright.</text>
-
+    <text id="paul1">I still can't believe you did that to [color=770000]Paul[/color]. Just tell me what you want cleansed and leave me alone.</text>
+    <text id="paul2">I hope [color=770000]Paul[/color] is doing alright. Thank you again, now is there something you want cleansed?</text>
+    <text id="dungeon">Please don't touch that door, friend. Only Gilbert is allowed in there.</text>
+    <text id="poor">I'm sorry friend, but you cannot afford my services. Gilbert wants to make sure whoever I help is capable of repaying in some way. This price is as low as he'll allow me to take it.</text>
+    <text id="altar">Please, have a seat, you shouldn't be on the altar.</text>
+    <text id="preach_question">So, do you have any questions for me about my faith?</text>
+    <text id="preach1_1">Ah, [color=770000]Aldir[/color] is our God, through which we thrived on this island. With bountiful harvests, and plentiful animals on land and underwater alike.</text>
+    <text id="preach1_2">Essentially anything you could hope for on an island such as this. [color=770000]Aldir[/color] was always there to help us in our times of need.</text>
+    <text id="preach1_3">One of his last, and most well known acts was the [color=770000]Draconic Awakening[/color]. Through which [color=770000]Aldir[/color] granted us protection, that was until [color=490068]The War of Corruption[/color]</text>
+    <text id="preach2_1">Ah, the [color=770000]Draconic Awakening[/color] was the birth of six dragons that were given the purpose of protecting us from any threats that would challenge the Monastery.</text>
+    <text id="preach2_2">First of the children was [color=00008B]Terador[/color], the Blue child of Lightning, and is now the only known alive one.</text>
+    <text id="preach2_3">The second child was [color=FA7202]Udarr[/color], the Orange child of Fire, who was shunned for dissenting from Aldir's guidance. The third was [color=14452F]Voli[/color], the Green child of Poison</text>
+    <text id="preach2_4">Then there was [color=979c9f]Lucer[/color], the fourth Silver child of Ice. [color=E5B80B]Myalis[/color] was the fifth golden child of Radiance. Finally there was [color=000000]Kalar[/color], the sixth Black child of Shadows.</text>
+    <text id="preach2_5">Unfortunately, the strength of the [color=490068]Purifier's Guild[/color] was too much, even for these divine children, [color=00008B]Terador[/color] is the only known survivor of [color=490068]The War of Corruption[/color].</text>
+    <text id="preach3_1">[color=490068]The War of Corruption[/color] was the battle between [color=770000]The Republic of Aldir[/color] and the [color=490068]Purifier's Guild[/color].</text>
+    <text id="preach3_2">These fanatics claimed they served the true final child of [color=770000]Aldir[/color]: [color=490068]Mundatorem[/color].</text>
+    <text id="preach3_3">While their claims were untrue, their power was nothing short of incredible, they wielded the corruption as corrosive projectiles to render our soldier's armor useless.</text>
+    <text id="preach3_4">Despite our numbers, we couldn't stop them. The only thing that saved us were the six children of Aldir, who fought valiantly to their ends. Me, Gilbert, and Hadvarr are the only survivors.</text>
+    <text id="preach3_5">I sometimes think to myself "Why would [color=770000]Aldir[/color] allow this?" But such questions are not mine to ask, I know that despite everything, [color=770000]Aldir[/color] has a plan for us, one day we'll thrive once more.</text>
   </section>
   <section id="paul">
     <text id="intro1">... [pause=20]Hello? Who's there? Azriel?</text>

@@ -84,8 +84,10 @@
           <section if="!player.questComplete('blood_moon') && !getFlag('MOS_imbound')">
             <action>setFlag('MOS_imbound',true);</action>
             <invokeLater seconds="30">
-              <object id="MOS_hotspot" x="65" y="-1" area="thirallan_zargoroth" />
-              <show tooltip="popup" text="common.beckoning" x="0.5" y="0.4" hold="120" />
+              <section if="player.areas.get('thirallan_zargoroth').getObject('MOS_hotspot') == null && player.areas.get('thirallan_zargoroth').getObject('mess_of_souls') == null && !player.questComplete('blood_moon')">
+                <object id="MOS_hotspot" x="65" y="-1" area="thirallan_zargoroth" />
+                <show tooltip="popup" text="common.beckoning" x="0.5" y="0.4" hold="120" />
+              </section>
             </invokeLater>
           </section>
         </section>
